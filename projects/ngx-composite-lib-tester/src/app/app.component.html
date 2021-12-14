@@ -1,0 +1,32 @@
+<div id="loadingSpinnerModal" *ngIf="showHeader" [hidden]="!showLoader" pepRtlClass >
+    <div id="loadingSpinner">
+        <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+    </div>
+</div>
+<div class="pep-layout" dir="{{ layoutService.isRtl() ? 'rtl' : 'ltr' }}">
+    <header class="pep-header-layout">
+        <div id="header" pepRtlClass>
+            <nav class="navbar {{ getTopBarStyle() }} navbar-light bg-faded menuCont"
+                [ngStyle]="{'background-color': customizationService.getBrandingMainColor() }">
+                <div class="pep-spacing-element-negative">
+                    <pep-button sizeType="sm" styleType="weak" classNames="keep-background-on-focus"
+                        class="pep-spacing-element pull-left flip" iconName="system_home"  (click)="navigateHome()">
+                    </pep-button>
+                </div>
+                <div class="pep-spacing-element-negative">
+                    <pep-button [value]="'ExampleComponentsTitle' | translate" sizeType="sm" styleType="weak" class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
+                        [routerLink]="['components-example']">
+                    </pep-button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="pep-main-layout" [ngClass]="{ 'add-padding': addPadding }">
+        <aside *ngIf="showSidebar" class="pep-side-layout">
+        </aside>
+        <div class="pep-center-layout">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>
+<pep-size-detector></pep-size-detector>
