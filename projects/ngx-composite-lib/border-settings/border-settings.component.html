@@ -1,4 +1,4 @@
-<pep-checkbox [label]="'BORDER_SETTINGS.BORDER' | translate" [renderTitle]="false" [value]="border.useBorder" (valueChange)="onUseBorderChanged($event)"></pep-checkbox>
+<pep-checkbox class="checkbox-as-title" [label]="'BORDER_SETTINGS.BORDER' | translate" [renderTitle]="false" [value]="border.useBorder" (valueChange)="onUseBorderChanged($event)"></pep-checkbox>
 <pep-color [value]="border.color" [label]="'BORDER_SETTINGS.BORDER_COLOR' | translate" [disabled]="!border.useBorder" (valueChange)="onColorChanged($event)">
 </pep-color>
 <pep-slider [label]="'BORDER_SETTINGS.BORDER_OPACITY' | translate" [hint]="border.opacity.toString() || ''" [minValue]="0" [maxValue]="100" [disabled]="!border.useBorder" [value]="border.opacity" 
