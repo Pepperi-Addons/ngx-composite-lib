@@ -1,7 +1,13 @@
 {
-    "BORDER_SETTINGS": {
-        "BORDER": "Border",
-        "BORDER_OPACITY": "Opacity",
-        "BORDER_COLOR": "Color"
+    "COLOR_SETTINGS": {
+        "OPACITY": "opacity",
+        "COLOR": "color"
+    },
+    "SHADOW_SETTINGS": {
+        "TITLE": "Drop shadow",
+        "TYPE": "Shadow type",
+        "TYPE_SOFT": "Soft",
+        "TYPE_REGULAR": "Regular",
+        "INTENSITY": "Shadow intensity"
     }
 }

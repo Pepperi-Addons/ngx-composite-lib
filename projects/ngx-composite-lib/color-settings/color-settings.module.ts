@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BorderSettingsComponent } from './border-settings.component';
 import { PepNgxLibModule } from '@pepperi-addons/ngx-lib';
 import { PepColorModule } from '@pepperi-addons/ngx-lib/color';
 import { PepCheckboxModule } from '@pepperi-addons/ngx-lib/checkbox';
 import { PepSliderModule } from '@pepperi-addons/ngx-lib/slider';
 
+import { ColorSettingsComponent } from './color-settings.component';
+
 @NgModule({
     declarations: [
-        BorderSettingsComponent
+        ColorSettingsComponent
     ],
     imports: [
         CommonModule,
@@ -17,6 +18,6 @@ import { PepSliderModule } from '@pepperi-addons/ngx-lib/slider';
         PepColorModule,
         PepSliderModule
     ],
-    exports: [BorderSettingsComponent],
+    exports: [ColorSettingsComponent],
 })
-export class PepBorderSettingsModule { }
+export class PepColorSettingsModule { }

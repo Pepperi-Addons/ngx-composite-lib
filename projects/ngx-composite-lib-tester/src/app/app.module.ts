@@ -8,9 +8,10 @@ import { PepAddonService } from '@pepperi-addons/ngx-lib';
 import { NgxLibHelperModule } from './common/ngx-helper.module';
 
 // import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
-// import { PepBorderSettingsModule } from '@pepperi-addons/ngx-composite-lib/border-settings';
-import { PepBorderSettingsModule } from 'projects/ngx-composite-lib/border-settings';
+// import { PepColorSettingsModule } from '@pepperi-addons/ngx-composite-lib/border-settings';
 import { PepNgxCompositeLibModule } from 'projects/ngx-composite-lib/src';
+import { PepColorSettingsModule } from 'projects/ngx-composite-lib/color-settings';
+import { PepShadowSettingsModule } from 'projects/ngx-composite-lib/shadow-settings';
 
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 
@@ -34,6 +35,7 @@ import {
     TranslateLoader,
     TranslateService,
 } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -41,12 +43,14 @@ import {
         ComponentsExampleComponent
     ],
     imports: [
+        CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         NgxLibHelperModule,
         PepNgxCompositeLibModule,
-        PepBorderSettingsModule,
+        PepColorSettingsModule,
+        PepShadowSettingsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

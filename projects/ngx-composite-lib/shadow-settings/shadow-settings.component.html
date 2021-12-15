@@ -1,0 +1,7 @@
+<pep-checkbox class="checkbox-as-title" [label]="'SHADOW_SETTINGS.TITLE' | translate" [renderTitle]="false" [value]="shadow.use" (valueChange)="onUseChanged($event)"></pep-checkbox>
+<pep-field-title [label]="'SHADOW_SETTINGS.TYPE' | translate" [disabled]="!shadow.use"></pep-field-title>
+<pep-group-buttons class="shadow-type-group" [buttons]="shadowTypes" [selectedButtonKey]="shadow.type" [stretch]="true" buttonsClass="md regular" [buttonsDisabled]="!shadow.use" viewType="toggle">
+</pep-group-buttons>
+<pep-slider [label]="'SHADOW_SETTINGS.INTENSITY' | translate" [hint]="shadow.intensity.toString() || ''" [minValue]="0" [maxValue]="100" [disabled]="!shadow.use" [value]="shadow.intensity" 
+    (inputChange)="onIntensityChanged($event)">
+</pep-slider>

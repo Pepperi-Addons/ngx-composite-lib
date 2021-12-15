@@ -1,0 +1,11 @@
+@import 'ngx-lib/src/core/style/abstracts/variables';
+
+:host {
+    width: 100%;
+    // max-width: 200px;
+
+    .shadow-type-group {
+        display: block;
+        margin-bottom: $form-spacing;
+    }
+}
