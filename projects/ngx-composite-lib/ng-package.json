@@ -6,6 +6,14 @@
         "./styles.scss"
     ],
     "lib": {
-        "entryFile": "src/public-api.ts"
+        "entryFile": "src/public-api.ts",
+        "umdModuleIds": {
+            "@ngx-translate/core": "translate",
+            "@pepperi-addons/ngx-lib": "ngx-lib",
+            "@pepperi-addons/ngx-lib/signature": "ngx-lib/signature",
+            "ngx-translate-multi-http-loader": "ngx-translate-multi-http-loader",
+            "moment": "moment",
+            "ngx-signaturepad": "signaturepad"
+        }
     }
 }

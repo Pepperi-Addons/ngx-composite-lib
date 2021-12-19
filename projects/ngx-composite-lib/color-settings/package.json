@@ -1,0 +1,17 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "public-api.ts",
+            "umdModuleIds": {
+                "@ngx-translate/core": "translate",
+                "@pepperi-addons/ngx-lib": "ngx-lib",
+                "@pepperi-addons/ngx-lib/color": "ngx-lib/color",
+                "@pepperi-addons/ngx-lib/checkbox": "ngx-lib/checkbox",
+                "@pepperi-addons/ngx-lib/slider": "ngx-lib/slider"
+            }
+        }
+    },
+    "peerDependencies": {
+        "@pepperi-addons/ngx-lib": "^0.2.56"
+    }
+}

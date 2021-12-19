@@ -7,7 +7,9 @@
         "declaration": true,
         "declarationMap": true,
         "inlineSources": true,
-        "types": [],
+        "types": [
+            "tween.js"
+        ],
         "lib": [
             "dom",
             "es2018"

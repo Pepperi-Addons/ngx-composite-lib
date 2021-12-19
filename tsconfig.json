@@ -12,17 +12,16 @@
         "declaration": false,
         "downlevelIteration": true,
         "paths": {
-            "ngx-composite-lib": [
-                "dist/ngx-composite-lib/ngx-composite-lib",
-                "dist/ngx-composite-lib"
-            ],
-            "@pepperi-addons/ngx-composite-lib": [
-                "dist/ngx-composite-lib/ngx-composite-lib",
-                "dist/ngx-composite-lib"
-            ],
-            // "@pepperi-addons/ngx-composite-lib/*": [
-            //     "dist/ngx-composite-lib/*"
+            // "ngx-composite-lib": [
+            //     "dist/ngx-composite-lib/ngx-composite-lib",
+            //     "dist/ngx-composite-lib"
             // ],
+            "@pepperi-addons/ngx-composite-lib": [
+                "dist/ngx-composite-lib"
+            ],
+            "@pepperi-addons/ngx-composite-lib/*": [
+                "dist/ngx-composite-lib/*"
+            ],
             // "@pepperi-addons/ngx-composite-lib": [
             //     "dist/ngx-composite-lib/ngx-composite-lib",
             //     "dist/ngx-composite-lib"

@@ -5,9 +5,16 @@
     },
     "SHADOW_SETTINGS": {
         "TITLE": "Drop shadow",
-        "TYPE": "Shadow type",
-        "TYPE_SOFT": "Soft",
-        "TYPE_REGULAR": "Regular",
+        "INTENSITY_SOFT": "Soft",
+        "INTENSITY_REGULAR": "Regular",
+        "INTENSITY_HARD": "Hard",
+        "SIZE": "Shadow size",
         "INTENSITY": "Shadow intensity"
+    },
+    "GENERAL": {
+        "SM": "SM",
+        "MD": "MD",
+        "LG": "LG",
+        "XL": "XL"
     }
 }

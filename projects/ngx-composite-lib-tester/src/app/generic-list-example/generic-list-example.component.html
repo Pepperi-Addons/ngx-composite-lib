@@ -1,0 +1,20 @@
+<div class="example-wrapper">
+    <pep-generic-list [dataSource]="dataSource" title="Generic list title">
+        <ng-container right-buttons>
+            <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'" (menuItemClick)="onMenuItemClicked($event)">
+            </pep-menu>
+            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'md'" [styleType]="'strong'">
+            </pep-button>
+        </ng-container>
+    </pep-generic-list>
+
+
+    <pep-generic-list [dataSource]="dataSource" [inline]="true" title="Generic list inline title">
+        <ng-container right-buttons>
+            <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'" (menuItemClick)="onMenuItemClicked($event)">
+            </pep-menu>
+            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'sm'" [styleType]="'strong'">
+            </pep-button>
+        </ng-container>
+    </pep-generic-list>
+</div>

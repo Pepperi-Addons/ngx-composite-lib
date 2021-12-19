@@ -1,7 +1,9 @@
-export type PepShadowIntensityType = 'Soft' | 'Regular';
+import { PepSizeType } from "@pepperi-addons/ngx-lib";
+
+export type PepShadowIntensityType = 'soft' | 'regular' | 'hard';
 
 export class PepShadowSettings {
     use: boolean = false;
-    type: PepShadowIntensityType = 'Regular';
-    intensity: number = 50;
+    size: PepSizeType = 'md';
+    intensity: PepShadowIntensityType = 'regular';
 }

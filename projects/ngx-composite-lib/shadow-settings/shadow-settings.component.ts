@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { PepSizeType } from '@pepperi-addons/ngx-lib';
 import { IPepButtonClickEvent, PepButton } from '@pepperi-addons/ngx-lib/button';
 import { PepShadowIntensityType, PepShadowSettings } from './shadow-settings.model';
 
@@ -26,7 +27,8 @@ export class ShadowSettingsComponent implements OnInit {
     @Output()
     shadowChange: EventEmitter<PepShadowSettings> = new EventEmitter<PepShadowSettings>();
     
-    shadowTypes: Array<PepButton> = [];
+    shadowSizes: Array<PepButton> = [];
+    shadowIntensities: Array<PepButton> = [];
 
     constructor(
         private translate: TranslateService,
@@ -35,13 +37,20 @@ export class ShadowSettingsComponent implements OnInit {
 
     ngOnInit(): void { 
         // Get the first translation for load all translations.
-        this.translate.get('SHADOW_SETTINGS.TYPE_SOFT').toPromise().then((typeSoft) => {
-            this.shadowTypes = [
-                { key: 'Soft', value: typeSoft, callback: () => this.onTypeChange('Soft') },
-                { key: 'Regular', value: this.translate.instant('SHADOW_SETTINGS.TYPE_REGULAR'), callback: () => this.onTypeChange('Regular') }
+        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').toPromise().then((typeSoft) => {
+            this.shadowSizes = [
+                { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: () => this.onSizeChange('sm') },
+                { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: () => this.onSizeChange('md') },
+                { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: () => this.onSizeChange('lg') },
+                { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: () => this.onSizeChange('xl') }
+            ];
+
+            this.shadowIntensities = [
+                { key: 'soft', value: typeSoft, callback: () => this.onIntensityChange('soft') },
+                { key: 'regular', value: this.translate.instant('SHADOW_SETTINGS.INTENSITY_REGULAR'), callback: () => this.onIntensityChange('regular') },
+                { key: 'hard', value: this.translate.instant('SHADOW_SETTINGS.INTENSITY_HARD'), callback: () => this.onIntensityChange('hard') }
             ];
         });
-
     }
 
 
@@ -54,12 +63,12 @@ export class ShadowSettingsComponent implements OnInit {
         this.raiseShadowChange();
     }
 
-    onTypeChange(value: PepShadowIntensityType) {
-        this.shadow.type = value;
+    onSizeChange(value: PepSizeType) {
+        this.shadow.size = value;
         this.raiseShadowChange();
     }
 
-    onIntensityChanged(value: number) {
+    onIntensityChange(value: PepShadowIntensityType) {
         this.shadow.intensity = value;
         this.raiseShadowChange();
     }
