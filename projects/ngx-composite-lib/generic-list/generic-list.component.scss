@@ -19,13 +19,13 @@
     height: inherit;
     display: grid;
     grid-template-rows: auto 1fr;
-    padding-inline: $content-padding;
 
-    // .inline-top-bar-container {
-    //     margin-top: $content-margin;
-    // }
+    &.add-padding {
+        padding-inline: $content-padding;
+    }
 
     ::ng-deep.pep-top-bar-container.inline {
         height: auto;
+        overflow: hidden;
     }
 }

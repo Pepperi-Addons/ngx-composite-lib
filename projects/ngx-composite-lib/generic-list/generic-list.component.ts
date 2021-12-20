@@ -45,7 +45,10 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     searchString: string = '';
   
     @Input()
-    title: string = ''
+    addPadding: boolean = false;
+
+    @Input()
+    title: string = '';
   
     @Input()
     inline: boolean = false;
