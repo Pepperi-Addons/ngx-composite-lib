@@ -10,6 +10,8 @@ import { NgxLibHelperModule } from './common/ngx-helper.module';
 import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
 import { PepColorSettingsModule } from '@pepperi-addons/ngx-composite-lib/color-settings';
 import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shadow-settings';
+
+
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 
 import { ComponentsExampleComponent } from './components-example/components-example.component';
@@ -52,6 +54,7 @@ import { CommonModule } from '@angular/common';
         PepNgxCompositeLibModule,
         PepColorSettingsModule,
         PepShadowSettingsModule,
+
         PepGenericListModule,
         TranslateModule.forRoot({
             loader: {

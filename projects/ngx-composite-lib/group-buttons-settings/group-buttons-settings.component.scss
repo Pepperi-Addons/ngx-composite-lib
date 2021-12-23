@@ -1,0 +1,12 @@
+@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
+
+:host {
+    width: 100%;
+    // max-width: 200px;
+
+    .shadow-size-group,
+    .shadow-type-group {
+        display: block;
+        margin-bottom: $form-spacing;
+    }
+}
