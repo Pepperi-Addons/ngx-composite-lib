@@ -33,7 +33,7 @@ export class ColorSettingsComponent implements OnInit {
     }
 
     private getRGBAcolor(colorObj: PepColorSettings, opac: number | null = null) {
-        let rgba = 'rgba(255,255,255,0';
+        let rgba = 'rgba(255,255,255,0)';
 
         if (colorObj) {
             let color = colorObj.value;
