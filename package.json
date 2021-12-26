@@ -9,7 +9,11 @@
         "build-lib-watch": "ng build ngx-composite-lib --watch --configuration development",
         "build-lib-prod": "ng build ngx-composite-lib --configuration production",
         "publish-lib": "cd dist && cd ngx-composite-lib && npm publish",
-        "test": "ng test"
+        "compile": "npm run build-lib-prod && ng build",
+        "prepare": "npm run compile && npm run lint",
+        "test": "ng test",
+        "lint": "eslint \"**/*.{ts,tsx}\" ",
+        "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix"
     },
     "private": true,
     "dependencies": {
