@@ -12,9 +12,32 @@
         "INTENSITY": "Shadow intensity"
     },
     "GENERAL": {
+        "NONE": "None",
+        "XS": "XS",
         "SM": "SM",
         "MD": "MD",
         "LG": "LG",
-        "XL": "XL"
+        "XL": "XL",
+        
+        "FONT_WEIGHT": {
+            "NORMAL": "Normal",
+            "BOLD": "Bold",
+            "BOLDER": "Bolder"
+        },
+        "WIDTH_SIZE": {
+            "NARROW": "Narrow",
+            "REGULAR": "Regular",
+            "WIDE": "Wide"
+        },
+        "HORIZONTAL_ALIGN": {
+            "LEFT": "Left",
+            "CENTER": "Center",
+            "RIGHT": "Right"
+        },
+        "VERTICAL_ALIGN": {
+            "TOP": "Top",
+            "MIDDLE": "Middle",
+            "BOTTOM": "Bottom"
+        }
     }
 }

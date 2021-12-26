@@ -10,7 +10,7 @@ import { NgxLibHelperModule } from './common/ngx-helper.module';
 import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
 import { PepColorSettingsModule } from '@pepperi-addons/ngx-composite-lib/color-settings';
 import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shadow-settings';
-
+import { PepGroupButtonsSettingsModule } from '@pepperi-addons/ngx-composite-lib/group-buttons-settings';
 
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 
@@ -54,7 +54,7 @@ import { CommonModule } from '@angular/common';
         PepNgxCompositeLibModule,
         PepColorSettingsModule,
         PepShadowSettingsModule,
-
+        PepGroupButtonsSettingsModule,
         PepGenericListModule,
         TranslateModule.forRoot({
             loader: {

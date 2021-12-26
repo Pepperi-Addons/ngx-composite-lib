@@ -6,7 +6,8 @@
                 "@ngx-translate/core": "translate",
                 "@pepperi-addons/ngx-lib": "ngx-lib",
                 "@pepperi-addons/ngx-lib/field-title": "ngx-lib/field-title",
-                "@pepperi-addons/ngx-lib/group-buttons": "ngx-lib/group-buttons"
+                "@pepperi-addons/ngx-lib/group-buttons": "ngx-lib/group-buttons",
+                "@pepperi-addons/ngx-lib/icon": "ngx-lib/icon"
             }
         }
     },
