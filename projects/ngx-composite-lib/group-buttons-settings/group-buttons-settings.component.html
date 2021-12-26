@@ -1,18 +1,10 @@
-<!-- <pep-checkbox class="checkbox-as-title" [label]="'SHADOW_SETTINGS.TITLE' | translate" [renderTitle]="false" [value]="shadow.use" (valueChange)="onUseChanged($event)"></pep-checkbox>
-<pep-field-title [label]="'SHADOW_SETTINGS.SIZE' | translate" [disabled]="!shadow.use"></pep-field-title>
-<pep-group-buttons class="shadow-size-group" [buttons]="shadowSizes" [selectedButtonKey]="shadow.size" [stretch]="true" buttonsClass="md regular" [buttonsDisabled]="!shadow.use" viewType="toggle">
-</pep-group-buttons>
-<pep-field-title [label]="'SHADOW_SETTINGS.INTENSITY' | translate" [disabled]="!shadow.use"></pep-field-title>
-<pep-group-buttons class="shadow-intensity-group" [buttons]="shadowIntensities" [selectedButtonKey]="shadow.intensity" [stretch]="true" buttonsClass="md regular" [buttonsDisabled]="!shadow.use" viewType="toggle">
-</pep-group-buttons> -->
+<label *ngIf="header != ''" class="body-xl bold ellipsis">{{header}}</label><br>
 
-<label *ngIf="btnTitle" class="body-xl bold ellipsis">{{btnTitle}}</label><br>
-<label *ngIf="btnSubHeader" class="body-xs ellipsis">{{btnSubHeader}}</label>
-
-<pep-group-buttons class="shadow-intensity-group" 
-                   [buttons]="shadowIntensities" 
-                   [selectedButtonKey]="'null'" 
-                   [stretch]="true" buttonsClass="md regular" 
-                   [buttonsDisabled]="true" 
+<pep-field-title *ngIf="subHeader !=''" [label]="subHeader" [disabled]="disabled"></pep-field-title>
+<pep-group-buttons [buttons]="btnsArray" 
+                   [selectedButtonKey]="btnKey" 
+                   [stretch]="true" 
+                   buttonsClass="md regular" 
+                   [buttonsDisabled]="disabled" 
                    viewType="toggle">
 </pep-group-buttons>
