@@ -2,9 +2,7 @@
     <div class="inline-top-bar-container">
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </div>
-    <div #listContainer class="list-container">
-        <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
-    </div>
+    <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
 </div>
 
 <pep-page-layout *ngIf="!inline" [addPadding]="addPadding">
