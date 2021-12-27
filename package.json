@@ -8,7 +8,7 @@
         "watch": "ng build --watch --configuration development",
         "build-lib-watch": "ng build ngx-composite-lib --watch --configuration development",
         "build-lib-prod": "ng build ngx-composite-lib --configuration production",
-        "publish-lib": "cd dist && cd ngx-composite-lib && npm publish",
+        "publish-lib-alpha": "cd dist && cd ngx-composite-lib && npm publish --tag alpha",
         "compile": "npm run build-lib-prod && ng build",
         "prepare": "npm run compile && npm run lint",
         "test": "ng test",
