@@ -42,7 +42,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
     
     sizes: Array<PepButton> = [];
     
-    pepB: PepSizeType | 'none' = "xs";
+    // pepB: PepSizeType | 'none' = "xs";
 
     constructor(
         private translate: TranslateService,
