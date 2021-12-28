@@ -1,0 +1,37 @@
+@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
+@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions';
+@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins';
+
+$draggable-item-height: 2.5rem;
+$pepperi-theme: get-pepperi-theme();
+
+:host {
+    display: block;
+}
+
+.draggable-item-container {
+    // opacity: 0.75;
+    height: $draggable-item-height;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    border-radius: $border-radius-md;
+    padding-inline: $spacing-sm;
+    
+    @include state-regular-default($pepperi-theme, true);
+}
+
+.title-container {
+    overflow-x: hidden;
+    margin-inline: $spacing-sm;
+
+    .title {
+        display: block;
+    }
+}
+
+.actions {
+    display: inline-flex;
+    gap: $spacing-xs;
+}
