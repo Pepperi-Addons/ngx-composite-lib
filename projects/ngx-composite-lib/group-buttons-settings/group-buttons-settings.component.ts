@@ -38,7 +38,6 @@ export class GroupButtonsSettingsComponent implements OnInit {
     btnkeyChange: EventEmitter<IPepButtonClickEvent> = new EventEmitter<IPepButtonClickEvent>();
     
     
-    
     none: PepButton = {key: 'none'};
     
     sizes: Array<PepButton> = [];
@@ -54,7 +53,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
         // Get the first translation for load all translations.
         this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').toPromise().then((typeSoft) => {
             
-            this.none = { key: 'none', value: this.translate.instant('GENERAL.NONE'), callback: () => this.onKeyChange('none') };
+            this.none = { key: 'none', value: this.translate.instant('GENERAL.NONE'), callback: () => this.onKeyChange(null) };
             
             this.arrayMerge();
         });
@@ -74,8 +73,8 @@ export class GroupButtonsSettingsComponent implements OnInit {
         }
     }
 
-    onKeyChange(value: any ) {
-        this.btnKey = value;
+    onKeyChange(event: IPepButtonClickEvent | null) {
+        this.btnKey = event?.source?.key || 'none';
         this.btnkeyChange.emit(this.btnKey);
     }
 
@@ -86,39 +85,39 @@ export class GroupButtonsSettingsComponent implements OnInit {
             }
             case 'sizes':{
                 return [
-                    { key: 'xs', value: this.translate.instant('GENERAL.XS'), callback: () => this.onKeyChange('xs') },
-                    { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: () => this.onKeyChange('sm') },
-                    { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: () => this.onKeyChange('md') },
-                    { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: () => this.onKeyChange('lg') },
-                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: () => this.onKeyChange('xl') }
+                    { key: 'xs', value: this.translate.instant('GENERAL.XS'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: (event: any) => this.onKeyChange(event) }
                 ];
             }
             case 'vertical-align':{
                 return [
-                    { key: 'top', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.TOP') },
-                    { key: 'middle', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE') },
-                    { key: 'bottom', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM') }
+                    { key: 'start', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.TOP'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
+                    { key: 'center', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
+                    { key: 'end', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) }
                 ];
             }
             case 'horizontal-align': {
                 return [
-                    { key: 'left', iconName: 'text_align_right' },
-                    { key: 'center', iconName: 'text_align_center' },
-                    { key: 'right', iconName: 'text_align_left' },
+                    { key: 'left', iconName: 'text_align_right', callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'center', iconName: 'text_align_center', callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'right', iconName: 'text_align_left', callback: (event: any) => this.onKeyChange(event) },
                 ];
             }
             case 'font-weight':{
                 return [
-                    { key: 'normal', value: this.translate.instant('SLIDE_EDITOR.FONT_WEIGHT.NORMAL') },
-                    { key: 'bold', value: this.translate.instant('SLIDE_EDITOR.FONT_WEIGHT.BOLD') },
-                    { key: 'bolder', value: this.translate.instant('SLIDE_EDITOR.FONT_WEIGHT.BOLDER') }
+                    { key: 'normal', value: this.translate.instant('GENERAL.FONT_WEIGHT.NORMAL'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'bold', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLD'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'bolder', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLDER'), callback: (event: any) => this.onKeyChange(event) }
                 ]
             }
             case 'width-sizes':{
                 return [
-                        { key: 'narrow', value: this.translate.instant('SLIDE_EDITOR.WIDTH_SIZE.NARROW') },
-                        { key: 'regular', value: this.translate.instant('SLIDE_EDITOR.WIDTH_SIZE.REGULAR') },
-                        { key: 'wide', value: this.translate.instant('SLIDE_EDITOR.WIDTH_SIZE.WIDE') }
+                        { key: 'narrow', value: this.translate.instant('GENERAL.WIDTH_SIZE.NARROW'), callback: (event: any) => this.onKeyChange(event) },
+                        { key: 'regular', value: this.translate.instant('GENERAL.WIDTH_SIZE.REGULAR'), callback: (event: any) => this.onKeyChange(event) },
+                        { key: 'wide', value: this.translate.instant('GENERAL.WIDTH_SIZE.WIDE'), callback: (event: any) => this.onKeyChange(event) }
                 ];
             }
 
