@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "Conformité AA",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Pas d’image",
+        "CLICK_TO_ENLARGE": "Cliquez pour agrandir"
+    },
+    "FILE": {
+        "HINT": "Glissez-déposez un fichier ici ou cliquez sur",
+        "UPLOADING_FILE": "Téléchargement en cours du fichier",
+        "SEE_ORIGINAL": "Voir l’original"
+    },
+    "QS": {
+        "ORDER": "Commande"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Cliquez pour commander"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Saisir le texte"
+    },
+    "SELECT": {
+        "HINT": "Veuillez sélectionner une option"
+    },
+    "SIGNATURE": {
+        "HINT": "Signature",
+        "TAP_TO_SIGN": "Taper pour signer",
+        "DIALOG_TITLE": "Ajouter la signature ici"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Appliquer",
+        "CANCEL": "Annuler",
+        "CLEAR": "Effacer",
+        "CLEAR_ALL": "Effacer tout",
+        "CLOSE": "Fermer",
+        "CREATE_NEW": "Créer nouveau",
+        "DONE": "Effectué",
+        "OK": "Ok",
+        "SAVE": "Enregistrer"
+    },
+    "LIST": {
+        "ALL": "Tous",
+        "NONE": "Aucun",
+        "SELECT": "Sélectionner",
+        "SELECTED": "Sélectionner",
+        "SORT_ASC": "Croissant",
+        "SORT_DESC": "Décroissant"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Notice",
+        "ERROR_CASE_QUANTITY_LIMIT": "Quantité dans carton ",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Echec du chargement du fichier, le format {{fileExtension}} n’est pas pris en charge.",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Echec du téléchargement du fichier, la limitation de la taille du fichier est - {{fileSize}} Mo",
+        "ERROR_INVALID_FIELDS": "Veuillez valider les champs suivants :",
+        "ERROR_INVENTORY_LIMIT": "Quantité max.",
+        "ERROR_IS_NOT_VALID": "{{field}} n’est pas valide",
+        "ERROR_IS_REQUIRED": "{{field}} n’est pas requis",
+        "ERROR_MANDATORY_FIELDS": "Champ requis :",
+        "ERROR_MAX_QUANTITY_LIMIT": "Quantité max.",
+        "ERROR_MIN_QUANTITY_LIMIT": "Quantité min.",
+        "ERROR_RANGE_IS_NOT_VALID": "La valeur doit être entre {{min}} et {{max}}",
+        "INFO_LOADING_FILE": "Chargement en cours",
+        "INFO_MISSING_FILE": "Fichier manquant",
+        "INFO_MISSING_IMAGE": "Image manquante",
+        "INFO_MISSING_SIGNATURE": "Signature manquante"
+    }
+}

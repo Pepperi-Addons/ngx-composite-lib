@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "Conformidade AA",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Nenhuma imagem",
+        "CLICK_TO_ENLARGE": "Clique para ampliar"
+    },
+    "FILE": {
+        "HINT": "Arraste e solte um arquivo aqui ou clique",
+        "UPLOADING_FILE": "Enviando Arquivo",
+        "SEE_ORIGINAL": "Ver original"
+    },
+    "QS": {
+        "ORDER": "Pedido"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Clique para pedir"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Inserir Texto"
+    },
+    "SELECT": {
+        "HINT": "Selecione uma opção"
+    },
+    "SIGNATURE": {
+        "HINT": "Assinatura",
+        "TAP_TO_SIGN": "Toque para assinar",
+        "DIALOG_TITLE": "Adicione a assinatura aqui"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Aplicar",
+        "CANCEL": "Cancelar",
+        "CLEAR": "Limpar",
+        "CLEAR_ALL": "Limpar tudo",
+        "CLOSE": "Fechar",
+        "CREATE_NEW": "Criar novo",
+        "DONE": "Pronto",
+        "OK": "Ok",
+        "SAVE": "Salvar"
+    },
+    "LIST": {
+        "ALL": "Todos",
+        "NONE": "Nenhum",
+        "SELECT": "Selecionar",
+        "SELECTED": "selecionado",
+        "SORT_ASC": "Crescente",
+        "SORT_DESC": "Decrescente"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Aviso",
+        "ERROR_CASE_QUANTITY_LIMIT": "Quantidade por embalagem",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Falha ao enviar arquivo, o formato {{fileExtension}} não é suportado",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Falha ao enviar arquivo, o limite de tamanho de arquivo é - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Valide os campos a seguir:",
+        "ERROR_INVENTORY_LIMIT": "Quantidade Máxima",
+        "ERROR_IS_NOT_VALID": "{{field}} não é válido",
+        "ERROR_IS_REQUIRED": "{{field}} é obrigatório",
+        "ERROR_MANDATORY_FIELDS": "Campos obrigatórios:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Quantidade Max",
+        "ERROR_MIN_QUANTITY_LIMIT": "Quantidade mínima",
+        "ERROR_RANGE_IS_NOT_VALID": "O valor deve estar entre {{min}} e {{max}}",
+        "INFO_LOADING_FILE": "Carregando",
+        "INFO_MISSING_FILE": "Arquivo ausente",
+        "INFO_MISSING_IMAGE": "Imagem ausente",
+        "INFO_MISSING_SIGNATURE": "Assinatura ausente"
+    }
+}

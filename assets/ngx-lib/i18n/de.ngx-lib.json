@@ -1,0 +1,78 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA-konform",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Kein Bild",
+        "CLICK_TO_ENLARGE": "Zum Vergrößern anklicken"
+    },
+    "FILE": {
+        "HINT": "Ziehen Sie eine Datei hierher oder klicken Sie darauf",
+        "UPLOADING_FILE": "Datei wird hochgeladen",
+        "SEE_ORIGINAL": "Siehe Original"
+    },
+    "QS": {
+        "ORDER": "Bestellung"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Zum Bestellen klicken"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Text eingeben"
+    },
+    "SELECT": {
+        "HINT": "Bitte wählen Sie eine Option"
+    },
+    "SIGNATURE": {
+        "HINT": "Unterschrift",
+        "TAP_TO_SIGN": "Zum Unterschreiben antippen",
+        "DIALOG_TITLE": "Unterschrift hier hinzufügen"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "CANCEL": "Abbrechen",
+        "CLEAR": "Löschen",
+        "CLEAR_ALL": "Alles löschen",
+        "CLOSE": "Schließen",
+        "CREATE_NEW": "Neu erstellen",
+        "DONE": "Fertig",
+        "OK": "OK",
+        "SAVE": "Speichern"
+    },
+    "LIST": {
+        "ALL": "Alles",
+        "NONE": "Keine",
+        "SELECT": "Auswählen",
+        "SELECTED": "ausgewählt",
+        "SORT_ASC": "Aufsteigend",
+        "SORT_DESC": "Absteigend"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Hinweis",
+        "ERROR_CASE_QUANTITY_LIMIT": "Verpackungsmenge",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Datei-Upload nicht erfolgreich, {{fileExtension}}-Format wird nicht unterstützt",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Datei-Upload nicht erfolgreich, die maximale Dateigröße ist {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Bitte überprüfen Sie die folgenden Felder:",
+        "ERROR_INVENTORY_LIMIT": "Maximale Menge",
+        "ERROR_IS_NOT_VALID": "{{field}} ist ungültig",
+        "ERROR_IS_REQUIRED": "{{field}} ist erforderlich",
+        "ERROR_MANDATORY_FIELDS": "Pflichtfelder:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Max Menge",
+        "ERROR_MIN_QUANTITY_LIMIT": "Mindestmenge",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Wird geladen",
+        "INFO_MISSING_FILE": "Fehlende Datei",
+        "INFO_MISSING_IMAGE": "Fehlende Abbildung",
+        "INFO_MISSING_SIGNATURE": "Unterschrift fehlt"
+    }
+}

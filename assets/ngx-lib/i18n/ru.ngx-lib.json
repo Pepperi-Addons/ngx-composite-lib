@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA Complient",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Нет изображения",
+        "CLICK_TO_ENLARGE": "Нажмите, чтобы увеличить"
+    },
+    "FILE": {
+        "HINT": "Drag and drop a file here or click",
+        "UPLOADING_FILE": "Uploading File",
+        "SEE_ORIGINAL": "See original"
+    },
+    "QS": {
+        "ORDER": "Заказ"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Нажмите для заказа"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Enter Text"
+    },
+    "SELECT": {
+        "HINT": "Please select an option"
+    },
+    "SIGNATURE": {
+        "HINT": "Подпись",
+        "TAP_TO_SIGN": "Дотроньтесь, чтобы поставить подпись",
+        "DIALOG_TITLE": "Add signature here"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Применить",
+        "CANCEL": "Отмена",
+        "CLEAR": "Очистить",
+        "CLEAR_ALL": "Очистить всё",
+        "CLOSE": "Закрыть",
+        "CREATE_NEW": "Создать новое",
+        "DONE": "Готово",
+        "OK": "Ok",
+        "SAVE": "Сохранить"
+    },
+    "LIST": {
+        "ALL": "Все",
+        "NONE": "Нет",
+        "SELECT": "Select",
+        "SELECTED": "выбранные",
+        "SORT_ASC": "По возрастанию",
+        "SORT_DESC": "По убывынию"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Уведомление",
+        "ERROR_CASE_QUANTITY_LIMIT": "Количество упаковок",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Не удалось загрузить файл, {{fileExtension}} формат не поддерживается",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Failed to upload file, file size limitation is - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Пожалуйста, подтвердите следующие поля:",
+        "ERROR_INVENTORY_LIMIT": "Макс. количество",
+        "ERROR_IS_NOT_VALID": "{{field}} is not valid",
+        "ERROR_IS_REQUIRED": "{{field}} is mandatory",
+        "ERROR_MANDATORY_FIELDS": "Обязательные поля:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Макс. количество",
+        "ERROR_MIN_QUANTITY_LIMIT": "Мин. количество",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Загрузка",
+        "INFO_MISSING_FILE": "Missing file",
+        "INFO_MISSING_IMAGE": "Missing image",
+        "INFO_MISSING_SIGNATURE": "Signature missing"
+    }
+}

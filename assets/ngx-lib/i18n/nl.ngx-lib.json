@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA Complient",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Geen afbeelding",
+        "CLICK_TO_ENLARGE": "Klik om te vergroten"
+    },
+    "FILE": {
+        "HINT": "Sleep een bestand hier naartoe of klik op",
+        "UPLOADING_FILE": "Bestand uploaden",
+        "SEE_ORIGINAL": "Zie origineel"
+    },
+    "QS": {
+        "ORDER": "Order"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Klik om te bestellen"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Enter Text"
+    },
+    "SELECT": {
+        "HINT": "Selecteer a. u. b. een optie"
+    },
+    "SIGNATURE": {
+        "HINT": "Handtekening",
+        "TAP_TO_SIGN": "Tik om te teken",
+        "DIALOG_TITLE": "Add signature here"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Toepassen",
+        "CANCEL": "Annuleren",
+        "CLEAR": "Wissen",
+        "CLEAR_ALL": "Wis alles",
+        "CLOSE": "Sluiten",
+        "CREATE_NEW": "Aanmaken nieuw",
+        "DONE": "Voltooid",
+        "OK": "Ok",
+        "SAVE": "Bewaren"
+    },
+    "LIST": {
+        "ALL": "Alle",
+        "NONE": "Geen",
+        "SELECT": "Selecteer",
+        "SELECTED": "geselecteerde",
+        "SORT_ASC": "Oplopend",
+        "SORT_DESC": "Aflopende"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Aankondiging",
+        "ERROR_CASE_QUANTITY_LIMIT": "Doos inhoud",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Niet gelukt uploaden bestand, {{fileExtension}} format wordt niet ondersteund",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Niet gelukt uploaden bestand, bestandgrootte gelimiteerd tot - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Gelieve volgende velden valideren:",
+        "ERROR_INVENTORY_LIMIT": "Max aantal",
+        "ERROR_IS_NOT_VALID": "{{field}} is niet valide",
+        "ERROR_IS_REQUIRED": "{{field}} is vereist",
+        "ERROR_MANDATORY_FIELDS": "Verplichte velden:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Max aantal",
+        "ERROR_MIN_QUANTITY_LIMIT": "Min. aantal",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Bezig met laden",
+        "INFO_MISSING_FILE": "Missing file",
+        "INFO_MISSING_IMAGE": "Missing image",
+        "INFO_MISSING_SIGNATURE": "Signature missing"
+    }
+}

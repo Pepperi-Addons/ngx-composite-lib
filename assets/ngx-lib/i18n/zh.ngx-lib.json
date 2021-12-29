@@ -1,0 +1,77 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "符合 AA 级别标准",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "无图片",
+        "CLICK_TO_ENLARGE": "点击放大"
+    },
+    "FILE": {
+        "HINT": "将文件拖放到此处或单击",
+        "UPLOADING_FILE": "正在上传文件",
+        "SEE_ORIGINAL": "查看原始文件"
+    },
+    "QS": {
+        "ORDER": "购买"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "点击订购"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "输入文本"
+    },
+    "SELECT": {
+        "HINT": "请选择一个选项"
+    },
+    "SIGNATURE": {
+        "HINT": "签名",
+        "TAP_TO_SIGN": "点击签名",
+        "DIALOG_TITLE": "在此添加签名"
+    },
+    "ACTIONS": {
+        "APPLY": "使用",
+        "CANCEL": "取消",
+        "CLEAR": "清除",
+        "CLEAR_ALL": "全部清除",
+        "CLOSE": "关闭",
+        "CREATE_NEW": "创建新的",
+        "DONE": "完成",
+        "OK": "确定",
+        "SAVE": "保存"
+    },
+    "LIST": {
+        "ALL": "全部",
+        "NONE": "无",
+        "SELECT": "选择",
+        "SELECTED": "已选",
+        "SORT_ASC": "升序",
+        "SORT_DESC": "降序"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "通知",
+        "ERROR_CASE_QUANTITY_LIMIT": "案例数量",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "上传文件失败，不支持 {{fileExtension}} 格式",
+        "ERROR_FAILD_TO_LOAD_SIZE": "上传文件失败，文件大小限制为 - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "请验证以下区域：",
+        "ERROR_INVENTORY_LIMIT": "最高数量",
+        "ERROR_IS_NOT_VALID": "{{field}} 无效",
+        "ERROR_IS_REQUIRED": "{{field}} 为必填项",
+        "ERROR_MANDATORY_FIELDS": "必填区域：",
+        "ERROR_MAX_QUANTITY_LIMIT": "最高数量",
+        "ERROR_MIN_QUANTITY_LIMIT": "最低数量",
+        "ERROR_RANGE_IS_NOT_VALID": "值应介于 {{min}} 和 {{max}} 之间",
+        "INFO_LOADING_FILE": "载入中",
+        "INFO_MISSING_FILE": "缺少文件",
+        "INFO_MISSING_IMAGE": "缺少图像",
+        "INFO_MISSING_SIGNATURE": "签名缺失"
+    }
+}

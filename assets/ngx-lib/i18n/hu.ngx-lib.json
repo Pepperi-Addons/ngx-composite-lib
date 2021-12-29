@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA Complient",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Nincs kép",
+        "CLICK_TO_ENLARGE": "Kattintson a képre a nagyításhoz"
+    },
+    "FILE": {
+        "HINT": "Drag and drop a file here or click",
+        "UPLOADING_FILE": "Uploading File",
+        "SEE_ORIGINAL": "See original"
+    },
+    "QS": {
+        "ORDER": "Rendelés"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Kattintson a rendeléshez"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Enter Text"
+    },
+    "SELECT": {
+        "HINT": "Please select an option"
+    },
+    "SIGNATURE": {
+        "HINT": "Aláírás",
+        "TAP_TO_SIGN": "Érintse meg a bejelentkezéshez",
+        "DIALOG_TITLE": "Add signature here"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Jóváhagy",
+        "CANCEL": "Mégsem",
+        "CLEAR": "Törlés",
+        "CLEAR_ALL": "Összes törlése",
+        "CLOSE": "Bezár",
+        "CREATE_NEW": "Új létrehozása",
+        "DONE": "Rendben",
+        "OK": "Ok",
+        "SAVE": "Kiválaszt"
+    },
+    "LIST": {
+        "ALL": "Mind",
+        "NONE": "Egyik sem",
+        "SELECT": "Kiválasztás",
+        "SELECTED": "kiválasztva",
+        "SORT_ASC": "Növekvő",
+        "SORT_DESC": "Csökkenő"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Értesítés",
+        "ERROR_CASE_QUANTITY_LIMIT": "Egység",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Nem sikerült feltölteni a fájlt, {{fileExtension}} formátum nem támogatott",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Nem sikerült feltölteni a fájlt, a maximális fájlméret: - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Ellenőrizze a következő mezőket:",
+        "ERROR_INVENTORY_LIMIT": "Maximum mennyiség",
+        "ERROR_IS_NOT_VALID": "{{field}} is not valid",
+        "ERROR_IS_REQUIRED": "{{field}} is mandatory",
+        "ERROR_MANDATORY_FIELDS": "Szükséges mezők:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Maximum mennyiség",
+        "ERROR_MIN_QUANTITY_LIMIT": "Minimum mennyiség",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Betöltés",
+        "INFO_MISSING_FILE": "Missing file",
+        "INFO_MISSING_IMAGE": "Missing image",
+        "INFO_MISSING_SIGNATURE": "Signature missing"
+    }
+}

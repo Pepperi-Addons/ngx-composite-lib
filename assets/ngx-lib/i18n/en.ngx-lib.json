@@ -1,0 +1,139 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA Complient",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "No image",
+        "CLICK_TO_ENLARGE": "Click to enlarge"
+    },
+    "FILE": {
+        "HINT": "Drag and drop a file here or click",
+        "UPLOADING_FILE": "Uploading File",
+        "SEE_ORIGINAL": "See original"
+    },
+    "QS": {
+        "ORDER": "Order"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Click to order"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Enter Text"
+    },
+    "SEARCH": {
+        "HINT": "Search",
+        "MORE_RESULTS": "More Results"
+    },
+    "SELECT": {
+        "HINT": "Please select an option"
+    },
+    "SIGNATURE": {
+        "HINT": "Signature",
+        "TAP_TO_SIGN": "Tap to Sign",
+        "DIALOG_TITLE": "Add signature here"
+    },
+    "SMART_FILTERS": {
+        "TITLE": "Smart filters",
+        "IS_ON": "Is on",
+        "CHOOSE_TIME": "Choose time",
+        "AMOUNT": "Amount",
+        "TIME_UNIT": "Time unit",
+        "START_DATE": "Start date",
+        "END_DATE": "End date",
+        "CHOOSE_DATE": "Choose a date",
+        "TYPE": "Type",
+        "MIN": "Min",
+        "MAX": "Max",
+        "SEARCH": "Search",
+        "NO_SEARCH_RESULTS": "No results found",
+        "NO_OPTIONS": "No options",
+        "OPERATORS": {
+            "IN_THE_LAST": "In the last",
+            "TODAY": "Today",
+            "THIS_WEEK": "This week",
+            "THIS_MONTH": "This month",
+            "DATE_RANGE": "Between",
+            "DUE_IN": "Due in",
+            "ON": "On",
+            "NOT_IN_THE_LAST": "Not in the last",
+            "NOT_DUE_IN": "Not due in",
+            "IS_EMPTY": "Is empty",
+            "IS_NOT_EMPTY": "Is not empty",
+            "NOT_EQUAL": "Not equal",
+            "LESS_THEN_OR_EQUAL": "Less than or equal to",
+            "LESS_THEN": "Less than",
+            "EQUAL": "Equal",
+            "GREATER_THEN": "Greater than",
+            "GREATER_THEN_OR_EQUAL": "Greater than or equal to",
+            "NUMBER_RANGE": "Between",
+            "In": "In"
+        },
+        "OPERATOR_UNITS": {
+            "DAYS": "Days",
+            "WEEKS": "Weeks",
+            "MONTHS": "Months",
+            "YEARS": "Years"
+        }
+    },
+    "ACTIONS": {
+        "APPLY": "Apply",
+        "CANCEL": "Cancel",
+        "CLEAR": "Clear",
+        "CLEAR_ALL": "Clear All",
+        "CLOSE": "Close",
+        "CONTINUE": "Continue",
+        "CREATE_NEW": "Create new",
+        "DELETE": "Delete",
+        "DONE": "Done",
+        "OK": "Ok",
+        "SAVE": "Save"
+    },
+    "LIST": {
+        "ALL": "All",
+        "NONE": "None",
+        "PAGER_PREVIOUS": "Previous",
+        "PAGER_NEXT": "Next",
+        "PAGER_OUT_OF": "Out of",
+        "PAGER_PAGE": "Page",
+        "SELECT": "Select",
+        "SELECTED": "selected",
+        "SORT_BY": "Sort by",
+        "SORT_ASC": "Ascending",
+        "SORT_DESC": "Descending",
+        "TOTAL_RESULTS": "<span class='bold number'>{{ totalRows }}</span> results",
+        "TOTAL_RESULT": "<span class='bold number'>{{ totalRows }}</span> result",
+        "TOTAL_RESULTS_OUT_OF": "<span class='bold number'>{{ xRows }}</span> of <span class='bold number'>{{ totalRows }}</span> results",
+        "TOTAL_RESULT_OUT_OF_RESULT": "<span class='bold number'>{{ xRows }}</span> of <span class='bold number'>{{ totalRows }}</span> result",
+        "TOTAL_OF": "At total of: ",
+        "NO_DATA_FOUND": "No results were found.",
+        "NO_DATA_FOUND_SUGGESTIONS_TITLE": "We have some suggestions:",
+        "NO_DATA_FOUND_SUGGESTIONS_LIST": "<li>Make sure that all words are spelled correctly.</li><li>Try different keywords.</li><li>Try more general keywords.</li>"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Notice",
+        "ERROR_CASE_QUANTITY_LIMIT": "Case quantity",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Failed to upload file, {{fileExtension}} format is not supported",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Failed to upload file, file size limitation is - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Please validate the following fields:",
+        "ERROR_INVENTORY_LIMIT": "Max quantity",
+        "ERROR_IS_NOT_VALID": "{{field}} is not valid",
+        "ERROR_IS_REQUIRED": "{{field}} is mandatory",
+        "ERROR_MANDATORY_FIELDS": "Required fields:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Max quantity",
+        "ERROR_MIN_QUANTITY_LIMIT": "Min quantity",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Loading",
+        "INFO_MISSING_FILE": "Missing file",
+        "INFO_MISSING_IMAGE": "Missing image",
+        "INFO_MISSING_SIGNATURE": "Signature missing"
+    }
+}

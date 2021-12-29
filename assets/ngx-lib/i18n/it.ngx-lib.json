@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "Conforme a AA",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "Nessuna immagine",
+        "CLICK_TO_ENLARGE": "Clicca per ingrandire"
+    },
+    "FILE": {
+        "HINT": "Trascina e rilasci un file qui o clicca su",
+        "UPLOADING_FILE": "Caricare File",
+        "SEE_ORIGINAL": "Vedere originale"
+    },
+    "QS": {
+        "ORDER": "Ordine"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Cliccare per ordinare"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Inserire Testo"
+    },
+    "SELECT": {
+        "HINT": "Seleziona un'opzione"
+    },
+    "SIGNATURE": {
+        "HINT": "Signature",
+        "TAP_TO_SIGN": "Fare tap sullo schermo per immettere la firma",
+        "DIALOG_TITLE": "Inserire la firma qui"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "Applica",
+        "CANCEL": "Annulla",
+        "CLEAR": "Elimina",
+        "CLEAR_ALL": "Elimina tutto",
+        "CLOSE": "Chiudi",
+        "CREATE_NEW": "Crea nuovo",
+        "DONE": "Fatto",
+        "OK": "Ok",
+        "SAVE": "Salvare"
+    },
+    "LIST": {
+        "ALL": "Tutto",
+        "NONE": "Niente",
+        "SELECT": "Selezionare",
+        "SELECTED": "selezionato",
+        "SORT_ASC": "Crescente",
+        "SORT_DESC": "Decrescente"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Avviso",
+        "ERROR_CASE_QUANTITY_LIMIT": "Quantità per confezione",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Caricamento del file non riuscito, {{fileExtension}} formato non supportato",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Caricamento file fallito, limite dimensione file- {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "La preghiamo di confermare i seguenti campi:",
+        "ERROR_INVENTORY_LIMIT": "Quantità Max",
+        "ERROR_IS_NOT_VALID": "{{field}} non è valido",
+        "ERROR_IS_REQUIRED": "{{field}} non è richiesto",
+        "ERROR_MANDATORY_FIELDS": "Campi obbligatori:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Quantità Max",
+        "ERROR_MIN_QUANTITY_LIMIT": "Quantità min",
+        "ERROR_RANGE_IS_NOT_VALID": "I valori dovrebbero essere compresi tra {{min}} e {{max}}",
+        "INFO_LOADING_FILE": "Caricamento in corso",
+        "INFO_MISSING_FILE": "File Mancante",
+        "INFO_MISSING_IMAGE": "Immagine Mancante",
+        "INFO_MISSING_SIGNATURE": "Firma dimenticata"
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "תואם ל-AA",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "אין תמונה",
+        "CLICK_TO_ENLARGE": "לחץ להגדלה"
+    },
+    "FILE": {
+        "HINT": "גרור ושחרר קובץ כאן או לחץ",
+        "UPLOADING_FILE": "מעלה קובץ",
+        "SEE_ORIGINAL": "ראה מקור"
+    },
+    "QS": {
+        "ORDER": "הזמן"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "הקליקו להזמנה"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "הזן טקסט"
+    },
+    "SELECT": {
+        "HINT": "בחר אפשרות"
+    },
+    "SIGNATURE": {
+        "HINT": "חתימה",
+        "TAP_TO_SIGN": "הקש כדי לחתום",
+        "DIALOG_TITLE": "הוסף חתימה"
+    },
+    "ACTIONS": {
+        "CONTINUE": "המשך",
+        "DELETE": "מחק",
+        "APPLY": "החל",
+        "CANCEL": "בטל",
+        "CLEAR": "נקה",
+        "CLEAR_ALL": "נקה הכל",
+        "CLOSE": "סגירה",
+        "CREATE_NEW": "צור חדש",
+        "DONE": "אישור",
+        "OK": "אישור",
+        "SAVE": "שמירה"
+    },
+    "LIST": {
+        "ALL": "הכל",
+        "NONE": "ללא",
+        "SELECT": "בחר",
+        "SELECTED": "נבחרו",
+        "SORT_ASC": "סדר עולה",
+        "SORT_DESC": "סדר יורד"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "הודעה",
+        "ERROR_CASE_QUANTITY_LIMIT": "כמות באריזה",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "התמונה לא הועלתה, פורמט {{fileExtension}} אינו נתמך",
+        "ERROR_FAILD_TO_LOAD_SIZE": "הקובץ לא הועלה, גודל המקסימלי הינו {{fileSize}} מגבייט",
+        "ERROR_INVALID_FIELDS": "נא לאמת את השדות הבאים:",
+        "ERROR_INVENTORY_LIMIT": "כמות מרבית",
+        "ERROR_IS_NOT_VALID": "{{field}} אינו חוקי",
+        "ERROR_IS_REQUIRED": "{{field}} הוא שדה חיוני",
+        "ERROR_MANDATORY_FIELDS": "שדות חובה:",
+        "ERROR_MAX_QUANTITY_LIMIT": "כמות מרבית",
+        "ERROR_MIN_QUANTITY_LIMIT": "כמות מינימלית",
+        "ERROR_RANGE_IS_NOT_VALID": "הערך צריך להיות בין {{min}} ל-{{max}}",
+        "INFO_LOADING_FILE": "טוען נתונים",
+        "INFO_MISSING_FILE": "קובץ חסר",
+        "INFO_MISSING_IMAGE": "תמונה חסרה",
+        "INFO_MISSING_SIGNATURE": "חתימה חסרה"
+    }
+}

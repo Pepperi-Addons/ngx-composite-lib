@@ -1,0 +1,79 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA 遵守",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "画像なし",
+        "CLICK_TO_ENLARGE": "クリックして拡大"
+    },
+    "FILE": {
+        "HINT": "ここにファイルをドラッグアンドドロップするかこちらをクリック：",
+        "UPLOADING_FILE": "ファイルをアップロード中",
+        "SEE_ORIGINAL": "元ファイルを表示"
+    },
+    "QS": {
+        "ORDER": "注文"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "クリックして注文"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "テキストを入力"
+    },
+    "SELECT": {
+        "HINT": "オプションを選択してください"
+    },
+    "SIGNATURE": {
+        "HINT": "署名",
+        "TAP_TO_SIGN": "タップして署名",
+        "DIALOG_TITLE": "ここに署名を追加"
+    },
+    "ACTIONS": {
+        "CONTINUE": "Continue",
+        "DELETE": "Delete",
+        "APPLY": "適用",
+        "CANCEL": "キャンセル",
+        "CLEAR": "クリア",
+        "CLEAR_ALL": "すべてクリア",
+        "CLOSE": "閉じる",
+        "CREATE_NEW": "新規作成",
+        "DONE": "終了",
+        "OK": "Ok",
+        "SAVE": "保存"
+    },
+    "LIST": {
+        "ALL": "すべて",
+        "NONE": "なし",
+        "SELECT": "選択",
+        "SELECTED": "選択済み",
+        "SORT_ASC": "昇順",
+        "SORT_DESC": "降順"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "通知",
+        "ERROR_CASE_QUANTITY_LIMIT": "ケース数量",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "ファイルのアップロードに失敗しました - {{fileExtension}} 形式はサポートされていません",
+        "ERROR_FAILD_TO_LOAD_SIZE": "ファイル容量の上限を超えているためファイルのアップロードに失敗しました - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "以下のフィールドを検証してください:",
+        "ERROR_INVENTORY_LIMIT": "最大数量",
+        "ERROR_IS_NOT_VALID": "{{field}} が無効です",
+        "ERROR_IS_REQUIRED": "{{field}} は入力必須です",
+        "ERROR_MANDATORY_FIELDS": "入力必須フィールド:",
+        "ERROR_MAX_QUANTITY_LIMIT": "最大数量",
+        "ERROR_MIN_QUANTITY_LIMIT": "最小数量",
+        "ERROR_RANGE_IS_NOT_VALID": "値は {{min}} ～ {{max}} でなければなりません",
+        "INFO_LOADING_FILE": "読み込み中",
+        "INFO_MISSING_FILE": "ファイルがありません",
+        "INFO_MISSING_IMAGE": "画像がありません",
+        "INFO_MISSING_SIGNATURE": "署名がありません"
+    }
+}
