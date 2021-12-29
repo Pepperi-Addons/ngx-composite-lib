@@ -5,7 +5,7 @@
             "umdModuleIds": {
                 "@ngx-translate/core": "translate",
                 "@pepperi-addons/ngx-lib": "ngx-lib",
-                "@pepperi-addons/ngx-lib/buton": "ngx-lib/buton"
+                "@pepperi-addons/ngx-lib/button": "ngx-lib/button"
             }
         }
     },
