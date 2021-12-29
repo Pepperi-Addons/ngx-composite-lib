@@ -7,6 +7,7 @@ $pepperi-theme: get-pepperi-theme();
 
 :host {
     display: block;
+    cursor: grab; 
 }
 
 .draggable-item-container {
