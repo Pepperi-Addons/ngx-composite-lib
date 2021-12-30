@@ -17,21 +17,6 @@ import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 import { GenericListExampleComponent } from './generic-list-example/generic-list-example.component';
 
-export function createTranslateLoader(addonService: PepAddonService) {
-    const ngxLibTranslationResource = addonService.getNgxLibTranslationResource();
-    const addonTranslationResource = addonService.getAddonTranslationResource();
-    const ngxCompositeLibAssetsFolder = 'assets/ngx-composite-lib/i18n/';
-    
-    return addonService.translateService.createMultiTranslateLoader([
-        ngxLibTranslationResource,
-        addonTranslationResource,
-        {
-            prefix: `/${ngxCompositeLibAssetsFolder}`,
-            suffix: '.ngx-composite-lib.json',
-        }
-    ]);
-}
-
 import {
     TranslateModule,
     TranslateLoader,
@@ -59,7 +44,8 @@ import { CommonModule } from '@angular/common';
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: createTranslateLoader,
+                useFactory: (addonService: PepAddonService) => 
+                    PepAddonService.createMultiTranslateLoader(addonService, ['ngx-lib', 'ngx-composite-lib']),
                 deps: [PepAddonService]
             }
         }),
