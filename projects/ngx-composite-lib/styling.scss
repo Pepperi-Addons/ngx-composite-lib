@@ -1,0 +1,14 @@
+// 1. Add ngx-lib styles
+@import '~@pepperi-addons/ngx-lib/theming';
+// @include pepperi-theme();
+
+// 2. Configuration and helpers
+@import './src/core/style/abstracts/functions', 
+        './src/core/style/abstracts/variables', 
+        './src/core/style/abstracts/mixins';
+
+// 3. Base stuff
+@import './src/core/style/base/helpers';
+
+// 4. Components
+@import './src/core/style/components/general';

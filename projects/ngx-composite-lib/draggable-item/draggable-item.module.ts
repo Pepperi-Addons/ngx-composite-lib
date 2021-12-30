@@ -19,4 +19,4 @@ import { DraggableItemComponent } from './draggable-item.component';
     ],
     exports: [DraggableItemComponent],
 })
-export class DraggableItemModule { }
+export class PepDraggableItemModule { }
