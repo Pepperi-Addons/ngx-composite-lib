@@ -2,18 +2,18 @@
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../dist/ngx-composite-lib",
     "assets": [
+        "**/*.theme.scss",
+        "./styling.scss",
         "./src/assets/**/*.*",
-        "./styles.scss"
+        "./src/core/style/**/*.*"
     ],
     "lib": {
         "entryFile": "src/public-api.ts",
         "umdModuleIds": {
             "@ngx-translate/core": "translate",
             "@pepperi-addons/ngx-lib": "ngx-lib",
-            "@pepperi-addons/ngx-lib/signature": "ngx-lib/signature",
             "ngx-translate-multi-http-loader": "ngx-translate-multi-http-loader",
-            "moment": "moment",
-            "ngx-signaturepad": "signaturepad"
+            "moment": "moment"
         }
     }
 }

@@ -2,7 +2,8 @@
 @import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions';
 @import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins';
 
-$draggable-item-height: 2.5rem;
+@import '../src/core/style/abstracts/variables';
+
 $pepperi-theme: get-pepperi-theme();
 
 :host {
@@ -21,18 +22,18 @@ $pepperi-theme: get-pepperi-theme();
     padding-inline: $spacing-sm;
     
     @include state-regular-default($pepperi-theme, true);
-}
 
-.title-container {
-    overflow-x: hidden;
-    margin-inline: $spacing-sm;
+    .title-container {
+        overflow-x: hidden;
+        margin-inline: $spacing-sm;
 
-    .title {
-        display: block;
+        .title {
+            display: block;
+        }
     }
-}
 
-.actions {
-    display: inline-flex;
-    gap: $spacing-xs;
+    .actions {
+        display: inline-flex;
+        gap: $spacing-xs;
+    }
 }
