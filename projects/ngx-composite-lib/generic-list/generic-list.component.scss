@@ -29,3 +29,12 @@
         overflow: hidden;
     }
 }
+
+.noDataFoundMsg{
+    height: 100%;
+    width: 100%;
+    background: hsla(0, 0%, 10%, 0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

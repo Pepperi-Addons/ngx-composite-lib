@@ -33,10 +33,16 @@
 
 <ng-template #listTemplate>
     <div #listContainer class="list-container">
-        <pep-list viewType="table" [supportSorting]="false"
-            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="noDataMessage"
-            (fieldClick)="onCustomizeFieldClick($event)"
+        
+        <pep-list *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
+            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="noDataFoundMsg"
+            (fieldClick)="onCustomizeFieldClick($event)" [firstFieldAsLink]="firstFieldAsLink"
             (selectedItemsChange)="selectedRowsChanged($event)">
         </pep-list>
+        <ng-container *ngIf="!hasRows">
+            <div class="noDataFoundMsg">
+                    <h2>{{noDataFoundMsg}}</h2>
+            </div>
+        </ng-container>
     </div>
 </ng-template>

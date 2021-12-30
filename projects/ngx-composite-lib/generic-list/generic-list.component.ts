@@ -60,11 +60,17 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     allowSelection: boolean = true;
   
     @Input()
-    noDataMessage: string = "No data";
+    noDataFoundMsg: string = this.translate.instant('GENERIC-LIST.NO_DATA');
   
     @Input()
     allowMultipleSelection: boolean = false;
-  
+    
+    @Input() 
+    firstFieldAsLink: boolean = false;
+
+    @Input()
+    supportSorting: boolean = false;
+
     @Output()
     fieldClick: EventEmitter<IPepFormFieldClickEvent> = new EventEmitter<IPepFormFieldClickEvent>();
 
@@ -73,6 +79,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};
     menuActions: Array<PepMenuItem> = [];
+    hasRows: boolean = true;
     // PepScreenSizeType = PepScreenSizeType;
     // screenSize: PepScreenSizeType;
   
@@ -179,6 +186,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
           
             this.loadMenuItems();
         }
+        this.hasRows = this.dataObjects?.length > 0 ? true : false;
     }
 
     selectedRowsChanged(selectedRowsCount: number) {
