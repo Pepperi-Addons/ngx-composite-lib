@@ -11,7 +11,7 @@ import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
 import { PepColorSettingsModule } from '@pepperi-addons/ngx-composite-lib/color-settings';
 import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shadow-settings';
 import { PepGroupButtonsSettingsModule } from '@pepperi-addons/ngx-composite-lib/group-buttons-settings';
-
+import { FileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 
 import { ComponentsExampleComponent } from './components-example/components-example.component';
@@ -40,6 +40,7 @@ import { CommonModule } from '@angular/common';
         PepColorSettingsModule,
         PepShadowSettingsModule,
         PepGroupButtonsSettingsModule,
+        FileStatusPanelModule,
         PepGenericListModule,
         TranslateModule.forRoot({
             loader: {

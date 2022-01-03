@@ -1,5 +1,5 @@
 <div class="example-wrapper">
-    <pep-generic-list [dataSource]="dataSource" title="Generic list title">
+    <pep-generic-list [dataSource]="dataSource" title="Generic list title" [allowMultipleSelection]="true">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'" (menuItemClick)="onMenuItemClicked($event)">
             </pep-menu>

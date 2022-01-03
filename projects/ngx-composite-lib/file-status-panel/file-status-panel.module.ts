@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { PepFileService, PepAddonService, PepNgxLibModule } from '@pepperi-addons/ngx-lib';
-import { UploadDownloadProgressComponent } from './upload-download-progress.component';
+import { FileStatusPanelComponent } from './file-status-panel.component';
 import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
@@ -11,7 +10,7 @@ import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
 
 @NgModule({
     declarations: [
-        UploadDownloadProgressComponent
+        FileStatusPanelComponent
     ],
     imports: [
         CommonModule,
@@ -20,6 +19,9 @@ import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
         PepButtonModule,
         PepDialogModule,
     ],
-    exports: [UploadDownloadProgressComponent]
+    exports: [FileStatusPanelComponent]
 })
-export class UploadDownloadProgressModule { }
+
+export class FileStatusPanelModule { 
+    constructor() { }
+}

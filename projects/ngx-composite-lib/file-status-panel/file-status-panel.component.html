@@ -1,9 +1,6 @@
-<!-- <pep-top-bar class="main-top-header" [inline]="true" [title]="'Add Folder'">
-    
-</pep-top-bar> -->
-<div id="uploadPanelCont">
+<div *ngIf="filesList.length" id="uploadPanelCont">
     <div class="panel-header pep-border-bottom">
-        <label class="body-md ellipsis">{{'DOWNLOAD_PANEL.TITLE' | translate}}</label>
+        <label class="body-md ellipsis">{{title}}</label>
         <pep-button
             styleType="weak"
             styleStateType="system"
@@ -18,10 +15,10 @@
     </div>
     <div class="panel-content">
         <ul>
-            <ng-container *ngFor="let asset of assetsList">
-            <li *ngIf="asset?.status !== 'hidden'">
+            <ng-container *ngFor="let file of filesList">
+            <li *ngIf="file?.status !== 'hidden'">
                
-                <span class="color-dimmed body-sm ellipsis">{{asset.name}}</span>
+                <span class="color-dimmed body-sm ellipsis">{{file.name}}</span>
                 <pep-button
                     styleType="weak-invert"
                     styleStateType="system"
@@ -29,7 +26,7 @@
                     [disabled]="false"
                     iconName="arrow_right_alt">
                 </pep-button>
-                <span class="body-sm" [ngClass]="asset?.status">{{asset.status}}</span>
+                <span class="body-sm">{{file.status}}</span>
             
             </li>
         </ng-container>
