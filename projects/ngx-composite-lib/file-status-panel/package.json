@@ -1,0 +1,13 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "public-api.ts",
+            "umdModuleIds": {
+                "@ngx-translate/core": "translate"
+            }
+        }
+    },
+    "peerDependencies": {
+        "@pepperi-addons/ngx-lib": "^0.2.56"
+    }
+}

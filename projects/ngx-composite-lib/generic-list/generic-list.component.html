@@ -1,12 +1,12 @@
 <div *ngIf="inline" class="inline-container" [ngClass]="{ 'add-padding': addPadding }">
-    <div class="inline-top-bar-container">
+    <div *ngIf="showTopBar" class="inline-top-bar-container">
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </div>
     <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
 </div>
 
 <pep-page-layout *ngIf="!inline" [addPadding]="addPadding">
-    <ng-container pep-top-area>
+    <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
 
@@ -33,10 +33,16 @@
 
 <ng-template #listTemplate>
     <div #listContainer class="list-container">
-        <pep-list viewType="table" [supportSorting]="false"
-            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="noDataMessage"
-            (fieldClick)="onCustomizeFieldClick($event)"
+        
+        <pep-list *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
+            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="noDataFoundMsg"
+            (fieldClick)="onCustomizeFieldClick($event)" [firstFieldAsLink]="firstFieldAsLink"
             (selectedItemsChange)="selectedRowsChanged($event)">
         </pep-list>
+        <ng-container *ngIf="!hasRows">
+            <div class="noDataFoundMsg">
+                    <h2>{{noDataFoundMsg}}</h2>
+            </div>
+        </ng-container>
     </div>
 </ng-template>

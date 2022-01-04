@@ -1,0 +1,35 @@
+<div *ngIf="filesList.length" id="uploadPanelCont">
+    <div class="panel-header pep-border-bottom">
+        <label class="body-md ellipsis">{{title}}</label>
+        <pep-button
+            styleType="weak"
+            styleStateType="system"
+            sizeType="xs"
+            classNames="roundCorners"
+            [disabled]="false"
+            iconName="system_close"
+            iconPosition="end"
+            [visible]="true"
+            (buttonClick)="closeClick($event)">
+        </pep-button>
+    </div>
+    <div class="panel-content">
+        <ul>
+            <ng-container *ngFor="let file of filesList">
+            <li *ngIf="file?.status !== 'hidden'">
+               
+                <span class="color-dimmed body-sm ellipsis">{{file.name}}</span>
+                <pep-button
+                    styleType="weak-invert"
+                    styleStateType="system"
+                    classNames="xxs-btn"
+                    [disabled]="false"
+                    iconName="arrow_right_alt">
+                </pep-button>
+                <span class="body-sm">{{file.status}}</span>
+            
+            </li>
+        </ng-container>
+        </ul>
+    </div>
+</div>

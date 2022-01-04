@@ -1,4 +1,8 @@
 {
     "ExampleComponentsTitle": "Example components",
-    "GenericListExampleComponentTitle": "Example generic list"
+    "GenericListExampleComponentTitle": "Example generic list",
+
+    "GENERIC_LIST": {
+        "NO_DATA": "No data found"
+    }
 }
