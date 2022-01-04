@@ -1,12 +1,12 @@
 <div *ngIf="inline" class="inline-container" [ngClass]="{ 'add-padding': addPadding }">
-    <div class="inline-top-bar-container">
+    <div *ngIf="showTopBar" class="inline-top-bar-container">
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </div>
     <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
 </div>
 
 <pep-page-layout *ngIf="!inline" [addPadding]="addPadding">
-    <ng-container pep-top-area>
+    <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
 

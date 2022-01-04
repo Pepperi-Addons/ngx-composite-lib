@@ -71,6 +71,9 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     @Input()
     supportSorting: boolean = false;
 
+    @Input()
+    showTopBar: boolean = true;
+
     @Output()
     fieldClick: EventEmitter<IPepFormFieldClickEvent> = new EventEmitter<IPepFormFieldClickEvent>();
 
