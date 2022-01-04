@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IFile } from './file-status-panel.model';
 
 @Component({
-    selector: 'file-status-panel',
+    selector: 'pep-file-status-panel',
     templateUrl: './file-status-panel.component.html',
     styleUrls: ['./file-status-panel.component.scss']
 })

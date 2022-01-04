@@ -60,7 +60,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     allowSelection: boolean = true;
   
     @Input()
-    noDataFoundMsg: string = this.translate.instant('GENERIC-LIST.NO_DATA');
+    noDataFoundMsg: string = this.translate.instant('GENERIC_LIST.NO_DATA');
   
     @Input()
     allowMultipleSelection: boolean = false;

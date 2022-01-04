@@ -22,6 +22,6 @@ import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
     exports: [FileStatusPanelComponent]
 })
 
-export class FileStatusPanelModule { 
+export class PepFileStatusPanelModule { 
     constructor() { }
 }

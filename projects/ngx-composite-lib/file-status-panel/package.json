@@ -3,10 +3,7 @@
         "lib": {
             "entryFile": "public-api.ts",
             "umdModuleIds": {
-                "@ngx-translate/core": "translate",
-                "@pepperi-addons/ngx-lib": "ngx-lib",
-                "@pepperi-addons/ngx-lib/field-title": "ngx-lib/field-title",
-                "@pepperi-addons/ngx-lib/icon": "ngx-lib/icon"
+                "@ngx-translate/core": "translate"
             }
         }
     },
