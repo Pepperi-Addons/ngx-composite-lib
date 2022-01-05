@@ -31,7 +31,8 @@
 }
 
 .noDataFoundMsg{
-    height: 100%;
+    margin: 1rem 0;
+    height: calc(100% - 2rem);
     width: 100%;
     background: hsla(0, 0%, 10%, 0.12);
     display: flex;

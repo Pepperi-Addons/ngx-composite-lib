@@ -41,6 +41,10 @@
         </pep-list>
         <ng-container *ngIf="!hasRows">
             <div class="noDataFoundMsg">
+                    <div class="leaf-background">
+                        <img [src]="imagesPath + 'brand-leaf-skiny.svg'">
+                        <img [src]="imagesPath + 'brand-leaf-round.svg'">
+                    </div>
                     <h2>{{noDataFoundMsg}}</h2>
             </div>
         </ng-container>

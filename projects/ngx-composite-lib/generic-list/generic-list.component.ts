@@ -19,10 +19,8 @@ import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
 import {
     PepListComponent
 } from '@pepperi-addons/ngx-lib/list';
-import {
-    PepMenuItem,
-    IPepMenuItemClickEvent,
-} from '@pepperi-addons/ngx-lib/menu';
+import { PepMenuItem, IPepMenuItemClickEvent } from '@pepperi-addons/ngx-lib/menu';
+import { PepAddonService } from '@pepperi-addons/ngx-lib';
 import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
   
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
@@ -79,7 +77,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     // @Output()
     // onAddClicked = new EventEmitter<void>();
-
+    public imagesPath = '';
     menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};
     menuActions: Array<PepMenuItem> = [];
     hasRows: boolean = true;
@@ -89,8 +87,10 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     constructor(
         private dataConvertorService: PepDataConvertorService,
         private layoutService: PepLayoutService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private pepAddonService: PepAddonService,
     ) {
+        this.imagesPath = this.pepAddonService.getAddonStaticFolder() + 'assets/images/';
         this.layoutService.onResize$.pipe().subscribe((size) => {
             // this.screenSize = size;
         });
