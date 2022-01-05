@@ -1,5 +1,5 @@
 <div class="example-wrapper">
-    <pep-generic-list [showTopBar]="true" [dataSource]="dataSource" title="Generic list title" [allowMultipleSelection]="true">
+    <pep-generic-list [showTopBar]="false" [dataSource]="dataSource" title="Generic list title" [allowMultipleSelection]="true">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'" (menuItemClick)="onMenuItemClicked($event)">
             </pep-menu>
@@ -9,7 +9,7 @@
     </pep-generic-list>
 
 
-    <pep-generic-list [dataSource]="dataSource" [inline]="true" title="Generic list inline title">
+    <pep-generic-list [dataSource]="dataSource" [showTopBar]="true" [inline]="true" title="Generic list inline title">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'" (menuItemClick)="onMenuItemClicked($event)">
             </pep-menu>

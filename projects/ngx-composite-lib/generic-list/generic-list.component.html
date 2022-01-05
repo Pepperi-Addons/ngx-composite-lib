@@ -1,4 +1,4 @@
-<div *ngIf="inline" class="inline-container" [ngClass]="{ 'add-padding': addPadding }">
+<div *ngIf="inline"  [ngClass]="{ 'inline-container': showTopBar , 'add-padding': addPadding }">
     <div *ngIf="showTopBar" class="inline-top-bar-container">
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </div>
