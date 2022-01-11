@@ -1,26 +1,25 @@
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins';
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions';
 
-@mixin app-theme($pepperi-theme) {
-    #header {
-        background-color: get-pep-color($pepperi-theme, color-system-primary-invert, color-base);
+#header {
+    background-color: functions.get-pep-color(color-system-primary-invert, color-base);
 
-        .navbar {
-            box-shadow: get-pep-shadow($pepperi-theme, shadow-sm, regular);
-            
-            &.weak {
-                @include state-weak-default($pepperi-theme, color-top-header);
-            }
-            
-            &.regular {
-                @include state-regular-default($pepperi-theme, true, color-top-header);
-            }
-            
-            &.strong {
-                @include state-strong-default($pepperi-theme, color-top-header);
-            }
-            
-            border-right: none !important;
-            border-left: none !important;
+    .navbar {
+        box-shadow: functions.get-pep-shadow(shadow-sm, regular);
+        
+        &.weak {
+            @include mixins.state-weak-default(color-top-header);
         }
+        
+        &.regular {
+            @include mixins.state-regular-default(true, color-top-header);
+        }
+        
+        &.strong {
+            @include mixins.state-strong-default(color-top-header);
+        }
+        
+        border-right: none !important;
+        border-left: none !important;
     }
-
 }

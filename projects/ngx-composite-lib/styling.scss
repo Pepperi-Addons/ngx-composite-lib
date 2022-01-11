@@ -1,6 +1,6 @@
 // 1. Add ngx-lib styles
-@import '~@pepperi-addons/ngx-lib/theming';
-// @include pepperi-theme();
+@use '~@pepperi-addons/ngx-lib/theming';
+@include theming.pepperi-theme();
 
 // 2. Configuration and helpers
 @import './src/core/style/abstracts/functions', 
