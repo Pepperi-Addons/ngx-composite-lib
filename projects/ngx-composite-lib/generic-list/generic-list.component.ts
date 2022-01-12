@@ -14,21 +14,28 @@ import {
     PepRowData,
     PepScreenSizeType,
     PepGuid,
-  } from '@pepperi-addons/ngx-lib';
+} from '@pepperi-addons/ngx-lib';
 import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
 import {
-    PepListComponent
+    PepListComponent,
+    PepSelectionData,
+    IPepListPagerChangeEvent,
+    PepListPagerType,
+    DEFAULT_PAGE_SIZE
 } from '@pepperi-addons/ngx-lib/list';
 import {
     PepMenuItem,
     IPepMenuItemClickEvent,
 } from '@pepperi-addons/ngx-lib/menu';
+import { 
+    PepBreadCrumbItem,
+    IPepBreadCrumbItemClickEvent
+ } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
-  
+
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import { GenericListDataSource } from './generic-list.model';
 
-import * as tween from '@tweenjs/tween.js'
 
 @Component({
     selector: 'pep-generic-list',
@@ -37,35 +44,35 @@ import * as tween from '@tweenjs/tween.js'
 })
 export class GenericListComponent implements OnInit, AfterViewInit {
     @ViewChild(PepListComponent) customList: PepListComponent | undefined;
-    
+
     @Input()
     dataSource: GenericListDataSource | undefined;
     dataObjects: any[] = []
-  
+
     searchString: string = '';
-  
+
     @Input()
     addPadding: boolean = false;
 
     @Input()
     title: string = '';
-  
+
     @Input()
     inline: boolean = false;
-  
+
     @Input()
     showSearch: boolean = false;
-  
+
     @Input()
     allowSelection: boolean = true;
-  
+
     @Input()
     noDataFoundMsg: string = this.translate.instant('GENERIC_LIST.NO_DATA');
-  
+
     @Input()
     allowMultipleSelection: boolean = false;
-    
-    @Input() 
+
+    @Input()
     firstFieldAsLink: boolean = false;
 
     @Input()
@@ -73,35 +80,51 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     @Input()
     showTopBar: boolean = true;
+    
+    breadCrumbs = new Array<PepBreadCrumbItem>();
+    showBreadCrumbs = false;
+    @Input()
+    set breadCrumbsItems(list: Array<PepBreadCrumbItem>) {
+        if (list?.length > 0) {
+            this.breadCrumbs = list;
+            this.showBreadCrumbs = true;
+        }        
+    }
+    
+    @Input() 
+    pagerType: PepListPagerType = 'scroll';
+
+    @Input() 
+    pageSize: number = DEFAULT_PAGE_SIZE;   
 
     @Output()
     fieldClick: EventEmitter<IPepFormFieldClickEvent> = new EventEmitter<IPepFormFieldClickEvent>();
 
-    // @Output()
-    // onAddClicked = new EventEmitter<void>();
+    @Output()
+    breadCrumbItemClick: EventEmitter<IPepBreadCrumbItemClickEvent> = new EventEmitter<IPepBreadCrumbItemClickEvent>();
 
     menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};
     menuActions: Array<PepMenuItem> = [];
-    hasRows: boolean = true;
-    // PepScreenSizeType = PepScreenSizeType;
-    // screenSize: PepScreenSizeType;
-  
+    hasRows = true;
+    showActions = false;
+    pageIndex = 0;    
+
     constructor(
         private dataConvertorService: PepDataConvertorService,
         private layoutService: PepLayoutService,
         private translate: TranslateService
     ) {
         this.layoutService.onResize$.pipe().subscribe((size) => {
-            // this.screenSize = size;
+            //            
         });
     }
-  
+
     private loadMenuItems(): void {
         if (this.allowSelection) {
             this.getMenuActions().then(x => this.menuActions = x);
         }
     }
-  
+
     private convertToPepRowData(object: any, dataView: GridDataView) {
         const row = new PepRowData();
         row.Fields = [];
@@ -126,12 +149,12 @@ export class GenericListComponent implements OnInit, AfterViewInit {
         }
         return row;
     }
-  
+
     private async getMenuActions(): Promise<PepMenuItem[]> {
         const actions = await this.dataSource?.getActions(this.getMenuObjects());
         const res: PepMenuItem[] = []
         this.menuHandlers = {};
-    
+
         actions?.forEach(item => {
             const uuid = PepGuid.newGuid();
             this.menuHandlers[uuid] = item.handler;
@@ -140,65 +163,73 @@ export class GenericListComponent implements OnInit, AfterViewInit {
                 text: item.title
             })
         })
-  
+
         return res;
     }
-  
+
     private getMenuObjects() {
-        let uuids = this.customList?.getSelectedItemsData().rows ?? [];
-        if (this.customList?.getIsAllSelectedForActions()) {
-            uuids = this.dataObjects.map(obj => obj.UID).filter(x => uuids.indexOf(x) != -1);
+        let selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();
+          
+        if (selectedData.rows?.length > 0 && this.customList?.getIsAllSelectedForActions()) {
+            selectedData.rows = this.dataObjects.map(obj => obj.UID).filter(x => selectedData.rows.indexOf(x) !== -1);
         }
-        const objects = uuids.map(uuid => this.getObject(uuid))
-        return objects;
+
+        if (selectedData.rows?.length > 0) {
+            selectedData.rows = selectedData.rows.map(uuid => this.getObject(uuid));            
+        }
+        
+        return selectedData;        
     }
-  
+
     private getObject(uuid: string) {
         return this.dataObjects.find(obj => obj.UID === uuid);
     }
-    
+
     ngOnInit() {
     }
-  
+
     ngAfterViewInit(): void {
         this.reload();
     }
-  
+
     onMenuItemClicked(action: IPepMenuItemClickEvent): void {
         this.menuHandlers[action.source.key](this.getMenuObjects());
     }
-  
+    
     onSearchChanged(event: IPepSearchClickEvent) {
-        this.searchString = event.value
+        this.searchString = event.value;
         this.reload();
     }
-  
+
     async reload() {
         if (this.customList && this.dataSource) {
             this.dataObjects = await this.dataSource.getList({
-              searchString: this.searchString
+                searchString: this.searchString
             });
             const dataView = await this.dataSource.getDataView();
             const tableData = this.dataObjects.map(x => this.convertToPepRowData(x, dataView));
             const data = this.dataConvertorService.convertListData(tableData);
             data.forEach((obj, i) => {
-              this.dataObjects[i].UID = obj.UID;
+                this.dataObjects[i].UID = obj.UID;
             })
             const uiControl = this.dataConvertorService.getUiControl(tableData[0]);
             this.customList.initListData(uiControl, data.length, data);
-          
+            
             this.loadMenuItems();
         }
         this.hasRows = this.dataObjects?.length > 0 ? true : false;
     }
 
-    selectedRowsChanged(selectedRowsCount: number) {
+    selectedRowsChanged(selectedRowsCount: number) {        
         this.loadMenuItems();
     }
 
     onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {
         this.fieldClick.emit(fieldClickEvent);
     }
-  
+
+    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {        
+        this.breadCrumbItemClick.emit(event);
+    }
+
 }
-  
