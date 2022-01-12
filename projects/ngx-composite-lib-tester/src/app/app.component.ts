@@ -12,7 +12,7 @@ import {
     styleUrls: ['./app.component.scss', './app.component.theme.scss'],
 })
 export class AppComponent implements OnInit {
-    footerHeight: number = 0;
+    footerHeight = 0;
     showLoader = false;
     showHeader = true;
     showSidebar = false;

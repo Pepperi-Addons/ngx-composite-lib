@@ -10,7 +10,9 @@ export class ComponentsExampleComponent implements OnInit {
 
     public files: Array<IFile> = [];
 
-    constructor() { }
+    constructor() { 
+        //
+    }
 
     ngOnInit(): void {
         
@@ -21,8 +23,8 @@ export class ComponentsExampleComponent implements OnInit {
 
     addFiles(){
         
-        let self = this;
-        let file: IFile = new IFile();
+        const self = this;
+        const file: IFile = new IFile();
         file.name = 'Test';
         file.status = 'downloading';
 

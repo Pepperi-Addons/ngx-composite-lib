@@ -9,7 +9,7 @@ import { PepColorSettings } from './color-settings.model';
 })
 export class ColorSettingsComponent implements OnInit {
 
-    @Input() title: string = '';
+    @Input() title = '';
 
     private _color: PepColorSettings = new PepColorSettings();
     @Input()
@@ -29,20 +29,21 @@ export class ColorSettingsComponent implements OnInit {
     
     constructor(private pepColorService: PepColorService) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
+        //
     }
 
     private getRGBAcolor(colorObj: PepColorSettings, opac: number | null = null) {
         let rgba = 'rgba(255,255,255,0)';
 
         if (colorObj) {
-            let color = colorObj.value;
+            const color = colorObj.value;
             let opacity = opac != null ? opac : colorObj.opacity;
 
             opacity = opacity > 0 ? opacity / 100 : 0;
 
-            let hsl = this.pepColorService.hslString2hsl(color);
-            let rgb = this.pepColorService.hsl2rgb(hsl);
+            const hsl = this.pepColorService.hslString2hsl(color);
+            const rgb = this.pepColorService.hsl2rgb(hsl);
             rgba = 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')';
         }
 
@@ -54,14 +55,14 @@ export class ColorSettingsComponent implements OnInit {
     }
 
     getSliderBackground() {
-        let alignTo = 'right';
+        const alignTo = 'right';
     
-        let colorObj = new PepColorSettings();
+        const colorObj = new PepColorSettings();
     
         colorObj.value = this.color.value;
         colorObj.opacity = 100;
     
-        let gradStr = this.getRGBAcolor(colorObj, 0) + ' , ' + this.getRGBAcolor(colorObj);
+        const gradStr = this.getRGBAcolor(colorObj, 0) + ' , ' + this.getRGBAcolor(colorObj);
     
         return 'linear-gradient(to ' + alignTo + ', ' + gradStr + ')';
     }

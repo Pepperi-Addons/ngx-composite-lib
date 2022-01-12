@@ -18,7 +18,7 @@
 .inline-container {
     height: inherit;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
 
     &.add-padding {
         padding-inline: ngx-variables.$content-padding;
@@ -37,4 +37,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.bread-crumbs {
+    padding: 1rem 0 .5rem 0;
 }
