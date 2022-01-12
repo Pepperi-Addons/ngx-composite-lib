@@ -17,7 +17,9 @@ export class GenericListExampleComponent implements OnInit {
     private selectedRowID = '';
     
 
-    constructor() { }
+    constructor() {
+        //
+     }
 
     ngOnInit(): void {
         this.menuItems.push({

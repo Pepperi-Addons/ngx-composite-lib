@@ -49,37 +49,37 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     dataSource: GenericListDataSource | undefined;
     dataObjects: any[] = []
 
-    searchString: string = '';
+    searchString = '';
 
     @Input()
-    addPadding: boolean = false;
+    addPadding = false;
 
     @Input()
-    title: string = '';
+    title = '';
 
     @Input()
-    inline: boolean = false;
+    inline = false;
 
     @Input()
-    showSearch: boolean = false;
+    showSearch = false;
 
     @Input()
-    allowSelection: boolean = true;
+    allowSelection = true;
 
     @Input()
     noDataFoundMsg: string = this.translate.instant('GENERIC_LIST.NO_DATA');
 
     @Input()
-    allowMultipleSelection: boolean = false;
+    allowMultipleSelection = false;
 
     @Input()
-    firstFieldAsLink: boolean = false;
+    firstFieldAsLink = false;
 
     @Input()
-    supportSorting: boolean = false;
+    supportSorting = false;
 
     @Input()
-    showTopBar: boolean = true;
+    showTopBar = true;
     
     breadCrumbs = new Array<PepBreadCrumbItem>();
     showBreadCrumbs = false;
@@ -131,7 +131,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
         if (dataView?.Fields && dataView.Columns) {
             for (let index = 0; index < dataView.Fields.length; index++) {
-                let field = dataView.Fields[index] as GridDataViewField
+                const field = dataView.Fields[index] as GridDataViewField
                 row.Fields.push({
                     ApiName: field.FieldID,
                     Title: this.translate.instant(field.Title),
@@ -168,7 +168,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     }
 
     private getMenuObjects() {
-        let selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();
+        const selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();
           
         if (selectedData.rows?.length > 0 && this.customList?.getIsAllSelectedForActions()) {
             selectedData.rows = this.dataObjects.map(obj => obj.UID).filter(x => selectedData.rows.indexOf(x) !== -1);
@@ -186,6 +186,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        //
     }
 
     ngAfterViewInit(): void {

@@ -24,8 +24,11 @@ export class DraggableItemComponent implements OnInit {
     //     return this._isDraggable;
     // }
 
-    constructor() { }
+    constructor() { 
+        //
+    }
 
     ngOnInit(): void {
+        //
     }
 }

@@ -12,6 +12,6 @@
         }
     },
     "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.2.56"
+        "@pepperi-addons/ngx-lib": "^0.3.0"
     }
 }

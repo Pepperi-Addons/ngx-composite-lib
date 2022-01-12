@@ -1,4 +1,4 @@
-@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
 
 :host {
     width: 100%;
@@ -7,6 +7,6 @@
     .shadow-size-group,
     .shadow-type-group {
         display: block;
-        margin-bottom: $form-spacing;
+        margin-bottom: ngx-variables.$form-spacing;
     }
 }

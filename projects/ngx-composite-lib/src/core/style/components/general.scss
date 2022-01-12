@@ -1,4 +1,5 @@
-@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
 
 .checkbox-as-title {
     margin-bottom: 0.5rem !important;
@@ -15,8 +16,8 @@
         }
 
         .mat-checkbox-layout {
-            @include font-body($fs-xl, $lh-xl);
-            font-weight: $font-weight-bold !important;
+            @include ngx-mixins.font-body(ngx-variables.$fs-xl, ngx-variables.$lh-xl);
+            font-weight: ngx-variables.$font-weight-bold !important;
 
             .mat-checkbox-label span {
                 margin: 0 0.5rem;
@@ -27,8 +28,8 @@
     // &.sub-title {
     //     .pep-checkbox-container {
     //         .mat-checkbox-layout {
-    //             @include font-body($fs-xl, $lh-xl);
-    //             font-weight: $font-weight-bold !important;
+    //             @include ngx-mixins.font-body(ngx-variables.$fs-xl, ngx-variables.$lh-xl);
+    //             font-weight: ngx-variables.$font-weight-bold !important;
     
     //             .mat-checkbox-label span {
     //                 margin: 0 0.5rem;
