@@ -34,7 +34,7 @@ import {
 import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
 
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
-import { GenericListDataSource } from './generic-list.model';
+import { PepGenericListDataSource } from './generic-list.model';
 
 
 @Component({
@@ -46,7 +46,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     @ViewChild(PepListComponent) customList: PepListComponent | undefined;
 
     @Input()
-    dataSource: GenericListDataSource | undefined;
+    dataSource: PepGenericListDataSource | undefined;
     dataObjects: any[] = []
 
     searchString = '';

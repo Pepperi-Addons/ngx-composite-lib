@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
-import { GenericListDataSource } from 'projects/ngx-composite-lib/generic-list';
+import { PepGenericListDataSource } from 'projects/ngx-composite-lib/generic-list';
 import { PepSelectionData } from '@pepperi-addons/ngx-lib/list';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { FakeData } from './fake-data';
@@ -39,7 +39,7 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
-    dataSource: GenericListDataSource = {
+    dataSource: PepGenericListDataSource = {
         getList: (options) => {
             const dataSource = FakeData.Addons;
             const res = dataSource.map(addon => ({
