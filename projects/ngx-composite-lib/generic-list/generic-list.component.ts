@@ -27,10 +27,10 @@ import {
     PepMenuItem,
     IPepMenuItemClickEvent,
 } from '@pepperi-addons/ngx-lib/menu';
-import { 
+import {
     PepBreadCrumbItem,
     IPepBreadCrumbItemClickEvent
- } from '@pepperi-addons/ngx-lib/bread-crumbs';
+} from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
 
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
@@ -80,7 +80,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     @Input()
     showTopBar = true;
-    
+
     breadCrumbs = new Array<PepBreadCrumbItem>();
     showBreadCrumbs = false;
     @Input()
@@ -88,14 +88,14 @@ export class GenericListComponent implements OnInit, AfterViewInit {
         if (list?.length > 0) {
             this.breadCrumbs = list;
             this.showBreadCrumbs = true;
-        }        
+        }
     }
-    
-    @Input() 
+
+    @Input()
     pagerType: PepListPagerType = 'scroll';
 
-    @Input() 
-    pageSize: number = DEFAULT_PAGE_SIZE;   
+    @Input()
+    pageSize: number = DEFAULT_PAGE_SIZE;
 
     @Output()
     fieldClick: EventEmitter<IPepFormFieldClickEvent> = new EventEmitter<IPepFormFieldClickEvent>();
@@ -107,7 +107,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     menuActions: Array<PepMenuItem> = [];
     hasRows = true;
     showActions = false;
-    pageIndex = 0;    
+    pageIndex = 0;
 
     constructor(
         private dataConvertorService: PepDataConvertorService,
@@ -169,16 +169,16 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     private getMenuObjects() {
         const selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();
-          
+
         if (selectedData.rows?.length > 0 && this.customList?.getIsAllSelectedForActions()) {
             selectedData.rows = this.dataObjects.map(obj => obj.UID).filter(x => selectedData.rows.indexOf(x) !== -1);
         }
 
         if (selectedData.rows?.length > 0) {
-            selectedData.rows = selectedData.rows.map(uuid => this.getObject(uuid));            
+            selectedData.rows = selectedData.rows.map(uuid => this.getObject(uuid));
         }
-        
-        return selectedData;        
+
+        return selectedData;
     }
 
     private getObject(uuid: string) {
@@ -196,7 +196,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     onMenuItemClicked(action: IPepMenuItemClickEvent): void {
         this.menuHandlers[action.source.key](this.getMenuObjects());
     }
-    
+
     onSearchChanged(event: IPepSearchClickEvent) {
         this.searchString = event.value;
         this.reload();
@@ -215,13 +215,13 @@ export class GenericListComponent implements OnInit, AfterViewInit {
             })
             const uiControl = this.dataConvertorService.getUiControl(tableData[0]);
             this.customList.initListData(uiControl, data.length, data);
-            
+
             this.loadMenuItems();
         }
         this.hasRows = this.dataObjects?.length > 0 ? true : false;
     }
 
-    selectedRowsChanged(selectedRowsCount: number) {        
+    selectedRowsChanged(selectedRowsCount: number) {
         this.loadMenuItems();
     }
 
@@ -229,7 +229,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
         this.fieldClick.emit(fieldClickEvent);
     }
 
-    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {        
+    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {
         this.breadCrumbItemClick.emit(event);
     }
 

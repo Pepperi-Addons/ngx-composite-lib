@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
 import { GenericListDataSource } from 'projects/ngx-composite-lib/generic-list';
 import { PepSelectionData } from '@pepperi-addons/ngx-lib/list';
+import { TranslateService } from '@ngx-translate/core';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { FakeData } from './fake-data';
 
@@ -13,11 +14,11 @@ import { FakeData } from './fake-data';
 export class GenericListExampleComponent implements OnInit {
     
     menuItems: Array<PepMenuItem> = new Array<PepMenuItem>();
-    breadCrumbsItems: Array<PepBreadCrumbItem> = new Array<PepBreadCrumbItem>();
+    breadCrumbsItems = new Array<PepBreadCrumbItem>();
     private selectedRowID = '';
     
 
-    constructor() {
+    constructor(private translate: TranslateService) {
         //
      }
 
@@ -26,7 +27,13 @@ export class GenericListExampleComponent implements OnInit {
             key: 'test',
             text: 'test'
         });
-        this.loadBreadCrumbs();
+        const text2 = this.translate.instant('ExampleComponentsTitle');
+        console.log('text2', text2);
+        this.translate.get('ExampleComponentsTitle').subscribe((text) => {
+            console.log('text', text);
+            this.loadBreadCrumbs();
+        })
+        //this.loadBreadCrumbs();
     }
 
     private getRegularReadOnlyColumn(columnId: string): any {
@@ -118,16 +125,20 @@ export class GenericListExampleComponent implements OnInit {
     }
 
     loadBreadCrumbs() {
-        this.breadCrumbsItems.push(new PepBreadCrumbItem({
+        //this.breadCrumbsItems = new Array<PepBreadCrumbItem>() ;
+        let array = new Array<PepBreadCrumbItem>();
+        array.push(new PepBreadCrumbItem({
             key: '1',
             text: 'Crumb1',
             title: 'Title1'
         }));
-        this.breadCrumbsItems.push(new PepBreadCrumbItem({
+        array.push(new PepBreadCrumbItem({
             key: '2',
             text: 'Crumb2',
             title: 'Title2'
         }));
+        this.breadCrumbsItems = array;
+       
     }
 
     onMenuItemClicked(action: IPepMenuItemClickEvent): void {
