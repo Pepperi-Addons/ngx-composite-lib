@@ -1,7 +1,6 @@
 import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
-import { PepSelectionData } from '@pepperi-addons/ngx-lib/list';
 
-export interface GenericListDataSource {
+export interface PepGenericListDataSource {
     getList(state: { searchString: string }): Promise<any[]>;
     getDataView(): Promise<GridDataView>;
     getActions(data: any): Promise<{
