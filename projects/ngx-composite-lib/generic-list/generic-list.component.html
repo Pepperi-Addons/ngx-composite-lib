@@ -3,7 +3,7 @@
         <div *ngIf="showTopBar" class="inline-top-bar-container">
             <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
         </div>
-        <ng-container *ngIf="showBreadCrumbs">
+        <ng-container *ngIf="breadCrumbsItems && breadCrumbsItems.length > 0">
             <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
         </ng-container>
     </div>
@@ -15,7 +15,7 @@
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
 
-    <ng-container *ngIf="showBreadCrumbs" pep-top-area>
+    <ng-container *ngIf="breadCrumbsItems && breadCrumbsItems.length > 0" pep-top-area>
         <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
     </ng-container>
 
@@ -43,17 +43,18 @@
 </ng-template>
 
 <ng-template #breadCrumbsTemplate>
-    <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbs" [addSpacing]="true" [displayType]="'items'"
+    <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbsItems" [addSpacing]="true" [displayType]="'items'"
         (itemClick)="onBreadCrumbItemClick($event)"></pep-bread-crumbs>
 </ng-template>
 
 <ng-template #listTemplate>
-    <div #listContainer class="list-container">
-        <pep-list *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
+    <div class="list-container">
+        <pep-list #customList *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
             [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')"
-            [pagerType]="pagerType" [pageSize]="pageSize" [pageIndex]="pageIndex" [noDataFoundMsg]="noDataFoundMsg"
+            [pagerType]="pager.type" [pageSize]="pager.size" [pageIndex]="pager.index" [noDataFoundMsg]="noDataFoundMsg"
             (fieldClick)="onCustomizeFieldClick($event)" [firstFieldAsLink]="firstFieldAsLink"
-            (selectedItemsChange)="selectedRowsChanged($event)">
+            (selectedItemsChange)="onSelectedRowsChanged($event)" (loadItems)="onLoadItems($event)"
+            (loadPage)="onLoadPage($event)" (valueChange)="onValueChanged($event)">
         </pep-list>
         <ng-container *ngIf="!hasRows">
             <div class="noDataFoundMsg">

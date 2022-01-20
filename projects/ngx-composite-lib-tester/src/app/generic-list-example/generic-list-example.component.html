@@ -1,5 +1,5 @@
 <div class="example-wrapper">
-    <pep-generic-list [showTopBar]="true" [dataSource]="dataSource" [breadCrumbsItems]="breadCrumbsItems" 
+    <pep-generic-list [data]="dataSource" [actions]="actions" [showTopBar]="true" [breadCrumbsItems]="breadCrumbsItems"
         title="Generic list title" [allowMultipleSelection]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'"
@@ -10,7 +10,7 @@
         </ng-container>
     </pep-generic-list>
 
-    <pep-generic-list [dataSource]="dataSource" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pagerType]="'pages'"
+    <pep-generic-list [data]="dataSource" [actions]="actions" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pager]="pager"
         title="Generic list inline title" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
