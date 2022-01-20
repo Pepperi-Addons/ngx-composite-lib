@@ -257,6 +257,9 @@ export class GenericListComponent implements OnInit, AfterViewInit {
         return dataList.map(item => this.convertToPepRowData(item, dataView));           
     }
 
+    /**
+     * loads virtual scroll items from api
+     */
     public async onLoadItems(event: IPepListLoadItemsEvent) {        
         const dataList = await this.getDataList(event.fromIndex, event.toIndex);        
         const data = this.dataConvertorService.convertListData(dataList);
@@ -264,6 +267,9 @@ export class GenericListComponent implements OnInit, AfterViewInit {
         this.customList?.updateItems(data, event);
     }
 
+    /**
+     * loads paging bulk from api
+     */
     public async onLoadPage(event: IPepListLoadPageEvent) {
         const fromIndex = event.pageIndex * event.pageSize;
         const toIndex = Math.min(fromIndex + event.pageSize - 1, this.data.totalCount - 1);
