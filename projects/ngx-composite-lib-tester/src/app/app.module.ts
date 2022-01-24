@@ -13,7 +13,7 @@ import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shado
 import { PepGroupButtonsSettingsModule } from '@pepperi-addons/ngx-composite-lib/group-buttons-settings';
 import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
-
+import { PepDIMXModule } from 'projects/ngx-composite-lib/dimx-export';
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 import { GenericListExampleComponent } from './generic-list-example/generic-list-example.component';
 
@@ -40,6 +40,7 @@ import { CommonModule } from '@angular/common';
         PepColorSettingsModule,
         PepShadowSettingsModule,
         PepGroupButtonsSettingsModule,
+        PepDIMXModule,
         PepFileStatusPanelModule,
         PepGenericListModule,
         TranslateModule.forRoot({
