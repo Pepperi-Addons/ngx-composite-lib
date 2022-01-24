@@ -10,9 +10,11 @@
         }
     },
     "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.2.56"
-    },
-    "devDependencies": {
-        "@types/file-saver": "^2.0.4"
+        "@pepperi-addons/ngx-lib": "^0.2.56",
+        "@types/file-saver": "^2.0.4",
+        "file-saver": "^2.0.5",
+        "jwt-decode": "^3.1.2",
+        "node-fetch": "^3.2.0"
     }
+    
 }

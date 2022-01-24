@@ -25,7 +25,7 @@ export class DIMXComponent implements OnInit {
 
     ngOnInit(): void { 
         // Get the first translation for load all translations.
-        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').toPromise().then((typeSoft) => {
+        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').toPromise().then((typeSoft) => { console.log("something");
         });
     }
 
@@ -53,11 +53,12 @@ export class DIMXComponent implements OnInit {
     async pollDIMXResult(pollingURL:string, ifile:IFile){
         console.log(`polling audit with the executionUUID: ${pollingURL}`);
         const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-        var seconds = 0;
+        let seconds = 0;
         const waitingTime = 1000; //in ms
         try{
+            let result;
             while(true){
-                var result = await this.addonService.papiClient.get(`/audit_logs/${pollingURL}`);
+                result = await this.addonService.papiClient.get(`/audit_logs/${pollingURL}`);
         
                 console.log(`result from auditlog get is: ${result}`);
                 if( !result || result["Status"]["ID"] === 2 || result["Status"]["ID"] === 4){
@@ -91,8 +92,7 @@ export class DIMXComponent implements OnInit {
         DIMXExportFormat:string,
         DIMXExportFileName: string,
     }){
-        var extension;
-        var filename;
+        let extension;
         switch (value.DIMXExportFormat.toLowerCase()){
             case "json":
                 extension = ".json";
@@ -103,7 +103,7 @@ export class DIMXComponent implements OnInit {
             default:
                 extension = "";
         }
-        filename = value.DIMXExportFileName;
+        const filename = value.DIMXExportFileName;
         return filename+extension;
     }
     
@@ -116,7 +116,7 @@ export class DIMXComponent implements OnInit {
             "status":status};
     }
 
-    async removeIfileWithDelay(iFile:IFile, delay:number = 2000) {
+    async removeIfileWithDelay(iFile:IFile, delay = 2000) {
         window.setTimeout(() => {
             const index = this.iFileArray.findIndex(element => element === iFile);
             if (index >= 0){
@@ -125,9 +125,6 @@ export class DIMXComponent implements OnInit {
         }, delay)
     }
 
-    async uploadasync(e:any){
-      
-    }
 
     uploadf(e:any){
         const files = e.target.files;
@@ -145,9 +142,9 @@ export class DIMXComponent implements OnInit {
 
     uploadFile(event:any, options?:{OverwriteOBject?:boolean, Delimiter?:string}){
         this.dimxImportOptions = options;
-        var elem = document.getElementById("fileuploader");
+        const elem = document.getElementById("fileuploader");
    if(elem && document.createEvent) {
-      var evt = document.createEvent("MouseEvents");
+      const evt = document.createEvent("MouseEvents");
       evt.initEvent("click", true, false);
       elem.dispatchEvent(evt);
    }
@@ -163,8 +160,8 @@ export class DIMXComponent implements OnInit {
 
         const filex = (file as HTMLInputElement);
         const dimx_import_relativeURL = `/addons/api/44c97115-6d14-4626-91dc-83f176e9a0fc/api/file_import_upload`;
-        var str = (await this.toBase64(filex)) as string; //???
-        var ext = filex.name.split('.')[1];
+        const str = (await this.toBase64(filex)) as string; //???
+        const ext = filex.name.split('.')[1];
         const value = {fileStr:str, fileExt:ext}
         const dimxUploadObject = {...this.getPFSUploadObject(value), ...this.dimxImportOptions, Resource:this.DIMXResource, AddonUUID:this.DIMXAddonUUID};
         const iFile:IFile = this.createNewIFile(filex.name, "uploading");
@@ -175,7 +172,7 @@ export class DIMXComponent implements OnInit {
         try{
 
             console.log("posting to dimx import_upload now");
-            var res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject);
+            const res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject);
             console.log("Got reply from dimx, calling poll with the result:");
             console.log(res);
 
@@ -258,7 +255,7 @@ export class DIMXComponent implements OnInit {
         try{
 
             console.log("posting to dimx export now");
-            var res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod);
+            const res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod);
             console.log("Got reply from dimx, calling poll with the result:");
             console.log(res);
 
@@ -266,7 +263,7 @@ export class DIMXComponent implements OnInit {
 
             console.log("attempting to download the file");
             console.log(`url is: ${url}`);
-            let blob = await fetch(url).then(r => r.blob());
+            const blob = await fetch(url).then(r => r.blob());
             saveAs(blob, fileName);
             iFile.status = "done";
             console.log("downloaded the file");
