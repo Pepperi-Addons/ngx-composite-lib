@@ -82,8 +82,7 @@
                             }
                         ],
                         "styles": [
-                            "projects/ngx-composite-lib-tester/src/styles.scss",
-                            "projects/ngx-composite-lib-tester/src/theme.scss"
+                            "projects/ngx-composite-lib-tester/src/styles.scss"
                         ],
                         "scripts": []
                     },

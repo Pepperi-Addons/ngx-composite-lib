@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
-import { GenericListDataSource } from 'projects/ngx-composite-lib/generic-list';
+import { PepGenericListDataSource } from 'projects/ngx-composite-lib/generic-list';
+import { PepSelectionData } from '@pepperi-addons/ngx-lib/list';
+import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { FakeData } from './fake-data';
 
 @Component({
@@ -11,16 +13,20 @@ import { FakeData } from './fake-data';
 export class GenericListExampleComponent implements OnInit {
     
     menuItems: Array<PepMenuItem> = new Array<PepMenuItem>();
+    breadCrumbsItems: Array<PepBreadCrumbItem> = new Array<PepBreadCrumbItem>();
     private selectedRowID = '';
     
 
-    constructor() { }
+    constructor() {
+        //
+     }
 
     ngOnInit(): void {
         this.menuItems.push({
             key: 'test',
             text: 'test'
         });
+        this.loadBreadCrumbs();
     }
 
     private getRegularReadOnlyColumn(columnId: string): any {
@@ -33,7 +39,7 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
-    dataSource: GenericListDataSource = {
+    dataSource: PepGenericListDataSource = {
         getList: (options) => {
             const dataSource = FakeData.Addons;
             const res = dataSource.map(addon => ({
@@ -75,20 +81,60 @@ export class GenericListExampleComponent implements OnInit {
             }
         },
 
-        getActions: async (objs) => {
-            this.selectedRowID = objs.length > 0 ? objs[0].Key : '';
-            return objs.length ? [
-                {
-                    title: 'Edit',
-                    handler: async (objs) => {
-                        alert('edit');
+        getActions: async (data: PepSelectionData) => {
+            if (data?.selectionType === 0) {
+                const list = await this.dataSource.getList({searchString: ''});   
+                if (list?.length === data?.rows.length) {
+                    return [];
+                }                
+            }
+                   
+            if (data?.rows.length === 1 && data?.selectionType !== 0) {
+                return [
+                    {
+                        title: 'Edit',
+                        handler: async (ddd) => {
+                            alert('edit');
+                        }
+                    },
+                    {
+                        title: 'Delete',
+                        handler: async (ddd) => {
+                            alert('delete');
+                        }
                     }
-                }
-            ] : []
+                ]
+            } else if (data?.rows.length > 1 || data?.selectionType === 0) {
+                return [
+                    {
+                        title: 'Delete',
+                        handler: async (ddd) => {
+                            alert('delete');
+                        }
+                    }
+                ]
+            } else return [];            
         }
+    }
+
+    loadBreadCrumbs() {
+        this.breadCrumbsItems.push(new PepBreadCrumbItem({
+            key: '1',
+            text: 'Crumb1',
+            title: 'Title1'
+        }));
+        this.breadCrumbsItems.push(new PepBreadCrumbItem({
+            key: '2',
+            text: 'Crumb2',
+            title: 'Title2'
+        }));
     }
 
     onMenuItemClicked(action: IPepMenuItemClickEvent): void {
         alert(action.source.key);
+    }
+
+    onBreadCrumbClick(event: IPepBreadCrumbItemClickEvent) {
+        console.log('onBreadCrumbClick', event);
     }
 }

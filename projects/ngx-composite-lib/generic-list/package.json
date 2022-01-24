@@ -11,12 +11,13 @@
                 "@pepperi-addons/ngx-lib/page-layout": "ngx-lib/page-layout",
                 "@pepperi-addons/ngx-lib/top-bar": "ngx-lib/top-bar",
                 "@pepperi-addons/ngx-lib/search": "ngx-lib/search",
+                "@pepperi-addons/ngx-lib/bread-crumbs": "ngx-lib/bread-crumbs",
                 "@pepperi-addons/papi-sdk/dist/entities/data-view": "papi-sdk/data-view"
             }
         }
     },
     "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.2.56",
+        "@pepperi-addons/ngx-lib": "^0.3.0",
         "@tweenjs/tween.js": "^17.1.1"
     }
 }

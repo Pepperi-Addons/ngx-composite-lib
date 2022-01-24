@@ -1,5 +1,5 @@
 
-@import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
 
 :host {
     height: inherit;
@@ -21,7 +21,7 @@
     grid-template-rows: auto 1fr;
 
     &.add-padding {
-        padding-inline: $content-padding;
+        padding-inline: ngx-variables.$content-padding;
     }
 
     ::ng-deep.pep-top-bar-container.inline {
@@ -37,4 +37,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.bread-crumbs {
+    padding: 1rem 0 .5rem 0;
 }

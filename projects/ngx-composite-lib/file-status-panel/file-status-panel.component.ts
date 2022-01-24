@@ -10,18 +10,19 @@ import { IFile } from './file-status-panel.model';
 
 export class FileStatusPanelComponent implements OnInit {
     
-    @Input() title: string = '';
+    @Input() title = '';
     @Input() filesList: Array<IFile> = [];
     
     constructor( public translate: TranslateService) {
-       
-    }
-    ngOnInit(): void {
- 
+       //
     }
 
-    closeClick(event: any){
+    ngOnInit() {
+        //
+    }
 
+    closeClick(event: any): void {
+        //
     }
 
 

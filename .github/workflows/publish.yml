@@ -53,10 +53,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Deploy examples project to Github Pages
-    - name: Deploy
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: npm run ng -- deploy --base-href=/ngx-composite-lib/ --name="GitHub Action" --email=action@github.com --no-silent
+    # - name: Deploy
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: npm run ng -- deploy --base-href=/ngx-composite-lib/ --name="GitHub Action" --email=action@github.com --no-silent
 
     # # Deploy examples project to Github Pages
     # - name: Deploy
