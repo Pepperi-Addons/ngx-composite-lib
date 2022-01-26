@@ -38,3 +38,29 @@
     //     }
     // }
 }
+
+
+.reset-configuration-field-container {
+    position: relative;
+    width: inherit;
+    display: flex;
+    justify-content: flex-end;
+
+    &.hidden {
+        display: none;
+    }
+
+    .reset-configuration-field-button {
+        position: absolute !important;
+        display: flex;
+        align-items: center;
+        height: 1rem;
+        line-height: unset;
+        border-radius: 0.5rem;
+        padding-inline: 0.75rem;
+        
+        &.bottom-end {
+            margin-top: 0.5rem;
+        }
+    }
+}

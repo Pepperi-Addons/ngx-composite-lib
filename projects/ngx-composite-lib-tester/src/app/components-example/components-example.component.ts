@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { IFile } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-export';
 
@@ -11,6 +11,8 @@ export class ComponentsExampleComponent implements OnInit {
     @ViewChild('dimx') dimx:DIMXComponent | undefined;
     public files: Array<IFile> = [];
 
+    @Output() hostEvents: EventEmitter<any> = new EventEmitter();
+    
     constructor() { 
         //
     }
@@ -45,23 +47,19 @@ export class ComponentsExampleComponent implements OnInit {
     }
 
     addFiles(){
-        
-        const self = this;
         const file: IFile = new IFile();
         file.name = 'Test';
         file.status = 'downloading';
-
-        window.setInterval(function () { 
-
-            self.files.push(file);
-
-            if(self.files.length === 4){
-                self.files[2].status = 'done';
-                self.files[0].status = 'failed';
+        
+        window.setInterval(() => { 
+            this.files.push(file);
+            if(this.files.length === 4){
+                this.files[2].status = 'done';
+                this.files[0].status = 'failed';
             }
-            else if(self.files.length === 6){
-                self.files = [];
+            else if(this.files.length === 6){
+                this.files = [];
             }
-          }, 2000);
+        }, 2000);
     }
 }
