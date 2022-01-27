@@ -50,9 +50,9 @@ export class GenericListExampleComponent implements OnInit {
 
     dataSource: IPepGenericListDataSource = {
         initList: (params) => {
-            console.log('params', params);
+            console.log('init params', params);
             const dataSource = FakeData.Addons;
-            console.log('orig list', dataSource);
+        //    console.log('orig list', dataSource);
             //dataSource.concat();
             const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
             console.log('filteredData list', filteredData);
@@ -63,7 +63,7 @@ export class GenericListExampleComponent implements OnInit {
                 Type: addon.Type,
                 CreationDate: addon.CreationDate,
             }));
-            console.log('list', res);
+        //    console.log('list', res);
             return Promise.resolve({base: {
                 dataView: {            
                     Context: {
@@ -94,9 +94,9 @@ export class GenericListExampleComponent implements OnInit {
             }, items: res});
         },
         updateList: (params) => {
-            console.log('params', params);
+            console.log('updae params', params);
             const dataSource = FakeData.Addons;
-            console.log('orig list', dataSource);
+          //  console.log('orig list', dataSource);
             //dataSource.concat();
             const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
             console.log('filteredData list', filteredData);
@@ -107,7 +107,7 @@ export class GenericListExampleComponent implements OnInit {
                 Type: addon.Type,
                 CreationDate: addon.CreationDate,
             }));
-            console.log('list', res);
+            //console.log('list', res);
             return Promise.resolve(res);
         }  
     }

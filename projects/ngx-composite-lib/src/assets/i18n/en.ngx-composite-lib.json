@@ -39,5 +39,8 @@
             "MIDDLE": "Middle",
             "BOTTOM": "Bottom"
         }
+    },
+    "GENERIC-LIST": {
+        "NO_DATA": "No data found"
     }
 }

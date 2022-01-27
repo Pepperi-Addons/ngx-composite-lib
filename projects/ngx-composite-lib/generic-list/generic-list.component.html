@@ -2,7 +2,7 @@
     <div>
         <div *ngIf="showTopBar" class="inline-top-bar-container">
             <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
-        </div>        
+        </div>
         <ng-container *ngIf="breadCrumbsItems.length > 0">
             <!-- <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container> -->
             <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbsItems" [addSpacing]="true"
@@ -16,10 +16,9 @@
     <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
-    <ng-container *ngIf="breadCrumbsItems.length > 0" pep-top-area>        
+    <ng-container *ngIf="breadCrumbsItems.length > 0" pep-top-area>
         <!-- <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>   
               -->
-              
         <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbsItems" [addSpacing]="true" [displayType]="'items'"
             (itemClick)="onBreadCrumbItemClick($event)"></pep-bread-crumbs>
     </ng-container>
@@ -50,20 +49,22 @@
     <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbsItems" [addSpacing]="true" [displayType]="'items'"
         (itemClick)="onBreadCrumbItemClick($event)"></pep-bread-crumbs>
 </ng-template> -->
-
 <ng-template #listTemplate>
     <div class="list-container">
-        <pep-list #customList *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
-            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')"
-            [pagerType]="pager.type" [pageSize]="pager.size" [pageIndex]="pager.index" [noDataFoundMsg]="noDataFoundMsg"
-            (fieldClick)="onCustomizeFieldClick($event)" [firstFieldAsLink]="firstFieldAsLink"
-            (selectedItemsChange)="onSelectedRowsChanged($event)" (loadItems)="onLoadItems($event)"
-            (loadPage)="onLoadPage($event)" (valueChange)="onValueChanged($event)">
-        </pep-list>
-        <ng-container *ngIf="!hasRows">
+        <!-- <ng-container *ngIf="dataList.length > 0"> -->
+            <pep-list #customList viewType="table" [supportSorting]="supportSorting"
+                [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')"
+                [pagerType]="pager.type" [pageSize]="pager.size" [pageIndex]="pager.index"
+                [noDataFoundMsg]="dataList.length === 0 ? noDataFoundMsg : ''" (fieldClick)="onCustomizeFieldClick($event)"
+                [firstFieldAsLink]="firstFieldAsLink" (selectedItemsChange)="onSelectedRowsChanged($event)"
+                (loadItems)="onLoadItems($event)" (loadPage)="onLoadPage($event)"
+                (valueChange)="onValueChanged($event)">
+            </pep-list>
+        <!-- </ng-container> -->
+        <!-- <ng-container *ngIf="dataList.length === 0">
             <div class="noDataFoundMsg">
                 <h2>{{noDataFoundMsg}}</h2>
             </div>
-        </ng-container>
+        </ng-container> -->
     </div>
 </ng-template>

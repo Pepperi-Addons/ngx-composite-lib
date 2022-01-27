@@ -37,11 +37,11 @@ import {
 import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
 
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
-import { 
-    IPepGenericListBaseData, 
-    IPepGenericListDataSource, 
-    IPepGenericListPager, 
-    IPepGenericListActions 
+import {
+    IPepGenericListBaseData,
+    IPepGenericListDataSource,
+    IPepGenericListPager,
+    IPepGenericListActions
 } from './generic-list.model';
 
 
@@ -66,7 +66,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
             return {
                 base: this._baseData,
                 items: []
-             }
+            }
         },
         updateList: async (options: any) => {
             return []
@@ -234,19 +234,20 @@ export class GenericListComponent implements OnInit, AfterViewInit {
     }
 
     async initData() {
-        if (this.customList) {
-            const fromIndex = 0;
-            const toIndex = fromIndex + this.pager.size - 1;
+        const fromIndex = 0;
+        const toIndex = fromIndex + this.pager.size - 1;
 
-            await this.initDataList(fromIndex, toIndex);
-            if (this.dataList.length > 0) {
+        await this.initDataList(fromIndex, toIndex);
+        setTimeout(() => {
+            if (this.customList && this.dataList.length > 0) {
                 const convertedList = this.dataConvertorService.convertListData(this.dataList);
                 const uiControl = this.dataConvertorService.getUiControl(this.dataList[0]);
                 this.customList.initListData(uiControl, this._baseData.totalCount, convertedList);
                 this.loadMenuItems();
-            }         
-        }
-    }    
+            }    
+        }, 0);
+        
+    }
 
     /*
     async reload() {
@@ -287,31 +288,30 @@ export class GenericListComponent implements OnInit, AfterViewInit {
             searchString: this.searchString || undefined,
             fromIndex: fromIndex,
             toIndex: toIndex
-        });        
-        
+        });
+
         if (initData?.base) {
             this._baseData = initData.base;
         }
         if (initData?.items?.length > 0) {
-            this.dataList = initData.items;
-            this.dataList.map(item => this.convertToPepRowData(item, this._baseData.dataView));
-        }        
+            this.dataList = initData.items.map(item => this.convertToPepRowData(item, this._baseData.dataView));
+        }
     }
 
-    private async getDataList(fromIndex: number, toIndex: number) {
-        this.dataList = await this.data.updateList({
+    private async updateDataList(fromIndex: number, toIndex: number) {
+        const updatedData = await this.data.updateList({
             fromIndex: fromIndex,
             toIndex: toIndex
-        });       
+        });
 
-        this.dataList.map(item => this.convertToPepRowData(item, this._baseData.dataView));
+        this.dataList = updatedData.map(item => this.convertToPepRowData(item, this._baseData.dataView));
     }
 
     /**
      * loads virtual scroll items from api
      */
     public async onLoadItems(event: IPepListLoadItemsEvent) {
-        await this.getDataList(event.fromIndex, event.toIndex);
+        await this.updateDataList(event.fromIndex, event.toIndex);
         const data = this.dataConvertorService.convertListData(this.dataList);
 
         this.customList?.updateItems(data, event);
@@ -321,11 +321,10 @@ export class GenericListComponent implements OnInit, AfterViewInit {
      * loads paging bulk from api
      */
     public async onLoadPage(event: IPepListLoadPageEvent) {
-        console.log('onLoadPage', event);
         const fromIndex = event.pageIndex * event.pageSize;
         const toIndex = Math.min(fromIndex + event.pageSize - 1, this._baseData.totalCount - 1);
 
-        await this.getDataList(fromIndex, toIndex);
+        await this.updateDataList(fromIndex, toIndex);
         const data = this.dataConvertorService.convertListData(this.dataList);
 
         this.customList?.updatePage(data, event);
