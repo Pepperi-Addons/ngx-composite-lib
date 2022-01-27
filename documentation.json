@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "IPepGenericListActions",
-            "id": "interface-IPepGenericListActions-2dd3c2736091cfa4b022a3f8c74a1b7f741bbfbd9019436e5d8297796a1066869eec81f1a9396a34ac398a09a33103e588b84407a234ffcb2d7b81e359e12eb6",
+            "id": "interface-IPepGenericListActions-6d8d932ec7b8828e9ac2cb4b81eaaf2c1b687d67a3e232e6e6bda8ea977edcdb1627f8614c0935217b03de4cbcdbb7aff8d893f5bbdb573f687221d50e625482",
             "file": "projects/ngx-composite-lib/generic-list/generic-list.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(state: { searchString: string }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
+            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(params: { \r\n        searchString: string, \r\n        fromIndex: number, \r\n        toIndex: number \r\n    }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
             "properties": [],
             "indexSignatures": [],
             "kind": 167,
@@ -26,7 +26,7 @@
                     "optional": false,
                     "returnType": "Promise<literal type[]>",
                     "typeParameters": [],
-                    "line": 11,
+                    "line": 15,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -45,12 +45,12 @@
         },
         {
             "name": "IPepGenericListDataSource",
-            "id": "interface-IPepGenericListDataSource-2dd3c2736091cfa4b022a3f8c74a1b7f741bbfbd9019436e5d8297796a1066869eec81f1a9396a34ac398a09a33103e588b84407a234ffcb2d7b81e359e12eb6",
+            "id": "interface-IPepGenericListDataSource-6d8d932ec7b8828e9ac2cb4b81eaaf2c1b687d67a3e232e6e6bda8ea977edcdb1627f8614c0935217b03de4cbcdbb7aff8d893f5bbdb573f687221d50e625482",
             "file": "projects/ngx-composite-lib/generic-list/generic-list.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(state: { searchString: string }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
+            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(params: { \r\n        searchString: string, \r\n        fromIndex: number, \r\n        toIndex: number \r\n    }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
             "properties": [
                 {
                     "name": "dataView",
@@ -59,7 +59,7 @@
                     "type": "GridDataView",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 10
                 },
                 {
                     "name": "totalCount",
@@ -68,7 +68,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 11
                 }
             ],
             "indexSignatures": [],
@@ -78,7 +78,7 @@
                     "name": "getList",
                     "args": [
                         {
-                            "name": "state",
+                            "name": "params",
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -92,7 +92,7 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "name": "state",
+                            "name": "params",
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": "",
@@ -106,12 +106,12 @@
         },
         {
             "name": "IPepGenericListPager",
-            "id": "interface-IPepGenericListPager-2dd3c2736091cfa4b022a3f8c74a1b7f741bbfbd9019436e5d8297796a1066869eec81f1a9396a34ac398a09a33103e588b84407a234ffcb2d7b81e359e12eb6",
+            "id": "interface-IPepGenericListPager-6d8d932ec7b8828e9ac2cb4b81eaaf2c1b687d67a3e232e6e6bda8ea977edcdb1627f8614c0935217b03de4cbcdbb7aff8d893f5bbdb573f687221d50e625482",
             "file": "projects/ngx-composite-lib/generic-list/generic-list.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(state: { searchString: string }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
+            "sourceCode": "import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { PepListPagerType } from '@pepperi-addons/ngx-lib/list';\r\n\r\nexport interface IPepGenericListDataSource {\r\n    getList(params: { \r\n        searchString: string, \r\n        fromIndex: number, \r\n        toIndex: number \r\n    }): Promise<any[]>;    \r\n    dataView: GridDataView;\r\n    totalCount: number;\r\n}\r\n\r\nexport interface IPepGenericListActions {\r\n    get(data: any): Promise<{\r\n        title: string;\r\n        handler: (obj: any) => Promise<void>;\r\n    }[]>;\r\n}\r\n\r\nexport interface IPepGenericListPager {\r\n    type: PepListPagerType;\r\n    size: number;\r\n    index: number;\r\n}\r\n",
             "properties": [
                 {
                     "name": "index",
@@ -120,7 +120,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 24
                 },
                 {
                     "name": "size",
@@ -129,7 +129,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 23
                 },
                 {
                     "name": "type",
@@ -138,7 +138,7 @@
                     "type": "PepListPagerType",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 22
                 }
             ],
             "indexSignatures": [],
@@ -1324,7 +1324,7 @@
         },
         {
             "name": "GenericListComponent",
-            "id": "component-GenericListComponent-9335c2a1c68510d5d39150958f3ee465597e4ec50b5c3c9255bff4099f2ee302ae56cd06c6003c41dea475164cb91f710b90c83eab89a95d71e5847b33134fc4",
+            "id": "component-GenericListComponent-b152c24a619931f02966761ce23cba1599bb18d7f62cd8d4a48800b29c4f8654b9a47cf6fd50dab7aacdae57115acbc88f8eba5b13bd8e958b85da9eccf892bc",
             "file": "projects/ngx-composite-lib/generic-list/generic-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1346,7 +1346,7 @@
                     "defaultValue": "{\r\n        get: async (data: any) => {\r\n            return []\r\n        }\r\n    }",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 63,
                     "type": "IPepGenericListActions",
                     "decorators": []
                 },
@@ -1355,39 +1355,12 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 67,
+                    "line": 70,
                     "type": "boolean",
                     "decorators": []
                 },
                 {
-                    "name": "allowSelection",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 79,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "breadCrumbsItems",
-                    "defaultValue": "new Array<PepBreadCrumbItem>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 97,
-                    "type": "any",
-                    "decorators": []
-                },
-                {
-                    "name": "data",
-                    "defaultValue": "{\r\n        getList: async (options: any) => {\r\n            return [];\r\n        },\r\n        dataView: {\r\n            Type: 'Grid'\r\n        },\r\n        totalCount: 0\r\n    }",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 49,
-                    "type": "IPepGenericListDataSource",
-                    "decorators": []
-                },
-                {
-                    "name": "firstFieldAsLink",
+                    "name": "allowMultipleSelection",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1396,61 +1369,34 @@
                     "decorators": []
                 },
                 {
-                    "name": "inline",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 73,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "multipleSelection",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 85,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "noDataFoundMsg",
-                    "defaultValue": "this.translate.instant('GENERIC_LIST.NO_DATA')",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 82,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "pager",
-                    "defaultValue": "{\r\n        type: 'scroll',\r\n        size: DEFAULT_PAGE_SIZE,        \r\n        index: 0\r\n    }",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 100,
-                    "type": "IPepGenericListPager",
-                    "decorators": []
-                },
-                {
-                    "name": "showSearch",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 76,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "showTopBar",
+                    "name": "allowSelection",
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 94,
+                    "line": 82,
                     "type": "boolean",
                     "decorators": []
                 },
                 {
-                    "name": "supportSorting",
+                    "name": "breadCrumbsItems",
+                    "defaultValue": "new Array<PepBreadCrumbItem>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 100,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "data",
+                    "defaultValue": "{\r\n        getList: async (options: any) => {\r\n            return [];\r\n        },\r\n        dataView: {\r\n            Type: 'Grid'\r\n        },\r\n        totalCount: 0\r\n    }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 52,
+                    "type": "IPepGenericListDataSource",
+                    "decorators": []
+                },
+                {
+                    "name": "firstFieldAsLink",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1459,11 +1405,65 @@
                     "decorators": []
                 },
                 {
+                    "name": "inline",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 76,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "noDataFoundMsg",
+                    "defaultValue": "this.translate.instant('GENERIC_LIST.NO_DATA')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 85,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "pager",
+                    "defaultValue": "{\r\n        type: 'scroll',\r\n        size: DEFAULT_PAGE_SIZE,        \r\n        index: 0\r\n    }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 103,
+                    "type": "IPepGenericListPager",
+                    "decorators": []
+                },
+                {
+                    "name": "showSearch",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 79,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showTopBar",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 97,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "supportSorting",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 94,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
                     "name": "title",
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 70,
+                    "line": 73,
                     "type": "string",
                     "decorators": []
                 }
@@ -1474,16 +1474,24 @@
                     "defaultValue": "new EventEmitter<IPepBreadCrumbItemClickEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 110,
-                    "type": "EventEmitter<IPepBreadCrumbItemClickEvent>"
+                    "line": 116,
+                    "type": "EventEmitter"
                 },
                 {
                     "name": "fieldClick",
                     "defaultValue": "new EventEmitter<IPepFormFieldClickEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 107,
-                    "type": "EventEmitter<IPepFormFieldClickEvent>"
+                    "line": 110,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "valueChange",
+                    "defaultValue": "new EventEmitter<IPepFormFieldValueChangeEvent>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 113,
+                    "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
@@ -1494,23 +1502,13 @@
                     "type": "PepListComponent | undefined",
                     "optional": false,
                     "description": "",
-                    "line": 46,
+                    "line": 49,
                     "decorators": [
                         {
                             "name": "ViewChild",
                             "stringifiedArguments": "PepListComponent"
                         }
                     ]
-                },
-                {
-                    "name": "dataObjects",
-                    "defaultValue": "[]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "any[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 112
                 },
                 {
                     "name": "hasRows",
@@ -1520,7 +1518,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 116
+                    "line": 122
                 },
                 {
                     "name": "menuActions",
@@ -1530,7 +1528,7 @@
                     "type": "Array<PepMenuItem>",
                     "optional": false,
                     "description": "",
-                    "line": 115
+                    "line": 121
                 },
                 {
                     "name": "menuHandlers",
@@ -1540,7 +1538,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "",
-                    "line": 114
+                    "line": 120
                 },
                 {
                     "name": "searchString",
@@ -1550,7 +1548,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 113
+                    "line": 119
                 }
             ],
             "methodsClass": [
@@ -1573,7 +1571,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 140,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1601,12 +1599,59 @@
                     ]
                 },
                 {
+                    "name": "getDataList",
+                    "args": [
+                        {
+                            "name": "fromIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "toIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "unknown",
+                    "typeParameters": [],
+                    "line": 252,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        131
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "fromIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "toIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "getMenuActions",
                     "args": [],
                     "optional": false,
                     "returnType": "Promise<PepMenuItem[]>",
                     "typeParameters": [],
-                    "line": 159,
+                    "line": 165,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1620,7 +1665,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 176,
+                    "line": 182,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1640,12 +1685,9 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 190,
+                    "line": 196,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "modifierKind": [
-                        121
-                    ],
                     "jsdoctags": [
                         {
                             "name": "uuid",
@@ -1664,7 +1706,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 128,
+                    "line": 134,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1677,7 +1719,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 198,
+                    "line": 206,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1687,7 +1729,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 194,
+                    "line": 200,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1704,7 +1746,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 238,
+                    "line": 244,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1732,13 +1774,81 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 234,
+                    "line": 240,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "fieldClickEvent",
                             "type": "IPepFormFieldClickEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onLoadItems",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "IPepListLoadItemsEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 265,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nloads virtual scroll items from api\n",
+                    "description": "<p>loads virtual scroll items from api</p>\n",
+                    "modifierKind": [
+                        123,
+                        131
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "IPepListLoadItemsEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onLoadPage",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "IPepListLoadPageEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 275,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nloads paging bulk from api\n",
+                    "description": "<p>loads paging bulk from api</p>\n",
+                    "modifierKind": [
+                        123,
+                        131
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "IPepListLoadPageEvent",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -1760,7 +1870,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 202,
+                    "line": 210,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1788,7 +1898,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 206,
+                    "line": 214,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1804,20 +1914,7 @@
                     ]
                 },
                 {
-                    "name": "reload",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 211,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        131
-                    ]
-                },
-                {
-                    "name": "selectedRowsChanged",
+                    "name": "onSelectedRowsChanged",
                     "args": [
                         {
                             "name": "selectedRowsCount",
@@ -1829,7 +1926,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 230,
+                    "line": 236,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1843,6 +1940,47 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "onValueChanged",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "IPepFormFieldValueChangeEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 248,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "IPepFormFieldValueChangeEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "reload",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 219,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        131
+                    ]
                 }
             ],
             "deprecated": false,
@@ -1852,7 +1990,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n    Component,\r\n    OnInit,\r\n    AfterViewInit,\r\n    ViewChild,\r\n    Input,\r\n    Output,\r\n    EventEmitter,\r\n} from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport {\r\n    PepDataConvertorService,\r\n    PepLayoutService,\r\n    PepRowData,\r\n    PepScreenSizeType,\r\n    PepGuid,\r\n} from '@pepperi-addons/ngx-lib';\r\nimport { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepListComponent,\r\n    PepSelectionData,\r\n    IPepListPagerChangeEvent,\r\n    PepListPagerType,\r\n    DEFAULT_PAGE_SIZE\r\n} from '@pepperi-addons/ngx-lib/list';\r\nimport {\r\n    PepMenuItem,\r\n    IPepMenuItemClickEvent,\r\n} from '@pepperi-addons/ngx-lib/menu';\r\nimport {\r\n    PepBreadCrumbItem,\r\n    IPepBreadCrumbItemClickEvent\r\n} from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';\r\n\r\nimport { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { IPepGenericListDataSource, IPepGenericListPager, IPepGenericListActions } from './generic-list.model';\r\n\r\n\r\n@Component({\r\n    selector: 'pep-generic-list',\r\n    templateUrl: './generic-list.component.html',\r\n    styleUrls: ['./generic-list.component.scss'],\r\n})\r\nexport class GenericListComponent implements OnInit, AfterViewInit {\r\n    @ViewChild(PepListComponent) customList: PepListComponent | undefined;\r\n\r\n    @Input()\r\n    data: IPepGenericListDataSource = {\r\n        getList: async (options: any) => {\r\n            return [];\r\n        },\r\n        dataView: {\r\n            Type: 'Grid'\r\n        },\r\n        totalCount: 0\r\n    };  \r\n\r\n    @Input()\r\n    actions: IPepGenericListActions = {\r\n        get: async (data: any) => {\r\n            return []\r\n        }\r\n    };\r\n\r\n    @Input()\r\n    addPadding = false;\r\n\r\n    @Input()\r\n    title = '';\r\n\r\n    @Input()\r\n    inline = false;\r\n\r\n    @Input()\r\n    showSearch = false;\r\n\r\n    @Input()\r\n    allowSelection = true;\r\n\r\n    @Input()\r\n    noDataFoundMsg: string = this.translate.instant('GENERIC_LIST.NO_DATA');\r\n\r\n    @Input()\r\n    multipleSelection = false;\r\n\r\n    @Input()\r\n    firstFieldAsLink = false;\r\n\r\n    @Input()\r\n    supportSorting = false;\r\n\r\n    @Input()\r\n    showTopBar = true;\r\n\r\n    @Input()\r\n    breadCrumbsItems = new Array<PepBreadCrumbItem>();\r\n\r\n    @Input() \r\n    pager: IPepGenericListPager = {\r\n        type: 'scroll',\r\n        size: DEFAULT_PAGE_SIZE,        \r\n        index: 0\r\n    }   \r\n\r\n    @Output()\r\n    fieldClick: EventEmitter<IPepFormFieldClickEvent> = new EventEmitter<IPepFormFieldClickEvent>();\r\n\r\n    @Output()\r\n    breadCrumbItemClick: EventEmitter<IPepBreadCrumbItemClickEvent> = new EventEmitter<IPepBreadCrumbItemClickEvent>();\r\n\r\n    dataObjects: any[] = [];\r\n    searchString = '';\r\n    menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};\r\n    menuActions: Array<PepMenuItem> = [];\r\n    hasRows = true;       \r\n\r\n    constructor(\r\n        private dataConvertorService: PepDataConvertorService,\r\n        private layoutService: PepLayoutService,\r\n        private translate: TranslateService\r\n    ) {\r\n        this.layoutService.onResize$.pipe().subscribe((size) => {\r\n            //            \r\n        });\r\n    }    \r\n\r\n    private loadMenuItems(): void {\r\n        if (this.allowSelection) {\r\n            this.getMenuActions().then(x => this.menuActions = x);\r\n        }\r\n    }\r\n\r\n    private convertToPepRowData(object: any, dataView: GridDataView) {\r\n        const row = new PepRowData();\r\n        row.Fields = [];\r\n\r\n        if (dataView?.Fields && dataView.Columns) {\r\n            for (let index = 0; index < dataView.Fields.length; index++) {\r\n                const field = dataView.Fields[index] as GridDataViewField\r\n                row.Fields.push({\r\n                    ApiName: field.FieldID,\r\n                    Title: this.translate.instant(field.Title),\r\n                    XAlignment: 1,\r\n                    FormattedValue: (object[field.FieldID] || '').toString(),\r\n                    Value: (object[field.FieldID] || '').toString(),\r\n                    ColumnWidth: dataView.Columns[index].Width,\r\n                    AdditionalValue: '',\r\n                    OptionalValues: [],\r\n                    FieldType: DataViewFieldTypes[field.Type],\r\n                    ReadOnly: field.ReadOnly,\r\n                    Enabled: !field.ReadOnly\r\n                })\r\n            }\r\n        }\r\n        return row;\r\n    }\r\n\r\n    private async getMenuActions(): Promise<PepMenuItem[]> {        \r\n        const actions = await this.actions.get(this.getMenuObjects());              \r\n        const res: PepMenuItem[] = [];\r\n        this.menuHandlers = {};\r\n\r\n        actions?.forEach(item => {\r\n            const uuid = PepGuid.newGuid();\r\n            this.menuHandlers[uuid] = item.handler;\r\n            res.push({\r\n                key: uuid,\r\n                text: item.title\r\n            })\r\n        })\r\n\r\n        return res;\r\n    }\r\n\r\n    private getMenuObjects() {\r\n        const selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();\r\n\r\n        if (selectedData.rows?.length > 0 && this.customList?.getIsAllSelectedForActions()) {\r\n            selectedData.rows = this.dataObjects.map(obj => obj.UID).filter(x => selectedData.rows.indexOf(x) !== -1);\r\n        }\r\n\r\n        if (selectedData.rows?.length > 0) {\r\n            selectedData.rows = selectedData.rows.map(uuid => this.getObject(uuid));\r\n        }\r\n\r\n        return selectedData;\r\n    }\r\n\r\n    private getObject(uuid: string) {\r\n        return this.dataObjects.find(obj => obj.UID === uuid);\r\n    }\r\n\r\n    ngOnInit() {\r\n        //       \r\n    }\r\n\r\n    ngAfterViewInit(): void {\r\n        this.reload();\r\n    }\r\n\r\n    onMenuItemClicked(action: IPepMenuItemClickEvent): void {\r\n        this.menuHandlers[action.source.key](this.getMenuObjects());\r\n    }\r\n\r\n    onSearchChanged(event: IPepSearchClickEvent) {\r\n        this.searchString = event.value;\r\n        this.reload();\r\n    }\r\n\r\n    async reload() {\r\n        if (this.customList && this.data) {\r\n            this.dataObjects = await this.data.getList({\r\n                searchString: this.searchString\r\n            });\r\n            const dataView = this.data.dataView;\r\n            const tableData = this.dataObjects.map(x => this.convertToPepRowData(x, dataView));\r\n            const data = this.dataConvertorService.convertListData(tableData);\r\n            data.forEach((obj, i) => {\r\n                this.dataObjects[i].UID = obj.UID;\r\n            })\r\n            const uiControl = this.dataConvertorService.getUiControl(tableData[0]);\r\n            this.customList.initListData(uiControl, this.data.totalCount, data);\r\n\r\n            this.loadMenuItems();\r\n        }\r\n        this.hasRows = this.dataObjects?.length > 0 ? true : false;\r\n    }\r\n\r\n    selectedRowsChanged(selectedRowsCount: number) {\r\n        this.loadMenuItems();\r\n    }\r\n\r\n    onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {\r\n        this.fieldClick.emit(fieldClickEvent);\r\n    }\r\n\r\n    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {\r\n        this.breadCrumbItemClick.emit(event);\r\n    }\r\n\r\n}\r\n",
+            "sourceCode": "import {\r\n    Component,\r\n    OnInit,\r\n    AfterViewInit,\r\n    ViewChild,\r\n    Input,\r\n    Output,\r\n    EventEmitter,\r\n} from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport {\r\n    PepDataConvertorService,\r\n    PepLayoutService,\r\n    PepRowData,\r\n    PepScreenSizeType,\r\n    PepGuid,\r\n} from '@pepperi-addons/ngx-lib';\r\nimport { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepListComponent,\r\n    PepSelectionData,\r\n    IPepListLoadPageEvent,    \r\n    IPepListPagerChangeEvent,\r\n    PepListPagerType,\r\n    DEFAULT_PAGE_SIZE,\r\n    IPepListLoadItemsEvent\r\n} from '@pepperi-addons/ngx-lib/list';\r\nimport {\r\n    PepMenuItem,\r\n    IPepMenuItemClickEvent,\r\n} from '@pepperi-addons/ngx-lib/menu';\r\nimport { IPepFormFieldValueChangeEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepBreadCrumbItem,\r\n    IPepBreadCrumbItemClickEvent\r\n} from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';\r\n\r\nimport { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport { IPepGenericListDataSource, IPepGenericListPager, IPepGenericListActions } from './generic-list.model';\r\n\r\n\r\n@Component({\r\n    selector: 'pep-generic-list',\r\n    templateUrl: './generic-list.component.html',\r\n    styleUrls: ['./generic-list.component.scss'],\r\n})\r\nexport class GenericListComponent implements OnInit, AfterViewInit {\r\n    @ViewChild(PepListComponent) customList: PepListComponent | undefined;\r\n\r\n    @Input()\r\n    data: IPepGenericListDataSource = {\r\n        getList: async (options: any) => {\r\n            return [];\r\n        },\r\n        dataView: {\r\n            Type: 'Grid'\r\n        },\r\n        totalCount: 0\r\n    };  \r\n\r\n    @Input()\r\n    actions: IPepGenericListActions = {\r\n        get: async (data: any) => {\r\n            return []\r\n        }\r\n    };\r\n\r\n    @Input()\r\n    addPadding = false;\r\n\r\n    @Input()\r\n    title = '';\r\n\r\n    @Input()\r\n    inline = false;\r\n\r\n    @Input()\r\n    showSearch = false;\r\n\r\n    @Input()\r\n    allowSelection = true;\r\n\r\n    @Input()\r\n    noDataFoundMsg: string = this.translate.instant('GENERIC_LIST.NO_DATA');\r\n\r\n    @Input()\r\n    allowMultipleSelection = false;\r\n\r\n    @Input()\r\n    firstFieldAsLink = false;\r\n\r\n    @Input()\r\n    supportSorting = false;\r\n\r\n    @Input()\r\n    showTopBar = false;\r\n    \r\n    @Input()\r\n    breadCrumbsItems = new Array<PepBreadCrumbItem>();\r\n\r\n    @Input() \r\n    pager: IPepGenericListPager = {\r\n        type: 'scroll',\r\n        size: DEFAULT_PAGE_SIZE,        \r\n        index: 0\r\n    }   \r\n\r\n    @Output()\r\n    fieldClick = new EventEmitter<IPepFormFieldClickEvent>();\r\n\r\n    @Output()\r\n    valueChange = new EventEmitter<IPepFormFieldValueChangeEvent>();\r\n\r\n    @Output()\r\n    breadCrumbItemClick = new EventEmitter<IPepBreadCrumbItemClickEvent>();\r\n\r\n    // dataObjects: any[] = [];\r\n    searchString = '';\r\n    menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};\r\n    menuActions: Array<PepMenuItem> = [];\r\n    hasRows = true;       \r\n\r\n    constructor(\r\n        private dataConvertorService: PepDataConvertorService,\r\n        private layoutService: PepLayoutService,\r\n        private translate: TranslateService\r\n    ) {\r\n        this.layoutService.onResize$.pipe().subscribe((size) => {\r\n            //            \r\n        });\r\n    }    \r\n\r\n    private loadMenuItems(): void {\r\n        if (this.allowSelection) {\r\n            this.getMenuActions().then(x => this.menuActions = x);\r\n        }\r\n    }\r\n\r\n    private convertToPepRowData(object: any, dataView: GridDataView) {\r\n        const row = new PepRowData();\r\n        row.Fields = [];\r\n\r\n        if (dataView?.Fields && dataView.Columns) {\r\n            for (let index = 0; index < dataView.Fields.length; index++) {\r\n                const field = dataView.Fields[index] as GridDataViewField\r\n                row.Fields.push({\r\n                    ApiName: field.FieldID,\r\n                    Title: this.translate.instant(field.Title),\r\n                    XAlignment: 1,\r\n                    FormattedValue: (object[field.FieldID] || '').toString(),\r\n                    Value: (object[field.FieldID] || '').toString(),\r\n                    ColumnWidth: dataView.Columns[index].Width,\r\n                    AdditionalValue: '',\r\n                    OptionalValues: [],\r\n                    FieldType: DataViewFieldTypes[field.Type],\r\n                    ReadOnly: field.ReadOnly,\r\n                    Enabled: !field.ReadOnly\r\n                })\r\n            }\r\n        }\r\n        return row;\r\n    }\r\n\r\n    private async getMenuActions(): Promise<PepMenuItem[]> {        \r\n        const actions = await this.actions.get(this.getMenuObjects());              \r\n        const res: PepMenuItem[] = [];\r\n        this.menuHandlers = {};\r\n\r\n        actions?.forEach(item => {\r\n            const uuid = PepGuid.newGuid();\r\n            this.menuHandlers[uuid] = item.handler;\r\n            res.push({\r\n                key: uuid,\r\n                text: item.title\r\n            })\r\n        })\r\n\r\n        return res;\r\n    }\r\n\r\n    private getMenuObjects() {\r\n        const selectedData = this.customList?.getSelectedItemsData() || new PepSelectionData();\r\n\r\n        // if (selectedData.rows?.length > 0 && this.customList?.getIsAllSelectedForActions()) {\r\n        //     selectedData.rows = this.dataObjects.map(obj => obj.UID).filter(x => selectedData.rows.indexOf(x) !== -1);\r\n        // }\r\n\r\n        // if (selectedData.rows?.length > 0) {\r\n        //     selectedData.rows = selectedData.rows.map(uuid => this.getObject(uuid));\r\n        // }\r\n\r\n        return selectedData;\r\n    }\r\n\r\n    getObject(uuid: string) {\r\n        return this.customList?.getItemDataByID(uuid); // this.dataObjects.find(obj => obj.UID === uuid);\r\n    }\r\n\r\n    ngOnInit() {\r\n        \r\n        \r\n        \r\n    }\r\n\r\n    ngAfterViewInit(): void {\r\n        this.reload();\r\n    }\r\n\r\n    onMenuItemClicked(action: IPepMenuItemClickEvent): void {\r\n        this.menuHandlers[action.source.key](this.getMenuObjects());\r\n    }\r\n\r\n    onSearchChanged(event: IPepSearchClickEvent) {\r\n        this.searchString = event.value;\r\n        this.reload();\r\n    }\r\n\r\n    async reload() {        \r\n        if (this.customList && this.data.totalCount > 0) {\r\n            const fromIndex = 0;\r\n            const toIndex = Math.min(fromIndex + this.pager.size - 1, this.data.totalCount - 1);\r\n\r\n            const dataList = await this.getDataList(fromIndex, toIndex);                        \r\n            const convertedList = this.dataConvertorService.convertListData(dataList);         \r\n            const uiControl = this.dataConvertorService.getUiControl(dataList[0]);\r\n\r\n            this.customList.initListData(uiControl, this.data.totalCount, convertedList);            \r\n            this.loadMenuItems();\r\n            this.hasRows = dataList.length > 0 ? true : false;\r\n        } else {\r\n            this.hasRows = false;\r\n        }\r\n    }\r\n    \r\n    onSelectedRowsChanged(selectedRowsCount: number) {\r\n        this.loadMenuItems();\r\n    }\r\n    \r\n    onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {\r\n        this.fieldClick.emit(fieldClickEvent);\r\n    }\r\n\r\n    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {\r\n        this.breadCrumbItemClick.emit(event);\r\n    }\r\n\r\n    onValueChanged(event: IPepFormFieldValueChangeEvent) {\r\n        this.valueChange.emit(event);\r\n    }\r\n\r\n    private async getDataList(fromIndex: number, toIndex: number) {\r\n        const dataList = await this.data.getList({\r\n            searchString: this.searchString,\r\n            fromIndex: fromIndex,\r\n            toIndex: toIndex\r\n        });  \r\n        const dataView = this.data.dataView;\r\n        return dataList.map(item => this.convertToPepRowData(item, dataView));           \r\n    }\r\n\r\n    /**\r\n     * loads virtual scroll items from api\r\n     */\r\n    public async onLoadItems(event: IPepListLoadItemsEvent) {        \r\n        const dataList = await this.getDataList(event.fromIndex, event.toIndex);        \r\n        const data = this.dataConvertorService.convertListData(dataList);\r\n        \r\n        this.customList?.updateItems(data, event);\r\n    }\r\n\r\n    /**\r\n     * loads paging bulk from api\r\n     */\r\n    public async onLoadPage(event: IPepListLoadPageEvent) {\r\n        const fromIndex = event.pageIndex * event.pageSize;\r\n        const toIndex = Math.min(fromIndex + event.pageSize - 1, this.data.totalCount - 1);\r\n\r\n        const dataList = await this.getDataList(fromIndex, toIndex);               \r\n        const data = this.dataConvertorService.convertListData(dataList);\r\n        \r\n        this.customList?.updatePage(data, event);\r\n    }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1886,7 +2024,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 116,
+                "line": 122,
                 "jsdoctags": [
                     {
                         "name": "dataConvertorService",
@@ -1921,11 +2059,11 @@
                 "OnInit",
                 "AfterViewInit"
             ],
-            "templateData": "<div *ngIf=\"inline\" class=\"inline-container\" [ngClass]=\"{ 'add-padding': addPadding }\">\r\n    <div>\r\n        <div *ngIf=\"showTopBar\" class=\"inline-top-bar-container\">\r\n            <ng-container *ngTemplateOutlet=\"topBarTemplate\"></ng-container>\r\n        </div>\r\n        <ng-container *ngIf=\"breadCrumbsItems && breadCrumbsItems.length > 0\">\r\n            <ng-container *ngTemplateOutlet=\"breadCrumbsTemplate\"></ng-container>\r\n        </ng-container>\r\n    </div>\r\n    <ng-container *ngTemplateOutlet=\"listTemplate\"></ng-container>\r\n</div>\r\n\r\n<pep-page-layout *ngIf=\"!inline\" [addPadding]=\"addPadding\">\r\n    <ng-container *ngIf=\"showTopBar\" pep-top-area>\r\n        <ng-container *ngTemplateOutlet=\"topBarTemplate\"></ng-container>\r\n    </ng-container>\r\n\r\n    <ng-container *ngIf=\"breadCrumbsItems && breadCrumbsItems.length > 0\" pep-top-area>\r\n        <ng-container *ngTemplateOutlet=\"breadCrumbsTemplate\"></ng-container>\r\n    </ng-container>\r\n\r\n    <div pep-main-area class=\"main-area-container\">\r\n        <ng-container *ngTemplateOutlet=\"listTemplate\"></ng-container>\r\n    </div>\r\n</pep-page-layout>\r\n\r\n<ng-template #topBarTemplate>\r\n    <pep-top-bar [title]=\"title\" [inline]=\"inline\">\r\n        <div header-start-content>\r\n            <ng-content select=\"[left-buttons]\"></ng-content>\r\n        </div>\r\n        <div header-end-content>\r\n            <ng-content select=\"[right-buttons]\"></ng-content>\r\n        </div>\r\n        <!-- <pep-list-actions [sizeType]=\"inline ? 'sm' : 'md'\" [actions]=\"menuActions\"\r\n            (actionClick)=\"onMenuItemClicked($event)\"></pep-list-actions> -->\r\n        <pep-list-total [sizeType]=\"inline ? 'sm' : 'md'\" [totalRows]=\"customList ? customList.totalRows : -1\">\r\n        </pep-list-total>\r\n\r\n        <pep-search *ngIf=\"showSearch\" [sizeType]=\"inline ? 'sm' : 'md'\" (search)=\"onSearchChanged($event)\">\r\n        </pep-search>\r\n    </pep-top-bar>\r\n</ng-template>\r\n\r\n<ng-template #breadCrumbsTemplate>\r\n    <pep-bread-crumbs class=\"bread-crumbs\" [items]=\"breadCrumbsItems\" [addSpacing]=\"true\" [displayType]=\"'items'\"\r\n        (itemClick)=\"onBreadCrumbItemClick($event)\"></pep-bread-crumbs>\r\n</ng-template>\r\n\r\n<ng-template #listTemplate>\r\n    <div #listContainer class=\"list-container\">\r\n        <pep-list #customList *ngIf=\"hasRows\" viewType=\"table\" [supportSorting]=\"supportSorting\"\r\n            [selectionTypeForActions]=\"multipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')\"\r\n            [pagerType]=\"pager.type\" [pageSize]=\"pager.size\" [pageIndex]=\"pager.index\" [noDataFoundMsg]=\"noDataFoundMsg\"\r\n            (fieldClick)=\"onCustomizeFieldClick($event)\" [firstFieldAsLink]=\"firstFieldAsLink\"\r\n            (selectedItemsChange)=\"selectedRowsChanged($event)\">\r\n        </pep-list>\r\n        <ng-container *ngIf=\"!hasRows\">\r\n            <div class=\"noDataFoundMsg\">\r\n                <h2>{{noDataFoundMsg}}</h2>\r\n            </div>\r\n        </ng-container>\r\n    </div>\r\n</ng-template>"
+            "templateData": "<div *ngIf=\"inline\" class=\"inline-container\" [ngClass]=\"{ 'add-padding': addPadding }\">\r\n    <div>\r\n        <div *ngIf=\"showTopBar\" class=\"inline-top-bar-container\">\r\n            <ng-container *ngTemplateOutlet=\"topBarTemplate\"></ng-container>\r\n        </div>        \r\n        <ng-container *ngIf=\"breadCrumbsItems.length > 0\">\r\n            <!-- <ng-container *ngTemplateOutlet=\"breadCrumbsTemplate\"></ng-container> -->\r\n            <pep-bread-crumbs class=\"bread-crumbs\" [items]=\"breadCrumbsItems\" [addSpacing]=\"true\"\r\n                [displayType]=\"'items'\" (itemClick)=\"onBreadCrumbItemClick($event)\"></pep-bread-crumbs>\r\n        </ng-container>\r\n    </div>\r\n    <ng-container *ngTemplateOutlet=\"listTemplate\"></ng-container>\r\n</div>\r\n\r\n<pep-page-layout *ngIf=\"!inline\" [addPadding]=\"addPadding\">\r\n    <ng-container *ngIf=\"showTopBar\" pep-top-area>\r\n        <ng-container *ngTemplateOutlet=\"topBarTemplate\"></ng-container>\r\n    </ng-container>\r\n    <ng-container *ngIf=\"breadCrumbsItems.length > 0\" pep-top-area>        \r\n        <!-- <ng-container *ngTemplateOutlet=\"breadCrumbsTemplate\"></ng-container>   \r\n              -->\r\n              \r\n        <pep-bread-crumbs class=\"bread-crumbs\" [items]=\"breadCrumbsItems\" [addSpacing]=\"true\" [displayType]=\"'items'\"\r\n            (itemClick)=\"onBreadCrumbItemClick($event)\"></pep-bread-crumbs>\r\n    </ng-container>\r\n    <div pep-main-area class=\"main-area-container\">\r\n        <ng-container *ngTemplateOutlet=\"listTemplate\"></ng-container>\r\n    </div>\r\n</pep-page-layout>\r\n\r\n<ng-template #topBarTemplate>\r\n    <pep-top-bar [title]=\"title\" [inline]=\"inline\">\r\n        <div header-start-content>\r\n            <ng-content select=\"[left-buttons]\"></ng-content>\r\n        </div>\r\n        <div header-end-content>\r\n            <ng-content select=\"[right-buttons]\"></ng-content>\r\n        </div>\r\n        <pep-list-actions [sizeType]=\"inline ? 'sm' : 'md'\" [actions]=\"menuActions\"\r\n            (actionClick)=\"onMenuItemClicked($event)\"></pep-list-actions>\r\n        <pep-list-total [sizeType]=\"inline ? 'sm' : 'md'\" [totalRows]=\"customList ? customList.totalRows : -1\">\r\n        </pep-list-total>\r\n\r\n        <pep-search *ngIf=\"showSearch\" [sizeType]=\"inline ? 'sm' : 'md'\" (search)=\"onSearchChanged($event)\">\r\n        </pep-search>\r\n    </pep-top-bar>\r\n</ng-template>\r\n\r\n<!-- <ng-template #breadCrumbsTemplate>\r\n    <pep-bread-crumbs class=\"bread-crumbs\" [items]=\"breadCrumbsItems\" [addSpacing]=\"true\" [displayType]=\"'items'\"\r\n        (itemClick)=\"onBreadCrumbItemClick($event)\"></pep-bread-crumbs>\r\n</ng-template> -->\r\n\r\n<ng-template #listTemplate>\r\n    <div class=\"list-container\">\r\n        <pep-list #customList *ngIf=\"hasRows\" viewType=\"table\" [supportSorting]=\"supportSorting\"\r\n            [selectionTypeForActions]=\"allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')\"\r\n            [pagerType]=\"pager.type\" [pageSize]=\"pager.size\" [pageIndex]=\"pager.index\" [noDataFoundMsg]=\"noDataFoundMsg\"\r\n            (fieldClick)=\"onCustomizeFieldClick($event)\" [firstFieldAsLink]=\"firstFieldAsLink\"\r\n            (selectedItemsChange)=\"onSelectedRowsChanged($event)\" (loadItems)=\"onLoadItems($event)\"\r\n            (loadPage)=\"onLoadPage($event)\" (valueChange)=\"onValueChanged($event)\">\r\n        </pep-list>\r\n        <ng-container *ngIf=\"!hasRows\">\r\n            <div class=\"noDataFoundMsg\">\r\n                <h2>{{noDataFoundMsg}}</h2>\r\n            </div>\r\n        </ng-container>\r\n    </div>\r\n</ng-template>"
         },
         {
             "name": "GenericListExampleComponent",
-            "id": "component-GenericListExampleComponent-267aacfbd377785951f6d9b8ccf8d083545b52a630e959ef65209988ab8e40b5dd0c3ec1d8d29c4509f53c4277c017b5ff873560511467dac99f89af71c4c261",
+            "id": "component-GenericListExampleComponent-ac01860add74269ecdc0184ec063c5242091fac4db5cc50b8335284ecd2736c85d5f623c87298fff8cba43f559a7b3fbc6c34c50adfc797756366f3f85cb8105",
             "file": "projects/ngx-composite-lib-tester/src/app/generic-list-example/generic-list-example.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1946,13 +2084,13 @@
             "propertiesClass": [
                 {
                     "name": "actions",
-                    "defaultValue": "{        \r\n        get: async (data: PepSelectionData) => {\r\n            if (data?.selectionType === 0) {\r\n                const list = await this.dataSource.getList({ searchString: '' });\r\n                if (list?.length === data?.rows.length) {\r\n                    return [];\r\n                }\r\n            }\r\n            if (data?.rows.length === 1 && data?.selectionType !== 0) {\r\n                return [\r\n                    {\r\n                        title: 'Edit',\r\n                        handler: async (ddd) => {\r\n                            alert('edit');\r\n                        }\r\n                    },\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else if (data?.rows.length > 1 || data?.selectionType === 0) {\r\n                return [\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else return [];\r\n        }\r\n    }",
+                    "defaultValue": "{        \r\n        get: async (data: PepSelectionData) => {\r\n            if (data?.selectionType === 0) {\r\n                /*const list = await this.dataSource.getList({ searchString: '', fromIndex: 0, toIndex: 20 });\r\n                if (list?.length === data?.rows.length) {\r\n                    return [];\r\n                } */\r\n            }\r\n            if (data?.rows.length === 1 && data?.selectionType !== 0) {\r\n                return [\r\n                    {\r\n                        title: 'Edit',\r\n                        handler: async (ddd) => {\r\n                            alert('edit');\r\n                        }\r\n                    },\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else if (data?.rows.length > 1 || data?.selectionType === 0) {\r\n                return [\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else return [];\r\n        }\r\n    }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "IPepGenericListActions",
                     "optional": false,
                     "description": "",
-                    "line": 93
+                    "line": 92
                 },
                 {
                     "name": "breadCrumbsItems",
@@ -1962,37 +2100,37 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 16
                 },
                 {
                     "name": "dataSource",
-                    "defaultValue": "{\r\n        getList: (options) => {\r\n            const dataSource = FakeData.Addons;\r\n            const res = dataSource.map(addon => ({\r\n                UUID: addon.UUID,\r\n                Description: addon.Addon.Description,\r\n                Version: addon.Version,\r\n                Type: addon.Type,\r\n                CreationDate: addon.CreationDate,\r\n            }));\r\n\r\n            return Promise.resolve(res);\r\n        },\r\n        totalCount: FakeData.Addons.length * 20,\r\n        dataView: {            \r\n            Context: {\r\n                Name: '',\r\n                Profile: { InternalID: 0 },\r\n                ScreenSize: 'Landscape'\r\n            },\r\n            Type: 'Grid',\r\n            Title: '',\r\n            Fields: [\r\n                this.getRegularReadOnlyColumn('UUID'),\r\n                this.getRegularReadOnlyColumn('Description'),\r\n                this.getRegularReadOnlyColumn('Version'),\r\n                this.getRegularReadOnlyColumn('Type'),\r\n                this.getRegularReadOnlyColumn('CreationDate')\r\n            ],\r\n            Columns: [\r\n                { Width: 15 },\r\n                { Width: 30 },\r\n                { Width: 15 },\r\n                { Width: 20 },\r\n                { Width: 20 }\r\n            ],\r\n            FrozenColumnsCount: 0,\r\n            MinimumColumnWidth: 0            \r\n        }\r\n    }",
+                    "defaultValue": "{\r\n        getList: (params) => {\r\n            const dataSource = FakeData.Addons;\r\n            const res = dataSource.map(addon => ({\r\n                UUID: addon.UUID,\r\n                Description: addon.Addon.Description,\r\n                Version: addon.Version,\r\n                Type: addon.Type,\r\n                CreationDate: addon.CreationDate,\r\n            }));\r\n\r\n            return Promise.resolve(res);\r\n        },\r\n        totalCount: FakeData.Addons.length * 5,\r\n        dataView: {            \r\n            Context: {\r\n                Name: '',\r\n                Profile: { InternalID: 0 },\r\n                ScreenSize: 'Landscape'\r\n            },\r\n            Type: 'Grid',\r\n            Title: '',\r\n            Fields: [\r\n                this.getRegularReadOnlyColumn('UUID'),\r\n                this.getRegularReadOnlyColumn('Description'),\r\n                this.getRegularReadOnlyColumn('Version'),\r\n                this.getRegularReadOnlyColumn('Type'),\r\n                this.getRegularReadOnlyColumn('CreationDate')\r\n            ],\r\n            Columns: [\r\n                { Width: 15 },\r\n                { Width: 30 },\r\n                { Width: 15 },\r\n                { Width: 20 },\r\n                { Width: 20 }\r\n            ],\r\n            FrozenColumnsCount: 0,\r\n            MinimumColumnWidth: 0            \r\n        }\r\n    }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "IPepGenericListDataSource",
                     "optional": false,
                     "description": "",
-                    "line": 52
+                    "line": 51
                 },
                 {
                     "name": "menuItems",
                     "defaultValue": "new Array<PepMenuItem>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Array<PepMenuItem>",
+                    "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 15
                 },
                 {
                     "name": "pager",
-                    "defaultValue": "{\r\n        type: 'pages',\r\n        size: DEFAULT_PAGE_SIZE,\r\n        index: 0\r\n    }",
+                    "defaultValue": "{\r\n        type: 'pages',\r\n        size: 10,\r\n        index: 0\r\n    }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "IPepGenericListPager",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 17
                 },
                 {
                     "name": "selectedRowID",
@@ -2002,7 +2140,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 22,
                     "modifierKind": [
                         121
                     ]
@@ -2022,7 +2160,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2046,7 +2184,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 129,
+                    "line": 128,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2056,7 +2194,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2073,7 +2211,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 147,
+                    "line": 146,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2101,7 +2239,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 143,
+                    "line": 142,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2124,7 +2262,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\nimport { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';\r\nimport { IPepGenericListDataSource, IPepGenericListPager, IPepGenericListActions } from 'projects/ngx-composite-lib/generic-list';\r\nimport { PepSelectionData, DEFAULT_PAGE_SIZE } from '@pepperi-addons/ngx-lib/list';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { FakeData } from './fake-data';\r\n\r\n@Component({\r\n    selector: 'app-generic-list-example',\r\n    templateUrl: './generic-list-example.component.html',\r\n    styleUrls: ['./generic-list-example.component.scss']\r\n})\r\nexport class GenericListExampleComponent implements OnInit {\r\n\r\n    menuItems: Array<PepMenuItem> = new Array<PepMenuItem>();\r\n    breadCrumbsItems = new Array<PepBreadCrumbItem>();\r\n    pager: IPepGenericListPager = {\r\n        type: 'pages',\r\n        size: DEFAULT_PAGE_SIZE,\r\n        index: 0\r\n    };\r\n    private selectedRowID = '';\r\n\r\n\r\n    constructor(private translate: TranslateService) {\r\n        //\r\n    }\r\n\r\n    ngOnInit(): void {\r\n        this.menuItems.push({\r\n            key: 'test',\r\n            text: 'test'\r\n        });\r\n\r\n        this.translate.get('ExampleComponentsTitle').subscribe((text) => {\r\n            this.loadBreadCrumbs();\r\n        });\r\n    }\r\n\r\n    private getRegularReadOnlyColumn(columnId: string): any {\r\n        return {\r\n            FieldID: columnId,\r\n            Type: 'TextBox',\r\n            Title: columnId,\r\n            Mandatory: false,\r\n            ReadOnly: true\r\n        }\r\n    }\r\n\r\n\r\n    dataSource: IPepGenericListDataSource = {\r\n        getList: (options) => {\r\n            const dataSource = FakeData.Addons;\r\n            const res = dataSource.map(addon => ({\r\n                UUID: addon.UUID,\r\n                Description: addon.Addon.Description,\r\n                Version: addon.Version,\r\n                Type: addon.Type,\r\n                CreationDate: addon.CreationDate,\r\n            }));\r\n\r\n            return Promise.resolve(res);\r\n        },\r\n        totalCount: FakeData.Addons.length * 20,\r\n        dataView: {            \r\n            Context: {\r\n                Name: '',\r\n                Profile: { InternalID: 0 },\r\n                ScreenSize: 'Landscape'\r\n            },\r\n            Type: 'Grid',\r\n            Title: '',\r\n            Fields: [\r\n                this.getRegularReadOnlyColumn('UUID'),\r\n                this.getRegularReadOnlyColumn('Description'),\r\n                this.getRegularReadOnlyColumn('Version'),\r\n                this.getRegularReadOnlyColumn('Type'),\r\n                this.getRegularReadOnlyColumn('CreationDate')\r\n            ],\r\n            Columns: [\r\n                { Width: 15 },\r\n                { Width: 30 },\r\n                { Width: 15 },\r\n                { Width: 20 },\r\n                { Width: 20 }\r\n            ],\r\n            FrozenColumnsCount: 0,\r\n            MinimumColumnWidth: 0            \r\n        }\r\n    }\r\n\r\n    actions: IPepGenericListActions = {        \r\n        get: async (data: PepSelectionData) => {\r\n            if (data?.selectionType === 0) {\r\n                const list = await this.dataSource.getList({ searchString: '' });\r\n                if (list?.length === data?.rows.length) {\r\n                    return [];\r\n                }\r\n            }\r\n            if (data?.rows.length === 1 && data?.selectionType !== 0) {\r\n                return [\r\n                    {\r\n                        title: 'Edit',\r\n                        handler: async (ddd) => {\r\n                            alert('edit');\r\n                        }\r\n                    },\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else if (data?.rows.length > 1 || data?.selectionType === 0) {\r\n                return [\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else return [];\r\n        }\r\n    }\r\n\r\n    loadBreadCrumbs() {\r\n        this.breadCrumbsItems.push(new PepBreadCrumbItem({\r\n            key: '1',\r\n            text: 'Crumb1',\r\n            title: 'Title1'\r\n        }));\r\n        this.breadCrumbsItems.push(new PepBreadCrumbItem({\r\n            key: '2',\r\n            text: 'Crumb2',\r\n            title: 'Title2'\r\n        }));\r\n\r\n    }\r\n\r\n    onMenuItemClicked(action: IPepMenuItemClickEvent): void {\r\n        alert(action.source.key);\r\n    }\r\n\r\n    onBreadCrumbClick(event: IPepBreadCrumbItemClickEvent) {\r\n        console.log('onBreadCrumbClick', event);\r\n    }\r\n}\r\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\nimport { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';\r\nimport { IPepGenericListDataSource, IPepGenericListPager, IPepGenericListActions } from 'projects/ngx-composite-lib/generic-list';\r\nimport { PepSelectionData, DEFAULT_PAGE_SIZE } from '@pepperi-addons/ngx-lib/list';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { FakeData } from './fake-data';\r\n\r\n@Component({\r\n    selector: 'app-generic-list-example',\r\n    templateUrl: './generic-list-example.component.html',\r\n    styleUrls: ['./generic-list-example.component.scss']\r\n})\r\nexport class GenericListExampleComponent implements OnInit {\r\n    menuItems = new Array<PepMenuItem>();\r\n    breadCrumbsItems = new Array<PepBreadCrumbItem>();\r\n    pager: IPepGenericListPager = {\r\n        type: 'pages',\r\n        size: 10,\r\n        index: 0\r\n    };\r\n    private selectedRowID = '';\r\n\r\n\r\n    constructor(private translate: TranslateService) {\r\n        //\r\n    }\r\n\r\n    ngOnInit(): void {\r\n        this.menuItems.push({\r\n            key: 'test',\r\n            text: 'test'\r\n        });\r\n\r\n        this.translate.get('ExampleComponentsTitle').subscribe((text) => {\r\n            this.loadBreadCrumbs();\r\n        });\r\n    }\r\n\r\n    private getRegularReadOnlyColumn(columnId: string): any {\r\n        return {\r\n            FieldID: columnId,\r\n            Type: 'TextBox',\r\n            Title: columnId,\r\n            Mandatory: false,\r\n            ReadOnly: true\r\n        }\r\n    }\r\n\r\n\r\n    dataSource: IPepGenericListDataSource = {\r\n        getList: (params) => {\r\n            const dataSource = FakeData.Addons;\r\n            const res = dataSource.map(addon => ({\r\n                UUID: addon.UUID,\r\n                Description: addon.Addon.Description,\r\n                Version: addon.Version,\r\n                Type: addon.Type,\r\n                CreationDate: addon.CreationDate,\r\n            }));\r\n\r\n            return Promise.resolve(res);\r\n        },\r\n        totalCount: FakeData.Addons.length * 5,\r\n        dataView: {            \r\n            Context: {\r\n                Name: '',\r\n                Profile: { InternalID: 0 },\r\n                ScreenSize: 'Landscape'\r\n            },\r\n            Type: 'Grid',\r\n            Title: '',\r\n            Fields: [\r\n                this.getRegularReadOnlyColumn('UUID'),\r\n                this.getRegularReadOnlyColumn('Description'),\r\n                this.getRegularReadOnlyColumn('Version'),\r\n                this.getRegularReadOnlyColumn('Type'),\r\n                this.getRegularReadOnlyColumn('CreationDate')\r\n            ],\r\n            Columns: [\r\n                { Width: 15 },\r\n                { Width: 30 },\r\n                { Width: 15 },\r\n                { Width: 20 },\r\n                { Width: 20 }\r\n            ],\r\n            FrozenColumnsCount: 0,\r\n            MinimumColumnWidth: 0            \r\n        }\r\n    }\r\n\r\n    actions: IPepGenericListActions = {        \r\n        get: async (data: PepSelectionData) => {\r\n            if (data?.selectionType === 0) {\r\n                /*const list = await this.dataSource.getList({ searchString: '', fromIndex: 0, toIndex: 20 });\r\n                if (list?.length === data?.rows.length) {\r\n                    return [];\r\n                } */\r\n            }\r\n            if (data?.rows.length === 1 && data?.selectionType !== 0) {\r\n                return [\r\n                    {\r\n                        title: 'Edit',\r\n                        handler: async (ddd) => {\r\n                            alert('edit');\r\n                        }\r\n                    },\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else if (data?.rows.length > 1 || data?.selectionType === 0) {\r\n                return [\r\n                    {\r\n                        title: 'Delete',\r\n                        handler: async (ddd) => {\r\n                            alert('delete');\r\n                        }\r\n                    }\r\n                ]\r\n            } else return [];\r\n        }\r\n    }\r\n\r\n    loadBreadCrumbs() {\r\n        this.breadCrumbsItems.push(new PepBreadCrumbItem({\r\n            key: '1',\r\n            text: 'Crumb1',\r\n            title: 'Title1'\r\n        }));\r\n        this.breadCrumbsItems.push(new PepBreadCrumbItem({\r\n            key: '2',\r\n            text: 'Crumb2',\r\n            title: 'Title2'\r\n        }));\r\n\r\n    }\r\n\r\n    onMenuItemClicked(action: IPepMenuItemClickEvent): void {\r\n        alert(action.source.key);\r\n    }\r\n\r\n    onBreadCrumbClick(event: IPepBreadCrumbItemClickEvent) {\r\n        console.log('onBreadCrumbClick', event);\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2146,7 +2284,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 23,
+                "line": 22,
                 "jsdoctags": [
                     {
                         "name": "translate",
@@ -3571,7 +3709,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<GenericListComponent>",
-                "defaultValue": "(args: GenericListComponent) => ({\r\n    props: args,\r\n    /*props: {\r\n        queryChange: action('queryChange'),\r\n        formValidationChange: action('formValidationChange'),\r\n    }, \r\n    template: `\r\n    <pep-generic-list>       \r\n    </pep-generic-list>   \r\n    `,*/\r\n})"
+                "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick')\r\n    }\r\n    //props: args,\r\n    /*props: {\r\n        queryChange: action('queryChange'),\r\n        formValidationChange: action('formValidationChange'),\r\n    }, \r\n    template: `\r\n    <pep-generic-list>       \r\n    </pep-generic-list>   \r\n    `,*/\r\n})"
             }
         ],
         "functions": [
@@ -3660,7 +3798,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<GenericListComponent>",
-                    "defaultValue": "(args: GenericListComponent) => ({\r\n    props: args,\r\n    /*props: {\r\n        queryChange: action('queryChange'),\r\n        formValidationChange: action('formValidationChange'),\r\n    }, \r\n    template: `\r\n    <pep-generic-list>       \r\n    </pep-generic-list>   \r\n    `,*/\r\n})"
+                    "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick')\r\n    }\r\n    //props: args,\r\n    /*props: {\r\n        queryChange: action('queryChange'),\r\n        formValidationChange: action('formValidationChange'),\r\n    }, \r\n    template: `\r\n    <pep-generic-list>       \r\n    </pep-generic-list>   \r\n    `,*/\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/src/test.ts": [
@@ -4131,8 +4269,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "GenericListComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/37",
+                "coveragePercent": 4,
+                "coverageCount": "2/41",
                 "status": "low"
             },
             {

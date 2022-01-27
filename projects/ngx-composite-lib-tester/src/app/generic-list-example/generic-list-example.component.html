@@ -11,7 +11,7 @@
     </pep-generic-list>
 
     <pep-generic-list [data]="dataSource" [actions]="actions" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pager]="pager"
-        title="Generic list inline title" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+        title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">

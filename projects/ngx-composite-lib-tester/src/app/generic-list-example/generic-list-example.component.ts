@@ -12,11 +12,11 @@ import { FakeData } from './fake-data';
     styleUrls: ['./generic-list-example.component.scss']
 })
 export class GenericListExampleComponent implements OnInit {
-    menuItems: Array<PepMenuItem> = new Array<PepMenuItem>();
+    menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
     pager: IPepGenericListPager = {
         type: 'pages',
-        size: 10,
+        size: 5,
         index: 0
     };
     private selectedRowID = '';
@@ -49,44 +49,67 @@ export class GenericListExampleComponent implements OnInit {
 
 
     dataSource: IPepGenericListDataSource = {
-        getList: (params) => {
+        initList: (params) => {
+            console.log('params', params);
             const dataSource = FakeData.Addons;
-            const res = dataSource.map(addon => ({
+            console.log('orig list', dataSource);
+            //dataSource.concat();
+            const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
+            console.log('filteredData list', filteredData);
+            const res = filteredData.map(addon => ({
                 UUID: addon.UUID,
                 Description: addon.Addon.Description,
                 Version: addon.Version,
                 Type: addon.Type,
                 CreationDate: addon.CreationDate,
             }));
-
-            return Promise.resolve(res);
+            console.log('list', res);
+            return Promise.resolve({base: {
+                dataView: {            
+                    Context: {
+                        Name: '',
+                        Profile: { InternalID: 0 },
+                        ScreenSize: 'Landscape'
+                    },
+                    Type: 'Grid',
+                    Title: '',
+                    Fields: [
+                        this.getRegularReadOnlyColumn('UUID'),
+                        this.getRegularReadOnlyColumn('Description'),
+                        this.getRegularReadOnlyColumn('Version'),
+                        this.getRegularReadOnlyColumn('Type'),
+                        this.getRegularReadOnlyColumn('CreationDate')
+                    ],
+                    Columns: [
+                        { Width: 15 },
+                        { Width: 30 },
+                        { Width: 15 },
+                        { Width: 20 },
+                        { Width: 20 }
+                    ],
+                    FrozenColumnsCount: 0,
+                    MinimumColumnWidth: 0            
+                },
+                totalCount: FakeData.Addons.length
+            }, items: res});
         },
-        totalCount: FakeData.Addons.length * 5,
-        dataView: {            
-            Context: {
-                Name: '',
-                Profile: { InternalID: 0 },
-                ScreenSize: 'Landscape'
-            },
-            Type: 'Grid',
-            Title: '',
-            Fields: [
-                this.getRegularReadOnlyColumn('UUID'),
-                this.getRegularReadOnlyColumn('Description'),
-                this.getRegularReadOnlyColumn('Version'),
-                this.getRegularReadOnlyColumn('Type'),
-                this.getRegularReadOnlyColumn('CreationDate')
-            ],
-            Columns: [
-                { Width: 15 },
-                { Width: 30 },
-                { Width: 15 },
-                { Width: 20 },
-                { Width: 20 }
-            ],
-            FrozenColumnsCount: 0,
-            MinimumColumnWidth: 0            
-        }
+        updateList: (params) => {
+            console.log('params', params);
+            const dataSource = FakeData.Addons;
+            console.log('orig list', dataSource);
+            //dataSource.concat();
+            const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
+            console.log('filteredData list', filteredData);
+            const res = filteredData.map(addon => ({
+                UUID: addon.UUID,
+                Description: addon.Addon.Description,
+                Version: addon.Version,
+                Type: addon.Type,
+                CreationDate: addon.CreationDate,
+            }));
+            console.log('list', res);
+            return Promise.resolve(res);
+        }  
     }
 
     actions: IPepGenericListActions = {        
