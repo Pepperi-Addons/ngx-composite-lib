@@ -6,30 +6,30 @@ import { PepSizeType, PepStyleStateType, PepStyleType } from '@pepperi-addons/ng
     selector: '[pepResetConfigurationField]',
 })
 export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDestroy {
-    @Input() fieldKey = '';
-    @Input() hostEvents: EventEmitter<any> = new EventEmitter();
+    @Input('pepResetConfigurationField') resetFieldKey: string = '';
+    @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
-    private readonly hidenClassName = 'hidden';
-    private _hidden: boolean = false;
+    private readonly hiddenClassName = 'hidden';
+    private _resetHidden: boolean = false;
     @Input() 
-    set hidden(value: boolean) {
-        this._hidden = value;
+    set resetHidden(value: boolean) {
+        this._resetHidden = value;
         
         if (value) {
-            this.renderer.addClass(this.buttonContainer, this.hidenClassName);
+            this.renderer.addClass(this.buttonContainer, this.hiddenClassName);
         } else {
-            this.renderer.removeClass(this.buttonContainer, this.hidenClassName);
+            this.renderer.removeClass(this.buttonContainer, this.hiddenClassName);
         }
     }
-    get hidden(): boolean {
-        return this._hidden;
+    get resetHidden(): boolean {
+        return this._resetHidden;
     }
 
-    @Input() position: 'top-end' | 'bottom-end' = 'top-end';
+    @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
 
-    @Input() styleType: PepStyleType = 'weak';
-    @Input() styleStateType: PepStyleStateType = 'system';
-    @Input() sizeType: PepSizeType = 'md';
+    styleType: PepStyleType = 'weak';
+    styleStateType: PepStyleStateType = 'system';
+    sizeType: PepSizeType = 'sm';
     
     private unlistener: (() => void) | undefined;
     private buttonContainer!: HTMLDivElement;
@@ -54,7 +54,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         this.renderer.addClass(button, this.styleType);
         this.renderer.addClass(button, this.styleStateType);
         this.renderer.addClass(button, this.sizeType);
-        this.renderer.addClass(button, this.position);
+        this.renderer.addClass(button, this.resetPosition);
         this.renderer.addClass(button, 'reset-configuration-field-button');
         
         this.unlistener = this.renderer.listen(button, 'click', () => this.onResetClicked());
@@ -66,7 +66,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
 
     ngAfterViewInit(): void {
         this.getResetElement().then(element => {
-            if (this.position === 'top-end' && this.element.nativeElement.children?.length > 0) {
+            if (this.resetPosition === 'top-end' && this.element.nativeElement.children?.length > 0) {
                 this.renderer.insertBefore(this.element.nativeElement, element, this.element.nativeElement.children[0]);
             } else {
                 this.renderer.appendChild(this.element.nativeElement, element);
@@ -82,9 +82,9 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     onResetClicked() {
-        this.hostEvents.emit({
+        this.resetHostEvents.emit({
             action: 'set-configuration-field',
-            key: this.fieldKey,
+            key: this.resetFieldKey,
             value: undefined
         });
     }
