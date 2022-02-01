@@ -9,6 +9,8 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input('pepResetConfigurationField') resetFieldKey: string = '';
     @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
+
+    // TODO: Change to disabled?
     private readonly hiddenClassName = 'hidden';
     private _resetHidden: boolean = false;
     @Input() 

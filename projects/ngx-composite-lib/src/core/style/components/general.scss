@@ -52,13 +52,17 @@
 
     .reset-configuration-field-button {
         position: absolute !important;
-        display: flex;
-        align-items: center;
-        height: 1rem;
-        line-height: unset;
-        border-radius: 0.5rem;
-        padding-inline: 0.75rem;
+        display: flex !important;
+        align-items: center !important;
+        height: 1rem !important;
+        line-height: unset !important;
+        border-radius: 0.5rem !important;
+        padding-inline: 0.75rem !important;
         
+        &.top-end {
+            top: -1.25rem;
+        }
+
         &.bottom-end {
             margin-top: 0.5rem;
         }
