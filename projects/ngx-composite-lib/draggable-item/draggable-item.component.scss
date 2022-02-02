@@ -2,17 +2,16 @@
 @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions' as ngx-functions;
 @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
 
-$draggable-item-height: 2.5rem;
+@use '../src/core/style/abstracts/variables';
 
 :host {
     display: block;
     cursor: grab; 
 }
 
-
 .draggable-item-container {
     // opacity: 0.75;
-    height: $draggable-item-height;
+    height: variables.$draggable-item-height;
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr auto;
