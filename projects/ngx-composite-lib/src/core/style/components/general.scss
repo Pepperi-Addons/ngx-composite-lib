@@ -1,70 +1,41 @@
-@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
-@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
-
-.checkbox-as-title {
-    margin-bottom: 0.5rem !important;
-    min-height: unset !important;
-
-    .pep-checkbox-container {
-        background: unset !important;
-        padding-left: unset !important;
-        padding-right: unset !important;
-
-        .mat-checkbox-inner-container {
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-        }
-
-        .mat-checkbox-layout {
-            @include ngx-mixins.font-body(ngx-variables.$fs-xl, ngx-variables.$lh-xl);
-            font-weight: ngx-variables.$font-weight-bold !important;
-
-            .mat-checkbox-label span {
-                margin: 0 0.5rem;
-            }
-        }
-    }
-
-    // &.sub-title {
-    //     .pep-checkbox-container {
-    //         .mat-checkbox-layout {
-    //             @include ngx-mixins.font-body(ngx-variables.$fs-xl, ngx-variables.$lh-xl);
-    //             font-weight: ngx-variables.$font-weight-bold !important;
-    
-    //             .mat-checkbox-label span {
-    //                 margin: 0 0.5rem;
-    //             }
-    //         }
-    //     }
-    // }
-}
+// @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+// @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
 
 
-.reset-configuration-field-container {
-    position: relative;
-    width: inherit;
-    display: flex;
-    justify-content: flex-end;
 
-    &.hidden {
-        display: none;
-    }
+// .reset-configuration-field-container {
+//     position: relative;
+//     width: inherit;
+//     display: flex;
+//     justify-content: flex-end;
 
-    .reset-configuration-field-button {
-        position: absolute !important;
-        display: flex !important;
-        align-items: center !important;
-        height: 1rem !important;
-        line-height: unset !important;
-        border-radius: 0.5rem !important;
-        padding-inline: 0.75rem !important;
+//     &.hidden {
+//         display: none;
+//     }
+
+//     &.top-end {
+//         margin-top: 1.5rem;
         
-        &.top-end {
-            top: -1.25rem;
-        }
+//         .reset-configuration-field-button {
+//             top: -1.25rem;
+//         }
+//     }
 
-        &.bottom-end {
-            margin-top: 0.5rem;
-        }
-    }
-}
+//     &.bottom-end {
+//         margin-bottom: 1.5rem;
+
+//         .reset-configuration-field-button {
+//             bottom: -1.25rem;
+//         }
+//     }
+
+//     .reset-configuration-field-button {
+//         position: absolute !important;
+//         display: flex !important;
+//         align-items: center !important;
+//         height: 1rem !important;
+//         line-height: unset !important;
+//         border-radius: 0.5rem !important;
+//         padding-inline: 0.75rem !important;
+//     }
+// }

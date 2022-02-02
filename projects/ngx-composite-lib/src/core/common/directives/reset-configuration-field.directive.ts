@@ -4,6 +4,7 @@ import { PepSizeType, PepStyleStateType, PepStyleType } from '@pepperi-addons/ng
 
 @Directive({
     selector: '[pepResetConfigurationField]',
+    
 })
 export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDestroy {
     @Input('pepResetConfigurationField') resetFieldKey: string = '';
@@ -43,8 +44,38 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         this.buttonContainer = this.renderer.createElement('div');
     }
 
+    private setButtonContainerStyle() {
+        let css = `
+            position: relative;
+            width: inherit;
+            display: flex;
+            justify-content: flex-end;
+            ${this.resetHidden ? 'display: none;' : ''}
+            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.5rem;
+        `;
+
+        this.buttonContainer.setAttribute("style", css);
+    }
+
+    private setButtonStyle(button: HTMLButtonElement) {
+        let css = `
+            position: absolute !important;
+            display: flex !important;
+            align-items: center !important;
+            height: 1rem !important;
+            line-height: unset !important;
+            border-radius: 0.5rem !important;
+            padding-inline: 0.75rem !important;
+            ${this.resetPosition === 'top-end' ? 'top:' : 'bottom:'} -1.25rem;
+        `;
+
+        button.setAttribute("style", css);
+    }
+
     private async getResetElement(): Promise<HTMLElement> {
-        this.renderer.addClass(this.buttonContainer, 'reset-configuration-field-container');
+        this.setButtonContainerStyle();
+        // this.renderer.addClass(this.buttonContainer, 'reset-configuration-field-container');
+        this.renderer.addClass(this.buttonContainer, this.resetPosition);
 
         const button: HTMLButtonElement = this.renderer.createElement('button');
         await this.translate.get('ACTIONS.RESET').toPromise().then(resetText => {
@@ -56,8 +87,8 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         this.renderer.addClass(button, this.styleType);
         this.renderer.addClass(button, this.styleStateType);
         this.renderer.addClass(button, this.sizeType);
-        this.renderer.addClass(button, this.resetPosition);
-        this.renderer.addClass(button, 'reset-configuration-field-button');
+        this.setButtonStyle(button);
+        // this.renderer.addClass(button, 'reset-configuration-field-button');
         
         this.unlistener = this.renderer.listen(button, 'click', () => this.onResetClicked());
         
