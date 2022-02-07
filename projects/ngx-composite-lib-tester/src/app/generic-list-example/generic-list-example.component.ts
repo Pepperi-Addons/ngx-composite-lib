@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
-import { IPepGenericListDataSource, IPepGenericListPager, IPepGenericListActions } from 'projects/ngx-composite-lib/generic-list';
+import { 
+    IPepGenericListDataSource, 
+    IPepGenericListPager, 
+    IPepGenericListActions, IPepGenericListInitData, PepGenericListService
+    
+} from '@pepperi-addons/ngx-composite-lib/generic-list';
+
 import { PepSelectionData, DEFAULT_PAGE_SIZE } from '@pepperi-addons/ngx-lib/list';
 import { TranslateService } from '@ngx-translate/core';
+import { GenericListComponent } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { FakeData } from './fake-data';
 
@@ -12,17 +19,20 @@ import { FakeData } from './fake-data';
     styleUrls: ['./generic-list-example.component.scss']
 })
 export class GenericListExampleComponent implements OnInit {
+    //@ViewChild(GenericListComponent) pList: GenericListComponent | undefined;
+    dataSource: any;
     menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
+
     pager: IPepGenericListPager = {
         type: 'pages',
-        size: 5,
+        size: 10,
         index: 0
     };
-    private selectedRowID = '';
+    //private selectedRowID = '';
 
 
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService, private genericListService: PepGenericListService) {
         //
     }
 
@@ -32,10 +42,45 @@ export class GenericListExampleComponent implements OnInit {
             text: 'test'
         });
 
-        this.translate.get('ExampleComponentsTitle').subscribe((text) => {
-            this.loadBreadCrumbs();
-        });
+        this.loadBreadCrumbs();
+
+        this.dataSource = this.getDataSource();
+
     }
+    /*
+
+    ngAfterViewInit(): void {
+        this.pList?.initDataList(
+            {
+                Context: {
+                    Name: '',
+                    Profile: { InternalID: 0 },
+                    ScreenSize: 'Landscape'
+                },
+                Type: 'Grid',
+                Title: '',
+                Fields: [
+                    this.getRegularReadOnlyColumn('UUID'),
+                    this.getRegularReadOnlyColumn('Description'),
+                    this.getRegularReadOnlyColumn('Version'),
+                    this.getRegularReadOnlyColumn('Type'),
+                    this.getRegularReadOnlyColumn('CreationDate')
+                ],
+                Columns: [
+                    { Width: 15 },
+                    { Width: 30 },
+                    { Width: 15 },
+                    { Width: 20 },
+                    { Width: 20 }
+                ],
+                FrozenColumnsCount: 0,
+                MinimumColumnWidth: 0
+            }
+            , this.getBulk({ fromIndex: 0, toIndex: 9 })
+            , FakeData.Addons.length
+
+        ); 
+    } */
 
     private getRegularReadOnlyColumn(columnId: string): any {
         return {
@@ -47,15 +92,25 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
+    getBulk(params: any) {
+        const dataList = FakeData.Addons;
+        const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+        const res = filteredData.map(addon => ({
+            UUID: addon.UUID,
+            Description: addon.Addon.Description,
+            Version: addon.Version,
+            Type: addon.Type,
+            CreationDate: addon.CreationDate,
+        }));
+        return res;
+    }
 
-    dataSource: IPepGenericListDataSource = {
-        initList: (params) => {
-            console.log('init params', params);
-            const dataSource = FakeData.Addons;
-        //    console.log('orig list', dataSource);
-            //dataSource.concat();
-            const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
-            console.log('filteredData list', filteredData);
+
+    /*dataSource: any = {
+       init: (params : any) => {
+            const dataList = FakeData.Addons;
+            const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+            console.log('filteredData', filteredData.length);
             const res = filteredData.map(addon => ({
                 UUID: addon.UUID,
                 Description: addon.Addon.Description,
@@ -63,9 +118,8 @@ export class GenericListExampleComponent implements OnInit {
                 Type: addon.Type,
                 CreationDate: addon.CreationDate,
             }));
-        //    console.log('list', res);
-            return Promise.resolve({base: {
-                dataView: {            
+            return Promise.resolve({
+                dataView: {
                     Context: {
                         Name: '',
                         Profile: { InternalID: 0 },
@@ -88,18 +142,16 @@ export class GenericListExampleComponent implements OnInit {
                         { Width: 20 }
                     ],
                     FrozenColumnsCount: 0,
-                    MinimumColumnWidth: 0            
+                    MinimumColumnWidth: 0 
                 },
-                totalCount: FakeData.Addons.length
-            }, items: res});
-        },
-        updateList: (params) => {
-            console.log('updae params', params);
-            const dataSource = FakeData.Addons;
-          //  console.log('orig list', dataSource);
-            //dataSource.concat();
-            const filteredData = dataSource.slice(params.fromIndex, params.toIndex + 1)
-            console.log('filteredData list', filteredData);
+                totalCount: res.length * 2,
+                items: res
+            });
+        }, 
+        update: (params: any) => {
+            console.log('update',params);
+            const dataList = FakeData.Addons;
+            const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
             const res = filteredData.map(addon => ({
                 UUID: addon.UUID,
                 Description: addon.Addon.Description,
@@ -107,19 +159,12 @@ export class GenericListExampleComponent implements OnInit {
                 Type: addon.Type,
                 CreationDate: addon.CreationDate,
             }));
-            //console.log('list', res);
             return Promise.resolve(res);
-        }  
-    }
+        } 
+    }*/
 
-    actions: IPepGenericListActions = {        
+    actions: IPepGenericListActions = {
         get: async (data: PepSelectionData) => {
-            if (data?.selectionType === 0) {
-                /*const list = await this.dataSource.getList({ searchString: '', fromIndex: 0, toIndex: 20 });
-                if (list?.length === data?.rows.length) {
-                    return [];
-                } */
-            }
             if (data?.rows.length === 1 && data?.selectionType !== 0) {
                 return [
                     {
@@ -147,6 +192,7 @@ export class GenericListExampleComponent implements OnInit {
             } else return [];
         }
     }
+   
 
     loadBreadCrumbs() {
         this.breadCrumbsItems.push(new PepBreadCrumbItem({
@@ -168,5 +214,121 @@ export class GenericListExampleComponent implements OnInit {
 
     onBreadCrumbClick(event: IPepBreadCrumbItemClickEvent) {
         console.log('onBreadCrumbClick', event);
+    }
+
+    onClick() {
+        console.log('item', this.genericListService.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
+        console.log('selected itens', this.genericListService.getSelectedItems());
+        //PepGenericListService
+        //this.dataSource = this.getDataSourceEmpty();
+    }
+
+    getDataSource() {
+        return {
+            init: (params : any) => {
+                const dataList = FakeData.Addons;
+                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                console.log('filteredData', filteredData.length);
+                const res = filteredData.map(addon => ({
+                    UUID: addon.UUID,
+                    Description: addon.Addon.Description,
+                    Version: addon.Version,
+                    Type: addon.Type,
+                    CreationDate: addon.CreationDate,
+                }));
+                return Promise.resolve({
+                    dataView: {
+                        Context: {
+                            Name: '',
+                            Profile: { InternalID: 0 },
+                            ScreenSize: 'Landscape'
+                        },
+                        Type: 'Grid',
+                        Title: '',
+                        Fields: [
+                            this.getRegularReadOnlyColumn('UUID'),
+                            this.getRegularReadOnlyColumn('Description'),
+                            this.getRegularReadOnlyColumn('Version'),
+                            this.getRegularReadOnlyColumn('Type'),
+                            this.getRegularReadOnlyColumn('CreationDate')
+                        ],
+                        Columns: [
+                            { Width: 15 },
+                            { Width: 30 },
+                            { Width: 15 },
+                            { Width: 20 },
+                            { Width: 20 }
+                        ],
+                        FrozenColumnsCount: 0,
+                        MinimumColumnWidth: 0 
+                    },
+                    totalCount: res.length * 2,
+                    items: res
+                });
+            }, 
+            update: (params: any) => {
+                console.log('update',params);
+                const dataList = FakeData.Addons;
+                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const res = filteredData.map(addon => ({
+                    UUID: addon.UUID,
+                    Description: addon.Addon.Description,
+                    Version: addon.Version,
+                    Type: addon.Type,
+                    CreationDate: addon.CreationDate,
+                }));
+                return Promise.resolve(res);
+            }
+        }
+    }
+
+    getDataSourceEmpty() {
+        return {
+            init: (params : any) => {
+               
+                return Promise.resolve({
+                    dataView: {
+                        Context: {
+                            Name: '',
+                            Profile: { InternalID: 0 },
+                            ScreenSize: 'Landscape'
+                        },
+                        Type: 'Grid',
+                        Title: '',
+                        Fields: [
+                            this.getRegularReadOnlyColumn('UUID'),
+                            this.getRegularReadOnlyColumn('Description'),
+                            this.getRegularReadOnlyColumn('Version'),
+                            this.getRegularReadOnlyColumn('Type'),
+                            this.getRegularReadOnlyColumn('CreationDate')
+                        ],
+                        Columns: [
+                            { Width: 15 },
+                            { Width: 30 },
+                            { Width: 15 },
+                            { Width: 20 },
+                            { Width: 20 }
+                        ],
+                        FrozenColumnsCount: 0,
+                        MinimumColumnWidth: 0 
+                    },
+                    totalCount: 0,
+                    items: []
+                });
+            }, 
+            update: (params: any) => {
+                console.log('update',params);
+                const dataList = FakeData.Addons;
+                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const res = filteredData.map(addon => ({
+                    UUID: addon.UUID,
+                    Description: addon.Addon.Description,
+                    Version: addon.Version,
+                    Type: addon.Type,
+                    CreationDate: addon.CreationDate,
+                }));
+                return Promise.resolve(res);
+            }
+        }
     }
 }

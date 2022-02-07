@@ -19,16 +19,21 @@ export default {
     title: 'Components/GenericList',
     component: GenericListComponent,
     argTypes: {
-        data: {
-            description: 'This is the legacy query',
+        dataSource: {
+            description: 'This is data source object',
             defaultValue: {
-                getList: async (options: any) => {
-                    return [];
+                init: async (params: any) => {
+                    return {
+                        dataView: {
+                            Type: 'Grid'
+                        },
+                        totalCount: 0,
+                        items: []
+                    };
                 },
-                dataView: {
-                    Type: 'Grid'
-                },
-                totalCount: 0
+                update: async (params: any) => {
+                    return []
+                }
             },
             control: 'object',
             table: {
@@ -59,21 +64,13 @@ export default {
         title: {
             name: 'title',
             type: { name: 'string', required: false },
-            // defaultValue: 'Hello',
             description: 'demo description',
             table: {
                 type: { summary: 'string' },
-                // defaultValue: { summary: 'Hello' },
             },
             control: {
                 type: 'text'
             }
-
-            /*description: 'This is the title of the top bar',
-            control: 'text',
-            table: {
-                defaultValue: { summary: null },
-            }, */
         },
         inline: {
             description: 'Is inline?',
