@@ -10,28 +10,29 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input('pepResetConfigurationField') resetFieldKey: string = '';
     @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
-
-    // TODO: Change to disabled?
-    private readonly hiddenClassName = 'hidden';
-    private _resetHidden: boolean = false;
+    private _disabled: boolean = false;
     @Input() 
-    set resetHidden(value: boolean) {
-        this._resetHidden = value;
-        
-        if (value) {
-            this.renderer.addClass(this.buttonContainer, this.hiddenClassName);
-        } else {
-            this.renderer.removeClass(this.buttonContainer, this.hiddenClassName);
-        }
+    set disabled(value: boolean) {
+        this._disabled = value;
     }
-    get resetHidden(): boolean {
-        return this._resetHidden;
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    private _hideReset: boolean = false;
+    @Input() 
+    set hideReset(value: boolean) {
+        this._hideReset = value;
+    }
+    get hideReset(): boolean {
+        return this._hideReset;
     }
 
     @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
+    @Input() dir: 'rtl' | 'ltr' = 'ltr';
 
-    styleType: PepStyleType = 'weak';
-    styleStateType: PepStyleStateType = 'system';
+    // styleType: PepStyleType = 'weak';
+    // styleStateType: PepStyleStateType = 'system';
     sizeType: PepSizeType = 'sm';
     
     private unlistener: (() => void) | undefined;
@@ -47,25 +48,28 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     private setButtonContainerStyle() {
         let css = `
             position: relative;
-            width: inherit;
             display: flex;
             justify-content: flex-end;
-            ${this.resetHidden ? 'display: none;' : ''}
-            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.5rem;
+            float: ${this.dir === 'rtl' ? 'left' : 'right'};
+            ${this.disabled || this.hideReset ? 'display: none;' : ''}
+            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.25rem;
         `;
 
         this.buttonContainer.setAttribute("style", css);
     }
 
     private setButtonStyle(button: HTMLButtonElement) {
+        // border-radius: 0.5rem !important;
+        // padding-inline: 0.75rem !important;
         let css = `
             position: absolute !important;
             display: flex !important;
             align-items: center !important;
             height: 1rem !important;
             line-height: unset !important;
-            border-radius: 0.5rem !important;
-            padding-inline: 0.75rem !important;
+            padding: unset !important;
+            background: unset !important;
+            font-size: var(--pep-button-xs-font-size) !important;
             ${this.resetPosition === 'top-end' ? 'top:' : 'bottom:'} -1.25rem;
         `;
 
@@ -84,8 +88,9 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         });
         
         this.renderer.addClass(button, 'pep-button');
-        this.renderer.addClass(button, this.styleType);
-        this.renderer.addClass(button, this.styleStateType);
+        // this.renderer.addClass(button, this.styleType);
+        // this.renderer.addClass(button, this.styleStateType);
+        this.renderer.addClass(button, 'color-link');
         this.renderer.addClass(button, this.sizeType);
         this.setButtonStyle(button);
         // this.renderer.addClass(button, 'reset-configuration-field-button');

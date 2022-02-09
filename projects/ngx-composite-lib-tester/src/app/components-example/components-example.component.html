@@ -13,10 +13,10 @@
         (menuClick)="menuClick($event)"
     ></pep-menu>
     <pep-color-settings title="Color"></pep-color-settings>
-    <pep-shadow-settings pepResetConfigurationField="'shadow-test'" [resetPosition]="'bottom-end'" [resetHidden]="false" [resetHostEvents]="hostEvents" ></pep-shadow-settings>
+    <pep-shadow-settings></pep-shadow-settings>
     <!-- <pep-button value="click here"></pep-button> -->
     <pep-group-buttons-settings [groupType]="'vertical-align'" [title]="'Group buttons'" [subHeader]="'Eisenberg'"
-        pepResetConfigurationField="'group-buttons-test'" [resetPosition]="'bottom-end'" [resetHostEvents]="hostEvents" ></pep-group-buttons-settings>
+        pepResetConfigurationField="'group-buttons-test'" [resetPosition]="'top-end'" [dir]="'ltr'" [resetHostEvents]="hostEvents" ></pep-group-buttons-settings>
     <pep-file-status-panel [title]="'File download'" [filesList]="files"></pep-file-status-panel>
     <!-- <pep-dimx #dimx [DIMXAddonUUID]="'b78f61f0-e9f0-4650-9ab1-d8b0906505ec'" [DIMXResource]="'Todos'"></pep-dimx> -->
 </div>
