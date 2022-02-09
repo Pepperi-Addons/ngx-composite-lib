@@ -1,0 +1,20 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "public-api.ts",
+            "umdModuleIds": {
+                "@ngx-translate/core": "translate",
+                "@pepperi-addons/ngx-lib": "ngx-lib",
+                "@pepperi-addons/ngx-lib/icon": "ngx-lib/icon"
+            }
+        }
+    },
+    "peerDependencies": {
+        "@pepperi-addons/ngx-lib": "^0.2.56",
+        "@types/file-saver": "^2.0.4",
+        "file-saver": "^2.0.5",
+        "jwt-decode": "^3.1.2",
+        "node-fetch": "^3.2.0"
+    }
+    
+}

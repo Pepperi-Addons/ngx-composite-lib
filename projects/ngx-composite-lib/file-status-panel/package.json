@@ -3,11 +3,16 @@
         "lib": {
             "entryFile": "public-api.ts",
             "umdModuleIds": {
-                "@ngx-translate/core": "translate"
+                "@ngx-translate/core": "translate",
+                "@pepperi-addons/ngx-lib": "ngx-lib",
+                "@pepperi-addons/ngx-lib/button": "ngx-lib/button",
+                "@pepperi-addons/ngx-lib/textbox": "ngx-lib/textbox",
+                "@pepperi-addons/ngx-lib/top-bar": "ngx-lib/top-bar",
+                "@pepperi-addons/ngx-lib/dialog": "ngx-lib/dialog"
             }
         }
     },
     "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.2.56"
+        "@pepperi-addons/ngx-lib": "^0.3.0"
     }
 }

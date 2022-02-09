@@ -8,6 +8,7 @@ import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepSearchModule } from '@pepperi-addons/ngx-lib/search';
+import { PepBreadCrumbsModule } from '@pepperi-addons/ngx-lib/bread-crumbs';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { PepSearchModule } from '@pepperi-addons/ngx-lib/search';
         PepMenuModule,
         PepPageLayoutModule,
         PepTopBarModule,
-        PepSearchModule
+        PepSearchModule,
+        PepBreadCrumbsModule
     ],
     exports: [GenericListComponent],
 })

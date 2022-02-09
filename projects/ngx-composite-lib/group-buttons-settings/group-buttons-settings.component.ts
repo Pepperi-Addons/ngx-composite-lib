@@ -11,16 +11,17 @@ import { PepGroupbuttonsTypes } from './group-buttons-settings.model';
 })
 export class GroupButtonsSettingsComponent implements OnInit {
 
-    @Input() header: string = '';
-    @Input() subHeader: string = '';
+    @Input() header = '';
+    @Input() subHeader = '';
 
     @Input() groupType: PepGroupbuttonsTypes = 'sizes'; 
     @Input() btnsArray: Array<PepButton> = [];
     @Input() excludeKeys: Array<string> = []; // for example ['xs','xl']
 
-    @Input() useNone: boolean = false;
-    @Input() disabled: boolean = false;
-
+    @Input() useNone = false;
+    @Input() disabled = false;
+    @Input() dir: 'rtl' | 'ltr' = 'ltr';
+    
     private _btnKey: any;
     @Input()
     set btnKey(value: any) {

@@ -18,7 +18,6 @@
         "MD": "MD",
         "LG": "LG",
         "XL": "XL",
-        
         "FONT_WEIGHT": {
             "NORMAL": "Normal",
             "BOLD": "Bold",
@@ -39,5 +38,8 @@
             "MIDDLE": "Middle",
             "BOTTOM": "Bottom"
         }
+    },
+    "ACTIONS": {
+        "RESET": "Reset"
     }
 }
