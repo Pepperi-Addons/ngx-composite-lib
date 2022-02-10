@@ -14,7 +14,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
-        this.renderer.setStyle(this.buttonContainer, 'display', this.getVisibility());
+        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
     }
     get disabled(): boolean {
         return this._disabled;
@@ -24,7 +24,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
-        this.renderer.setStyle(this.buttonContainer, 'display', this.getVisibility());
+        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
     }
     get hideReset(): boolean {
         return this._hideReset;
@@ -89,7 +89,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
             line-height: unset !important;
             padding: unset !important;
             background: unset !important;
-            font-size: var(--pep-button-xs-font-size) !important;
+            font-size: var(--pep-button-2xs-font-size) !important;
             ${this.resetPosition === 'top-end' ? 'top:' : 'bottom:'} -1.25rem;
         `;
 
