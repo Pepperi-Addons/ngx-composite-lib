@@ -14,7 +14,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
-        this.renderer.setStyle(this.buttonContainer, 'display', this.getDisplayStyle());
+        this.renderer.setStyle(this.buttonContainer, 'display', this.getVisibility());
     }
     get disabled(): boolean {
         return this._disabled;
@@ -24,14 +24,23 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
-        this.renderer.setStyle(this.buttonContainer, 'display', this.getDisplayStyle());
+        this.renderer.setStyle(this.buttonContainer, 'display', this.getVisibility());
     }
     get hideReset(): boolean {
         return this._hideReset;
     }
 
     @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
-    @Input() dir: 'rtl' | 'ltr' = 'ltr';
+    
+    private _dir: 'rtl' | 'ltr' = 'ltr';
+    @Input() 
+    set dir(value: 'rtl' | 'ltr') {
+        this._dir = value;
+        this.renderer.setStyle(this.buttonContainer, 'float', this.getFloat());
+    }
+    get dir(): 'rtl' | 'ltr' {
+        return this._dir;
+    }
 
     // styleType: PepStyleType = 'weak';
     // styleStateType: PepStyleStateType = 'system';
@@ -44,19 +53,25 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         private renderer:Renderer2,
         private element: ElementRef,
         private translate: TranslateService) {
+        // Create the buton container.
         this.buttonContainer = this.renderer.createElement('div');
     }
 
-    private getDisplayStyle() {
-        return this.disabled || this.hideReset ? 'none' : 'flex';
+    private getVisibility() {
+        return this.disabled || this.hideReset ? 'hidden' : 'visible';
+    }
+
+    private getFloat() {
+        return this.dir === 'rtl' ? 'left' : 'right';
     }
 
     private setButtonContainerStyle() {
         let css = `
             position: relative;
+            display: flex;
             justify-content: flex-end;
-            float: ${this.dir === 'rtl' ? 'left' : 'right'};
-            display: ${this.getDisplayStyle()};
+            float: ${this.getFloat()};
+            visibility: ${this.getVisibility()};
             ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.25rem;
         `;
 
