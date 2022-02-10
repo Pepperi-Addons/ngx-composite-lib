@@ -30,8 +30,9 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         return this._hideReset;
     }
 
-    @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
-    
+    // @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
+    resetPosition = 'bottom-end';
+
     private _dir: 'rtl' | 'ltr' = 'ltr';
     @Input() 
     set dir(value: 'rtl' | 'ltr') {
@@ -72,7 +73,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
             justify-content: flex-end;
             float: ${this.getFloat()};
             visibility: ${this.getVisibility()};
-            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.25rem;
+            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1rem;
         `;
 
         this.buttonContainer.setAttribute("style", css);
@@ -98,8 +99,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
 
     private async getResetElement(): Promise<HTMLElement> {
         this.setButtonContainerStyle();
-        // this.renderer.addClass(this.buttonContainer, 'reset-configuration-field-container');
-        this.renderer.addClass(this.buttonContainer, this.resetPosition);
+        this.renderer.addClass(this.buttonContainer, 'pep-reset-configuration-field-container');
 
         const button: HTMLButtonElement = this.renderer.createElement('button');
         await this.translate.get('ACTIONS.RESET').toPromise().then(resetText => {
