@@ -14,6 +14,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
+        this.renderer.setStyle(this.buttonContainer, 'display', this.getDisplayStyle());
     }
     get disabled(): boolean {
         return this._disabled;
@@ -23,6 +24,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
+        this.renderer.setStyle(this.buttonContainer, 'display', this.getDisplayStyle());
     }
     get hideReset(): boolean {
         return this._hideReset;
@@ -45,13 +47,16 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         this.buttonContainer = this.renderer.createElement('div');
     }
 
+    private getDisplayStyle() {
+        return this.disabled || this.hideReset ? 'none' : 'flex';
+    }
+
     private setButtonContainerStyle() {
         let css = `
             position: relative;
-            display: flex;
             justify-content: flex-end;
             float: ${this.dir === 'rtl' ? 'left' : 'right'};
-            ${this.disabled || this.hideReset ? 'display: none;' : ''}
+            display: ${this.getDisplayStyle()};
             ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1.25rem;
         `;
 
