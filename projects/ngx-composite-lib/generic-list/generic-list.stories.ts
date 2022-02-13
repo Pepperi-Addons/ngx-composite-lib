@@ -38,7 +38,7 @@ export default {
             control: 'object',
             table: {
                 type: {
-                    summary: 'IPepGenericListDataSource'
+                    summary: 'IPepGenericListTableData'
                 }
             }
         },

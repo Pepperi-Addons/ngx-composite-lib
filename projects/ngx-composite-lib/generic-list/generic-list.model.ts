@@ -1,20 +1,22 @@
 import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
-import { PepListPagerType } from '@pepperi-addons/ngx-lib/list';
+import { 
+    PepListPagerType, 
+    PepListSelectionType,
+    IPepListSortingChangeEvent
+ } from '@pepperi-addons/ngx-lib/list';
 
-export interface IPepGenericListDataSource {
+export interface IPepGenericListTableData {
     init(params: {
         searchString?: string,
         filter?: any,
-        sorting?: any,
+        sorting?: IPepListSortingChangeEvent,
         fromIndex: number, // 0
         toIndex: number // top || page-size
-    }): Promise<{
-        dataView: GridDataView,
-        totalCount: number,
-        items: any[]
-    }>;
-    update(params: {
+    }): Promise<IPepGenericListInitData>;
+    inputs?(): Promise<IPepGenericListTableInputs>;
+    update?(params: {
         searchString?: string,
+        sorting?: IPepListSortingChangeEvent,
         fromIndex: number,
         toIndex: number,
         pageIndex?: number
@@ -27,6 +29,14 @@ export interface IPepGenericListInitData {
     items: any[]
 }
 
+export interface IPepGenericListTableInputs {
+    supportSorting: boolean;
+    selectionType: PepListSelectionType;
+    pager: IPepGenericListPager;
+    noDataFoundMsg: string;
+    firstFieldAsLink: boolean;
+}
+
 export interface IPepGenericListActions {
     get(data: any): Promise<{
         title: string;
@@ -36,7 +46,7 @@ export interface IPepGenericListActions {
 
 export interface IPepGenericListPager {
     type: PepListPagerType;
-    size: number;
-    index: number;
+    size?: number;
+    index?: number;
 }
 

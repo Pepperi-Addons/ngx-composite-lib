@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewContainerRef } from '@angular/core';
 import { PepListComponent } from '@pepperi-addons/ngx-lib/list';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class PepGenericListService {
-    private _pepList: any;
-   
+export class PepGenericListService {   
+    private _refresh$ = new BehaviorSubject<boolean>(false);
+    
+    private _pepList: any;    
+
+    public refresh$ = this._refresh$.asObservable();
+       
     constructor() {
         //
     }
@@ -34,5 +39,11 @@ export class PepGenericListService {
             return null;
         }  
     }
+
+    /*
+    refreshTable() {
+        this._refresh$.next(true);
+    } */
+
 
 }
