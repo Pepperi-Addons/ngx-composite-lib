@@ -5,7 +5,7 @@ import {
     IPepListSortingChangeEvent
  } from '@pepperi-addons/ngx-lib/list';
 
-export interface IPepGenericListTableData {
+export interface IPepGenericListDataSource {
     init(params: {
         searchString?: string,
         filter?: any,
@@ -30,11 +30,10 @@ export interface IPepGenericListInitData {
 }
 
 export interface IPepGenericListTableInputs {
-    supportSorting: boolean;
-    selectionType: PepListSelectionType;
-    pager: IPepGenericListPager;
-    noDataFoundMsg: string;
-    firstFieldAsLink: boolean;
+    supportSorting?: boolean;
+    selectionType?: PepListSelectionType;
+    pager?: IPepGenericListPager;
+    noDataFoundMsg?: string;
 }
 
 export interface IPepGenericListActions {

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
 import {
-    IPepGenericListTableData,
+    IPepGenericListDataSource,
     IPepGenericListPager,
     IPepGenericListActions, IPepGenericListInitData, PepGenericListService
 
@@ -21,7 +21,17 @@ import { FakeData } from './fake-data';
 })
 export class GenericListExampleComponent implements OnInit {
     //@ViewChild(GenericListComponent) pList: GenericListComponent | undefined;
-    dataSource: any;
+    dataSource: IPepGenericListDataSource = {
+        init: async (params: any) => {
+            return {
+                dataView: {
+                    Type: 'Grid'
+                },
+                totalCount: -1,
+                items: []
+            }
+        }
+    };
     menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
 
@@ -32,7 +42,7 @@ export class GenericListExampleComponent implements OnInit {
     };
     selectionType: any = 'multi';
     supportSorting = false;
-    firstFieldAsLink: boolean = false;
+    firstFieldAsLink = false;
     //private selectedRowID = '';
 
 
@@ -96,20 +106,17 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
-    getBulk(params: any) {
-        const dataList = FakeData.Addons;
-        const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-        const res = filteredData.map(addon => ({
-            UUID: addon.UUID,
-            Description: addon.Addon.Description,
-            Version: addon.Version,
-            Type: addon.Type,
-            CreationDate: addon.CreationDate,
-        }));
-        return res;
+    private getLinkColumn(columnId: string): any {
+        return {
+            FieldID: columnId,
+            Type: 'Link',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: true
+        }
     }
 
-
+   
     /*dataSource: any = {
        init: (params : any) => {
             const dataList = FakeData.Addons;
@@ -224,6 +231,7 @@ export class GenericListExampleComponent implements OnInit {
             this.firstFieldAsLink = false;
             this.supportSorting = false;
             this.dataSource = this.getDataSource();
+           
 
         } else {
             this.pager.type = 'scroll';
@@ -245,7 +253,7 @@ export class GenericListExampleComponent implements OnInit {
 
     getDataSource() {
         return {
-            init: (params: any) => {
+            init: async (params: any) => {
                 const dataList = FakeData.Addons;
                 const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
                 //const filteredData = dataList.slice(0, 5);
@@ -270,7 +278,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('UUID'),
                             this.getRegularReadOnlyColumn('Description'),
                             this.getRegularReadOnlyColumn('Version'),
-                            this.getRegularReadOnlyColumn('Type'),
+                            this.getLinkColumn('Type'),
                             this.getRegularReadOnlyColumn('CreationDate')
                         ],
                         Columns: [
@@ -297,7 +305,7 @@ export class GenericListExampleComponent implements OnInit {
                     }
                 );
             }, */
-            update: (params: any) => {
+            update: async (params: any) => {
                 console.log('update', params);
                 const dataList = FakeData.Addons;
                 const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
@@ -310,8 +318,8 @@ export class GenericListExampleComponent implements OnInit {
                     CreationDate: addon.CreationDate,
                 }));
                 return Promise.resolve(res);
-            }
-        }
+            } 
+        } as IPepGenericListDataSource
     }
 
     getDataSourceEmpty() {
@@ -380,6 +388,6 @@ export class GenericListExampleComponent implements OnInit {
                 }));
                 return Promise.resolve(res);
             }
-        }
+        } as IPepGenericListDataSource
     }
 }

@@ -1,7 +1,7 @@
 <div class="example-wrapper">
-    <pep-generic-list [tableData]="dataSource" [actions]="actions" [showTopBar]="true" title="Generic list title"
+    <pep-generic-list [dataSource]="dataSource" [actions]="actions" [showTopBar]="true" title="Generic list title"
         [showSearch]="true" [breadCrumbsItems]="breadCrumbsItems" [uuidMapping]="'UUID'" [selectionType]="selectionType"
-        [pager]="pager" [supportSorting]="supportSorting" [firstFieldAsLink]="firstFieldAsLink" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+        [pager]="pager" [supportSorting]="supportSorting" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'"
                 (menuItemClick)="onMenuItemClicked($event)">

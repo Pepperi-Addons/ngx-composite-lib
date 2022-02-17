@@ -1,17 +1,12 @@
 import {
     Component,
     OnInit,
-    AfterViewInit,
     ViewChild,
     Input,
     Output,
     EventEmitter,
     ViewContainerRef,
-    OnChanges,
-    DoCheck,
-    ComponentFactoryResolver,
-    ChangeDetectorRef,
-    ChangeDetectionStrategy
+    ComponentFactoryResolver
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -19,7 +14,6 @@ import {
     PepLayoutService,
     PepRowData,
     ObjectsDataRow,
-    PepScreenSizeType,
     PepGuid,
     UIControl,
 } from '@pepperi-addons/ngx-lib';
@@ -29,9 +23,7 @@ import {
     PepSelectionData,
     IPepListLoadPageEvent,
     PepListSelectionType,
-    IPepListPagerChangeEvent,
     IPepListSortingChangeEvent,
-    PepListPagerType,
     DEFAULT_PAGE_SIZE,
     IPepListLoadItemsEvent
 } from '@pepperi-addons/ngx-lib/list';
@@ -49,7 +41,7 @@ import { IPepSearchClickEvent } from '@pepperi-addons/ngx-lib/search';
 import { GridDataViewField, DataViewFieldTypes, GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import {
     IPepGenericListInitData,
-    IPepGenericListTableData,
+    IPepGenericListDataSource,
     IPepGenericListPager,
     IPepGenericListActions,
     IPepGenericListTableInputs,
@@ -62,18 +54,16 @@ import { PepGenericListService } from './generic-list.service';
 @Component({
     selector: 'pep-generic-list',
     templateUrl: './generic-list.component.html',
-    styleUrls: ['./generic-list.component.scss']/*,
-    changeDetection: ChangeDetectionStrategy.OnPush */
+    styleUrls: ['./generic-list.component.scss']
 })
 export class GenericListComponent implements OnInit {
     private _pepListContainer: ViewContainerRef | undefined;
     @ViewChild('pepListContainer', { read: ViewContainerRef })
     set pepListContainer(val: ViewContainerRef) {
         this._pepListContainer = val;
-       // this.initTable();
     }
 
-    _tableData: IPepGenericListTableData = {
+    _dataSource: IPepGenericListDataSource = {
         init: async (params: any) => {
             return {
                 dataView: {
@@ -82,16 +72,11 @@ export class GenericListComponent implements OnInit {
                 totalCount: -1,
                 items: []
             }
-        },
-        update: async (params: any) => {
-            return []
         }
     }
     @Input()
-    set tableData(val: IPepGenericListTableData) {
-        this._tableData = val;
-        //  this.menuHandlers = {};
-        //   this.menuActions = [];
+    set dataSource(val: IPepGenericListDataSource) {
+        this._dataSource = val;
         this.searchString = '';
         this._sorting = undefined;
         this.initTable();
@@ -122,35 +107,21 @@ export class GenericListComponent implements OnInit {
     @Input()
     set noDataFoundMsg(val: string) {
         this._tableInputs.noDataFoundMsg = val;
-     //   this.pepList.noDataFoundMsg = val;
-    };
+    }
 
     @Input()
     set selectionType(val: PepListSelectionType) {
         this._tableInputs.selectionType = val;
-      //  this.pepList.selectionTypeForActions = val;
-    };
-
-    @Input()
-    set firstFieldAsLink(val: boolean) {
-        this._tableInputs.firstFieldAsLink = val;
-      //  this.pepList.firstFieldAsLink = val;
-    };
+    }
 
     @Input()
     set supportSorting(val: boolean) {
         this._tableInputs.supportSorting = val;
-     //   this.pepList.supportSorting = val;
-    };
+    }
 
     @Input()
     set pager(val: IPepGenericListPager) {
         this._tableInputs.pager = val;
-      /*  this.pepList.pagerType = val.type;
-        if (val.type === 'pages') {
-            this.pepList.pageSize = val.size || DEFAULT_PAGE_SIZE;
-            this.pepList.pageIndex = val.index || 0;
-        } */
     }
 
     @Input()
@@ -177,7 +148,6 @@ export class GenericListComponent implements OnInit {
     }
 
     private _resize$: Subscription = new Subscription();
-    private _refresh$: Subscription = new Subscription();
 
     private _dataView: GridDataView = {
         Type: 'Grid'
@@ -188,8 +158,7 @@ export class GenericListComponent implements OnInit {
         pager: {
             type: 'scroll'
         },
-        noDataFoundMsg: '',
-        firstFieldAsLink: false
+        noDataFoundMsg: ''
     };
     totalRowCount = -1;
     searchString = '';
@@ -197,7 +166,6 @@ export class GenericListComponent implements OnInit {
 
     menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};
     menuActions: Array<PepMenuItem> = [];
-    //hasRows = false;
 
     constructor(
         private _resolver: ComponentFactoryResolver,
@@ -209,9 +177,6 @@ export class GenericListComponent implements OnInit {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {
             //            
         });
-        this._refresh$ = this._genericListService.refresh$.subscribe((state: boolean) => {
-            this.refresh();
-        });
     }
 
     ngOnInit() {
@@ -220,31 +185,31 @@ export class GenericListComponent implements OnInit {
 
     private async initTable() {
         setTimeout(async () => {
-            if (this._tableData &&
+            if (this._dataSource &&
                 this._pepListContainer) {
-               
+
                 if (this._pepListContainer.length > 0) {
                     this._pepListContainer.remove();
                 }
                 const factory = this._resolver.resolveComponentFactory(PepListComponent);
                 const componentRef = this._pepListContainer.createComponent(factory);
                 this.pepList = componentRef.instance;
-    
+
                 //merge selector inputs with callback inputs
-                const tableInputs = await this.loadTableInputs(); 
-              
+                const tableInputs = await this.loadTableInputs();
+
                 const fromIndex = 0;
                 let toIndex = 0;
-    
+
                 if (tableInputs.pager?.type === 'pages') {
                     toIndex = fromIndex + (tableInputs.pager?.size || DEFAULT_PAGE_SIZE) - 1;
                 } else {
                     toIndex = 100;//TO DO - get reesult from - this.customList.getTopItems()
                 }
-    
+
                 const data = await this.loadData(fromIndex, toIndex);
                 this.totalRowCount = data?.totalCount || 0;
-    
+
                 componentRef.instance.viewType = 'table';
                 componentRef.instance.supportSorting = tableInputs.supportSorting;
                 componentRef.instance.selectionTypeForActions = tableInputs.selectionType;
@@ -252,34 +217,33 @@ export class GenericListComponent implements OnInit {
                 if (tableInputs.pager.type === 'pages') {
                     componentRef.instance.pageSize = tableInputs.pager?.size || DEFAULT_PAGE_SIZE;
                     componentRef.instance.pageIndex = tableInputs.pager?.index || 0;
-                };
+                }
                 componentRef.instance.noDataFoundMsg = tableInputs.noDataFoundMsg;
-                componentRef.instance.firstFieldAsLink = tableInputs.firstFieldAsLink;
-    
+                
                 componentRef.instance.fieldClick.subscribe(($event) => {
                     this.onCustomizeFieldClick($event);
                 });
-    
+
                 componentRef.instance.selectedItemsChange.subscribe(($event) => {
                     this.onSelectedRowsChanged($event);
                 })
-    
+
                 componentRef.instance.loadItems.subscribe(($event) => {
                     this.onLoadItems($event);
                 });
-    
+
                 componentRef.instance.loadPage.subscribe(($event) => {
                     this.onLoadPage($event);
                 });
-    
+
                 componentRef.instance.valueChange.subscribe(($event) => {
                     this.onValueChanged($event)
                 });
-    
+
                 componentRef.instance.sortingChange.subscribe(($event) => {
                     this.onSortingChange($event);
                 });
-    
+
                 let convertedList: ObjectsDataRow[] = [];
                 if (data) {
                     if (data?.items?.length > 0) {
@@ -287,11 +251,10 @@ export class GenericListComponent implements OnInit {
                     }
                     const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
                     componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
-                    // this.loadMenuItems();
                 }
             }
         }, 0);
-        
+
     }
 
     /**
@@ -309,10 +272,10 @@ export class GenericListComponent implements OnInit {
      * @returns merged pep-list inputs
      */
     private async loadTableInputs() {
-        let tableInputs: any = { ...this._tableInputs };
+        const tableInputs: any = { ...this._tableInputs };
 
-        if (this._tableData.inputs) {
-            const inputs: IPepGenericListTableInputs = await this._tableData.inputs();
+        if (this._dataSource.inputs) {
+            const inputs: IPepGenericListTableInputs = await this._dataSource.inputs();
             if (inputs) {
                 Object.entries(inputs).forEach((item: any) => {
                     if (this.hasProperty(tableInputs, item[0])) {
@@ -324,97 +287,7 @@ export class GenericListComponent implements OnInit {
 
         return tableInputs;
     }
-
-    private refresh() {
-        //
-    }
-
-    /*
-    private async initPepListInstance() {
-        this._isDataSourceInitialized = true;
-        const factory = this._resolver.resolveComponentFactory(PepListComponent);
-        const componentRef = this._pepListContainer.createComponent(factory);
-
-        componentRef.instance.viewType = 'table';
-        componentRef.instance.supportSorting = true;
-        componentRef.instance.selectionTypeForActions = 'multi';
-        componentRef.instance.pagerType = 'pages';
-        componentRef.instance.pageSize = 5;
-        componentRef.instance.pageIndex = 0;
-        componentRef.instance.noDataFoundMsg = '';
-        componentRef.instance.firstFieldAsLink = false;
-
-        componentRef.instance.fieldClick.subscribe(($event) => {
-            this.onCustomizeFieldClick($event);
-        });
-
-        componentRef.instance.loadItems.subscribe(($event) => {
-            this.onLoadItems($event);
-        });
-
-        componentRef.instance.loadPage.subscribe(($event) => {
-            this.onLoadPage($event);
-        });
-
-        //selectedItemsChange
-        //loadItems
-        //loadPage
-
-
-        const fromIndex = 0;
-        let toIndex = 0;
-
-        if (this.pager.type === 'scroll') {
-            toIndex = 100;//TO DO - get reesult from - this.customList.getTopItems()
-        } else {
-            toIndex = fromIndex + this.pager.size - 1;
-        }
-
-        const data = await this.loadData(fromIndex, toIndex);
-        this.totalRowCount = data?.totalCount ? data.totalCount : 0;
-
-        let convertedList: ObjectsDataRow[] = [];
-        if (data) {
-            if (data?.items?.length > 0) {
-                convertedList = this._dataConvertorService.convertListData(data.items);
-            }
-            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
-            componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
-            this.pepList = componentRef.instance;
-            this.loadMenuItems();
-        }
-
-
-
-    } 
-
-    private async initDataSource() {
-        //  this._isDataSourceInitialized = true;
-        await this.loadTableInputs();
-
-        const fromIndex = 0;
-        let toIndex = 0;
-
-        if (this._tableInputs.pagerType === 'pages') {
-            toIndex = fromIndex + this._tableInputs.pageSize - 1;
-        } else {
-            toIndex = 100;//TO DO - get reesult from - this.customList.getTopItems()
-        }
-
-        const data = await this.loadData(fromIndex, toIndex);
-        this.totalRowCount = data?.totalCount ? data.totalCount : 0;
-
-        let convertedList: ObjectsDataRow[] = [];
-        if (data) {
-            if (data?.items?.length > 0) {
-                convertedList = this._dataConvertorService.convertListData(data.items);
-            }
-            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
-            this.pepList.initListData(uiControl, data.totalCount, convertedList);
-            this.loadMenuItems();
-        }
-    } */
-
+  
     private getUiControl(data: any): UIControl {
         const uiControl = new UIControl();
         uiControl.ControlFields = [];
@@ -494,25 +367,10 @@ export class GenericListComponent implements OnInit {
         }
 
         return res;
-
-        /* const actions = await this.actions.get(this.getMenuObjects());
-         const res: PepMenuItem[] = [];
-         this.menuHandlers = {};
- 
-         actions?.forEach(item => {
-             const uuid = PepGuid.newGuid();
-             this.menuHandlers[uuid] = item.handler;
-             res.push({
-                 key: uuid,
-                 text: item.title
-             })
-         })
- 
-         return res; */
     }
 
     private getMenuObjects() {
-        let menuObjects: any = {
+        const menuObjects: any = {
             success: false,
             data: new PepSelectionData()
         };
@@ -521,8 +379,7 @@ export class GenericListComponent implements OnInit {
             menuObjects.success = true;
             menuObjects.data = this.pepList.getSelectedItemsData();
         }
-        // const selectedData = this.pepList?.getSelectedItemsData() || new PepSelectionData();
-
+      
         return menuObjects;
     }
 
@@ -560,7 +417,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
-        const data: IPepGenericListInitData = await this._tableData.init({
+        const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             sorting: this._sorting || undefined,
             fromIndex: fromIndex,
@@ -580,9 +437,8 @@ export class GenericListComponent implements OnInit {
 
 
     private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
-        //  console.log(`pageIndex - ${pageIndex}`);
-        if (this._tableData.update) {
-            const dataList = await this._tableData.update({
+        if (this._dataSource.update) {
+            const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 sorting: this._sorting || undefined,
                 fromIndex: fromIndex,
@@ -604,7 +460,6 @@ export class GenericListComponent implements OnInit {
      * loads virtual scroll items from api
      */
     async onLoadItems(event: IPepListLoadItemsEvent) {
-        // console.log('onitemsload', event);
         const list = await this.updateDataList(event.fromIndex, event.toIndex);
         const convertedList = this._dataConvertorService.convertListData(list);
         this.pepList.updateItems(convertedList, event);
@@ -614,7 +469,6 @@ export class GenericListComponent implements OnInit {
      * loads paging bulk from api
      */
     async onLoadPage(event: IPepListLoadPageEvent) {
-        // console.log('onLoadPage', event);
         const fromIndex = event.pageIndex * event.pageSize;
         const toIndex = Math.min(fromIndex + event.pageSize - 1, this.totalRowCount - 1);
         const list = await this.updateDataList(fromIndex, toIndex, event.pageIndex);
@@ -625,10 +479,6 @@ export class GenericListComponent implements OnInit {
     ngOnDestroy() {
         if (this._resize$) {
             this._resize$.unsubscribe();
-        }
-
-        if (this._refresh$) {
-            this._refresh$.unsubscribe();
         }
     }
 

@@ -30,15 +30,12 @@ export default {
                         totalCount: 0,
                         items: []
                     };
-                },
-                update: async (params: any) => {
-                    return []
                 }
             },
             control: 'object',
             table: {
                 type: {
-                    summary: 'IPepGenericListTableData'
+                    summary: 'IPepGenericListDataSource'
                 }
             }
         },
@@ -82,10 +79,10 @@ export default {
             defaultValue: false,
             control: 'boolean'
         },
-        allowSelection: {
-            description: 'Allow selection',
+        selectionType: {
+            description: 'Selection type',
             defaultValue: true,
-            control: 'boolean'
+            control: 'string'
         },
         noDataFoundMsg: {
             description: 'This is the displayed message in case no data was supplied',
