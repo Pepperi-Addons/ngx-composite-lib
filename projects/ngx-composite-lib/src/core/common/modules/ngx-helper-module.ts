@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from '@angular/common/http';
 
 import { PepNgxLibModule } from '@pepperi-addons/ngx-lib';
+import { PepIconModule } from '@pepperi-addons/ngx-lib/icon';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,7 +18,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     imports: [
         CommonModule,
         BrowserAnimationsModule,
-        PepNgxLibModule,       
+        PepNgxLibModule,
+        PepIconModule,   
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
