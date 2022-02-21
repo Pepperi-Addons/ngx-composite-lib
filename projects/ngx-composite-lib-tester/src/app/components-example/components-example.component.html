@@ -1,8 +1,22 @@
 <div class="components-container">
-    
+    <pep-menu
+        [text]="'text'"
+        iconName="system_menu"
+        type="action"
+        styleType="weak"
+        sizeType="md"
+        classNames="hahah"
+        [items]="menuItems"
+        [selectedItem]="selectedMenuItem"
+        [disabled]="false"
+        (menuItemClick)="menuItemClick($event)"
+        (menuClick)="menuClick($event)"
+    ></pep-menu>
     <pep-color-settings title="Color"></pep-color-settings>
-    <pep-shadow-settings ></pep-shadow-settings>
+    <pep-shadow-settings pepResetConfigurationField [fieldKey]="'shadow-test'" [position]="'bottom-end'" [hidden]="true" [hostEvents]="hostEvents" ></pep-shadow-settings>
     <!-- <pep-button value="click here"></pep-button> -->
-    <pep-group-buttons-settings [groupType]="'vertical-align'" [title]="'Group buttons'" [subHeader]="'Eisenberg'"></pep-group-buttons-settings>
+    <pep-group-buttons-settings [groupType]="'vertical-align'" [title]="'Group buttons'" [subHeader]="'Eisenberg'"
+        pepResetConfigurationField [fieldKey]="'group-buttons-test'" [position]="'bottom-end'" [hostEvents]="hostEvents" ></pep-group-buttons-settings>
     <pep-file-status-panel [title]="'File download'" [filesList]="files"></pep-file-status-panel>
+    <!-- <pep-dimx #dimx [DIMXAddonUUID]="'b78f61f0-e9f0-4650-9ab1-d8b0906505ec'" [DIMXResource]="'Todos'"></pep-dimx> -->
 </div>

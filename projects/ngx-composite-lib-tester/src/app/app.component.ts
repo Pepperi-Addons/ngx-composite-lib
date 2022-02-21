@@ -48,4 +48,6 @@ export class AppComponent implements OnInit {
         alert('Home');
     }
 
+    onHostEvents(event: any) {
+    }
 }
