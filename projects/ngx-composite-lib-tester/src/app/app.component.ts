@@ -49,5 +49,6 @@ export class AppComponent implements OnInit {
     }
 
     onHostEvents(event: any) {
+        //
     }
 }

@@ -295,7 +295,7 @@ export class GenericListExampleComponent implements OnInit {
                     items: res
                 });
             },
-            /*inputs: () => {
+            inputs: () => {
                 return Promise.resolve(
                     {
                         pager: {
@@ -304,7 +304,7 @@ export class GenericListExampleComponent implements OnInit {
                         selectionType: 'multi'
                     }
                 );
-            }, */
+            }, 
             update: async (params: any) => {
                 console.log('update', params);
                 const dataList = FakeData.Addons;

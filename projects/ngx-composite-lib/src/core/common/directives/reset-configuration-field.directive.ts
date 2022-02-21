@@ -10,7 +10,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() hostEvents: EventEmitter<any> = new EventEmitter();
     
     private readonly hidenClassName = 'hidden';
-    private _hidden: boolean = false;
+    private _hidden = false;
     @Input() 
     set hidden(value: boolean) {
         this._hidden = value;
