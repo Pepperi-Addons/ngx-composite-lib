@@ -20,7 +20,8 @@ export class GroupButtonsSettingsComponent implements OnInit {
 
     @Input() useNone = false;
     @Input() disabled = false;
-
+    @Input() dir: 'rtl' | 'ltr' = 'ltr';
+    
     private _btnKey: any;
     @Input()
     set btnKey(value: any) {

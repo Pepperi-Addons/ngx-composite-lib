@@ -4,32 +4,48 @@ import { PepSizeType, PepStyleStateType, PepStyleType } from '@pepperi-addons/ng
 
 @Directive({
     selector: '[pepResetConfigurationField]',
+    
 })
 export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDestroy {
-    @Input() fieldKey = '';
-    @Input() hostEvents: EventEmitter<any> = new EventEmitter();
+    @Input('pepResetConfigurationField') resetFieldKey: string = '';
+    @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
-    private readonly hidenClassName = 'hidden';
-    private _hidden = false;
+    private _disabled: boolean = false;
     @Input() 
-    set hidden(value: boolean) {
-        this._hidden = value;
-        
-        if (value) {
-            this.renderer.addClass(this.buttonContainer, this.hidenClassName);
-        } else {
-            this.renderer.removeClass(this.buttonContainer, this.hidenClassName);
-        }
+    set disabled(value: boolean) {
+        this._disabled = value;
+        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
     }
-    get hidden(): boolean {
-        return this._hidden;
+    get disabled(): boolean {
+        return this._disabled;
     }
 
-    @Input() position: 'top-end' | 'bottom-end' = 'top-end';
+    private _hideReset: boolean = false;
+    @Input() 
+    set hideReset(value: boolean) {
+        this._hideReset = value;
+        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
+    }
+    get hideReset(): boolean {
+        return this._hideReset;
+    }
 
-    @Input() styleType: PepStyleType = 'weak';
-    @Input() styleStateType: PepStyleStateType = 'system';
-    @Input() sizeType: PepSizeType = 'md';
+    // @Input() resetPosition: 'top-end' | 'bottom-end' = 'top-end';
+    resetPosition = 'bottom-end';
+
+    private _dir: 'rtl' | 'ltr' = 'ltr';
+    @Input() 
+    set dir(value: 'rtl' | 'ltr') {
+        this._dir = value;
+        this.renderer.setStyle(this.buttonContainer, 'float', this.getFloat());
+    }
+    get dir(): 'rtl' | 'ltr' {
+        return this._dir;
+    }
+
+    // styleType: PepStyleType = 'weak';
+    // styleStateType: PepStyleStateType = 'system';
+    sizeType: PepSizeType = 'sm';
     
     private unlistener: (() => void) | undefined;
     private buttonContainer!: HTMLDivElement;
@@ -38,11 +54,52 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         private renderer:Renderer2,
         private element: ElementRef,
         private translate: TranslateService) {
+        // Create the buton container.
         this.buttonContainer = this.renderer.createElement('div');
     }
 
+    private getVisibility() {
+        return this.disabled || this.hideReset ? 'hidden' : 'visible';
+    }
+
+    private getFloat() {
+        return this.dir === 'rtl' ? 'left' : 'right';
+    }
+
+    private setButtonContainerStyle() {
+        let css = `
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            float: ${this.getFloat()};
+            visibility: ${this.getVisibility()};
+            ${this.resetPosition === 'top-end' ? 'margin-top:' : 'margin-bottom:'} 1rem;
+        `;
+
+        this.buttonContainer.setAttribute("style", css);
+    }
+
+    private setButtonStyle(button: HTMLButtonElement) {
+        // border-radius: 0.5rem !important;
+        // padding-inline: 0.75rem !important;
+        let css = `
+            position: absolute !important;
+            display: flex !important;
+            align-items: center !important;
+            height: 1rem !important;
+            line-height: unset !important;
+            padding: unset !important;
+            background: unset !important;
+            font-size: var(--pep-button-2xs-font-size) !important;
+            ${this.resetPosition === 'top-end' ? 'top:' : 'bottom:'} -1.25rem;
+        `;
+
+        button.setAttribute("style", css);
+    }
+
     private async getResetElement(): Promise<HTMLElement> {
-        this.renderer.addClass(this.buttonContainer, 'reset-configuration-field-container');
+        this.setButtonContainerStyle();
+        this.renderer.addClass(this.buttonContainer, 'pep-reset-configuration-field-container');
 
         const button: HTMLButtonElement = this.renderer.createElement('button');
         await this.translate.get('ACTIONS.RESET').toPromise().then(resetText => {
@@ -51,11 +108,12 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         });
         
         this.renderer.addClass(button, 'pep-button');
-        this.renderer.addClass(button, this.styleType);
-        this.renderer.addClass(button, this.styleStateType);
+        // this.renderer.addClass(button, this.styleType);
+        // this.renderer.addClass(button, this.styleStateType);
+        this.renderer.addClass(button, 'color-link');
         this.renderer.addClass(button, this.sizeType);
-        this.renderer.addClass(button, this.position);
-        this.renderer.addClass(button, 'reset-configuration-field-button');
+        this.setButtonStyle(button);
+        // this.renderer.addClass(button, 'reset-configuration-field-button');
         
         this.unlistener = this.renderer.listen(button, 'click', () => this.onResetClicked());
         
@@ -66,7 +124,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
 
     ngAfterViewInit(): void {
         this.getResetElement().then(element => {
-            if (this.position === 'top-end' && this.element.nativeElement.children?.length > 0) {
+            if (this.resetPosition === 'top-end' && this.element.nativeElement.children?.length > 0) {
                 this.renderer.insertBefore(this.element.nativeElement, element, this.element.nativeElement.children[0]);
             } else {
                 this.renderer.appendChild(this.element.nativeElement, element);
@@ -82,9 +140,9 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     onResetClicked() {
-        this.hostEvents.emit({
+        this.resetHostEvents.emit({
             action: 'set-configuration-field',
-            key: this.fieldKey,
+            key: this.resetFieldKey,
             value: undefined
         });
     }
