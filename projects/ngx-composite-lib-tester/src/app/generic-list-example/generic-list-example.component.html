@@ -1,6 +1,7 @@
 <div class="example-wrapper">
-    <pep-generic-list [showTopBar]="true" [dataSource]="dataSource" [breadCrumbsItems]="breadCrumbsItems" [pagerType]="'pages'"
-        title="Generic list title" [allowMultipleSelection]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+    <pep-generic-list [dataSource]="dataSource" [actions]="actions" [showTopBar]="true" title="Generic list title"
+        [showSearch]="true" [breadCrumbsItems]="breadCrumbsItems" [uuidMapping]="'UUID'" [selectionType]="selectionType"
+        [pager]="pager" [supportSorting]="supportSorting" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'md'"
                 (menuItemClick)="onMenuItemClicked($event)">
@@ -10,8 +11,8 @@
         </ng-container>
     </pep-generic-list>
 
-    <pep-generic-list [dataSource]="dataSource" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pagerType]="'pages'"
-        title="Generic list inline title" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+    <!-- <pep-generic-list [data]="dataSource" [actions]="actions" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pager]="pager"
+        title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">
@@ -19,5 +20,7 @@
             <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'sm'" [styleType]="'strong'">
             </pep-button>
         </ng-container>
-    </pep-generic-list>
+    </pep-generic-list> -->
 </div>
+<pep-button class="pep-spacing-element" [value]="'Try me'" [sizeType]="'sm'" [styleType]="'strong'" (click)="onClick()">
+</pep-button>

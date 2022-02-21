@@ -28,6 +28,7 @@
         height: auto;
         overflow: hidden;
     }
+    
 }
 
 .noDataFoundMsg{
@@ -40,5 +41,5 @@
 }
 
 .bread-crumbs {
-    padding: 1rem 0 .5rem 0;
+   padding: ngx-variables.$spacing-lg 0 ngx-variables.$spacing-sm 0;
 }
