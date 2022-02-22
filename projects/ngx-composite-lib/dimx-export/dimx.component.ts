@@ -14,7 +14,7 @@ export class DIMXComponent implements OnInit {
     @ViewChild('fileField') fileField:ElementRef | undefined;
     @Input() DIMXAddonUUID!: string;
     @Input() DIMXResource!: string;
-    dimxImportOptions: { OverwriteOBject?: boolean | undefined; Delimiter?: string | undefined; } | undefined;
+    dimxImportOptions: { OverwriteOBject?: boolean | undefined; Delimiter?: string | undefined; OwnerID?: string | undefined; ActionID?: string | undefined} | undefined;
     constructor(
         private translate: TranslateService,
         public addonService: DIMXService
@@ -140,7 +140,7 @@ export class DIMXComponent implements OnInit {
 });
     }
 
-    uploadFile(event:any, options?:{OverwriteOBject?:boolean, Delimiter?:string}){
+    uploadFile(event:any, options?:{OverwriteOBject?:boolean, Delimiter?:string, OwnerID?:string, ActionID?:string}){
         this.dimxImportOptions = options;
         const elem = document.getElementById("fileuploader");
    if(elem && document.createEvent) {
@@ -172,7 +172,7 @@ export class DIMXComponent implements OnInit {
         try{
 
             console.log("posting to dimx import_upload now");
-            const res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject);
+            const res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject, {"X-Pepperi-OwnerID":dimxUploadObject.OwnerID, "X-Pepperi-ActionID":dimxUploadObject.ActionID});
             console.log("Got reply from dimx, calling poll with the result:");
             console.log(res);
 
@@ -231,7 +231,8 @@ export class DIMXComponent implements OnInit {
         DIMXExportFileName?: string,
         DIMXExportWhere?: string,
         DIMXExportFields?: string,
-        DIMXExportDelimiter?:string
+        DIMXExportDelimiter?:string,
+        ActionID?:string
     }) {
         if (!value){
             value = {};
@@ -255,7 +256,7 @@ export class DIMXComponent implements OnInit {
         try{
 
             console.log("posting to dimx export now");
-            const res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod);
+            const res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod, {"X-Pepperi-ActionID":value.ActionID});
             console.log("Got reply from dimx, calling poll with the result:");
             console.log(res);
 
