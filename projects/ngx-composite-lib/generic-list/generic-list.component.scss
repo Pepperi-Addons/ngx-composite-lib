@@ -22,13 +22,7 @@
 
     &.add-padding {
         padding-inline: ngx-variables.$content-padding;
-    }
-
-    ::ng-deep.pep-top-bar-container.inline {
-        height: auto;
-        overflow: hidden;
-    }
-    
+    }    
 }
 
 .noDataFoundMsg{

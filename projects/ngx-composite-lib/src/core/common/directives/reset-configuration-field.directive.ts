@@ -7,10 +7,10 @@ import { PepSizeType, PepStyleStateType, PepStyleType } from '@pepperi-addons/ng
     
 })
 export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDestroy {
-    @Input('pepResetConfigurationField') resetFieldKey: string = '';
+    @Input('pepResetConfigurationField') resetFieldKey = '';
     @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
-    private _disabled: boolean = false;
+    private _disabled = false;
     @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
@@ -20,7 +20,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         return this._disabled;
     }
 
-    private _hideReset: boolean = false;
+    private _hideReset = false;
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
@@ -67,7 +67,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setButtonContainerStyle() {
-        let css = `
+        const css = `
             position: relative;
             display: flex;
             justify-content: flex-end;
@@ -82,7 +82,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     private setButtonStyle(button: HTMLButtonElement) {
         // border-radius: 0.5rem !important;
         // padding-inline: 0.75rem !important;
-        let css = `
+        const css = `
             position: absolute !important;
             display: flex !important;
             align-items: center !important;

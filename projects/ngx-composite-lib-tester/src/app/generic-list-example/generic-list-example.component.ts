@@ -21,6 +21,7 @@ import { FakeData } from './fake-data';
 })
 export class GenericListExampleComponent implements OnInit {
     //@ViewChild(GenericListComponent) pList: GenericListComponent | undefined;
+    inline = true;
     dataSource: IPepGenericListDataSource = {
         init: async (params: any) => {
             return {
