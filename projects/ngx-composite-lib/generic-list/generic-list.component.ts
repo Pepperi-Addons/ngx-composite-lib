@@ -128,7 +128,7 @@ export class GenericListComponent implements OnInit {
     showTopBar = false;
 
     @Input()
-    breadCrumbsItems = new Array<PepBreadCrumbItem>();
+    breadCrumbsItems: PepBreadCrumbItem[] = new Array<PepBreadCrumbItem>();
 
     @Output()
     fieldClick = new EventEmitter<IPepFormFieldClickEvent>();
@@ -219,13 +219,13 @@ export class GenericListComponent implements OnInit {
                     componentRef.instance.pageIndex = tableInputs.pager?.index || 0;
                 }
                 componentRef.instance.noDataFoundMsg = tableInputs.noDataFoundMsg;
-                
+
                 componentRef.instance.fieldClick.subscribe(($event) => {
                     this.onCustomizeFieldClick($event);
                 });
 
                 componentRef.instance.selectedItemsChange.subscribe(($event) => {
-                    this.onSelectedRowsChanged($event);
+                    this.onSelectedItemsChanged($event);
                 })
 
                 componentRef.instance.loadItems.subscribe(($event) => {
@@ -287,7 +287,7 @@ export class GenericListComponent implements OnInit {
 
         return tableInputs;
     }
-  
+
     private getUiControl(data: any): UIControl {
         const uiControl = new UIControl();
         uiControl.ControlFields = [];
@@ -301,7 +301,9 @@ export class GenericListComponent implements OnInit {
 
     private loadMenuItems(): void {
         if (this._tableInputs.selectionType !== 'none') {
-            this.getMenuActions().then(x => this.menuActions = x);
+            this.getMenuActions().then(
+                x => this.menuActions = x
+            );
         }
     }
 
@@ -379,11 +381,11 @@ export class GenericListComponent implements OnInit {
             menuObjects.success = true;
             menuObjects.data = this.pepList.getSelectedItemsData();
         }
-      
+
         return menuObjects;
     }
 
-    onMenuItemClicked(action: IPepMenuItemClickEvent): void {
+    onActionItemClicked(action: IPepMenuItemClickEvent): void {
         const result = this.getMenuObjects();
         if (result.success) {
             this.menuHandlers[action.source.key](result.data);
@@ -395,8 +397,11 @@ export class GenericListComponent implements OnInit {
         this.initTable();
     }
 
-    onSelectedRowsChanged(selectedRowsCount: number) {
-        this.loadMenuItems();
+    onSelectedItemsChanged(selectedRowsCount: number) {
+        //loading menu items after pep-list selected items are updated
+        setTimeout(() => {
+            this.loadMenuItems();
+        }, 0);
     }
 
     onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {
