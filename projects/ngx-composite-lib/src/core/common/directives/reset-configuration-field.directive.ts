@@ -8,11 +8,11 @@ import { PepIconService, pepIconDeviceResponsive } from '@pepperi-addons/ngx-lib
     selector: '[pepResetConfigurationField]',
 })
 export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDestroy {
-    @Input('pepResetConfigurationField') resetFieldKey: string = '';
+    @Input('pepResetConfigurationField') resetFieldKey = '';
     @Input() resetHostEvents: EventEmitter<any> = new EventEmitter();
     
-    private _disabled: boolean = false;
-    @Input()
+    private _disabled = false;
+    @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
         this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
@@ -21,7 +21,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         return this._disabled;
     }
 
-    private _hideReset: boolean = false;
+    private _hideReset = false;
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
@@ -82,7 +82,6 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setButtonStyle(button: HTMLButtonElement) {
-        
         let css = `
             display: flex !important;
             align-items: center !important;
