@@ -11,8 +11,5 @@
                 "@pepperi-addons/ngx-lib/slider": "ngx-lib/slider"
             }
         }
-    },
-    "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.3.0"
     }
 }

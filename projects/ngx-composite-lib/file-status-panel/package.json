@@ -11,8 +11,5 @@
                 "@pepperi-addons/ngx-lib/dialog": "ngx-lib/dialog"
             }
         }
-    },
-    "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.3.0"
     }
 }
