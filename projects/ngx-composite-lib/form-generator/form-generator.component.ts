@@ -1,8 +1,6 @@
 import {
     Component,
     OnInit,
-    AfterViewInit,
-    ViewChild,
     Input,
     Output,
     EventEmitter,
@@ -11,17 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
 import {
     PepDataConvertorService,
     PepLayoutService,
+    UIControl,
+    ObjectsDataRow,
     ObjectsDataRowCell,
-    PepRowData,
-    PepScreenSizeType,
-    PepGuid,
-    UIControl
+    PepGuid    
 } from '@pepperi-addons/ngx-lib';
 
 import { DataViewConverter } from '@pepperi-addons/data-views';
-
-
-import { FormDataView, BaseFormDataViewField } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
+import { FormDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import { PepFormGeneratorService } from './form-generator.service';
 
 
@@ -30,33 +25,40 @@ import { PepFormGeneratorService } from './form-generator.service';
     templateUrl: './form-generator.component.html',
     styleUrls: ['./form-generator.component.scss'],
 })
-export class FormGeneratorComponent implements OnInit {
+export class FormGeneratorComponent implements OnInit {    
     @Input()
     set dataView(val: FormDataView) {
-        //this.setUiControl(val);
-        this.formGeneratorService.setUiControl(val);
-      //  Type: 'Form',
-       // Columns: 
-       // Fields: BaseFormDataViewField[]
+        this.setUiControl(val);
     };
 
     @Input() 
     set fields(val : Array<ObjectsDataRowCell>) {
-        this.formGeneratorService.setData(val);
+        if (val?.length > 0) {
+            this._data.Fields = val;
+        }
     };
 
     @Input() 
     set numOfColumns(val : number) {
-        this.formGeneratorService.setNumOfColumns(val);
+        this._uiControl.Columns = val;
     };
 
+    @Input()
+    showTopBar = false;
+    
+    @Input() 
+    addPadding = false;
+
     get uiControl() {
-        return this.formGeneratorService.uiControl;
+        return this._uiControl;
     }
 
     get data() {
-        return this.formGeneratorService.data;
+        return this._data;
     }
+
+    private _uiControl: UIControl = new UIControl();
+    private _data: ObjectsDataRow = new ObjectsDataRow();
 
     constructor(
         private layoutService: PepLayoutService,
@@ -65,32 +67,37 @@ export class FormGeneratorComponent implements OnInit {
         this.layoutService.onResize$.pipe().subscribe((size) => {
             //            
         });
+
+        this.initDefaults();
     }
 
     ngOnInit() {
         //
     }
 
-    /*
-    private setUiControl(view: FormDataView) {
-        console.log('setUiControl', view);
-        const uiControl = this.getUiControl(DataViewConverter.toUIControlData(view));
-        console.log('converted data', uiControl);
+    private initDefaults() {
+        //Ui Control defaults
+        this._uiControl.Columns = 2;
+        this._uiControl.ControlFields = [];
+
+        //Data defaults
+        this._data.IsEditable = false;
+        this._data.IsSelectableForActions = false;
+        this._data.UID = PepGuid.newGuid();
+        this._data.Fields = [];
     }
 
-    private getUiControl(data: any): UIControl {
-        console.log('getUiControl', data);
-        const uiControl = new UIControl();
-        uiControl.ControlFields = [];
+    private setUiControl(view: FormDataView) {
+        const uiControlData = DataViewConverter.toUIControlData(view);
 
-        if (data?.ControlFields) {
-            uiControl.ControlFields = data.ControlFields.map((field: any) => this.convertToUiControlField(field));
+        if (uiControlData?.ControlFields) {
+            this._uiControl.ControlFields = uiControlData.ControlFields.map((field: any) => this.convertToUiControlField(field));
         }
 
-        return uiControl;
-    }
+        console.log('uiControl in service', this._uiControl);
+    }  
 
-    private convertToUiControlField(field: any) {
+    private convertToUiControlField(field: any): any {
         return {
             ApiName: field.ApiName,
             FieldType: field.FieldType,
@@ -107,6 +114,6 @@ export class FormGeneratorComponent implements OnInit {
                 YAlignment: field.Layout.yAlignment,
             }
         }
-    } */
+    }
 
 }

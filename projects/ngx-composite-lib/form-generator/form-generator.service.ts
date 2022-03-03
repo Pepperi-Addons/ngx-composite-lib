@@ -28,9 +28,9 @@ export class PepFormGeneratorService {
     }
 
     get data() {
-        return this, this._data;
+        return this._data;
     }
-    
+
     private initDefaults() {
         //Ui Control defaults
         this._uiControl.Columns = 2;

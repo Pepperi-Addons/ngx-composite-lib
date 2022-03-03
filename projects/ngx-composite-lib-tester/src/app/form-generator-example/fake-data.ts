@@ -60,7 +60,7 @@ export const FakeData = [
         AdditionalValue: "",
         ApiName: "ExternalID",
         BackgroundColor: "",
-        Enabled: false,
+        Enabled: true,
         EventsData: null,
         FieldType: 1,
         FormattedValue: "",
