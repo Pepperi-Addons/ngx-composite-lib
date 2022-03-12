@@ -1,0 +1,22 @@
+<pep-generic-form [dataSource]="dataSource" [dataView]="dataView" [inline]="inline" [showTopBar]="true"
+    (valueChange)="onValueChanged($event)">
+
+    <ng-container right-buttons>
+        <pep-button class="pep-spacing-element" [value]="'Save'" [sizeType]="inline ? 'sm' : 'md'"
+            [styleType]="'strong'" (click)="onGetDataClicked()">
+        </pep-button>
+    </ng-container>
+
+    <ng-container left-buttons>
+    </ng-container>
+
+    <!-- <ng-container bottom-right-buttons>   
+        <pep-button class="pep-spacing-element" [value]="'Save 2'" [sizeType]="inline ? 'sm' : 'md'" [styleType]="'strong'">
+        </pep-button>      
+    </ng-container> -->
+
+</pep-generic-form>
+
+<!-- <pep-button class="pep-spacing-element" [value]="'Get Data'" [sizeType]="inline ? 'sm' : 'md'" [styleType]="'strong'"
+    (click)="onGetDataClicked()">
+</pep-button> -->

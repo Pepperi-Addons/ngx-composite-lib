@@ -5,7 +5,9 @@
             "umdModuleIds": {
                 "@ngx-translate/core": "translate",
                 "@pepperi-addons/ngx-lib": "ngx-lib",
-                "@pepperi-addons/ngx-lib/form": "ngx-lib/form",
+                "@pepperi-addons/ngx-lib/form": "ngx-lib/form",              
+                "@pepperi-addons/ngx-lib/menu": "ngx-lib/menu",                   
+                "@pepperi-addons/ngx-lib/page-layout": "ngx-lib/page-layout",
                 "@pepperi-addons/ngx-lib/top-bar": "ngx-lib/top-bar",
                 "@pepperi-addons/papi-sdk/dist/entities/data-view": "papi-sdk/data-view",
                 "@pepperi-addons/data-views/dist/data-view.converter": "data-views"
