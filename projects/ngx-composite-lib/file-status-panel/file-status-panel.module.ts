@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PepFileService, PepAddonService, PepNgxLibModule } from '@pepperi-addons/ngx-lib';
 import { FileStatusPanelComponent } from './file-status-panel.component';
 import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
 import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
-
+import { PepIconModule } from '@pepperi-addons/ngx-lib/icon';
 
 @NgModule({
     declarations: [
@@ -17,6 +16,7 @@ import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
         PepTopBarModule,
         PepTextboxModule,
         PepButtonModule,
+        PepIconModule,
         PepDialogModule,
     ],
     exports: [FileStatusPanelComponent]
