@@ -6,7 +6,7 @@ import { DataViewConverter } from '@pepperi-addons/data-views';
 
 import {
     IPepGenericFormDataSource,
-    IPepGenericFormDataView,
+    IPepGenericFormDataView,    
     PepGenericFormService
 } from '@pepperi-addons/ngx-composite-lib/generic-form';
 
@@ -17,13 +17,16 @@ import {
     styleUrls: ['./generic-form-example.component.scss']
 })
 export class GenericFormExampleComponent implements OnInit {
-    dataSource: IPepGenericFormDataSource = {
+    /*dataSource: IPepGenericFormDataSource = {
         UID: 'ABCD-DCBA',
         IsEnabled: true,
         Values: FakeData,
-    };
+    };*/
+    dataSource: any = FakeData;
+    isLocked = false;
 
-    dataView: FormDataView = {
+    dataView: IPepGenericFormDataView = {
+        UID: 'ABCD-DCBA-FGHD-POLK',
         Type: 'Form',
         Hidden: false,
         Columns: [{}],
@@ -65,8 +68,8 @@ export class GenericFormExampleComponent implements OnInit {
 
     ngOnInit(): void {
         //
-        console.log('data view', DataViewConverter.toDataView(uiControlData));
-        console.log('data view 2', this.dataView);
+      //  console.log('data view', DataViewConverter.toDataView(uiControlData));
+      //  console.log('data view 2', this.dataView);
 
     }
 
@@ -74,6 +77,7 @@ export class GenericFormExampleComponent implements OnInit {
 
     onValueChanged(event: any) {
         console.log('on form value changed', event)
+      //  this.isLocked = true;
     }
 
     onGetDataClicked() {

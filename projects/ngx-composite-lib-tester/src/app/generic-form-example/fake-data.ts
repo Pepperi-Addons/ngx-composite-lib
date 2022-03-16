@@ -5,361 +5,40 @@ import {
 
 } from '@pepperi-addons/ngx-lib';
 
-export const FakeDataViewFields: BaseFormDataViewField[] = [
-    {
-        "FieldID": "ItemExternalID",
-        "Type": "TextBox",
-        "Title": "Item Code",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 0
-            },
-            "Size": {
-                "Width": 1,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "ItemMainCategory",
-        "Type": "TextBox",
-        "Title": "Main Category",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 1
-            },
-            "Size": {
-                "Width": 1,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "ItemName",
-        "Type": "TextBox",
-        "Title": "Item Description",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 2
-            },
-            "Size": {
-                "Width": 1,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "UnitsQuantity",
-        "Type": "NumberReal",
-        "Title": "Unit Quantity",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 3
-            },
-            "Size": {
-                "Width": 1,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TotalUnitsPriceAfterDiscount",
-        "Type": "Currency",
-        "Title": "Total Unit Price After Discount",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 5
-            },
-            "Size": {
-                "Width": 1,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSASetPriceForHardContract",
-        "Type": "TextBox",
-        "Title": "",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 6
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "",
-        "Type": "Separator",
-        "Title": "Labels",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 7
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSALabels",
-        "Type": "ComboBox",
-        "Title": "Choose Labels",
-        "Mandatory": false,
-        "ReadOnly": false,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 8
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSALabelQty",
-        "Type": "NumberIntegerQuantitySelector",
-        "Title": "Label Qty",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 9
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSALabelCode",
-        "Type": "TextBox",
-        "Title": "Label Code",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 10
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "",
-        "Type": "Separator",
-        "Title": "Put In Multiple Bags",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 11
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSABagsQty",
-        "Type": "NumberIntegerQuantitySelector",
-        "Title": "Bags Qty",
-        "Mandatory": false,
-        "ReadOnly": false,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 12
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSAAmountPerBag",
-        "Type": "NumberInteger",
-        "Title": "Amount Per Bag",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 13
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "TSABagPrevValue",
-        "Type": "NumberInteger",
-        "Title": "Bag Prev Value",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 14
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    },
-    {
-        "FieldID": "ItemTSAPackAllIn1Bag",
-        "Type": "TextBox",
-        "Title": "Item Pack All In 1 Bag",
-        "Mandatory": false,
-        "ReadOnly": true,
-        "Layout": {
-            "Origin": {
-                "X": 0,
-                "Y": 15
-            },
-            "Size": {
-                "Width": 0,
-                "Height": 1
-            }
-        },
-        "Style": {
-            "Alignment": {
-                "Vertical": "Center",
-                "Horizontal": "Stretch"
-            }
-        }
-    }
-]
+
 
 export const FakeData: any = {
+    GeneralInformation: '',
     ItemExternalID: 'Abcd',
-    ItemMainCategory: '',
+    ActionDateTime: '2021-11-22T09:26:02Z',
+    WrntyID: '272764514',
+    TSATsaTextTest: 'Some text',
+    DeliveryDate: '2021-11-22',
+    AccountInformation: '',
+    BranchDbId: '1',
+    BillToName: 'AD',
+    ShipToName: 'Someone',
+    /*BillToAddress: {
+        Value: 'Israel',
+        GroupFields: [
+            {
+                ShipToCountryIso: {
+                    Value: 'IL',
+                    OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "UIsrael" }],
+                }
+            },
+            { ShipToStateIso: '' },
+            { ShipToCity: '' },
+            { ShipToStreet: '' },
+            { ShipToZipCode: '' }
+
+        ]
+    }, 
+
     ItemName: {
         Value: 'abc',
-        OptionalValues: {'a': 1, 'b': 2}
-    },
+        OptionalValues: [{ Key: 'a', Value: 1 }, { Key: 'b', Value: 2 }]
+    }, */
     UnitsQuantity: 10000,
     TotalUnitsPriceAfterDiscount: 20000,
     TSASetPriceForHardContract: 'high price',
@@ -373,11 +52,11 @@ export const FakeData: any = {
 
 }
 
-export const FakeDataViewFieldsOld: any[] = [
+export const FakeDataViewFields: any[] = [
     {
         FieldID: 'GeneralInformation',
         Type: 'Separator',
-        Title: 'General Information',
+        Title: 'General Information 2',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
@@ -391,14 +70,16 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
-        FieldID: 'ExternalID',
+        FieldID: 'ItemExternalID',
         Type: 'TextBox',
-        Title: 'External ID',
+        Title: 'Item Code',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
@@ -412,8 +93,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -433,8 +116,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -454,8 +139,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -475,8 +162,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -496,8 +185,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -517,14 +208,39 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
         FieldID: 'BranchDbId',
         Type: 'EmptyComboBox',
         Title: 'Branch Db Id',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 0,
+                Y: 5
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'BillToName',
+        Type: 'ComboBox',
+        Title: 'Bill To Name',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
@@ -538,30 +254,12 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
-        }
-    },
-    {
-        FieldID: 'BillToName',
-        Type: 'TextBox',
-        Title: 'Bill To Name',
-        Mandatory: false,
-        ReadOnly: false,
-        Layout: {
-            Origin: {
-                X: 0,
-                Y: 6
-            },
-            Size: {
-                Width: 1,
-                Height: 0
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
             }
         },
-        Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
-        }
+        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
     },
     {
         FieldID: 'ShipToName',
@@ -580,8 +278,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -601,8 +301,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -622,8 +324,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -643,8 +347,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -664,13 +370,15 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
         FieldID: 'OrderInformation',
-        Type: 'Seperator',
+        Type: 'Separator',
         Title: 'SOrder In formation',
         Mandatory: false,
         ReadOnly: false,
@@ -685,8 +393,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -706,8 +416,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -727,8 +439,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -748,8 +462,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -769,8 +485,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -790,8 +508,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -811,8 +531,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     }, {
         FieldID: 'TSAUDTtesttest',
@@ -831,8 +553,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -852,8 +576,10 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
     },
     {
@@ -873,9 +599,47 @@ export const FakeDataViewFieldsOld: any[] = [
             }
         },
         Style: {
-            Horizontal: 'Stretch',
-            Vertical: 'Stretch'
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
         }
+    }, 
+    {
+        FieldID: 'ShipToCountryIso',
+        Type: 'EmptyComboBox',
+        Title: 'Ship To State',
+        Mandatory: false,
+        ReadOnly: false
+        
+    },
+    {
+        FieldID: 'ShipToStateIso',
+        Type: 'EmptyComboBox',
+        Title: 'Ship To State',
+        Mandatory: false,
+        ReadOnly: false
+    },
+    {
+        FieldID: 'ShipToCity',
+        Type: 'TextBox',
+        Title: 'Ship To State',
+        Mandatory: false,
+        ReadOnly: false        
+    },
+    {
+        FieldID: 'ShipToStreet',
+        Type: 'TextBox',
+        Title: 'Ship To State',
+        Mandatory: false,
+        ReadOnly: false        
+    },
+    {
+        FieldID: 'ShipToZipCode',
+        Type: 'TextBox',
+        Title: 'Ship To State',
+        Mandatory: false,
+        ReadOnly: false        
     }
 ];
 

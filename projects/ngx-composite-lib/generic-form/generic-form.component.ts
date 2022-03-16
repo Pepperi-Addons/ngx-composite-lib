@@ -34,14 +34,17 @@ const NUM_OF_FORM_COLUMNS = 2;
 })
 export class GenericFormComponent implements OnInit {
     @Input()
-    set dataSource(val: IPepGenericFormDataSource) {
+    set dataSource(val: any) {
         this._genericFormService.setDataSource(val);
     }
 
     @Input()
-    set dataView(val: FormDataView) {
+    set dataView(val: IPepGenericFormDataView) {
         this._genericFormService.setUiControl(val);
     };
+
+    @Input()
+    isLocked = false;
 
     @Input()
     inline = false;
@@ -87,8 +90,6 @@ export class GenericFormComponent implements OnInit {
         };
         this._genericFormService.updateFieldValue(field);
         this.valueChange.emit(field);
-       // console.log('onValueChanged event', event);
-        //console.log('onValueChanged output', field);
     }
 
     onfieldClicked(event: any) {
@@ -99,9 +100,6 @@ export class GenericFormComponent implements OnInit {
         };
         this._genericFormService.updateFieldValue(field);
         this.fieldClick.emit(field);
-
-        //console.log('onfieldClicked event', event);
-        //console.log('onfieldClicked output', field);
     }
 
 

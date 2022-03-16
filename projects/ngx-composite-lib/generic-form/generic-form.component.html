@@ -33,7 +33,7 @@
 </ng-template>
 
 <ng-template #formTemplate>
-    <pep-form [layoutType]="'form'" [layout]="uiControl" [data]="data" (valueChange)="onValueChanged($event)"
-        (fieldClick)="onfieldClicked($event)">
+    <pep-form [layoutType]="'form'" [layout]="uiControl" [data]="data" [isInternal]="false"
+        (valueChange)="onValueChanged($event)" (fieldClick)="onfieldClicked($event)">
     </pep-form>
 </ng-template>
