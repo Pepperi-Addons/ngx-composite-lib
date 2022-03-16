@@ -19,13 +19,14 @@
             <li *ngIf="file?.status !== 'hidden'">
                
                 <span class="color-dimmed body-sm ellipsis">{{file.name}}</span>
-                <pep-button
+                <pep-icon name="arrow_right_alt"></pep-icon>
+                <!-- <pep-button
                     styleType="weak-invert"
                     styleStateType="system"
                     classNames="xxs-btn"
                     [disabled]="false"
                     iconName="arrow_right_alt">
-                </pep-button>
+                </pep-button> -->
                 <span class="body-sm">{{file.status}}</span>
             
             </li>

@@ -1,4 +1,4 @@
-#uploadPanelCont{
+#uploadPanelCont {
     position: absolute;
     bottom: 10px;
     right: 2.5rem;
@@ -11,50 +11,53 @@
     border-radius: .25rem;
     z-index: 9999;
 
-.panel-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 2.5rem;
+    .panel-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 2.5rem;
 
-        ::ng-deep{
+        ::ng-deep {
             .roundCorners{
                 border-radius: 1.5rem;
             }
         }
     }
 }
-.panel-content{
 
+.panel-content {
     max-height: 50vh;
     overflow: auto;
 
-    ul{
-      list-style-type: none;
-      padding: 0;  
+    ul {
+        list-style-type: none;
+        padding: 0;  
 
-      li{
-          height: 1.25rem;
-          margin-top: .5rem;
-          display: flex;
-          flex-direction: row;
-        
-          .done{
-              color: Green !important;
-          }
+        li {
+            height: 1.25rem;
+            margin-top: .5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            pep-icon {
+                height: 1rem;
+            }
+
+            .done {
+                color: Green !important;
+            }
           
-        ::ng-deep{
-            .xxs-btn{
-                min-width: 1rem !important;
-                height: 1.3rem;
-                pep-icon{
-                    
-                    width: .75rem !important;
-                }
-            } 
+            ::ng-deep {
+                .xxs-btn {
+                    min-width: 1rem !important;
+                    height: 1.3rem;
+                    pep-icon {
+                        width: .75rem !important;
+                    }
+                } 
+            }
         }
-      }
-      
     }
 }
 
