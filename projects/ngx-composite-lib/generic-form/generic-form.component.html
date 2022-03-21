@@ -1,0 +1,40 @@
+<div *ngIf="inline" class="inline-container form-view" [ngClass]="{ 'add-padding': addPadding }">
+    <div *ngIf="showTopBar" class="inline-top-bar-container">
+        <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
+    </div>
+    <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+</div>
+
+<pep-page-layout *ngIf="!inline" [addPadding]="addPadding">
+    <ng-container *ngIf="showTopBar" pep-top-area>
+        <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
+    </ng-container>
+    <div pep-main-area class="main-area-container form-view">
+        <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
+    </div>
+</pep-page-layout>
+
+<ng-template #topBarTemplate>
+    <pep-top-bar [inline]="inline"> 
+        <div header-start-content>
+            <ng-content select="[left-buttons]"></ng-content>
+        </div>
+        <div header-end-content>
+            <ng-content select="[right-buttons]"></ng-content>
+        </div>
+
+        <!-- <div footer-start-content>
+            <ng-content select="[bottom-left-buttons]"></ng-content>
+        </div>
+        <div footer-end-content>
+            <ng-content select="[bottom-right-buttons]"></ng-content>
+        </div> -->
+    </pep-top-bar>
+</ng-template>
+
+<ng-template #formTemplate>
+    <pep-form [layoutType]="'form'" [layout]="uiControl" [data]="data" [isInternal]="false" [lockFields]="isLocked"
+        (valueChange)="onValueChanged($event)" (fieldClick)="onfieldClicked($event)"
+        (formValidationChange)="onFormValidationChanged($event)">
+    </pep-form>
+</ng-template>

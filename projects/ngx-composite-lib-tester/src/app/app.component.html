@@ -1,6 +1,7 @@
-<div id="loadingSpinnerModal" *ngIf="showHeader" [hidden]="!showLoader" pepRtlClass >
+<div id="loadingSpinnerModal" *ngIf="showHeader" [hidden]="!showLoader" pepRtlClass>
     <div id="loadingSpinner">
-        <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+        <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]"
+            [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
     </div>
 </div>
 <div class="pep-layout" dir="{{ layoutService.isRtl() ? 'rtl' : 'ltr' }}">
@@ -10,15 +11,21 @@
                 [ngStyle]="{'background-color': customizationService.getBrandingMainColor() }">
                 <div class="pep-spacing-element-negative">
                     <pep-button sizeType="sm" styleType="weak" classNames="keep-background-on-focus"
-                        class="pep-spacing-element pull-left flip" iconName="system_home"  (click)="navigateHome()">
+                        class="pep-spacing-element pull-left flip" iconName="system_home" (click)="navigateHome()">
                     </pep-button>
                 </div>
                 <div class="pep-spacing-element-negative">
-                    <pep-button [value]="'ExampleComponentsTitle' | translate" sizeType="sm" styleType="weak" class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
+                    <pep-button [value]="'ExampleComponentsTitle' | translate" sizeType="sm" styleType="weak"
+                        class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
                         [routerLink]="['components-example']">
                     </pep-button>
-                    <pep-button [value]="'GenericListExampleComponentTitle' | translate" sizeType="sm" styleType="weak" class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
+                    <pep-button [value]="'GenericListExampleComponentTitle' | translate" sizeType="sm" styleType="weak"
+                        class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
                         [routerLink]="['generic-list-example']">
+                    </pep-button>
+                    <pep-button [value]="'FormGeneratorExampleComponent' | translate" sizeType="sm" styleType="weak"
+                        class="pep-spacing-element pull-right flip" classNames="keep-background-on-focus"
+                        [routerLink]="['generic-form-example']">
                     </pep-button>
                 </div>
             </nav>

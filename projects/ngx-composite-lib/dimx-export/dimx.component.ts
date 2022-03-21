@@ -4,6 +4,7 @@ import { IFile } from './dimx.model';
 import { DIMXService } from './dimx.service';
 import { saveAs } from 'file-saver';
 import { PepGuid } from '@pepperi-addons/ngx-lib';
+import { IFileExt } from '.';
 
 @Component({
     selector: 'pep-dimx',
@@ -14,6 +15,7 @@ export class DIMXComponent implements OnInit {
     @ViewChild('fileField') fileField:ElementRef | undefined;
     @Input() DIMXAddonUUID!: string;
     @Input() DIMXResource!: string;
+    @Output() DIMXProcessDone: EventEmitter<any> = new EventEmitter();
     dimxImportOptions: { OverwriteOBject?: boolean | undefined; Delimiter?: string | undefined; OwnerID?: string | undefined; ActionID?: string | undefined} | undefined;
     constructor(
         private translate: TranslateService,
@@ -46,11 +48,7 @@ export class DIMXComponent implements OnInit {
         }
     }
 
-    printHello(){
-        console.log("hello");
-    }
-
-    async pollDIMXResult(pollingURL:string, ifile:IFile){
+    async pollDIMXResult(pollingURL:string, ifile:IFileExt){
         console.log(`polling audit with the executionUUID: ${pollingURL}`);
         const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
         let seconds = 0;
@@ -72,19 +70,25 @@ export class DIMXComponent implements OnInit {
             switch(result["Status"]["ID"]){
                 case 0:
                     ifile.status = "failed";
-                    throw new Error(result["AuditInfo"]["ErrorMessage"]);
+                    ifile.returnedObject = {"ErrorMessage": result["AuditInfo"]["ErrorMessage"]}
+                    await this.SendDoneEventIfDone();
+                    return null;
                 case 1:
                     console.log(`polling result: ${result["AuditInfo"]["ResultObject"]}`);
                     return JSON.parse(result["AuditInfo"]["ResultObject"]);
                 default:
                     ifile.status = "failed";
-                    throw new Error(`pollDIMXResult: unknown audit log type: ${result["Status"]}`);
+                    ifile.returnedObject = {"ErrorMessage": `unknown audit log type: ${result["Status"]}`}
+                    await this.SendDoneEventIfDone();
+                    return null
             }
         }
         catch(ex){
             console.log(`pollDIMXResult: ${ex}`);
             ifile.status = "failed";
-            throw new Error((ex as {message:string}).message);
+            ifile.returnedObject = {"ErrorMessage": (ex as {message:string}).message}
+            await this.SendDoneEventIfDone();
+            return null;
         }
     }
 
@@ -108,15 +112,15 @@ export class DIMXComponent implements OnInit {
     }
     
     iFileID = 0;
-    iFileArray:IFile[] = [];
-    createNewIFile(fileName:string , status:"downloading"|"uploading"):IFile{
+    iFileArray:IFileExt[] = [];
+    createNewIFile(fileName:string , status:"downloading"|"uploading"):IFileExt{
         return {
             "key":this.iFileID++,
             "name":fileName,
             "status":status};
     }
 
-    async removeIfileWithDelay(iFile:IFile, delay = 2000) {
+    async removeIfilesWithDelay(iFile:IFile, delay = 2000) {
         window.setTimeout(() => {
             const index = this.iFileArray.findIndex(element => element === iFile);
             if (index >= 0){
@@ -125,22 +129,14 @@ export class DIMXComponent implements OnInit {
         }, delay)
     }
 
-
-    uploadf(e:any){
-        const files = e.target.files;
-        const fileListAsArray = Array.from(files);
-       
-        fileListAsArray.forEach((file, i) => {
-
-        const filex = (file as HTMLInputElement);
-        
-
-
-
-});
+    async clearIFilesWithDelay(delay = 2000){
+        window.setTimeout(() => {
+            this.iFileArray = [];
+        }, delay)
     }
 
-    uploadFile(event:any, options?:{OverwriteOBject?:boolean, Delimiter?:string, OwnerID?:string, ActionID?:string}){
+
+    uploadFile(options?:{OverwriteOBject?:boolean, Delimiter?:string, OwnerID?:string, ActionID?:string}){
         this.dimxImportOptions = options;
         const elem = document.getElementById("fileuploader");
    if(elem && document.createEvent) {
@@ -151,6 +147,35 @@ export class DIMXComponent implements OnInit {
         // this.fileField?.nativeElement.click();
     }   
 
+    IsFileInProgress(iFile:IFile){
+        return iFile.status == "downloading" || iFile.status == "uploading";
+    }
+
+    AnyFilesInProgress(){
+        if (this.iFileArray.find(this.IsFileInProgress) === undefined){
+            return false;
+        }
+        return true
+    }
+
+    GetDoneEventBody(){
+        return this.iFileArray.map(iFile => {
+            return {
+                "FileName": iFile.name, 
+                "Status": iFile.status,
+                "ReturnedObject": iFile.returnedObject!
+        }
+        });
+    }
+
+    async SendDoneEventIfDone(){
+        if (this.AnyFilesInProgress()){
+            return;
+        }
+        const eventObject:any = this.GetDoneEventBody();
+        this.DIMXProcessDone.emit(eventObject);
+        await this.clearIFilesWithDelay();
+    }
 
     async dimximportrun(e:any) {
         console.log("Enter DIMXImportRun");
@@ -158,42 +183,56 @@ export class DIMXComponent implements OnInit {
         const fileListAsArray = Array.from(files);
         fileListAsArray.forEach(async (file, i) => {
 
-        const filex = (file as HTMLInputElement);
-        const dimx_import_relativeURL = `/addons/api/44c97115-6d14-4626-91dc-83f176e9a0fc/api/file_import_upload`;
-        const str = (await this.toBase64(filex)) as string; //???
-        const ext = filex.name.split('.')[1];
-        const value = {fileStr:str, fileExt:ext}
-        const dimxUploadObject = {...this.getPFSUploadObject(value), ...this.dimxImportOptions, Resource:this.DIMXResource, AddonUUID:this.DIMXAddonUUID};
-        const iFile:IFile = this.createNewIFile(filex.name, "uploading");
-        console.log(`created new iFile: ${iFile}`);
-        this.iFileArray.push(iFile);
-        console.log(`added iFile to iFileArray`);
-        
-        try{
+            const filex = (file as HTMLInputElement);
+            const dimx_import_relativeURL = `/addons/api/44c97115-6d14-4626-91dc-83f176e9a0fc/api/file_import_upload`;
+            const str = (await this.toBase64(filex)) as string; //???
+            const ext = filex.name.split('.')[1];
+            const value = {fileStr:str, fileExt:ext}
+            const dimxUploadObject = {...this.getPFSUploadObject(value), ...this.dimxImportOptions, Resource:this.DIMXResource, AddonUUID:this.DIMXAddonUUID};
+            const iFile:IFileExt = this.createNewIFile(filex.name, "uploading");
+            console.log(`created new iFile: ${iFile}`);
+            this.iFileArray.push(iFile);
+            console.log(`added iFile to iFileArray`);
+            
+            try{
+                console.log("posting to dimx import_upload now");
+                const header:any = {};
+                if(dimxUploadObject.ActionID){
+                    header["X-Pepperi-ActionID"]=dimxUploadObject.ActionID;
+                }
+                if(dimxUploadObject.OwnerID){
+                    header["X-Pepperi-OwnerID"]=dimxUploadObject.OwnerID;
+                }
+                const res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject, header);
+                console.log("Got reply from dimx, calling poll with the result:");
+                console.log(JSON.stringify(res));
 
-            console.log("posting to dimx import_upload now");
-            const res = await this.addonService.papiClient.post(dimx_import_relativeURL, dimxUploadObject, {"X-Pepperi-OwnerID":dimxUploadObject.OwnerID, "X-Pepperi-ActionID":dimxUploadObject.ActionID});
-            console.log("Got reply from dimx, calling poll with the result:");
-            console.log(res);
+                const poll_result = await this.pollDIMXResult(res['ExecutionUUID'], iFile);
+                if (poll_result === null) {
+                    return;
+                }
+                console.log(`done polling, got result: ${JSON.stringify(poll_result)}`);
+                iFile.status = "done";
+                iFile.returnedObject = poll_result;
+                await this.SendDoneEventIfDone();
+                console.log("Imported the file");
+                //await this.removeIfileWithDelay(iFile);
+                // check all done
+                
 
-            const poll_result = await this.pollDIMXResult(res['ExecutionUUID'], iFile);
-
-            console.log(`done polling, got result: ${JSON.stringify(poll_result)}`);
-            iFile.status = "done";
-            console.log("Imported the file");
-            await this.removeIfileWithDelay(iFile);
-
-        }
-        catch(ex){
-            console.log(`DIMXImportRun: ${ex}`);
-            iFile.status = "failed";
-            await this.removeIfileWithDelay(iFile, 2000);
-            throw new Error((ex as {message:string}).message);
-        }
-        
-        
-        
-        });
+            }
+            catch(ex){
+                console.log(`DIMXImportRun: ${ex}`);
+                iFile.status = "failed";
+                iFile.returnedObject = {"ErrorMessage": (ex as {message:string}).message}
+                await this.SendDoneEventIfDone();
+                //await this.removeIfileWithDelay(iFile, 2000);
+                return;
+            }
+            
+            
+            
+            });
     }
     getNewPFSUploadKey(fileExt:string){
         const uuid = PepGuid.newGuid();
@@ -248,7 +287,7 @@ export class DIMXComponent implements OnInit {
         }
         const bod = this.getDIMXExportPOSTBody(value ? value : {});
         const fileName = this.getNewFileName(value as {DIMXExportFormat:string, DIMXExportFileName:string});
-        const iFile:IFile = this.createNewIFile(fileName, "downloading");
+        const iFile:IFileExt = this.createNewIFile(fileName, "downloading");
         console.log(`created new iFile: ${iFile}`);
         this.iFileArray.push(iFile);
         console.log(`added iFile to iFileArray`);
@@ -256,25 +295,36 @@ export class DIMXComponent implements OnInit {
         try{
 
             console.log("posting to dimx export now");
-            const res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod, {"X-Pepperi-ActionID":value.ActionID});
+            const header:any = {};
+            if(value.ActionID){
+                header["X-Pepperi-ActionID"]=value.ActionID;
+            }
+            const res = await this.addonService.papiClient.post(`/addons/data/export/file/${this.DIMXAddonUUID}/${this.DIMXResource}`, bod, header);
             console.log("Got reply from dimx, calling poll with the result:");
             console.log(res);
-
-            const url = (await this.pollDIMXResult(res['ExecutionUUID'], iFile))["DownloadURL"];
+            const result = await this.pollDIMXResult(res['ExecutionUUID'], iFile);
+            if (result === null){
+                return 
+            }
+            const url = result["DownloadURL"];
 
             console.log("attempting to download the file");
             console.log(`url is: ${url}`);
             const blob = await fetch(url).then(r => r.blob());
             saveAs(blob, fileName);
             iFile.status = "done";
+            iFile.returnedObject = result;
+            await this.SendDoneEventIfDone();
             console.log("downloaded the file");
-            await this.removeIfileWithDelay(iFile);
+            //await this.removeIfileWithDelay(iFile);
         }
         catch(ex){
             iFile.status= "failed";
-            await this.removeIfileWithDelay(iFile);
+            iFile.returnedObject = {"ErrorMessage":(ex as {message:string}).message}
+            await this.SendDoneEventIfDone();
+            //await this.removeIfileWithDelay(iFile);
             console.log(`buttonClick: ${ex}`);
-            throw new Error((ex as {message:string}).message);
+            return;
         }
         
     }
