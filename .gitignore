@@ -44,3 +44,4 @@ testem.log
 .DS_Store
 Thumbs.db
 projects/ngx-composite-lib/node_modules/
+projects/ngx-composite-lib/dimx-export/dimx.service.ts
