@@ -24,7 +24,6 @@ export interface IPepGenericFormDataSource {
  */
 export interface IPepGenericFormDataView extends FormDataView {
     UID?: string;
-    IsEnabled?: boolean;
 }
 
 /**

@@ -9,7 +9,7 @@ import {
 
 export const FakeData: any = {
     GeneralInformation: '',
-    ItemExternalID: 'Abcd',
+  //  ItemExternalID: 'Abcd',
     ActionDateTime: '2021-11-22T09:26:02Z',
     WrntyID: '272764514',
     TSATsaTextTest: 'Some text',
@@ -80,7 +80,7 @@ export const FakeDataViewFields: any[] = [
         FieldID: 'ItemExternalID',
         Type: 'TextBox',
         Title: 'Item Code',
-        Mandatory: false,
+        Mandatory: true,
         ReadOnly: false,
         Layout: {
             Origin: {
@@ -412,7 +412,7 @@ export const FakeDataViewFields: any[] = [
             },
             Size: {
                 Width: 2,
-                Height: 0
+                Height: 4
             }
         },
         Style: {
@@ -527,7 +527,7 @@ export const FakeDataViewFields: any[] = [
             },
             Size: {
                 Width: 2,
-                Height: 0
+                Height: 2
             }
         },
         Style: {
@@ -572,7 +572,7 @@ export const FakeDataViewFields: any[] = [
             },
             Size: {
                 Width: 2,
-                Height: 0
+                Height: 2
             }
         },
         Style: {
@@ -595,7 +595,7 @@ export const FakeDataViewFields: any[] = [
             },
             Size: {
                 Width: 2,
-                Height: 0
+                Height: 2
             }
         },
         Style: {
@@ -605,42 +605,7 @@ export const FakeDataViewFields: any[] = [
             }
         }
     }, 
-    {
-        FieldID: 'ShipToCountryIso',
-        Type: 'EmptyComboBox',
-        Title: 'Ship To State',
-        Mandatory: false,
-        ReadOnly: false
-        
-    },
-    {
-        FieldID: 'ShipToStateIso',
-        Type: 'EmptyComboBox',
-        Title: 'Ship To State',
-        Mandatory: false,
-        ReadOnly: false
-    },
-    {
-        FieldID: 'ShipToCity',
-        Type: 'TextBox',
-        Title: 'Ship To State',
-        Mandatory: false,
-        ReadOnly: false        
-    },
-    {
-        FieldID: 'ShipToStreet',
-        Type: 'TextBox',
-        Title: 'Ship To State',
-        Mandatory: false,
-        ReadOnly: false        
-    },
-    {
-        FieldID: 'ShipToZipCode',
-        Type: 'TextBox',
-        Title: 'Ship To State',
-        Mandatory: false,
-        ReadOnly: false        
-    }
+    
 ];
 
 export const FakeDataOld: ObjectsDataRowCell[] = [

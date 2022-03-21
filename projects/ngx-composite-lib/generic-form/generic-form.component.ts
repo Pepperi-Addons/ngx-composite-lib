@@ -5,27 +5,13 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { PepLayoutService } from '@pepperi-addons/ngx-lib';
 import {
-    PepDataConvertorService,
-    PepLayoutService,
-    UIControl,
-    ObjectsDataRow,
-    ObjectsDataRowCell,
-    PepGuid
-} from '@pepperi-addons/ngx-lib';
-import { IPepFormFieldValueChangeEvent } from '@pepperi-addons/ngx-lib/form';
-import {
-    IPepGenericFormDataSource,
     IPepGenericFormDataView,
     IPepGenericFormValueChange
 } from './generic-form.model';
-
-import { DataViewConverter } from '@pepperi-addons/data-views';
-import { FormDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import { PepGenericFormService } from './generic-form.service';
 
-const NUM_OF_FORM_COLUMNS = 2;
 
 @Component({
     selector: 'pep-generic-form',
@@ -41,10 +27,12 @@ export class GenericFormComponent implements OnInit {
     @Input()
     set dataView(val: IPepGenericFormDataView) {
         this._genericFormService.setUiControl(val);
-    };
+    }
 
     @Input()
-    isLocked = false;
+    set isLocked(val: boolean) {
+        this._genericFormService.isLocked = val;
+    }
 
     @Input()
     inline = false;
@@ -61,12 +49,19 @@ export class GenericFormComponent implements OnInit {
     @Output()
     fieldClick: EventEmitter<IPepGenericFormValueChange> = new EventEmitter<IPepGenericFormValueChange>();
 
+    @Output()
+    formValidationChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     get uiControl() {
         return this._genericFormService.uiControl;
     }
 
     get data() {
         return this._genericFormService.data;
+    }
+
+    get isLocked() {
+        return this._genericFormService.isLocked;
     }
 
     constructor(
@@ -100,6 +95,10 @@ export class GenericFormComponent implements OnInit {
         };
         this._genericFormService.updateFieldValue(field);
         this.fieldClick.emit(field);
+    }
+
+    onFormValidationChanged(event: any) {
+        this.formValidationChange.emit(event);
     }
 
 

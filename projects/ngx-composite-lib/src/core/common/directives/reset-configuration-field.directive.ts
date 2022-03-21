@@ -71,7 +71,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setButtonContainerStyle() {
-        let css = `
+        const css = `
             display: flex;
             justify-content: flex-end;
             float: ${this.getFloat()};
@@ -82,7 +82,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setButtonStyle(button: HTMLButtonElement) {
-        let css = `
+        const css = `
             display: flex !important;
             align-items: center !important;
             height: 1rem !important;
@@ -97,7 +97,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setSvgStyle(svg: SVGElement) {
-        let css = `
+        const css = `
             transform: rotate(270deg);
             width: 0.75rem;
         `;
