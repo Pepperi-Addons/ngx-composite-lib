@@ -1,6 +1,7 @@
 {
     "ExampleComponentsTitle": "Example components",
     "GenericListExampleComponentTitle": "Example generic list",
+    "FormGeneratorExampleComponent": "Example form generator",
 
     "GENERIC_LIST": {
         "NO_DATA": "No data found"

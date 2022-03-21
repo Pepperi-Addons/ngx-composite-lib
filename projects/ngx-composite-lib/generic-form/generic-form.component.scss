@@ -1,0 +1,22 @@
+
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+
+:host {
+    height: inherit;
+    display: block;
+}
+
+.main-area-container {
+    display: grid;
+    height: inherit;
+}
+
+.inline-container {
+    height: inherit;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    &.add-padding {
+        padding-inline: ngx-variables.$content-padding;
+    }    
+}

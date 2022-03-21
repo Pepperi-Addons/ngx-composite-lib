@@ -1,21 +1,6 @@
 <div class="example-wrapper">
     <!-- <div>abc</div> -->
-    <pep-generic-list [dataSource]="dataSource" [actions]="actions" [showTopBar]="true" title="Generic list title"
-        [showSearch]="true" [breadCrumbsItems]="breadCrumbsItems" [uuidMapping]="'UUID'" [selectionType]="selectionType"
-        [pager]="pager" [supportSorting]="supportSorting" (breadCrumbItemClick)="onBreadCrumbClick($event)">
-        <ng-container right-buttons>
-            <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="inline ? 'sm' : 'md'"
-                (menuItemClick)="onMenuItemClicked($event)">
-            </pep-menu>
-            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="inline ? 'sm' : 'md'" [styleType]="'strong'">
-            </pep-button>
-            <pep-button class="pep-spacing-element" [value]="'Delete'" [sizeType]="inline ? 'sm' : 'md'" [styleType]="'strong'">
-            </pep-button>
-        </ng-container>
-
-        <ng-container left-buttons>
-        </ng-container>
-    </pep-generic-list>
+ 
 
     <!-- <pep-generic-list [data]="dataSource" [actions]="actions" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pager]="pager"
         title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
