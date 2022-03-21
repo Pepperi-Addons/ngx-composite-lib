@@ -4,3 +4,9 @@ export class IFile {
     name = '';
     status: fileStatus = 'downloading';
     }
+export class IFileExt {
+    key = 0;
+    name = '';
+    status: fileStatus = 'downloading';
+    returnedObject?: any;
+}

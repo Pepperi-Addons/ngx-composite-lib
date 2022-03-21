@@ -30,16 +30,20 @@ export class ComponentsExampleComponent implements OnInit {
        
         switch(value["source"]["key"]){
             case "dimxexport":
-                this.dimx?.DIMXExportRun({});
+                this.dimx?.DIMXExportRun({"DIMXExportFormat":"csv"});
                 break;
             case "dimximport":
-                this.dimx?.uploadFile(value, {});
+                this.dimx?.uploadFile({});
                 
                 break;
             default:
                 console.log("default reached in menuItemClick switch-case");
         }
         
+    }
+
+    onDIMXProcessDone(event:any){
+        console.log(`DIMXProcessDone: ${JSON.stringify(event)}`);
     }
 
     menuClick(value: any){
