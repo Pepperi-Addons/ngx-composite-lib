@@ -1,4 +1,4 @@
-<div *ngIf="inline" class="inline-container" [ngClass]="{ 'add-padding': addPadding }">
+<div *ngIf="inline" class="inline-container form-view" [ngClass]="{ 'add-padding': addPadding }">
     <div *ngIf="showTopBar" class="inline-top-bar-container">
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </div>
@@ -9,13 +9,13 @@
     <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
-    <div pep-main-area class="main-area-container">
+    <div pep-main-area class="main-area-container form-view">
         <ng-container *ngTemplateOutlet="formTemplate"></ng-container>
     </div>
 </pep-page-layout>
 
 <ng-template #topBarTemplate>
-    <pep-top-bar>
+    <pep-top-bar [inline]="inline"> 
         <div header-start-content>
             <ng-content select="[left-buttons]"></ng-content>
         </div>
