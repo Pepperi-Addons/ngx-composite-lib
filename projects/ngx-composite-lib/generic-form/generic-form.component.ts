@@ -5,7 +5,7 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { PepLayoutService, PepLayoutType } from '@pepperi-addons/ngx-lib';
+import { PepLayoutService } from '@pepperi-addons/ngx-lib';
 import {
     IPepGenericFormDataView,
     IPepGenericFormValueChange
@@ -33,12 +33,9 @@ export class GenericFormComponent implements OnInit {
     set isLocked(val: boolean) {
         this._genericFormService.isLocked = val;
     }
-    get isLocked(): boolean {
+
+    get isLocked() {
         return this._genericFormService.isLocked;
-    }
-    @Input()
-    set layoutType(val: PepLayoutType) {
-        this._genericFormService.layouType = val;
     }
 
     @Input()
@@ -68,13 +65,12 @@ export class GenericFormComponent implements OnInit {
     }
 
 
-
     constructor(
         private layoutService: PepLayoutService,
         public _genericFormService: PepGenericFormService
     ) {
         this.layoutService.onResize$.pipe().subscribe((size) => {
-            //
+            //            
         });
     }
 

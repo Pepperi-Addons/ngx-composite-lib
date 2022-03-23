@@ -3,8 +3,7 @@ import {
     UIControl,
     ObjectsDataRow,
     ObjectsDataRowCell,
-    PepGuid,
-    PepLayoutType
+    PepGuid
 } from '@pepperi-addons/ngx-lib';
 import { DataViewConverter } from '@pepperi-addons/data-views';
 import {
@@ -29,7 +28,6 @@ export class PepGenericFormService {
     private _formData: ObjectsDataRow = new ObjectsDataRow();
     private _optionalValues: any[] = [];
     private _isLocked = false;
-    private _layouType:PepLayoutType = "card";
 
     get uiControl() {
         return this._uiControl;
@@ -40,7 +38,7 @@ export class PepGenericFormService {
     }
 
     constructor() {
-        //
+        // 
     }
 
     get isLocked() {
@@ -49,9 +47,6 @@ export class PepGenericFormService {
 
     set isLocked(val: boolean) {
         this._isLocked = val;
-    }
-    set layouType(val: PepLayoutType) {
-        this._layouType = val;
     }
 
     setDataSource(data: IPepGenericFormDataSource) {
@@ -77,6 +72,7 @@ export class PepGenericFormService {
                         }
                     });
                     this._uiControl.ControlFields = uiControlData.ControlFields.map((field: any) => this.convertToUiControlField(field));
+                   
                 }
                 this._uiControl.Columns = uiControlData.Columns;
                 this.createFormFields();
@@ -142,7 +138,7 @@ export class PepGenericFormService {
 
     private createFormField(controlField: any, value: any) {
         const field = new ObjectsDataRowCell();
-
+       
         field.ApiName = controlField.ApiName;
         field.Value = value;
         field.FieldType = controlField.FieldType;
@@ -151,7 +147,7 @@ export class PepGenericFormService {
         field.Accessory = "";
         field.AdditionalValue = "";
         field.BackgroundColor = "";
-        field.FormattedValue = value;
+        field.FormattedValue = "";
         field.GroupFields = [];
         field.Highlighted = false;
         field.NotificationInfo = "";
@@ -176,8 +172,13 @@ export class PepGenericFormService {
             FieldType: field.FieldType,
             Title: field.Title,
             ReadOnly: field.ReadOnlyField,
+            Mandatory: field.MandatoryField,
+            Hidden: field.Hidden,
             ColumnWidth: field.ColumnWidth,
             ColumnWidthType: 1,
+            MaxFieldCharacters: field.MaxCharacters,
+            MinValue: field.MinValue,
+            MaxValue: field.MaxValue,
             Layout: {
                 X: field.Layout.X,
                 Y: field.Layout.Y,
