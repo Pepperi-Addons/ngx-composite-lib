@@ -34,6 +34,10 @@ export class GenericFormComponent implements OnInit {
         this._genericFormService.isLocked = val;
     }
 
+    get isLocked() {
+        return this._genericFormService.isLocked;
+    }
+
     @Input()
     inline = false;
 
@@ -60,9 +64,6 @@ export class GenericFormComponent implements OnInit {
         return this._genericFormService.data;
     }
 
-    get isLocked() {
-        return this._genericFormService.isLocked;
-    }
 
     constructor(
         private layoutService: PepLayoutService,
