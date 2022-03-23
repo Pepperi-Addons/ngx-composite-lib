@@ -15,7 +15,7 @@
 </pep-page-layout>
 
 <ng-template #topBarTemplate>
-    <pep-top-bar [inline]="inline"> 
+    <pep-top-bar [inline]="inline">
         <div header-start-content>
             <ng-content select="[left-buttons]"></ng-content>
         </div>
@@ -33,7 +33,7 @@
 </ng-template>
 
 <ng-template #formTemplate>
-    <pep-form [layoutType]="'form'" [layout]="uiControl" [data]="data" [isInternal]="false" [lockFields]="isLocked"
+    <pep-form [layoutType]="layoutType" [layout]="uiControl" [data]="data" [isInternal]="false" [lockFields]="isLocked"
         (valueChange)="onValueChanged($event)" (fieldClick)="onfieldClicked($event)"
         (formValidationChange)="onFormValidationChanged($event)">
     </pep-form>
