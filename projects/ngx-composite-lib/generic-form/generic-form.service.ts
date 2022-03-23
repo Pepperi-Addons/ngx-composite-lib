@@ -72,6 +72,7 @@ export class PepGenericFormService {
                         }
                     });
                     this._uiControl.ControlFields = uiControlData.ControlFields.map((field: any) => this.convertToUiControlField(field));
+                   
                 }
                 this._uiControl.Columns = uiControlData.Columns;
                 this.createFormFields();
@@ -171,8 +172,13 @@ export class PepGenericFormService {
             FieldType: field.FieldType,
             Title: field.Title,
             ReadOnly: field.ReadOnlyField,
+            Mandatory: field.MandatoryField,
+            Hidden: field.Hidden,
             ColumnWidth: field.ColumnWidth,
             ColumnWidthType: 1,
+            MaxFieldCharacters: field.MaxCharacters,
+            MinValue: field.MinValue,
+            MaxValue: field.MaxValue,
             Layout: {
                 X: field.Layout.X,
                 Y: field.Layout.Y,
