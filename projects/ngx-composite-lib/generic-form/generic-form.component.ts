@@ -33,7 +33,9 @@ export class GenericFormComponent implements OnInit {
     set isLocked(val: boolean) {
         this._genericFormService.isLocked = val;
     }
-
+    get isLocked(): boolean {
+        return this._genericFormService.isLocked;
+    }
     @Input()
     set layoutType(val: PepLayoutType) {
         this._genericFormService.layouType = val;
@@ -65,9 +67,7 @@ export class GenericFormComponent implements OnInit {
         return this._genericFormService.data;
     }
 
-    get isLocked() {
-        return this._genericFormService.isLocked;
-    }
+
 
     constructor(
         private layoutService: PepLayoutService,
