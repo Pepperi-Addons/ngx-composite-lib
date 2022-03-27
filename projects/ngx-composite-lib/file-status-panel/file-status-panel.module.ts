@@ -6,6 +6,8 @@ import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
 import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
 import { PepIconModule } from '@pepperi-addons/ngx-lib/icon';
+import { PepSnackBarModule } from '@pepperi-addons/ngx-lib/snack-bar';
+
 
 @NgModule({
     declarations: [
@@ -18,6 +20,7 @@ import { PepIconModule } from '@pepperi-addons/ngx-lib/icon';
         PepButtonModule,
         PepIconModule,
         PepDialogModule,
+        PepSnackBarModule
     ],
     exports: [FileStatusPanelComponent]
 })

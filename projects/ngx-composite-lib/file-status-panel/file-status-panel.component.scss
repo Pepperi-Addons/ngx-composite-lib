@@ -1,37 +1,24 @@
-#uploadPanelCont {
-    width: 22rem;
+// @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+
+.upload-panel-contnainer {
+    .panel-content {
+        max-height: 50vh;
+        overflow: auto;
     
-    .panel-header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: 2.5rem;
-
-        ::ng-deep {
-            .round-corners {
-                border-radius: 1.5rem;
-            }
-        }
-    }
-}
-
-.panel-content {
-    max-height: 50vh;
-    overflow: auto;
-
-    ul {
-        list-style-type: none;
-        padding: 0;  
-
-        li {
-            height: 1.25rem;
-            margin-top: .5rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            pep-icon {
-                height: 1rem;
+        ul {
+            list-style-type: none;
+            padding: 0;  
+    
+            li {
+                height: 1.25rem;
+                margin-top: .5rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+    
+                pep-icon {
+                    height: 1rem;
+                }
             }
         }
     }
