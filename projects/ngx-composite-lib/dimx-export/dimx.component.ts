@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IFile } from './dimx.model';
 import { DIMXService } from './dimx.service';
 import { saveAs } from 'file-saver';
 import { PepGuid } from '@pepperi-addons/ngx-lib';
 import { IFileExt } from '.';
+import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 
 @Component({
     selector: 'pep-dimx',
@@ -120,7 +120,7 @@ export class DIMXComponent implements OnInit {
             "status":status};
     }
 
-    async removeIfilesWithDelay(iFile:IFile, delay = 2000) {
+    async removeIfilesWithDelay(iFile:FileStatus, delay = 2000) {
         window.setTimeout(() => {
             const index = this.iFileArray.findIndex(element => element === iFile);
             if (index >= 0){
@@ -147,7 +147,7 @@ export class DIMXComponent implements OnInit {
         // this.fileField?.nativeElement.click();
     }   
 
-    IsFileInProgress(iFile:IFile){
+    IsFileInProgress(iFile:FileStatus){
         return iFile.status == "downloading" || iFile.status == "uploading";
     }
 

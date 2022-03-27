@@ -1,16 +1,6 @@
 #uploadPanelCont {
-    position: absolute;
-    bottom: 10px;
-    right: 2.5rem;
     width: 22rem;
-    padding: 1rem;
-    min-height: 7rem;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(89, 89, 89);
-    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.24);
-    border-radius: .25rem;
-    z-index: 9999;
-
+    
     .panel-header {
         display: flex;
         flex-direction: row;
@@ -18,7 +8,7 @@
         height: 2.5rem;
 
         ::ng-deep {
-            .roundCorners{
+            .round-corners {
                 border-radius: 1.5rem;
             }
         }
@@ -43,21 +33,6 @@
             pep-icon {
                 height: 1rem;
             }
-
-            .done {
-                color: Green !important;
-            }
-          
-            ::ng-deep {
-                .xxs-btn {
-                    min-width: 1rem !important;
-                    height: 1.3rem;
-                    pep-icon {
-                        width: .75rem !important;
-                    }
-                } 
-            }
         }
     }
 }
-

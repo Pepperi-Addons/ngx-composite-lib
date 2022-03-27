@@ -1,7 +1,8 @@
-export type fileStatus = 'uploading' | 'downloading' | 'done' | 'failed' | 'hidden';
+export type FileStatusType = 'uploading' | 'downloading' | 'done' | 'failed' | 'hidden' | 'deleting';
 
-export class IFile {
+export class FileStatus {
     key = 0;
     name = '';
-    status: fileStatus = 'uploading';
+    status: FileStatusType = 'uploading';
+    statusMessage? = '';
 }
