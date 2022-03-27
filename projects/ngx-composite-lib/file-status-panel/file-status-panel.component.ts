@@ -10,8 +10,8 @@ import { FileStatus } from './file-status-panel.model';
     styleUrls: ['./file-status-panel.component.scss']
 })
 export class FileStatusPanelComponent implements OnInit {
-    @Input() title = '';
-    @Input() filesList: Array<FileStatus> = [];
+    // @Input() title = '';
+    // @Input() filesList: Array<FileStatus> = [];
     
     @Output()
     closeClick: EventEmitter<void> = new EventEmitter<void>();
