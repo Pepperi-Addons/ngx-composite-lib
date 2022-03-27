@@ -1,5 +1,7 @@
 import { Component, OnInit, Injectable, Input, Output, EventEmitter, Optional, Inject } from '@angular/core';
+import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { PepSnackBarData } from '@pepperi-addons/ngx-lib/snack-bar';
 import { FileStatus } from './file-status-panel.model';
 
 @Component({
@@ -14,7 +16,10 @@ export class FileStatusPanelComponent implements OnInit {
     @Output()
     closeClick: EventEmitter<void> = new EventEmitter<void>();
     
-    constructor(public translate: TranslateService) {
+    constructor(
+        @Inject(MAT_SNACK_BAR_DATA) public data: PepSnackBarData,
+        public snackBarRef: MatSnackBarRef<FileStatusPanelComponent>
+    ) {
        //
     }
 

@@ -1,7 +1,7 @@
-<pep-snack-bar class="upload-panel-contnainer" [title]="title" (closeClick)="onCloseClicked($event)" >
+<pep-snack-bar class="upload-panel-contnainer" [snackBarRef]="snackBarRef" [title]="data.title" (closeClick)="onCloseClicked($event)" >
     <div pep-snack-bar-content class="panel-content">
-        <ul *ngIf="filesList.length">
-            <li *ngFor="let file of filesList">
+        <ul *ngIf="data.content.length">
+            <li *ngFor="let file of data.content">
                 <ng-container *ngIf="file?.status !== 'hidden'">
                     <span class="color-dimmed body-sm ellipsis">{{file.name}}</span>
                     <pep-icon class="pep-spacing-element" name="arrow_right_alt"></pep-icon>
