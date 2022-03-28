@@ -7,7 +7,7 @@ import {PepHttpService, PepDataConvertorService, PepSessionService} from '@peppe
 
 @Injectable({ providedIn: 'root' })
 export class DIMXService {
-    //tempToken = ""
+    tempToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjRiYTFjNzJmMTI3NThjYzEzMzg3ZWQ3YTBiZjNlODg3IiwidHlwIjoiSldUIn0.eyJuYmYiOjE2NDc3ODY2NDgsImV4cCI6MTY0Nzc5MDI0OCwiaXNzIjoiaHR0cHM6Ly9pZHAuc2FuZGJveC5wZXBwZXJpLmNvbSIsImF1ZCI6WyJodHRwczovL2lkcC5zYW5kYm94LnBlcHBlcmkuY29tL3Jlc291cmNlcyIsInBlcHBlcmkuYXBpbnQiLCJwZXBwZXJpLndhY2QiXSwiY2xpZW50X2lkIjoiaW9zLmNvbS53cm50eS5wZXBwZXJ5Iiwic3ViIjoiOTE1ZWUxODItNTk3Ni00ZjJlLWFhOGQtZDQ1ZjI3N2Y2OTdjIiwiYXV0aF90aW1lIjoxNjQ3Nzg2NjQ4LCJpZHAiOiJsb2NhbCIsInBlcHBlcmkuYXBpbnRiYXNldXJsIjoiaHR0cHM6Ly9yZXN0YXBpLnNhbmRib3gucGVwcGVyaS5jb20iLCJlbWFpbCI6Ik9kZWRAcGVwcGVyaXRlc3QuY29tIiwicGVwcGVyaS5pZCI6MTE0NzcwOTcsInBlcHBlcmkudXNlcnV1aWQiOiI5MTVlZTE4Mi01OTc2LTRmMmUtYWE4ZC1kNDVmMjc3ZjY5N2MiLCJwZXBwZXJpLmRpc3RyaWJ1dG9ydXVpZCI6IjBhM2FmNGU3LTMyZGUtNDExOC04Y2NmLTVkOWRiZDc5YzA0MSIsInBlcHBlcmkuZGlzdHJpYnV0b3JpZCI6MzAwMTUwMzEsInBlcHBlcmkuZGF0YWNlbnRlciI6InNhbmRib3giLCJwZXBwZXJpLmVtcGxveWVldHlwZSI6MSwicGVwcGVyaS5iYXNldXJsIjoiaHR0cHM6Ly9wYXBpLnN0YWdpbmcucGVwcGVyaS5jb20vVjEuMCIsInBlcHBlcmkud2FjZGJhc2V1cmwiOiJodHRwczovL2NwYXBpLnN0YWdpbmcucGVwcGVyaS5jb20iLCJuYW1lIjoiT2RlZCBBbnN3ZXIiLCJzY29wZSI6WyJwZXBwZXJpLmFwaW50IiwicGVwcGVyaS53YWNkIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.XIpG0urTDreOIB3ehAKQqeQoFLiCYnxqYdXo61XaOWuJQe5hvJXNvjdnNuoC79GDiayHXEbrlsExcg5JYnou46bf35D9tEKQSx1ZF5S_vhSZcc5vg7OlS-2_AGJdov0RqC22Ti2nIBoWRkQK_Xv1D9aNWoE23ygD85bHyEI76z35aqpsUY6vy4yR_L-2p9GByslkYByaU9ES4RgLDCefTbo9C40ux0sH62IeJnC9cOC7hSIaCdMzvXVUg1BFh5ZvZGybaqwMRCXmc5XgvgN9e1Q3ej2Mje-Rt4Vqz9OCYHZJ3GZEiyzEatJDXFAwfXhQJypPu9ucNL_r8jy_r5FIGQ"
     accessToken = '';
     parsedToken: any
     papiBaseURL = ''
@@ -25,7 +25,7 @@ export class DIMXService {
         public pepperiDataConverter: PepDataConvertorService,
         private pepHttp: PepHttpService
     ) {
-        //window.sessionStorage.setItem('idp_token',this.tempToken)
+        window.sessionStorage.setItem('idp_token',this.tempToken)
         const accessToken = this.session.getIdpToken();
       
         this.parsedToken = jwt(accessToken);

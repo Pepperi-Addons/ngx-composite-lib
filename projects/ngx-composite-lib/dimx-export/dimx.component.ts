@@ -4,7 +4,9 @@ import { DIMXService } from './dimx.service';
 import { saveAs } from 'file-saver';
 import { PepGuid } from '@pepperi-addons/ngx-lib';
 import { IFileExt } from '.';
-import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { FileStatus, FileStatusPanelComponent } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { PepSnackBarService } from '@pepperi-addons/ngx-lib/snack-bar';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'pep-dimx',
@@ -17,9 +19,11 @@ export class DIMXComponent implements OnInit {
     @Input() DIMXResource!: string;
     @Output() DIMXProcessDone: EventEmitter<any> = new EventEmitter();
     dimxImportOptions: { OverwriteOBject?: boolean | undefined; Delimiter?: string | undefined; OwnerID?: string | undefined; ActionID?: string | undefined} | undefined;
+    private currentSnackBar: MatSnackBarRef<FileStatusPanelComponent>|null = null;
     constructor(
         private translate: TranslateService,
-        public addonService: DIMXService
+        public addonService: DIMXService,
+        private pepSnackBarService: PepSnackBarService,
     ) {
 
     }
@@ -71,6 +75,7 @@ export class DIMXComponent implements OnInit {
                 case 0:
                     ifile.status = "failed";
                     ifile.returnedObject = {"ErrorMessage": result["AuditInfo"]["ErrorMessage"]}
+                    this.updateSnackbar();
                     await this.SendDoneEventIfDone();
                     return null;
                 case 1:
@@ -79,6 +84,7 @@ export class DIMXComponent implements OnInit {
                 default:
                     ifile.status = "failed";
                     ifile.returnedObject = {"ErrorMessage": `unknown audit log type: ${result["Status"]}`}
+                    this.updateSnackbar();
                     await this.SendDoneEventIfDone();
                     return null
             }
@@ -86,7 +92,8 @@ export class DIMXComponent implements OnInit {
         catch(ex){
             console.log(`pollDIMXResult: ${ex}`);
             ifile.status = "failed";
-            ifile.returnedObject = {"ErrorMessage": (ex as {message:string}).message}
+            ifile.returnedObject = {"ErrorMessage": (ex as {message:string}).message};
+            this.updateSnackbar();
             await this.SendDoneEventIfDone();
             return null;
         }
@@ -125,6 +132,7 @@ export class DIMXComponent implements OnInit {
             const index = this.iFileArray.findIndex(element => element === iFile);
             if (index >= 0){
                 this.iFileArray.splice(index,1);
+                this.updateSnackbar();
             }
         }, delay)
     }
@@ -132,6 +140,8 @@ export class DIMXComponent implements OnInit {
     async clearIFilesWithDelay(delay = 2000){
         window.setTimeout(() => {
             this.iFileArray = [];
+            //this.currentSnackBar?.instance.closeClick.emit();
+            this.updateSnackbar();
         }, delay)
     }
 
@@ -177,12 +187,31 @@ export class DIMXComponent implements OnInit {
         await this.clearIFilesWithDelay();
     }
 
+    updateSnackbar(){
+        if (!this.currentSnackBar?.instance){
+            this.currentSnackBar = this.pepSnackBarService.openSnackBarFromComponent(FileStatusPanelComponent, {
+                title: "DIMX Process",
+                content: this.iFileArray
+            })
+            this.currentSnackBar.instance.closeClick.subscribe(() => {
+                this.currentSnackBar = null;
+
+            });
+        }
+        else{
+            this.currentSnackBar.instance.data.content = this.iFileArray;
+            if (this.iFileArray.length === 0){
+                this.currentSnackBar.instance.snackBarRef.dismiss();
+                this.currentSnackBar = null;
+            }
+        }
+    }
+
     async dimximportrun(e:any) {
         console.log("Enter DIMXImportRun");
         const files = e.target.files;
         const fileListAsArray = Array.from(files);
         fileListAsArray.forEach(async (file, i) => {
-
             const filex = (file as HTMLInputElement);
             const dimx_import_relativeURL = `/addons/api/44c97115-6d14-4626-91dc-83f176e9a0fc/api/file_import_upload`;
             const str = (await this.toBase64(filex)) as string; //???
@@ -192,6 +221,7 @@ export class DIMXComponent implements OnInit {
             const iFile:IFileExt = this.createNewIFile(filex.name, "uploading");
             console.log(`created new iFile: ${iFile}`);
             this.iFileArray.push(iFile);
+            this.updateSnackbar();
             console.log(`added iFile to iFileArray`);
             
             try{
@@ -214,6 +244,7 @@ export class DIMXComponent implements OnInit {
                 console.log(`done polling, got result: ${JSON.stringify(poll_result)}`);
                 iFile.status = "done";
                 iFile.returnedObject = poll_result;
+                this.updateSnackbar();
                 await this.SendDoneEventIfDone();
                 console.log("Imported the file");
                 //await this.removeIfileWithDelay(iFile);
@@ -225,6 +256,7 @@ export class DIMXComponent implements OnInit {
                 console.log(`DIMXImportRun: ${ex}`);
                 iFile.status = "failed";
                 iFile.returnedObject = {"ErrorMessage": (ex as {message:string}).message}
+                this.updateSnackbar();
                 await this.SendDoneEventIfDone();
                 //await this.removeIfileWithDelay(iFile, 2000);
                 return;
@@ -290,6 +322,7 @@ export class DIMXComponent implements OnInit {
         const iFile:IFileExt = this.createNewIFile(fileName, "downloading");
         console.log(`created new iFile: ${iFile}`);
         this.iFileArray.push(iFile);
+        this.updateSnackbar();
         console.log(`added iFile to iFileArray`);
      
         try{
@@ -314,6 +347,7 @@ export class DIMXComponent implements OnInit {
             saveAs(blob, fileName);
             iFile.status = "done";
             iFile.returnedObject = result;
+            this.updateSnackbar();
             await this.SendDoneEventIfDone();
             console.log("downloaded the file");
             //await this.removeIfileWithDelay(iFile);
@@ -321,6 +355,7 @@ export class DIMXComponent implements OnInit {
         catch(ex){
             iFile.status= "failed";
             iFile.returnedObject = {"ErrorMessage":(ex as {message:string}).message}
+            this.updateSnackbar();
             await this.SendDoneEventIfDone();
             //await this.removeIfileWithDelay(iFile);
             console.log(`buttonClick: ${ex}`);
