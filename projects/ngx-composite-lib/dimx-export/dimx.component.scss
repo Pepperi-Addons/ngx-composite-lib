@@ -1,5 +1,7 @@
 @import '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
-
+#fileuploader{
+    display: none;
+}
 :host {
     width: 100%;
     // max-width: 200px;

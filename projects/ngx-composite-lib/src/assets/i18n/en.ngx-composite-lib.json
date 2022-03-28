@@ -37,7 +37,8 @@
             "TOP": "Top",
             "MIDDLE": "Middle",
             "BOTTOM": "Bottom"
-        }
+        },
+        "RESET_HINT": "Screen sizes support"
     },
     "ACTIONS": {
         "RESET": "Reset"

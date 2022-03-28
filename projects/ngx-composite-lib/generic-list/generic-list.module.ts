@@ -10,6 +10,8 @@ import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepSearchModule } from '@pepperi-addons/ngx-lib/search';
 import { PepBreadCrumbsModule } from '@pepperi-addons/ngx-lib/bread-crumbs';
 
+import { PepGenericListService } from './generic-list.service';
+
 @NgModule({
     declarations: [
         GenericListComponent
@@ -25,6 +27,11 @@ import { PepBreadCrumbsModule } from '@pepperi-addons/ngx-lib/bread-crumbs';
         PepSearchModule,
         PepBreadCrumbsModule
     ],
-    exports: [GenericListComponent],
+    exports: [
+        GenericListComponent
+    ],
+    providers: [
+        PepGenericListService
+    ]
 })
 export class PepGenericListModule { }

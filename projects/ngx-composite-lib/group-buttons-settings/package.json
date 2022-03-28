@@ -10,8 +10,5 @@
                 "@pepperi-addons/ngx-lib/icon": "ngx-lib/icon"
             }
         }
-    },
-    "peerDependencies": {
-        "@pepperi-addons/ngx-lib": "^0.3.0"
     }
 }

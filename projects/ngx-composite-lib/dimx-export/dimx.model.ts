@@ -1,6 +1,6 @@
-type fileStatus = 'uploading'|'downloading'|'done'|'failed'|'hidden';
-export class IFile {
-    key = 0;
-    name = '';
-    status: fileStatus = 'downloading';
-    }
+import { FileStatusType, FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+
+export class IFileExt extends FileStatus {
+    status: FileStatusType = 'downloading';
+    returnedObject?: any;
+}

@@ -6,6 +6,7 @@ import { PepIconRegistry, pepIconSystemDoc } from '@pepperi-addons/ngx-lib/icon'
 import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
 import { PepIconModule } from '@pepperi-addons/ngx-lib/icon';
 import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { PepSnackBarModule } from '@pepperi-addons/ngx-lib/snack-bar';
 
 const pepIcons = [
     pepIconSystemDoc,
@@ -21,6 +22,7 @@ const pepIcons = [
         PepButtonModule,
         PepIconModule,
         PepFileStatusPanelModule,
+        PepSnackBarModule,
     ],
     exports: [DIMXComponent]
 })

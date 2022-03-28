@@ -3,7 +3,7 @@
         <div *ngIf="showTopBar" class="inline-top-bar-container">
             <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
         </div>
-        <ng-container *ngIf="showBreadCrumbs">
+        <ng-container *ngIf="breadCrumbsItems.length > 0">
             <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
         </ng-container>
     </div>
@@ -14,11 +14,9 @@
     <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
     </ng-container>
-
-    <ng-container *ngIf="showBreadCrumbs" pep-top-area>
+    <ng-container *ngIf="breadCrumbsItems.length > 0" pep-top-area>
         <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
     </ng-container>
-
     <div pep-main-area class="main-area-container">
         <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
     </div>
@@ -32,33 +30,25 @@
         <div header-end-content>
             <ng-content select="[right-buttons]"></ng-content>
         </div>
-        <pep-list-actions [sizeType]="inline ? 'sm' : 'md'" [actions]="menuActions"
-            (actionClick)="onMenuItemClicked($event)"></pep-list-actions>
-        <pep-list-total [sizeType]="inline ? 'sm' : 'md'" [totalRows]="customList ? customList.totalRows : -1">
+
+        <pep-list-actions *ngIf="menuActions.length > 0" [sizeType]="inline ? 'sm' : 'md'" [actions]="menuActions"
+            (actionClick)="onActionItemClicked($event)"></pep-list-actions>
+        <pep-list-total [sizeType]="inline ? 'sm' : 'md'" [totalRows]="totalRowCount">
         </pep-list-total>
 
-        <pep-search *ngIf="showSearch" [sizeType]="inline ? 'sm' : 'md'" (search)="onSearchChanged($event)">
+        <pep-search *ngIf="showSearch" [value]="searchString" [sizeType]="inline ? 'sm' : 'md'"
+            (search)="onSearchChanged($event)">
         </pep-search>
     </pep-top-bar>
 </ng-template>
 
 <ng-template #breadCrumbsTemplate>
-    <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbs" [addSpacing]="true" [displayType]="'items'"
+    <pep-bread-crumbs class="bread-crumbs" [items]="breadCrumbsItems" [addSpacing]="true" [displayType]="'items'"
         (itemClick)="onBreadCrumbItemClick($event)"></pep-bread-crumbs>
 </ng-template>
 
 <ng-template #listTemplate>
-    <div #listContainer class="list-container">
-        <pep-list *ngIf="hasRows" viewType="table" [supportSorting]="supportSorting"
-            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')"
-            [pagerType]="pagerType" [pageSize]="pageSize" [pageIndex]="pageIndex" [noDataFoundMsg]="noDataFoundMsg"
-            (fieldClick)="onCustomizeFieldClick($event)" [firstFieldAsLink]="firstFieldAsLink"
-            (selectedItemsChange)="selectedRowsChanged($event)">
-        </pep-list>
-        <ng-container *ngIf="!hasRows">
-            <div class="noDataFoundMsg">
-                <h2>{{noDataFoundMsg}}</h2>
-            </div>
-        </ng-container>
+    <div class="list-container">
+        <ng-container #pepListContainer></ng-container>
     </div>
 </ng-template>
