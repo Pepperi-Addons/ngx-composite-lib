@@ -1,0 +1,16 @@
+<div>Addon block loader</div>
+<ng-container *ngIf="!isOnPopUp">
+    <remote-loader 
+        [hostObject]="hostObject"
+        [remotePathOptions]="remotePathOptions"
+        (hostEvents)="onHostEvents($event)"
+        (blockLoad)="onBlockLoad()">
+    </remote-loader>
+</ng-container>
+
+<!-- <pep-remote-loader *ngIf="remotePathOptions !== null"  class="remote-loader"
+            [options]="remotePathOptions"
+            [hostObject]="hostObject"
+            (hostEvents)="onHostEvents($event);"
+            (load)="onBlockLoad($event)">
+</pep-remote-loader> -->

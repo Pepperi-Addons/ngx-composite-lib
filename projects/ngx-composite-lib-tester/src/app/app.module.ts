@@ -8,13 +8,13 @@ import { AppComponent } from './app.component';
 import { PepAddonService } from '@pepperi-addons/ngx-lib';
 import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 import { NgxLibHelperModule } from './common/ngx-helper.module';
-
 import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
 import { PepColorSettingsModule } from '@pepperi-addons/ngx-composite-lib/color-settings';
 import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shadow-settings';
 import { PepGroupButtonsSettingsModule } from '@pepperi-addons/ngx-composite-lib/group-buttons-settings';
 import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
+
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
 import { PepDIMXModule } from 'projects/ngx-composite-lib/dimx-export';
 import { ComponentsExampleComponent } from './components-example/components-example.component';

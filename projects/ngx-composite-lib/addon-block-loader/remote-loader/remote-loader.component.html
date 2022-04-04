@@ -1,0 +1,7 @@
+<div>Remote loader</div>
+<pep-remote-loader *ngIf="remotePathOptions"
+            [options]="remotePathOptions"
+            [hostObject]="hostObject"
+            (hostEvents)="onHostEvents($event);"
+            (load)="onBlockLoad()">
+</pep-remote-loader>
