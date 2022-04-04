@@ -1,11 +1,7 @@
-import { Component, OnInit, Injectable, Input, Output, EventEmitter, Optional, Inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { PepDialogService } from '@pepperi-addons/ngx-lib/dialog';
-import { PepTextboxComponent } from '@pepperi-addons/ngx-lib/textbox';
-import { AddonEndpoint } from '@pepperi-addons/papi-sdk/dist/endpoints';
+import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
+import { PepDialogService, PepDialogSizeType } from '@pepperi-addons/ngx-lib/dialog';
 import { PepRemoteLoaderOptions } from '@pepperi-addons/ngx-remote-loader';
-import { AddonBlockLoaderService } from './addon-block-loader-service';
-import { RemoteLoaderComponent } from './remote-loader/remote-loader.component';
+import { AddonBlockLoaderService, addonClockType } from './addon-block-loader-service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -14,81 +10,29 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrls: ['./addon-block-loader.component.scss']
 })
 export class AddonBlockLoaderComponent implements OnInit {
-   
-    @Input() blockType: string = 'assets-manager';
+    @ViewChild('dialogTemplate', { read: TemplateRef }) dialogTemplate: TemplateRef<any> | undefined;
+    
+    @Input() blockType: addonClockType = 'assets-manager';
     @Input() isOnPopUp: boolean = true;
-    // @Input() filesList: Array<FileStatus> = [];
-    @Input() hostObject = {};
+    @Input() hostObject = null;
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() blockLoad: EventEmitter<void> = new EventEmitter<void>();
     
-    private dialogRef: MatDialogRef<RemoteLoaderComponent> | null = null;
-
-    blockData = {
-        remoteEntry: '',
-        addonUUID: '',
-        key: ''
-    };
-    
-    remotePathOptions: any = null;
-
-    // remotePathOptions  = {
-    //     key:  '',
-    //     addonId: this.addonUUID,
-    //     remoteEntry: /*this.remoteEntry,*/'https://cdn.pepperi.com/Addon/Public/ad909780-0c23-401e-8e8e-f514cc4f6aa2/0.0.8/addon.js',// this.getRemoteEntryByType(relation, 
-    //     remoteName: 'addon',
-    //     exposedModule: './AddonModule',
-    //     componentName: 'AddonComponent'
-    // }
-
+    remotePathOptions: PepRemoteLoaderOptions = null;
+    private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(private addonBlockLoaderService: AddonBlockLoaderService, private dialogService: PepDialogService) {
        
     }
     
-
-     async ngOnInit() {
-         this.remotePathOptions = await this.getRemoteOptions();
-        // this.setRemoteOptions().then(res => {
-        //     this.remotePathOptions = res;
-        // });
-        
-        // TODO: Change this to open in function
-        if (this.isOnPopUp) {
-            this.dialogRef = this.dialogService.openDialog(
-                RemoteLoaderComponent, {
-                    remotePathOptions: this.remotePathOptions,
-                    hostObject: this.hostObject,
-                },
-            );
-    
-            // TODO: Return another event for this or expose this.dialogRef to the user
-            // this.dialogRef.afterClosed().subscribe((value) => {
-            //     if (value !== undefined && value !== null) {
-                    
-            //     }
-            // });
-        }
+    ngOnInit() {
+        this.loadRemoteOptions();
     }
 
-    async getRemoteOptions() {
-
-        this.blockData = await this.addonBlockLoaderService.getPublicBaseURL(this.blockType);
-
-        return {
-            addonId: this.blockData.addonUUID,
-            remoteEntry: this.blockData.remoteEntry,
-            remoteName: 'addon',
-            exposedModule: './AddonModule',
-            displayName: '',
-            componentName: 'AddonComponent', 
-        };
+    async loadRemoteOptions() {
+        this.remotePathOptions = await this.addonBlockLoaderService.getRemoteLoaderOptions(this.blockType);
     }
-
-    // onCloseClicked(event: any): void {
-    //     this.closeClick.emit();
-    // }
 
     onBlockLoad() {
         this.blockLoad.emit();
@@ -98,5 +42,29 @@ export class AddonBlockLoaderComponent implements OnInit {
         this.hostEvents.emit(event);
     }
 
+    closeDialog(event: any) {
+        if (this.dialogRef) {
+            this.dialogRef.close(event);
+        }
+    }
 
+    openDialog(title: string, size: PepDialogSizeType = 'large') {
+        if (this.isOnPopUp) {
+            const config = this.dialogService.getDialogConfig({}, size);
+            const data = {
+                title: title,
+                remotePathOptions: this.remotePathOptions,
+                hostObject: this.hostObject,
+            }
+
+            this.dialogRef = this.dialogService.openDialog(this.dialogTemplate as TemplateRef<any>, data, config);
+                
+            // TODO: Return another event for this or expose this.dialogRef to the user
+            // this.dialogRef.afterClosed().subscribe((value) => {
+            //     if (value !== undefined && value !== null) {
+                    
+            //     }
+            // });
+        }
+    }
 }

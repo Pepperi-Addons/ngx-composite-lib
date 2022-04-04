@@ -1,8 +1,5 @@
 import { Component, OnInit, Injectable, Input, Output, EventEmitter, Optional, Inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { AddonEndpoint } from '@pepperi-addons/papi-sdk/dist/endpoints';
-import { PepRemoteLoaderOptions } from '@pepperi-addons/ngx-remote-loader';
-import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 //import { AddonBlockLoaderService } from './addon-block-loader-service';
 
 export interface IRemoteLoaderData {
@@ -14,7 +11,6 @@ export interface IRemoteLoaderData {
     selector: 'remote-loader',
     templateUrl: './remote-loader.component.html'
 })
-
 export class RemoteLoaderComponent implements OnInit {
     @Input() remotePathOptions: any = null;
     @Input() hostObject: any;
@@ -22,19 +18,9 @@ export class RemoteLoaderComponent implements OnInit {
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() blockLoad: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(
-        @Optional()
-        private dialogRef: MatDialogRef<RemoteLoaderComponent>,
-        @Optional()
-        @Inject(MAT_DIALOG_DATA) 
-        private data: IRemoteLoaderData) {
+    constructor() {
         
-        if (this.dialogRef && this.data?.hostObject && this.data?.remotePathOptions) {
-            this.dialogRef.afterOpened().subscribe((res) => {
-                debugger;
-                this.remotePathOptions = this.data.remotePathOptions;
-                this.hostObject = this.data.hostObject;
-            });
+        if (this.remotePathOptions && this.hostObject) {
             
             // this.dialogRef.componentInstance.hostEvents.subscribe((event) => {
             //     this.onHostEvents(event);
