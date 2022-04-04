@@ -41,7 +41,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@pepperi-addons/data-views": "0.0.2",
-    "@pepperi-addons/ngx-lib": "^0.3.12-beta.2",
+    "@pepperi-addons/ngx-lib": "^0.3.12-beta.8",
     "@pepperi-addons/ngx-remote-loader": "0.0.37",
     "@angular-architects/module-federation": "^12.5.3",
     "@angular-architects/module-federation-tools": "^12.5.3",

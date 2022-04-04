@@ -16,8 +16,6 @@ export class AddonBlockLoaderService {
     pagesUUID = '50062e0c-9967-4ed4-9102-f2bc50602d41';
     assetsUUID = 'ad909780-0c23-401e-8e8e-f514cc4f6aa2';
 
-    'assets-manager'
-
     get papiClient(): PapiClient {
         return new PapiClient({
             baseURL: this.papiBaseURL,

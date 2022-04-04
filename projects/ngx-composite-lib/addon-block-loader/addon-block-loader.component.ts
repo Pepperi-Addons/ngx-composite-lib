@@ -19,7 +19,7 @@ export class AddonBlockLoaderComponent implements OnInit {
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() blockLoad: EventEmitter<void> = new EventEmitter<void>();
     
-    remotePathOptions: PepRemoteLoaderOptions = null;
+    remotePathOptions: PepRemoteLoaderOptions | null = null;
     private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(private addonBlockLoaderService: AddonBlockLoaderService, private dialogService: PepDialogService) {
