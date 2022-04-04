@@ -41,6 +41,7 @@
         "RESET_HINT": "Screen sizes support"
     },
     "ACTIONS": {
-        "RESET": "Reset"
+        "RESET": "Reset",
+        "CLOSE": "Close"
     }
 }

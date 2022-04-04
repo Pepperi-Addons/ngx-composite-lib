@@ -1,5 +1,5 @@
 <!-- <div>Addon block loader</div> -->
-<ng-container *ngIf="!isOnPopUp">
+<ng-container *ngIf="!inDialog">
     <pep-remote-loader *ngIf="remotePathOptions"
         [options]="remotePathOptions"
         [hostObject]="hostObject"
@@ -7,13 +7,6 @@
         (load)="onBlockLoad()">
     </pep-remote-loader>
 </ng-container>
-
-<!-- <pep-remote-loader *ngIf="remotePathOptions !== null"  class="remote-loader"
-            [options]="remotePathOptions"
-            [hostObject]="hostObject"
-            (hostEvents)="onHostEvents($event);"
-            (load)="onBlockLoad($event)">
-</pep-remote-loader> -->
 
 <ng-template #dialogTemplate let-data>
     <pep-dialog [title]="data.title">
@@ -27,7 +20,7 @@
         </ng-container>
         <div pep-dialog-actions class="spacing-element-negative">
             <button mat-button (click)="closeDialog($event)" class="spacing-element pep-button md weak">
-                {{ 'Close' | translate }}
+                {{ 'ACTIONS.CLOSE' | translate }}
             </button>
         </div>
     </pep-dialog>

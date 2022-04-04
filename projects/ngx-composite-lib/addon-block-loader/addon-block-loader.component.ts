@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { PepDialogService, PepDialogSizeType } from '@pepperi-addons/ngx-lib/dialog';
 import { PepRemoteLoaderOptions } from '@pepperi-addons/ngx-remote-loader';
-import { AddonBlockLoaderService, addonClockType } from './addon-block-loader-service';
+import { AddonBlockLoaderService } from './addon-block-loader-service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { addonBlockType } from './addon-block-loader-model';
 
 @Component({
     selector: 'pep-addon-block-loader',
@@ -12,9 +13,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AddonBlockLoaderComponent implements OnInit {
     @ViewChild('dialogTemplate', { read: TemplateRef }) dialogTemplate: TemplateRef<any> | undefined;
     
-    @Input() blockType: addonClockType = 'assets-manager';
-    @Input() isOnPopUp: boolean = true;
+    @Input() blockType: addonBlockType = '';
     @Input() hostObject = null;
+    @Input() inDialog: boolean = true;
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() blockLoad: EventEmitter<void> = new EventEmitter<void>();
@@ -48,8 +49,8 @@ export class AddonBlockLoaderComponent implements OnInit {
         }
     }
 
-    openDialog(title: string, size: PepDialogSizeType = 'large') {
-        if (this.isOnPopUp) {
+    openDialog(title: string, size: PepDialogSizeType = 'full-screen') {
+        if (this.inDialog) {
             const config = this.dialogService.getDialogConfig({}, size);
             const data = {
                 title: title,
