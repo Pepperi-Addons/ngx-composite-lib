@@ -1,0 +1,15 @@
+::ng-deep .mat-dialog-container{
+    .mat-dialog-content{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        .pep-top-bar-container{
+            height: 3rem;
+            .header-content{
+                margin-top: 0 !important;
+            }
+        }
+    }
+    .mat-dialog-actions{
+        padding-top: .5rem !important;
+    }
+}

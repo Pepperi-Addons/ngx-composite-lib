@@ -9,7 +9,7 @@
 </ng-container>
 
 <ng-template #dialogTemplate let-data>
-    <pep-dialog [title]="data.title">
+    <pep-dialog [title]="data?.title" [showHeader]="data?.showHeader">
         <ng-container pep-dialog-content>
             <pep-remote-loader 
                 [options]="data.remotePathOptions"
@@ -18,10 +18,12 @@
                 (load)="onBlockLoad()">
             </pep-remote-loader>
         </ng-container>
-        <div pep-dialog-actions class="spacing-element-negative">
-            <button mat-button (click)="closeDialog($event)" class="spacing-element pep-button md weak">
+        <!-- <div pep-dialog-actions class="spacing-element-negative">
+            <button mat-button (click)="closeDialog($event)" class="pep-spacing-element pep-button sm weak">
                 {{ 'ACTIONS.CLOSE' | translate }}
+            </button><button mat-button (click)="doneDialog($event)" class="pep-spacing-element pep-button sm strong">
+                {{ 'ACTIONS.DONE' | translate }}
             </button>
-        </div>
+        </div> -->
     </pep-dialog>
 </ng-template>

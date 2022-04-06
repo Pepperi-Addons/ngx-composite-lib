@@ -13,8 +13,8 @@ import { addonBlockType } from './addon-block-loader-model';
 export class AddonBlockLoaderComponent implements OnInit {
     @ViewChild('dialogTemplate', { read: TemplateRef }) dialogTemplate: TemplateRef<any> | undefined;
     
-    @Input() blockType: addonBlockType = '';
-    @Input() hostObject = null;
+    @Input() blockType: addonBlockType = 'assets-manager';
+    @Input() hostObject: any;
     @Input() inDialog: boolean = true;
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
@@ -24,7 +24,7 @@ export class AddonBlockLoaderComponent implements OnInit {
     private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(private addonBlockLoaderService: AddonBlockLoaderService, private dialogService: PepDialogService) {
-       
+
     }
     
     ngOnInit() {
@@ -49,16 +49,23 @@ export class AddonBlockLoaderComponent implements OnInit {
         }
     }
 
-    openDialog(title: string, size: PepDialogSizeType = 'full-screen') {
-        if (this.inDialog) {
-            const config = this.dialogService.getDialogConfig({}, size);
-            const data = {
-                title: title,
-                remotePathOptions: this.remotePathOptions,
-                hostObject: this.hostObject,
-            }
+ 
 
-            this.dialogRef = this.dialogService.openDialog(this.dialogTemplate as TemplateRef<any>, data, config);
+    openDialog(title: string, showHeader: boolean = true, size: PepDialogSizeType = 'full-screen', hostObject: any = {}) {
+            
+        this.hostObject = hostObject;
+        this.hostObject.inDialog = true;
+        
+        //await this.loadRemoteOptions();
+        const config = this.dialogService.getDialogConfig({}, size);
+        const data = {
+                title: title,
+                showHeader: showHeader,
+                remotePathOptions: this.remotePathOptions,
+                hostObject: this.hostObject
+        }
+
+        this.dialogRef = this.dialogService.openDialog(this.dialogTemplate as TemplateRef<any>, data, config);
                 
             // TODO: Return another event for this or expose this.dialogRef to the user
             // this.dialogRef.afterClosed().subscribe((value) => {
@@ -66,6 +73,5 @@ export class AddonBlockLoaderComponent implements OnInit {
                     
             //     }
             // });
-        }
     }
 }
