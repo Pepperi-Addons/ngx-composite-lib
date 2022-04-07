@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { AddonBlockLoaderService } from 'projects/ngx-composite-lib/addon-block-loader';
 import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-export';
 
 @Component({
@@ -8,12 +9,14 @@ import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-
     styleUrls: ['./components-example.component.scss'],
 })
 export class ComponentsExampleComponent implements OnInit {
+    @ViewChild('addonLoaderContainer', { read: ViewContainerRef }) addonLoaderContainer!: ViewContainerRef;
+    
     @ViewChild('dimx') dimx:DIMXComponent | undefined;
     public files: Array<FileStatus> = [];
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter();
     
-    constructor() { 
+    constructor(private addonBlockLoaderService: AddonBlockLoaderService) { 
         //
     }
 
@@ -65,5 +68,11 @@ export class ComponentsExampleComponent implements OnInit {
                 this.files = [];
             }
         }, 2000);
+    }
+
+    openDialog() {
+        debugger;
+        this.addonBlockLoaderService.openDialog(this.addonLoaderContainer, 'assets-manager', {}, this.hostEvents);
+        // this.addonBlockLoaderService.loadAddonBlock(this.addonLoaderContainer, 'assets-manager', {}, this.hostEvents);
     }
 }

@@ -7,6 +7,7 @@ import { PepIconRegistry, pepIconTextAlignCenter, pepIconTextAlignLeft, pepIconT
 import { PepAddonLoaderModule } from '@pepperi-addons/ngx-remote-loader';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
+import { AddonBlockLoaderService } from './addon-block-loader.service';
 
 const pepIcons = [
     pepIconTextAlignCenter, 
@@ -25,7 +26,8 @@ const pepIcons = [
         PepDialogModule,
         MatDialogModule
     ],
-    exports: [AddonBlockLoaderComponent]
+    exports: [AddonBlockLoaderComponent],
+    providers: [AddonBlockLoaderService]
 })
 export class PepAddonBlockLoaderModule { 
     constructor(

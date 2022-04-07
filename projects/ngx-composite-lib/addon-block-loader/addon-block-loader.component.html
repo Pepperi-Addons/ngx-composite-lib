@@ -1,29 +1,20 @@
-<!-- <div>Addon block loader</div> -->
 <ng-container *ngIf="!inDialog">
+    <ng-container *ngTemplateOutlet="remoteLoaderTemplate"></ng-container>
+</ng-container>
+
+<ng-template #dialogTemplate let-data>
+    <pep-dialog [showClose]="data?.showClose" [showHeader]="data?.showHeader" [showFooter]="data?.showFooter" [title]="data?.title">
+        <ng-container pep-dialog-content>
+            <ng-container *ngTemplateOutlet="remoteLoaderTemplate"></ng-container>
+        </ng-container>
+    </pep-dialog>
+</ng-template>
+
+<ng-template #remoteLoaderTemplate>
     <pep-remote-loader *ngIf="remotePathOptions"
         [options]="remotePathOptions"
         [hostObject]="hostObject"
         (hostEvents)="onHostEvents($event);"
         (load)="onBlockLoad()">
     </pep-remote-loader>
-</ng-container>
-
-<ng-template #dialogTemplate let-data>
-    <pep-dialog [title]="data?.title" [showHeader]="data?.showHeader">
-        <ng-container pep-dialog-content>
-            <pep-remote-loader 
-                [options]="data.remotePathOptions"
-                [hostObject]="data.hostObject"
-                (hostEvents)="onHostEvents($event);"
-                (load)="onBlockLoad()">
-            </pep-remote-loader>
-        </ng-container>
-        <!-- <div pep-dialog-actions class="spacing-element-negative">
-            <button mat-button (click)="closeDialog($event)" class="pep-spacing-element pep-button sm weak">
-                {{ 'ACTIONS.CLOSE' | translate }}
-            </button><button mat-button (click)="doneDialog($event)" class="pep-spacing-element pep-button sm strong">
-                {{ 'ACTIONS.DONE' | translate }}
-            </button>
-        </div> -->
-    </pep-dialog>
 </ng-template>

@@ -85,7 +85,8 @@
                         "styles": [
                             "projects/ngx-composite-lib-tester/src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "preserveSymlinks": true
                     },
                     "configurations": {
                         "production": {
