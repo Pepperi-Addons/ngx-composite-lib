@@ -1,5 +1,7 @@
 ::ng-deep .mat-dialog-container {
-    .mat-dialog-content{
+    .mat-dialog-content {
+        max-height: unset;
+        height: 100%;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
         
