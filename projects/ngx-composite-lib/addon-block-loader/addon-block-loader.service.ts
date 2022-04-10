@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, EventEmitter, Injectable, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
 import {PepHttpService} from '@pepperi-addons/ngx-lib';
 import { PepRemoteLoaderOptions } from '@pepperi-addons/ngx-remote-loader';
-import { addonBlockType, assetsManager, IAddonBlockLoaderDialogDataOptions, IAddonBlockLoaderDialogOptions, IAddonBlockLoaderOptions } from './addon-block-loader.model';
+import { addonBlockType, assetsPicker, IAddonBlockLoaderDialogDataOptions, IAddonBlockLoaderDialogOptions, IAddonBlockLoaderOptions, scriptPicker } from './addon-block-loader.model';
 import { AddonBlockLoaderComponent } from './addon-block-loader.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PepDialogData, PepDialogService, PepDialogSizeType } from '@pepperi-addons/ngx-lib/dialog';
@@ -30,8 +30,13 @@ export class AddonBlockLoaderService {
         let defaultComponentName = 'AddonComponent';
 
         switch (blockType) {
-            case 'assets-manager':
-                addon = await this.getInstalledAddons(assetsManager.addonId);
+            case 'assets-picker':
+                addon = await this.getInstalledAddons(assetsPicker.addonId);
+                break;
+            case 'script-picker':
+                addon = await this.getInstalledAddons(scriptPicker.addonId);
+                defaultModuleName = 'ScriptPickerModule';
+                defaultComponentName = 'ScriptPickerComponent';
                 break;
         
             default:
