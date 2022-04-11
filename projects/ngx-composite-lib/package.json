@@ -1,6 +1,6 @@
 {
     "name": "@pepperi-addons/ngx-composite-lib",
-    "version": "0.0.15-beta.1",
+    "version": "0.0.15-beta.2",
     "peerDependencies": {
         "@angular/animations": ">= 12.0.0",
         "@angular/cdk": ">= 12.0.0",
@@ -14,7 +14,6 @@
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
         "@pepperi-addons/ngx-lib": "^0.3.12",
-        "@pepperi-addons/ngx-remote-loader": "0.0.37",
         "@angular-architects/module-federation": "^12.5.3",
         "@angular-architects/module-federation-tools": "^12.5.3",
         "ngx-translate-multi-http-loader": "^3.0.0",
