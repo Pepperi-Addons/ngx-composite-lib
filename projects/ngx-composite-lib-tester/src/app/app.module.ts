@@ -27,7 +27,6 @@ import {
     TranslateService,
 } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { PepAddonBlockLoaderModule } from 'projects/ngx-composite-lib/addon-block-loader';
 
 @NgModule({
     declarations: [
@@ -52,7 +51,6 @@ import { PepAddonBlockLoaderModule } from 'projects/ngx-composite-lib/addon-bloc
         PepFileStatusPanelModule,
         PepGenericListModule,
         PepGenericFormModule,
-        PepAddonBlockLoaderModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
