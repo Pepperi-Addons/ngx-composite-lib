@@ -6,7 +6,7 @@ import { DataViewConverter } from '@pepperi-addons/data-views';
 
 import {
     IPepGenericFormDataSource,
-    IPepGenericFormDataView,    
+    IPepGenericFormDataView,
     PepGenericFormService
 } from '@pepperi-addons/ngx-composite-lib/generic-form';
 
@@ -68,8 +68,8 @@ export class GenericFormExampleComponent implements OnInit {
 
     ngOnInit(): void {
         //
-      //  console.log('data view', DataViewConverter.toDataView(uiControlData));
-      //  console.log('data view 2', this.dataView);
+        //  console.log('data view', DataViewConverter.toDataView(uiControlData));
+        //  console.log('data view 2', this.dataView);
 
     }
 
@@ -77,10 +77,31 @@ export class GenericFormExampleComponent implements OnInit {
 
     onValueChanged(event: any) {
         console.log('on form value changed', event)
-      //  this.isLocked = true;
+        //  this.isLocked = true;
     }
 
     onGetDataClicked() {
-        console.log('get data', this.genericFormService.getData());
+        //console.log('get data', this.genericFormService.getData());
+        this.dataView = {
+            UID: 'AAAA-DCBA-FGHD-DDDD',
+            Type: 'Form',
+            Hidden: false,
+            Columns: [{}],
+            Context: {
+                Object: {
+                    Resource: 'transactions',
+                    InternalID: 290714,
+                    Name: 'Form2'
+                },
+                Name: 'OrderCartItemForm',
+                ScreenSize: 'Tablet',
+                Profile: {
+                    InternalID: 46273,
+                    Name: 'Rep'
+                }
+            },
+            Fields: [FakeDataViewFields[0], FakeDataViewFields[1], FakeDataViewFields[2], FakeDataViewFields[3]],
+            Rows: []
+        }
     }
 }

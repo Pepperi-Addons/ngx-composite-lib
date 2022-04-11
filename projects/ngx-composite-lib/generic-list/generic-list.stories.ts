@@ -27,8 +27,96 @@ export default {
     argTypes: {
         dataSource: {
             description: 'This is a data source',
-           
+            defaultValue: {
+                init: async (params: any) => {
+                    return {
+                        dataView: {
+                            Context: {
+                                Name: '',
+                                Profile: { InternalID: 0 },
+                                ScreenSize: 'Landscape'
+                            },
+                            Type: 'Grid',
+                            Title: '',
+                            Fields: [
+                                {
+                                    FieldID: 'UUID',
+                                    Type: 'TextBox',
+                                    Title: 'UUID',
+                                    Mandatory: false,
+                                    ReadOnly: true
+                                },
+                                {
+                                    FieldID: 'Description',
+                                    Type: 'TextBox',
+                                    Title: 'Description',
+                                    Mandatory: false,
+                                    ReadOnly: true
+                                },
+                                {
+                                    FieldID: 'Version',
+                                    Type: 'TextBox',
+                                    Title: 'Version',
+                                    Mandatory: false,
+                                    ReadOnly: true
+                                },
+                                {
+                                    FieldID: 'Type',
+                                    Type: 'TextBox',
+                                    Title: 'Type',
+                                    Mandatory: false,
+                                    ReadOnly: true
+                                },
+                                {
+                                    FieldID: 'CreationDate',
+                                    Type: 'TextBox',
+                                    Title: 'Creation Date',
+                                    Mandatory: false,
+                                    ReadOnly: true
+                                }
+                            ],
+                            Columns: [
+                                { Width: 15 },
+                                { Width: 30 },
+                                { Width: 15 },
+                                { Width: 20 },
+                                { Width: 20 }
+                            ],
+                            FrozenColumnsCount: 0,
+                            MinimumColumnWidth: 0
+                        },
+                        totalCount: 3,
+                        items: [
+                            {
+                                UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
+                                Description: 'Manage your add-ons',
+                                Version: 'v1.0',
+                                Type: 1,
+                                CreationDate: '2020-04-22T11:56:09.863Z'
+                            },
+                            {
+                                UUID: 'bd629d5f-a7b4-4d03-9e7c-67865a6d82a9',
+                                Description: 'Manage the addons (install, uninstall, upgrade)',
+                                Version: '0.3.3',
+                                Type: 1,
+                                CreationDate: '2020-06-08T09:39:08.703Z',
+
+                            },
+                            {
+                                UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                                Description: 'Run, Schedule and Audit your jobs',
+                                Version: '1.0.53',
+                                Type: 1,
+                                CreationDate: '2020-06-09T07:44:49.883Z'
+
+                            }
+                        ]
+                    }
+                }
+            }
+
         },
+        actions: {},
         breadCrumbsItems: {
             description: 'This is a list of Bread Crumbs items',
             defaultValue: [],
@@ -44,10 +132,17 @@ export default {
         },
         uuidMapping: {
             description: 'This is the name of the table column used for UUID Mapping ',
+            defaultValue: 'key',
             control: 'text'
+        },
+        disabled: {
+            description: 'is the form locked for edit?',
+            defaultValue: false,
+            control: 'boolean',
         },
         addPadding: {
             description: 'Add container padding?',
+            defaultValue: false,
             control: 'boolean'
         },
         title: {
@@ -56,15 +151,17 @@ export default {
         },
         inline: {
             description: 'Is inline?',
+            defaultValue: false,
             control: 'boolean'
         },
         showSearch: {
             description: 'Show search box?',
+            defaultValue: false,
             control: 'boolean'
         },
         selectionType: {
             description: 'This is the table selection type',
-            defaultValue: 'multi',
+            defaultValue: 'single',
             options: [
                 'multi',
                 'single',
@@ -75,7 +172,7 @@ export default {
                 type: {
                     summary: `'multi' | 'single' | 'none'`,
                 },
-                defaultValue: { summary: 'multi' },
+                defaultValue: { summary: 'single' },
             }
         },
         noDataFoundMsg: {
@@ -91,12 +188,14 @@ export default {
             control: 'boolean'
         },
         showTopBar: {
-            description: 'Show Top Bar?',           
+            description: 'Show Top Bar?',
             control: 'boolean'
         },
         pager: {
             description: 'Table paging type',
-            defaultValue: null,
+            defaultValue: {
+                type: 'scroll'
+            },
             table: {
                 type: {
                     summary: 'IPepGenericListPager'
@@ -105,6 +204,26 @@ export default {
                     summary: `type: 'scroll'`
                 }
             }
+        },
+        tableViewType: {
+            description: 'line height type',
+            defaultValue: 'regular',
+            options: [
+                'compact',
+                'regular'
+            ],
+            control: { type: 'radio' },
+            table: {
+                type: {
+                    summary: `'compact' | 'regular'`,
+                },
+                defaultValue: { summary: 'regular' },
+            }
+        },
+        zebraStripes: {
+            description: 'show zebra stripes?',
+            defaultValue: false,
+            control: 'boolean'
         }
     },
     parameters: {
@@ -121,7 +240,9 @@ export default {
                 'noDataFoundMsg',
                 'supportSorting',
                 'showTopBar',
-                'pager'
+                'pager',
+                'tableViewType',
+                'zebraStripes'
             ],
         },
     }

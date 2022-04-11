@@ -7,8 +7,10 @@ import { PepFormModule } from '@pepperi-addons/ngx-lib/form';
 import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
+import { PepSideBarModule } from '@pepperi-addons/ngx-lib/side-bar';
 import { PepSearchModule } from '@pepperi-addons/ngx-lib/search';
 import { PepBreadCrumbsModule } from '@pepperi-addons/ngx-lib/bread-crumbs';
+import { PepSmartFiltersModule } from '@pepperi-addons/ngx-lib/smart-filters';
 
 import { PepGenericListService } from './generic-list.service';
 
@@ -24,14 +26,16 @@ import { PepGenericListService } from './generic-list.service';
         PepMenuModule,
         PepPageLayoutModule,
         PepTopBarModule,
+        PepSideBarModule,
         PepSearchModule,
-        PepBreadCrumbsModule
+        PepBreadCrumbsModule,
+        PepSmartFiltersModule
     ],
     exports: [
-        GenericListComponent
-    ],
+        GenericListComponent        
+    ]/*,
     providers: [
         PepGenericListService
-    ]
+    ] */
 })
 export class PepGenericListModule { }
