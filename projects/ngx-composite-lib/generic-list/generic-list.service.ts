@@ -125,7 +125,7 @@ export class PepGenericListService {
         }
 
         return smartFields;
-    };
+    }
 
 
 }

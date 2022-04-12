@@ -438,6 +438,6 @@ export class GenericListExampleComponent implements OnInit {
     }
 
     onBtn2Clicked() {
-
+        //
     }
 }

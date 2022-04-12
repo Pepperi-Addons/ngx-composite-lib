@@ -138,7 +138,7 @@ export class GenericListComponent implements OnInit {
     set smartFilter(val: IPepGenericListSmartFilter) {
         this.internalSmartFilter = this._genericListService.convertToSmartFilter(val);
         this.showSmartFilter = this.internalSmartFilter.fields.length > 0;
-    };
+    }
 
     @Input()
     showTopBar = false;
