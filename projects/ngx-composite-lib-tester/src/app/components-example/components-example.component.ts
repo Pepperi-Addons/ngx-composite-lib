@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { IFile } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-export';
 
 @Component({
@@ -9,7 +9,7 @@ import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-
 })
 export class ComponentsExampleComponent implements OnInit {
     @ViewChild('dimx') dimx:DIMXComponent | undefined;
-    public files: Array<IFile> = [];
+    public files: Array<FileStatus> = [];
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter();
     
@@ -51,7 +51,7 @@ export class ComponentsExampleComponent implements OnInit {
     }
 
     addFiles(){
-        const file: IFile = new IFile();
+        const file: FileStatus = new FileStatus();
         file.name = 'Test';
         file.status = 'downloading';
         
