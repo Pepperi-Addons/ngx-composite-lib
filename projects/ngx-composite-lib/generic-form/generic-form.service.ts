@@ -27,19 +27,19 @@ export class PepGenericFormService {
         field.FieldType = controlField.FieldType;
         field.Enabled = !controlField.ReadOnly;
         field.Visible = !controlField.Hidden;
-        field.Accessory = "";
+       /* field.Accessory = "";
         field.AdditionalValue = "";
         field.BackgroundColor = "";
-        field.FormattedValue = "";
+        field.FormattedValue = "";*/
         field.GroupFields = [];
         field.Highlighted = false;
-        field.NotificationInfo = "";
+       // field.NotificationInfo = "";
         field.OptionalValues = optionalValues;
-        field.ReferenceObjectInternalType = "";
+       /* field.ReferenceObjectInternalType = "";
         field.ReferenceObjectSubType = "";
         field.ReferenceObjectType = '0';
         field.TextColor = "";
-        field.UiPageKey = "";
+        field.UiPageKey = "";*/
 
         return field;
     }
