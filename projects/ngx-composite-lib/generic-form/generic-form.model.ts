@@ -42,7 +42,7 @@ export interface IPepGenericFormValueChange {
 
 export interface IPepGenericFormFieldUpdate {
     FieldId: string;
-    Params: IPepGenericFormDataParams
+    Params: IPepGenericFormDataParams;
 }
 
 export interface IPepGenericFormDataParams {      
