@@ -9,6 +9,7 @@ import {
     IPepGenericFormDataView,
     PepGenericFormService
 } from '@pepperi-addons/ngx-composite-lib/generic-form';
+import { GenericFormComponent } from '@pepperi-addons/ngx-composite-lib/generic-form';
 
 
 @Component({
@@ -17,6 +18,8 @@ import {
     styleUrls: ['./generic-form-example.component.scss']
 })
 export class GenericFormExampleComponent implements OnInit {
+    @ViewChild('formContainer') formContainer: GenericFormComponent | undefined;
+
     /*dataSource: IPepGenericFormDataSource = {
         UID: 'ABCD-DCBA',
         IsEnabled: true,
@@ -80,8 +83,33 @@ export class GenericFormExampleComponent implements OnInit {
         //  this.isLocked = true;
     }
 
+    getInitialDataView() {
+        return {
+            UID: 'ABCD-DCBA-FGHD-POLK',
+            Type: 'Form',
+            Hidden: false,
+            Columns: [{}],
+            Context: {
+                Object: {
+                    Resource: 'transactions',
+                    InternalID: 290714,
+                    Name: '1OlegImpExpרg'
+                },
+                Name: 'OrderCartItemForm',
+                ScreenSize: 'Tablet',
+                Profile: {
+                    InternalID: 46273,
+                    Name: 'Rep'
+                }
+            },
+            Fields: FakeDataViewFields,
+            Rows: []
+        }
+    }
+
     onGetDataClicked() {
         //console.log('get data', this.genericFormService.getData());
+
         this.dataView = {
             UID: 'AAAA-DCBA-FGHD-DDDD',
             Type: 'Form',
@@ -103,5 +131,49 @@ export class GenericFormExampleComponent implements OnInit {
             Fields: [FakeDataViewFields[0], FakeDataViewFields[1], FakeDataViewFields[2], FakeDataViewFields[3]],
             Rows: []
         }
+        this.dataSource = {
+            ActionDateTime: '2021-10-11T09:26:02Z',
+        }
+    }
+
+    onSaveDataClicked() {
+        /*this.dataView = {
+            UID: 'ABCD-DCBA-FGHD-POLK',
+            Type: 'Form',
+            Hidden: false,
+            Columns: [{}],
+            Context: {
+                Object: {
+                    Resource: 'transactions',
+                    InternalID: 290714,
+                    Name: '1OlegImpExpרg'
+                },
+                Name: 'OrderCartItemForm',
+                ScreenSize: 'Tablet',
+                Profile: {
+                    InternalID: 46273,
+                    Name: 'Rep'
+                }
+            },
+            Fields: FakeDataViewFields,
+            Rows: []
+        }
+        this.dataSource = FakeData;*/
+        this.formContainer?.updateFields([
+            {
+                FieldId: 'ActionDateTime',
+                Params: {
+                    Value: '2021-02-02T09:16:02Z',
+                    Enabled: false
+                }
+            },
+            {
+                FieldId: 'TSATsaTextTest',
+                Params: {
+                    Value: 'other text',
+                    Highlighted: true,
+                }
+            }
+        ]);
     }
 }

@@ -1,5 +1,6 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
+//import { CommonModule } from '@angular/common';
 import { PepGenericFormModule } from './generic-form.module';
 import { GenericFormComponent } from './generic-form.component';
 import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module';
@@ -15,9 +16,11 @@ export default {
         // The necessary modules for the component to work on Storybook
         moduleMetadata({
             imports: [
+                
                 PepGenericFormModule,
                 PepNgxHelperModule
-            ]
+            ],
+           // declarations: [GenericFormComponent]
         })
     ],
     title: 'Components/GenericForm',
@@ -210,7 +213,7 @@ export default {
         formValidationChange: {
             action: 'formValidationChange',
             control: false
-        }*/
+        } */
     },
     parameters: {
         controls: {
@@ -230,13 +233,22 @@ export default {
 
 } as Meta;
 
+/*
 const Template: Story<GenericFormComponent> = (args: GenericFormComponent) => ({
-    props: args/*,
+    props: args,
    template: `
         <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
         (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)" (formValidationChange)="formValidationChange($event)"></pep-generic-form>
-    `*/
+    `
+}); */
+
+const Template: Story = (args) => ({
+    props: args,
+    template: `
+        <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
+        (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)"></pep-generic-form>
+    `
 });
 
 export const Base = Template.bind({});
-Base.args = {}
+//Base.args = {}

@@ -33,8 +33,5 @@
 </ng-template>
 
 <ng-template #formTemplate>
-    <pep-form [layoutType]="'form'" [layout]="uiControl" [data]="formData" [isInternal]="false" [lockFields]="isLocked"
-        (valueChange)="onValueChanged($event)" (fieldClick)="onfieldClicked($event)"
-        (formValidationChange)="onFormValidationChanged($event)">
-    </pep-form>
+    <ng-container #pepFormContainer></ng-container>
 </ng-template>
