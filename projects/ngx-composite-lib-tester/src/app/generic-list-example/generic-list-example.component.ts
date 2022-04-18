@@ -241,7 +241,8 @@ export class GenericListExampleComponent implements OnInit {
             init: async (params: any) => {
                 const dataList = FakeData.Addons;
                 const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                console.log('init params', params);
+                //const filteredData = dataList.slice(0, 5);
+                //console.log('init params', params);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,

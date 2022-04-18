@@ -109,7 +109,6 @@ export class GenericFormExampleComponent implements OnInit {
 
     onGetDataClicked() {
         //console.log('get data', this.genericFormService.getData());
-
         this.dataView = {
             UID: 'AAAA-DCBA-FGHD-DDDD',
             Type: 'Form',
@@ -163,15 +162,7 @@ export class GenericFormExampleComponent implements OnInit {
             {
                 FieldId: 'ActionDateTime',
                 Params: {
-                    Value: '2021-02-02T09:16:02Z',
                     Enabled: false
-                }
-            },
-            {
-                FieldId: 'TSATsaTextTest',
-                Params: {
-                    Value: 'other text',
-                    Highlighted: true,
                 }
             }
         ]);
