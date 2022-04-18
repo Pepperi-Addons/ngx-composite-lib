@@ -3,7 +3,7 @@
         [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'" [breadCrumbsItems]="breadCrumbsItems"
         [disabled]="disableTable" [pager]="pager" title="Generic list inline title" [showSearch]="true"
         (breadCrumbItemClick)="onBreadCrumbClick($event)">
-        <ng-container right-top-area>
+        <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">
             </pep-menu>

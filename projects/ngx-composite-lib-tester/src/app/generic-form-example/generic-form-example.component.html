@@ -1,9 +1,9 @@
-<pep-generic-form [dataSource]="dataSource" [dataView]="dataView" [inline]="inline" [showTopBar]="true"
+<pep-generic-form #formContainer [dataSource]="dataSource" [dataView]="dataView" [inline]="inline" [showTopBar]="true"
     [isLocked]="isLocked" (valueChange)="onValueChanged($event)">
 
     <ng-container right-buttons>
         <pep-button class="pep-spacing-element" [value]="'Save'" [sizeType]="inline ? 'sm' : 'md'"
-            [styleType]="'strong'" (click)="onGetDataClicked()">
+            [styleType]="'strong'" (click)="onSaveDataClicked()">
         </pep-button>
     </ng-container>
 

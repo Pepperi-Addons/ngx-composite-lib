@@ -45,8 +45,12 @@ export interface IPepGenericFormFieldUpdate {
     Params: IPepGenericFormDataParams;
 }
 
-export interface IPepGenericFormDataParams {      
+export interface IPepGenericFormDataParams {   
+    Value?: any;   
     Visible?: boolean;     
-    Enabled?: boolean;         
+    Enabled?: boolean;      
+    BackgroundColor?: string;
+    TextColor?: string;
+    Highlighted?: boolean;   
     OptionalValues?: [];   
 }

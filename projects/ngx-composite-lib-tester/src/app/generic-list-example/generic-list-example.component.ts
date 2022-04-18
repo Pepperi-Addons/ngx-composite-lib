@@ -410,7 +410,7 @@ export class GenericListExampleComponent implements OnInit {
                 Profile: { InternalID: 0 },
                 ScreenSize: 'Landscape'
             },
-            Type: 'SmartFilters',
+            Type: 'Menu',
             Title: '',
             Fields: FakeSmartFilterFields,
             FrozenColumnsCount: 0,
@@ -425,7 +425,7 @@ export class GenericListExampleComponent implements OnInit {
                 Profile: { InternalID: 0 },
                 ScreenSize: 'Landscape'
             },
-            Type: 'SmartFilters',
+            Type: 'Menu',
             Title: '',
             Fields: [FakeSmartFilterFields[0], FakeSmartFilterFields[2]],
             FrozenColumnsCount: 0,
