@@ -1,8 +1,9 @@
 <div class="example-wrapper">
-    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false" [showTopBar]="true"
-        [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'" [breadCrumbsItems]="breadCrumbsItems"
-        [disabled]="disableTable" [pager]="pager" title="Generic list inline title" [showSearch]="true"
-        (breadCrumbItemClick)="onBreadCrumbClick($event)">
+
+    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false"
+        [showTopBar]="true" [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'"
+        [breadCrumbsItems]="breadCrumbsItems" [disabled]="disableTable" [pager]="pager"
+        title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">
@@ -17,8 +18,10 @@
         </ng-container> -->
     </pep-generic-list>
 
-    <!-- <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
-        [uuidMapping]="'UUID'" [disabled]="disableTable" [pager]="pager" title="Generic list 2 inline title"
+
+
+    <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
+        [uuidMapping]="'UUIS'" [disabled]="disableTable" [pager]="pager" title="Generic list 2 inline title"
         [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
@@ -28,7 +31,8 @@
                 (click)="onBtn2Clicked()">
             </pep-button>
         </ng-container>
-    </pep-generic-list> -->
+    </pep-generic-list>
+
 </div>
 <pep-button class="pep-spacing-element" [value]="'Try me'" [sizeType]="'sm'" [styleType]="'strong'" (click)="onClick()">
 </pep-button>

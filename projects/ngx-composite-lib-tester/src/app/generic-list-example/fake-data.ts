@@ -4,7 +4,7 @@ export const FakeData = {
             Type: 'OverwriteExisting',
             UUID: '2e51566e-7035-42dd-a7c2-fb92bc4ed135',
             Addon: {
-                UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
+                UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d152',
                 Name: 'Add-ons Manager',
                 Description: 'Manage your add-ons',
                 SystemData:
@@ -232,7 +232,7 @@ export const FakeData = {
             Type: 'OverwriteExisting',
             UUID: '7e51566e-7035-42dd-a7c2-fb92bc4ed135',
             Addon: {
-                UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
+                UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d154',
                 Name: 'Add-ons Manager',
                 Description: 'Manage your add-ons',
                 SystemData:

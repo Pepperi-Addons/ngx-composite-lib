@@ -7,10 +7,13 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-essentials",
+    "@storybook/preset-scss"
   ],
   "framework": "@storybook/angular",
   "core": {
     "builder": "webpack5"
   }
 }
+
+//~@pepperi-addons/ngx-lib/theming

@@ -53,13 +53,14 @@ export class GenericListExampleComponent implements OnInit {
     disableTable = false;
     pager: IPepGenericListPager = {
         type: 'pages',
-        size: 10,
+        size: 5,
         index: 0
     };
     selectionType: any = 'multi';
     supportSorting = false;
     firstFieldAsLink = false;
     tableViewType: PepListTableViewType = 'compact';
+    
     //private selectedRowID = '';
 
 
@@ -153,6 +154,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
+                            console.log('ddd', ddd);
                             alert('delete');
                         }
                     }
@@ -162,6 +164,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
+                            console.log('ddd 2', ddd);
                             alert('delete');
                         }
                     }
@@ -218,12 +221,14 @@ export class GenericListExampleComponent implements OnInit {
     }
 
     onClick() {
+       // console.log('glist1', this.glist1);
         if (this.glist1) {
             console.log('item 1', this.glist1.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 1', this.glist1.getSelectedItems());
         }
+      //  console.log('glist2', this.glist2);
         if (this.glist2) {
-            console.log('item 2', this.glist2.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
+            console.log('item 2', this.glist2.getItemById('7e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 2', this.glist2.getSelectedItems());
         }
 
@@ -240,8 +245,8 @@ export class GenericListExampleComponent implements OnInit {
         return {
             init: async (params: any) => {
                 const dataList = FakeData.Addons;
-                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                //const filteredData = dataList.slice(0, 5);
+               // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
@@ -309,8 +314,8 @@ export class GenericListExampleComponent implements OnInit {
             update: async (params: any) => {
                 //                console.log('update', params);
                 const dataList = FakeData.Addons;
-                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                //const filteredData = dataList.slice(5, 10);
+                //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = dataList.slice(5, 10);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,
@@ -337,11 +342,12 @@ export class GenericListExampleComponent implements OnInit {
                 const filteredData = dataList.slice(10, 15);
                 //  console.log('filteredData 2', filteredData.length);
                 const res = filteredData.map(addon => ({
-                    UUID: addon.UUID,
+                    ABCD: 'something',
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
                     CreationDate: addon.CreationDate,
+                    UUIS: addon.UUID
                 }));
                 return Promise.resolve({
                     dataView: {
@@ -353,7 +359,7 @@ export class GenericListExampleComponent implements OnInit {
                         Type: 'Grid',
                         Title: '',
                         Fields: [
-                            this.getRegularReadOnlyColumn('UUID'),
+                            this.getRegularReadOnlyColumn('ABCD'),
                             this.getRegularReadOnlyColumn('Description'),
                             this.getRegularReadOnlyColumn('Version'),
                             this.getRegularReadOnlyColumn('Type'),
@@ -388,14 +394,6 @@ export class GenericListExampleComponent implements OnInit {
                 }));
                 return Promise.resolve(res);
             },
-            /*inputs: () => {
-                return Promise.resolve(
-                    {
-                        selectionType: 'single',
-                        firstFieldAsLink: true
-                    }
-                );
-            },*/
             inputs: {
                 selectionType: 'single',
                 firstFieldAsLink: true

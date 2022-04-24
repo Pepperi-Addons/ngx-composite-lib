@@ -5,6 +5,7 @@ import { PepGenericFormModule } from './generic-form.module';
 import { GenericFormComponent } from './generic-form.component';
 import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module';
 
+
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
 
 export default {
@@ -16,11 +17,9 @@ export default {
         // The necessary modules for the component to work on Storybook
         moduleMetadata({
             imports: [
-                
                 PepGenericFormModule,
                 PepNgxHelperModule
-            ],
-           // declarations: [GenericFormComponent]
+            ]
         })
     ],
     title: 'Components/GenericForm',

@@ -8,7 +8,7 @@ addons.setConfig({
     panelPosition: 'right',
     enableShortcuts: true,
     isToolshown: true,
-    theme: pepperiTheme,
+   // theme: pepperiTheme,
     selectedPanel: undefined,
     initialActive: 'sidebar',
     sidebar: {

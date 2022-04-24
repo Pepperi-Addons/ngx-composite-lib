@@ -8,7 +8,7 @@ import {
     ViewContainerRef,
     ComponentFactoryResolver
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+//import { TranslateService } from '@ngx-translate/core';
 import {
     PepDataConvertorService,
     PepLayoutService,    
@@ -190,7 +190,7 @@ export class GenericListComponent implements OnInit {
         private _resolver: ComponentFactoryResolver,
         private _dataConvertorService: PepDataConvertorService,
         private _layoutService: PepLayoutService,
-        private _translate: TranslateService,
+       // private _translate: TranslateService,
         private _genericListService: PepGenericListService
     ) {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {

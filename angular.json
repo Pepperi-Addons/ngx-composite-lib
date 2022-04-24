@@ -142,7 +142,26 @@
                     "options": {}
                 }
             }
-        }
+        },
+        "storybook": {
+            "projectType": "application",
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+              "build": {
+                "builder": "@angular-devkit/build-angular:browser",
+                "options": {
+                  "tsConfig": "tsconfig.json",
+                  "styles": [
+                    "@pepperi-addons/ngx-lib/theming.scss",
+                    "@angular/material/prebuilt-themes/indigo-pink.css"
+                  ],
+                  "scripts": []
+                }
+              }
+            }
+          }
     },
     "defaultProject": "ngx-composite-lib"
 }
