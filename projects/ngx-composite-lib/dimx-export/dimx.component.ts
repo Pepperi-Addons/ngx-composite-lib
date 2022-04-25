@@ -173,7 +173,7 @@ export class DIMXComponent implements OnInit {
             return {
                 "FileName": iFile.name, 
                 "Status": iFile.status,
-                "ReturnedObject": iFile.returnedObject!
+                "ReturnedObject": iFile.returnedObject
         }
         });
     }
