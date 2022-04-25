@@ -1,14 +1,31 @@
 <div class="example-wrapper">
-    <!-- <div>abc</div> -->
- 
-
-    <!-- <pep-generic-list [data]="dataSource" [actions]="actions" [inline]="true" [breadCrumbsItems]="breadCrumbsItems" [pager]="pager"
-        title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false" [showTopBar]="true"
+        [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'" [breadCrumbsItems]="breadCrumbsItems"
+        [disabled]="disableTable" [pager]="pager" title="Generic list inline title" [showSearch]="true"
+        (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">
             </pep-menu>
-            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'sm'" [styleType]="'strong'">
+            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'sm'" [styleType]="'strong'"
+                (click)="onBtnClicked()">
+            </pep-button>
+        </ng-container>
+        <!-- <ng-container left-bottom-area>           
+            <pep-button class="pep-spacing-element" [value]="'Old'" [sizeType]="'sm'" [styleType]="'strong'"                >
+            </pep-button>
+        </ng-container> -->
+    </pep-generic-list>
+
+    <!-- <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
+        [uuidMapping]="'UUID'" [disabled]="disableTable" [pager]="pager" title="Generic list 2 inline title"
+        [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
+        <ng-container right-buttons>
+            <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
+                (menuItemClick)="onMenuItemClicked($event)">
+            </pep-menu>
+            <pep-button class="pep-spacing-element" [value]="'New'" [sizeType]="'sm'" [styleType]="'strong'"
+                (click)="onBtn2Clicked()">
             </pep-button>
         </ng-container>
     </pep-generic-list> -->

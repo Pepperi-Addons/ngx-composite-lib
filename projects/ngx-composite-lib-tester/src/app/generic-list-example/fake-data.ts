@@ -458,3 +458,22 @@ export const FakeData = {
         }
     ],
 };
+
+export const FakeSmartFilterFields = [
+    {
+        FieldID: 'BillToName',
+        Type: 'MultipleStringValues',
+        Title: 'Bill To Name',
+        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+    },
+    {
+        FieldID: 'AllowDecimal',
+        Type: 'Bool',
+        Title: 'Allow Decimal'
+    },
+    {
+        FieldID: 'CaseQuantity',
+        Type: 'Integer',
+        Title: 'Case Quantity'
+    }
+]

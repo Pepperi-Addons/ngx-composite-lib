@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-export';
 
