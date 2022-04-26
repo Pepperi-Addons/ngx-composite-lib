@@ -477,3 +477,182 @@ export const FakeSmartFilterFields = [
         Title: 'Case Quantity'
     }
 ]
+
+export const FakeCardsDataView = [
+    {
+        "FieldID": "Image",
+        "Type": "Image",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 0,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 3,
+                "Height": 3
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "UnitPrice",
+        "Type": "Currency",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 3,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 6,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "ObjectMenu",
+        "Type": "InternalLink",
+        "Title": "Menu",
+        "Mandatory": false,
+        "ReadOnly": false,
+        "Layout": {
+            "Origin": {
+                "X": 9,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 1,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "TotalUnitsPriceAfterDiscount",
+        "Type": "Currency",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 3,
+                "Y": 1
+            },
+            "Size": {
+                "Width": 7,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "UnitsQuantity",
+        "Type": "NumberReal",
+        "Title": "Unit Quantity",
+        "Mandatory": false,
+        "ReadOnly": false,
+        "Layout": {
+            "Origin": {
+                "X": 3,
+                "Y": 2
+            },
+            "Size": {
+                "Width": 7,
+                "Height": 2
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "ItemExternalID",
+        "Type": "TextBox",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 0,
+                "Y": 3
+            },
+            "Size": {
+                "Width": 3,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    }
+]
+export const FakeCardsData = [
+    {
+        UUID: '00000000-0000-0000-0000-000000abcdef',
+        Image: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/8/32944058_1.jpg?ft=1',
+        UnitPrice: '34.0000',
+        ObjectMenu: '',
+        TotalUnitsPriceAfterDiscount: '31.0000',
+        UnitsQuantity: '1.0000',
+        ItemExternalID: 'ABC1234'
+    },
+    {
+        UUID: '1624db9d-3c6f-4814-a92f-ac45a991df74',
+        ItemImage: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/6/32944056_1.jpg?ft=1',
+        UnitPrice: '55.0000',
+        ObjectMenu: '',
+        TotalUnitsPriceAfterDiscount: '40.0000',
+        UnitsQuantity: '1.0000',
+        ItemExternalID: 'DDD4444'
+    },
+    {
+        UUID: '00000000-0000-0000-0000-000000abcdef',
+        ItemImage: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        UnitPrice: '23.0000',
+        ObjectMenu: '',
+        TotalUnitsPriceAfterDiscount: '18.0000',
+        UnitsQuantity: '1.0000',
+        ItemExternalID: 'FER321'
+    },
+    {
+        UUID: '00000000-0000-0000-0000-000000abcdef',
+        ItemImage: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        UnitPrice: '60.0000',
+        ObjectMenu: '',
+        TotalUnitsPriceAfterDiscount: '60.0000',
+        UnitsQuantity: '1.0000',
+        ItemExternalID: 'POR444'
+    }
+]

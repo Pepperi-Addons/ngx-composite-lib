@@ -27,7 +27,7 @@ export default {
     component: GenericListComponent,
     argTypes: {
         dataSource: {
-            description: 'The grid\'s data and it\'s representation',
+            description: 'A callback to retrieve the list data and data view',
             defaultValue: {
                 init: async (params: any) => {
                     return {
@@ -121,7 +121,7 @@ export default {
 
         },
         actions: {
-            description: 'The grid actions data',
+            description: 'A callback to retrieve a list of actions in relation to the selected items',
             defaultValue: {
                 get: async (data: PepSelectionData) => {
                     if (data?.rows.length === 1 && data?.selectionType !== 0) {
@@ -160,7 +160,7 @@ export default {
 
         },
         breadCrumbsItems: {
-            description: 'A list of Bread Crumbs items',
+            description: 'A list of breadcrumb items',
             defaultValue: [],
             control: 'array',
             table: {
@@ -170,12 +170,12 @@ export default {
             }
         },
         uuidMapping: {
-            description: 'Column name used as unique key',
+            description: 'Column name to be used as unique key',
             defaultValue: 'key',
             control: 'text'
         },
         disabled: {
-            description: 'Whether the form is disabled',
+            description: 'Whether the list is disabled',
             defaultValue: false,
             control: 'boolean',
         },
@@ -189,7 +189,7 @@ export default {
             control: 'text'
         },
         inline: {
-            description: 'Whether the component is inline',
+            description: 'Whether the component is inline. when inline is set to true, the container width and height have to be set manually',
             defaultValue: false,
             control: 'boolean'
         },
@@ -199,7 +199,7 @@ export default {
             control: 'boolean'
         },
         selectionType: {
-            description: 'Grid selection type',
+            description: 'Item selection type',
             defaultValue: 'single',
             options: [
                 'multi',
@@ -215,7 +215,7 @@ export default {
             }
         },
         noDataFoundMsg: {
-            description: 'No data found message text',
+            description: 'No data found text message',
             defaultValue: '',
             control: 'text',
             table: {
@@ -228,7 +228,8 @@ export default {
         },
         showTopBar: {
             description: 'Whether the top bar is displayed',
-            control: 'boolean'
+            //control: 'boolean',
+            
         },
         pager: {
             description: 'Table paging type',
@@ -245,7 +246,7 @@ export default {
             }
         },
         tableViewType: {
-            description: 'Grid line height type',
+            description: 'List line height type',
             defaultValue: 'regular',
             options: [
                 'compact',
@@ -265,7 +266,7 @@ export default {
             control: 'boolean'
         },
         smartFilter: {
-            description: 'Smart Filter',
+            description: 'Smart Filter\'s data and data view',
             defaultValue: {
                 dataView: {
                     Context: {
@@ -309,7 +310,7 @@ export default {
         },
         valueChange: {
             action: 'valueChange',
-            description: 'Emits a change event whenever a value changes',
+            description: 'Emits a change event whenever a value is changed',
             control: false,
             table: {
                 type: {
@@ -330,7 +331,7 @@ export default {
         },
         breadCrumbItemClick: {
             action: 'breadCrumbItemClick',
-            description: 'Emits a click event whenever a bread crumb item is clicked',
+            description: 'Emits a click event whenever a breadcrumb item is clicked',
             control: false,
             table: {
                 type: {
@@ -369,19 +370,12 @@ export default {
 } as Meta;
 
 const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
-    //props: args,
     props: {
         ...args,
         fieldClick: action('fieldClick'),
         valueChange: action('valueChange'),
         breadCrumbItemClick: action('breadCrumbItemClick')
-    }/*,
-    template: `
-    <pep-generic-list [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="inline"
-    [showTopBar]="showTopBar" [tableViewType]="tableViewType" [zebraStripes]="zebraStripes" [uuidMapping]="uuidMapping"
-    [breadCrumbsItems]="breadCrumbsItems" [disabled]="disabled" [pager]="pager"
-    [title]="title" [showSearch]="showSearch" (breadCrumbItemClick)="breadCrumbItemClick($event)"></pep-generic-list>
-    `*/
+    }
 });
 
 export const Base = Template.bind({});

@@ -7,13 +7,13 @@ import {
     IPepGenericListInitData,
     PepGenericListService
 
-} from '@pepperi-addons/ngx-composite-lib/generic-list';
+} from 'projects/ngx-composite-lib/generic-list'; //from '@pepperi-addons/ngx-composite-lib/generic-list';
 
 import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepperi-addons/ngx-lib/list';
 import { TranslateService } from '@ngx-translate/core';
 import { GenericListComponent } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
-import { FakeData, FakeSmartFilterFields } from './fake-data';
+import { FakeData, FakeSmartFilterFields, FakeCardsData, FakeCardsDataView } from './fake-data';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class GenericListExampleComponent implements OnInit {
         init: async (params: any) => {
             return {
                 dataView: {
-                    Type: 'Grid'
+                    Type: 'Card'
                 },
                 totalCount: -1,
                 items: []
@@ -60,7 +60,7 @@ export class GenericListExampleComponent implements OnInit {
     supportSorting = false;
     firstFieldAsLink = false;
     tableViewType: PepListTableViewType = 'compact';
-    
+
     //private selectedRowID = '';
 
 
@@ -88,6 +88,16 @@ export class GenericListExampleComponent implements OnInit {
             Title: columnId,
             Mandatory: false,
             ReadOnly: true
+        }
+    }
+
+    getColumn(columnId: string, type: string, isEnabled: boolean) {
+        return {
+            FieldID: columnId,
+            Type: type,//'Currency',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: !isEnabled
         }
     }
 
@@ -133,7 +143,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
-                            alert('delete');
+                            //   alert('delete');
                         }
                     }
                 ]
@@ -221,12 +231,12 @@ export class GenericListExampleComponent implements OnInit {
     }
 
     onClick() {
-       // console.log('glist1', this.glist1);
+        // console.log('glist1', this.glist1);
         if (this.glist1) {
             console.log('item 1', this.glist1.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 1', this.glist1.getSelectedItems());
         }
-      //  console.log('glist2', this.glist2);
+        //  console.log('glist2', this.glist2);
         if (this.glist2) {
             console.log('item 2', this.glist2.getItemById('7e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 2', this.glist2.getSelectedItems());
@@ -245,7 +255,7 @@ export class GenericListExampleComponent implements OnInit {
         return {
             init: async (params: any) => {
                 const dataList = FakeData.Addons;
-               // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
                 const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
                 const res = filteredData.map(addon => ({
@@ -300,7 +310,7 @@ export class GenericListExampleComponent implements OnInit {
                     items: res
 
                 });
-            },            
+            },
             /*inputs: () => {
                 return Promise.resolve(
                     {
@@ -334,49 +344,83 @@ export class GenericListExampleComponent implements OnInit {
         } as IPepGenericListDataSource
     }
 
-    getDataSourceEmpty() {        
+    getDataSourceEmpty() {
         return {
             init: (params: any) => {
-                const dataList = FakeData.Addons;
-                //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                const filteredData = dataList.slice(10, 15);
-                //  console.log('filteredData 2', filteredData.length);
-                const res = filteredData.map(addon => ({
-                    ABCD: 'something',
-                    Description: addon.Addon.Description,
-                    Version: addon.Version,
-                    Type: addon.Type,
-                    CreationDate: addon.CreationDate,
-                    UUIS: addon.UUID
-                }));
+
                 return Promise.resolve({
                     dataView: {
+                        InternalID: 3098435,
+                        Type: "Card",
+                        Title: "Sales Rep Form",
+                        Hidden: false,
+                        CreationDateTime: "2018-04-22T07:58:02Z",
+                        ModificationDateTime: "2018-04-22T07:58:13Z",
+                        Context: {
+                            "Object": {
+                                "Resource": "transactions",
+                                "InternalID": 138173,
+                                "Name": "sales avner"
+                            },
+                            "Name": "OrderCenterBarcodeLinesView",
+                            "ScreenSize": "Tablet",
+                            "Profile": {
+                                "InternalID": 46273,
+                                "Name": "Rep"
+                            }
+                        },
+                        ListData: {},
+                        Fields: FakeCardsDataView,
+                        "Rows": [
+                            {
+                                "Mode": "MatchParent"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            }
+                        ],
+                        "Columns": [
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {}
+                        ]
+                    },
+                    /*dataView: {
                         Context: {
                             Name: '',
                             Profile: { InternalID: 0 },
                             ScreenSize: 'Landscape'
                         },
-                        Type: 'Grid',
-                        Title: '',
-                        Fields: [
-                            this.getRegularReadOnlyColumn('ABCD'),
-                            this.getRegularReadOnlyColumn('Description'),
-                            this.getRegularReadOnlyColumn('Version'),
-                            this.getRegularReadOnlyColumn('Type'),
-                            this.getRegularReadOnlyColumn('CreationDate')
-                        ],
-                        Columns: [
-                            { Width: 15 },
-                            { Width: 30 },
-                            { Width: 15 },
-                            { Width: 20 },
-                            { Width: 20 }
-                        ],
-                        FrozenColumnsCount: 0,
-                        MinimumColumnWidth: 0
-                    },
-                    totalCount: res.length * 2,
-                    items: res
+                        Type: 'Card',
+                        Fields: FakeCardsDataView[
+                            this.getColumn('ItemImage', 'ImageURL', false),
+                            this.getColumn('ItemHasActiveCampaign', 'Boolean', false), //10
+                            this.getColumn('ItemIndicatorsWithoutCampaign', 'Indicators', false),
+                            this.getColumn('ObjectMenu', 'InternalLink', true),
+                            this.getColumn('ItemExternalID', 'TextBox', false),
+                            this.getColumn('UnitsQuantity', 'InternalLink', false), //17
+                            this.getColumn('ItemName', 'TextBox', false),
+                            this.getColumn('ItemPrice', 'Currency', false), //9
+                            this.getColumn('TSAUDTTESTFIELD', 'TextBox', true),
+                            this.getColumn('TSATestItemsScop', 'TextBox', true),
+                        ]
+                    },*/
+
+                    totalCount: FakeCardsData.length * 2,
+                    items: FakeCardsData
 
                 });
             },

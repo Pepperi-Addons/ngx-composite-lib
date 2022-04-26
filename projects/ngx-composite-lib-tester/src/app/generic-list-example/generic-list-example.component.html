@@ -1,6 +1,6 @@
 <div class="example-wrapper">
 
-    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false"
+    <!-- <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false"
         [showTopBar]="true" [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'"
         [breadCrumbsItems]="breadCrumbsItems" [disabled]="disableTable" [pager]="pager"
         title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
@@ -12,16 +12,13 @@
                 (click)="onBtnClicked()">
             </pep-button>
         </ng-container>
-        <!-- <ng-container left-bottom-area>           
-            <pep-button class="pep-spacing-element" [value]="'Old'" [sizeType]="'sm'" [styleType]="'strong'"                >
-            </pep-button>
-        </ng-container> -->
-    </pep-generic-list>
+      
+    </pep-generic-list> -->
 
 
 
     <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
-        [uuidMapping]="'UUIS'" [disabled]="disableTable" [pager]="pager" title="Generic list 2 inline title"
+        [uuidMapping]="'UUIS'" [disabled]="disableTable" [selectionType]="'none'" [pager]="pager" title="Generic list 2 inline title"
         [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"

@@ -1,4 +1,5 @@
 import {
+    DataView,
     GridDataView,
     MenuDataView
 } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
@@ -30,7 +31,7 @@ export interface IPepGenericListParams {
 }
 
 export interface IPepGenericListInitData {
-    dataView: GridDataView;
+    dataView: DataView;
     totalCount: number;
     items: any[];   
 }

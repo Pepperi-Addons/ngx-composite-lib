@@ -26,7 +26,7 @@ export default {
     component: GenericFormComponent,
     argTypes: {
         dataView: {
-            description: 'this is the form data view',
+            description: 'Form\'s data view',
             defaultValue: {
                 Type: 'Form',
                 Hidden: false,
@@ -173,8 +173,11 @@ export default {
             }
         },
         dataSource: {
-            description: 'this is the form data object',
-            defaultValue: {},
+            description: 'Form\'s data. provided as object properties representing FieldID and value',
+            defaultValue: {
+                ItemExternalID: 'Example value'
+            },
+            control: 'object',
             table: {
                 type: {
                     summary: 'any'
@@ -182,37 +185,55 @@ export default {
             }
         },
         isLocked: {
-            description: 'is the form locked for edit?',
+            description: 'Whether the list is disabled',
             defaultValue: false,
             control: 'boolean',
         },
         inline: {
-            description: 'is the component inline?',
+            description: 'Whether the component is inline. when inline is set to true, the container width and height have to be set manually',
             defaultValue: false,
             control: 'boolean',
         },
         showTopBar: {
-            description: 'is the top bar visible?',
+            description: 'Whether the top bar is displayed',
             defaultValue: false,
             control: 'boolean',
         },
         addPadding: {
-            description: 'add padding to container?',
+            description: 'Whether the container has padding',
             defaultValue: false,
             control: 'boolean',
         },
         valueChange: {
             action: 'valueChange',
-            control: false
+            description: 'Emits a change event whenever a value is changed',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepGenericFormValueChange>'
+                }
+            }
         },
         fieldClick: {
             action: 'fieldClick',
-            control: false
-        }/*,
+            description: 'Emits a click event whenever a field is clicked',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepGenericFormValueChange>'
+                }
+            }
+        },
         formValidationChange: {
             action: 'formValidationChange',
-            control: false
-        } */
+            description: 'Event emitted whenever the form is changed indicating whether the form is valid',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<boolean>'
+                }
+            }
+        } 
     },
     parameters: {
         controls: {
@@ -225,28 +246,20 @@ export default {
                 'addPadding',
                 'valueChange',
                 'fieldClick',
-               // 'formValidationChange'
+                'formValidationChange'
             ],
         },
     }
 
 } as Meta;
 
-/*
 const Template: Story<GenericFormComponent> = (args: GenericFormComponent) => ({
-    props: args,
-   template: `
-        <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
-        (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)" (formValidationChange)="formValidationChange($event)"></pep-generic-form>
-    `
-}); */
-
-const Template: Story = (args) => ({
-    props: args,
-    template: `
-        <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
-        (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)"></pep-generic-form>
-    `
+    props: {
+        ...args,
+        valueChange: action('valueChange'),
+        fieldClick: action('fieldClick'),
+        formValidationChange: action('formValidationChange')
+    }
 });
 
 export const Base = Template.bind({});

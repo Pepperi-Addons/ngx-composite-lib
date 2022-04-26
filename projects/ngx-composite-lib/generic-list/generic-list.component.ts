@@ -39,13 +39,16 @@ import {
 } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepSearchClickEvent, PepSearchComponent } from '@pepperi-addons/ngx-lib/search';
 
-import { GridDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
+import { 
+    DataView, 
+    GridDataView 
+} from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import {
     IPepGenericListInitData,
     IPepGenericListDataSource,
     IPepGenericListPager,
     IPepGenericListActions,
-    IPepGenericListSmartFilter,
+    IPepGenericListSmartFilter
 } from './generic-list.model';
 import { PepGenericListService } from './generic-list.service';
 import { DataViewConverter } from '@pepperi-addons/data-views';
@@ -165,7 +168,7 @@ export class GenericListComponent implements OnInit {
 
     private _resize$: Subscription = new Subscription();
 
-    private _dataView: GridDataView = {
+    private _dataView: DataView = {
         Type: 'Grid'
     };
     private _tableInputs: any;
@@ -229,7 +232,7 @@ export class GenericListComponent implements OnInit {
                 const data = await this.loadData(fromIndex, toIndex);
                 this.totalRowCount = data?.totalCount || 0;
 
-                componentRef.instance.viewType = 'table';
+                componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
                 componentRef.instance.tableViewType = this._tableInputs.tableViewType;
                 componentRef.instance.zebraStripes = this._tableInputs.zebraStripes;
                 if (this.disabled) {
