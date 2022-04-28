@@ -355,7 +355,7 @@ export default {
                 'inline',
                 'showSearch',
                 'selectionType',
-                'showItemSelection',
+                //'showItemSelection',
                 'noDataFoundMsg',
                 'supportSorting',
                 'showTopBar',
