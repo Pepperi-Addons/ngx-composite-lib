@@ -19,7 +19,8 @@
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6007",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook",
+    "chromatic": "npx chromatic --project-token=96cf7af007ec"
   },
   "private": true,
   "dependencies": {
