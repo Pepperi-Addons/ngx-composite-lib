@@ -23,7 +23,7 @@ export default {
             ]
         })
     ],
-    title: 'Components/GenericList',
+    title: 'Components/generic-list',
     component: GenericListComponent,
     argTypes: {
         dataSource: {
@@ -189,7 +189,7 @@ export default {
             control: 'text'
         },
         inline: {
-            description: 'Whether the component is inline. when inline is set to true, the container width and height have to be set manually',
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the component\'s width and height have to be set manually',
             defaultValue: false,
             control: 'boolean'
         },
@@ -200,7 +200,7 @@ export default {
         },
         selectionType: {
             description: 'Item selection type',
-            defaultValue: 'single',
+            defaultValue: 'multi',
             options: [
                 'multi',
                 'single',
@@ -213,6 +213,9 @@ export default {
                 },
                 defaultValue: { summary: 'single' },
             }
+        },
+        showItemSelection: {
+            description: 'Whether item selection is allowed. Relevant for data view of types \'Card\' and \'Line\' only',
         },
         noDataFoundMsg: {
             description: 'No data found text message',
@@ -352,6 +355,7 @@ export default {
                 'inline',
                 'showSearch',
                 'selectionType',
+                'showItemSelection',
                 'noDataFoundMsg',
                 'supportSorting',
                 'showTopBar',

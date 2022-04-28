@@ -17,8 +17,8 @@
 
 
 
-    <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
-        [uuidMapping]="'UUIS'" [disabled]="disableTable" [selectionType]="'none'" [pager]="pager" title="Generic list 2 inline title"
+    <pep-generic-list #glist2 [dataSource]="dataSourceLine" [actions]="actions2" [inline]="true" [showTopBar]="true"
+        [uuidMapping]="'UUIS'" [disabled]="disableTable" [selectionType]="'multi'" [pager]="pager" title="Generic list 2 inline title"
         [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"

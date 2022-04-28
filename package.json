@@ -18,8 +18,9 @@
     "lint": "eslint \"**/*.{ts,tsx}\" ",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "npm run docs:json && start-storybook -p 6007",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "storybook": "npm run docs:json && start-storybook -s .storybook/public -p 6007 --no-manager-cache",
+    "build-storybook": "npm run docs:json && build-storybook",
+    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN"
   },
   "private": true,
   "dependencies": {
@@ -88,6 +89,7 @@
     "@webcomponents/custom-elements": "^1.5.0",
     "angular-cli-ghpages": "^1.0.0-rc.1",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.5.4",
     "css-loader": "^6.7.1",
     "eslint": "^7.27.0",
     "eslint-plugin-storybook": "^0.5.10",

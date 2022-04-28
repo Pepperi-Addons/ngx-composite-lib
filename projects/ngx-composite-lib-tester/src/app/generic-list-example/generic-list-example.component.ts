@@ -13,7 +13,7 @@ import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepp
 import { TranslateService } from '@ngx-translate/core';
 import { GenericListComponent } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
-import { FakeData, FakeSmartFilterFields, FakeCardsData, FakeCardsDataView } from './fake-data';
+import { FakeData, FakeSmartFilterFields, FakeCardsData, FakeCardsDataView, FakeLineDataView, FakeLineData } from './fake-data';
 
 
 @Component({
@@ -42,6 +42,17 @@ export class GenericListExampleComponent implements OnInit {
             return {
                 dataView: {
                     Type: 'Card'
+                },
+                totalCount: -1,
+                items: []
+            }
+        }
+    };
+    dataSourceLine: IPepGenericListDataSource = {
+        init: async (params: any) => {
+            return {
+                dataView: {
+                    Type: 'Line'
                 },
                 totalCount: -1,
                 items: []
@@ -78,6 +89,7 @@ export class GenericListExampleComponent implements OnInit {
 
         this.dataSource = this.getDataSource();
         this.dataSource2 = this.getDataSourceEmpty();
+        this.dataSourceLine = this.getDataSourceLine();
 
     }
 
@@ -85,6 +97,16 @@ export class GenericListExampleComponent implements OnInit {
         return {
             FieldID: columnId,
             Type: 'TextBox',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: true
+        }
+    }
+
+    private getNumberColumn(columnId: string) {
+        return {
+            FieldID: columnId,
+            Type: 'NumberInteger',
             Title: columnId,
             Mandatory: false,
             ReadOnly: true
@@ -264,6 +286,7 @@ export class GenericListExampleComponent implements OnInit {
                     Version: addon.Version,
                     Type: addon.Type,
                     CreationDate: addon.CreationDate
+
                 }));
                 const rows2 = filteredData.map((item) => {
                     return {
@@ -293,6 +316,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
                             this.getRegularReadOnlyColumn('CreationDate'),
+                            //this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
                         Columns: [
@@ -301,6 +325,7 @@ export class GenericListExampleComponent implements OnInit {
                             { Width: 15 },
                             { Width: 20 },
                             { Width: 20 },
+
                             // { Width: 0 }
                         ],
                         FrozenColumnsCount: 0,
@@ -398,26 +423,6 @@ export class GenericListExampleComponent implements OnInit {
                             {}
                         ]
                     },
-                    /*dataView: {
-                        Context: {
-                            Name: '',
-                            Profile: { InternalID: 0 },
-                            ScreenSize: 'Landscape'
-                        },
-                        Type: 'Card',
-                        Fields: FakeCardsDataView[
-                            this.getColumn('ItemImage', 'ImageURL', false),
-                            this.getColumn('ItemHasActiveCampaign', 'Boolean', false), //10
-                            this.getColumn('ItemIndicatorsWithoutCampaign', 'Indicators', false),
-                            this.getColumn('ObjectMenu', 'InternalLink', true),
-                            this.getColumn('ItemExternalID', 'TextBox', false),
-                            this.getColumn('UnitsQuantity', 'InternalLink', false), //17
-                            this.getColumn('ItemName', 'TextBox', false),
-                            this.getColumn('ItemPrice', 'Currency', false), //9
-                            this.getColumn('TSAUDTTESTFIELD', 'TextBox', true),
-                            this.getColumn('TSATestItemsScop', 'TextBox', true),
-                        ]
-                    },*/
 
                     totalCount: FakeCardsData.length * 2,
                     items: FakeCardsData
@@ -441,6 +446,53 @@ export class GenericListExampleComponent implements OnInit {
             inputs: {
                 selectionType: 'single',
                 firstFieldAsLink: true
+            }
+        } as IPepGenericListDataSource
+    }
+
+    getDataSourceLine() {
+        return {
+            init: (params: any) => {
+                return Promise.resolve({
+                    dataView: {
+                        "InternalID": 2884561,
+                        "Type": "Line",
+                        "Title": "Sales Rep Form",
+                        "Hidden": false,
+                        "CreationDateTime": "2017-12-03T09:50:14Z",
+                        "ModificationDateTime": "2017-12-03T09:50:14Z",
+                        "Context": {
+                            "Object": {
+                                "Resource": "transactions",
+                                "InternalID": 138173,
+                                "Name": "sales avner"
+                            },
+                            "Name": "OrderCenterFlatMatrixLine",
+                            "ScreenSize": "Tablet",
+                            "Profile": {
+                                "InternalID": 46273,
+                                "Name": "Rep"
+                            }
+                        },
+                        "ListData": {},
+                        "Fields": FakeLineDataView,
+                        "Rows": [],
+                        "Columns": [
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {}
+                        ]
+                    },
+                    totalCount: FakeLineData.length * 2,
+                    items: FakeLineData
+                });
             }
         } as IPepGenericListDataSource
     }

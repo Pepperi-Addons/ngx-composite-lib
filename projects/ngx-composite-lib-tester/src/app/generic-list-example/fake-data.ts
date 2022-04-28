@@ -656,3 +656,237 @@ export const FakeCardsData = [
         ItemExternalID: 'POR444'
     }
 ]
+
+export const FakeLineDataView = [
+    {
+        "FieldID": "ItemHasActiveCampaign",
+        "Type": "Boolean",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 0,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 1,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Left"
+            }
+        }
+    },
+    {
+        "FieldID": "ItemIndicatorsWithoutCampaign",
+        "Type": "Indicators",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 1,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 2,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Left"
+            }
+        }
+    },
+    {
+        "FieldID": "ItemExternalID",
+        "Type": "TextBox",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 4,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 5,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "ObjectMenu",
+        "Type": "InternalLink",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": false,
+        "Layout": {
+            "Origin": {
+                "X": 9,
+                "Y": 0
+            },
+            "Size": {
+                "Width": 1,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Right"
+            }
+        }
+    },
+    {
+        "FieldID": "Image",
+        "Type": "ImageURL",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 0,
+                "Y": 1
+            },
+            "Size": {
+                "Width": 4,
+                "Height": 4
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "ItemParentCode",
+        "Type": "TextBox",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 4,
+                "Y": 1
+            },
+            "Size": {
+                "Width": 6,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "ItemDimension1Name",
+        "Type": "TextBox",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": true,
+        "Layout": {
+            "Origin": {
+                "X": 4,
+                "Y": 2
+            },
+            "Size": {
+                "Width": 6,
+                "Height": 1
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    },
+    {
+        "FieldID": "UnitsQuantity",
+        "Type": "NumberRealQuantitySelector",
+        "Title": "",
+        "Mandatory": false,
+        "ReadOnly": false,
+        "Layout": {
+            "Origin": {
+                "X": 4,
+                "Y": 3
+            },
+            "Size": {
+                "Width": 6,
+                "Height": 2
+            }
+        },
+        "Style": {
+            "Alignment": {
+                "Vertical": "Center",
+                "Horizontal": "Center"
+            }
+        }
+    }
+]
+
+export const FakeLineData = [
+    {   
+        UUID: '00000000-0000-0000-0000-000000abcdef',
+        ItemHasActiveCampaign: '1',
+        ItemIndicatorsWithoutCampaign: '',
+        ItemExternalID: 'FER321',
+        ObjectMenu: '',
+        Image: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        ItemParentCode: '',
+        ItemDimension1Name: 'Kuko',
+        UnitsQuantity: '1.0000'
+    },
+    {   
+        UUID: '00000000-0000-0000-0000-000000abcdee',
+        ItemHasActiveCampaign: '1',
+        ItemIndicatorsWithoutCampaign: '',
+        ItemExternalID: 'FER333',
+        ObjectMenu: '',
+        Image: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        ItemParentCode: '',
+        ItemDimension1Name: 'Kuko',
+        UnitsQuantity: '1.0000'
+    },
+    {   
+        UUID: '00000000-0000-0000-0000-000000abcded',
+        ItemHasActiveCampaign: '1',
+        ItemIndicatorsWithoutCampaign: '',
+        ItemExternalID: 'FER999',
+        ObjectMenu: '',
+        Image: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        ItemParentCode: '',
+        ItemDimension1Name: 'Kuko',
+        UnitsQuantity: '1.0000'
+    },
+    {   
+        UUID: '00000000-0000-0000-0000-000000abcdec',
+        ItemHasActiveCampaign: '1',
+        ItemIndicatorsWithoutCampaign: '',
+        ItemExternalID: 'FER778',
+        ObjectMenu: '',
+        Image: 'https://cdn.pepperi.com/WrntyImages/7779723/PortfolioItems/2/32944052_1.jpg?ft=1',
+        ItemParentCode: '',
+        ItemDimension1Name: 'Kuko',
+        UnitsQuantity: '1.0000'
+    }
+]

@@ -22,7 +22,7 @@ export default {
             ]
         })
     ],
-    title: 'Components/GenericForm',
+    title: 'Components/generic-form',
     component: GenericFormComponent,
     argTypes: {
         dataView: {
@@ -190,7 +190,7 @@ export default {
             control: 'boolean',
         },
         inline: {
-            description: 'Whether the component is inline. when inline is set to true, the container width and height have to be set manually',
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually',
             defaultValue: false,
             control: 'boolean',
         },

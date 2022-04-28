@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { 
+import {
     IPepGenericListSmartFilter,
     IPepGenericListDataRow
- } from './generic-list.model';
+} from './generic-list.model';
 import {
     PepSmartFilterBaseField,
     IPepSmartFilterData,
@@ -36,11 +36,13 @@ export class PepGenericListService {
     }
 
     getListViewType(dataViewType: string) {
-        switch(dataViewType) {
+        switch (dataViewType) {
             case 'Grid':
                 return 'table';
             case 'Card':
                 return 'cards';
+            case 'Line':
+                return 'lines';
             default:
                 return 'table';
         }
@@ -61,7 +63,6 @@ export class PepGenericListService {
         } else {
             itemFields = item;
         }
-        console.log('type of', typeof itemFields);
 
         row.UUID = itemFields[uuidMapping] || undefined;
         row.Fields = [];
