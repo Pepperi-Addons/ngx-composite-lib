@@ -12,7 +12,6 @@ import { PepSearchModule } from '@pepperi-addons/ngx-lib/search';
 import { PepBreadCrumbsModule } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { PepSmartFiltersModule } from '@pepperi-addons/ngx-lib/smart-filters';
 
-import { PepGenericListService } from './generic-list.service';
 
 @NgModule({
     declarations: [

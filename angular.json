@@ -154,8 +154,7 @@
                 "options": {
                   "tsConfig": "tsconfig.json",
                   "styles": [
-                    "@pepperi-addons/ngx-lib/theming.scss",
-                    "@angular/material/prebuilt-themes/indigo-pink.css"
+                   ".storybook/theme.scss"
                   ],
                   "scripts": []
                 }

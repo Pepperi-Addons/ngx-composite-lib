@@ -173,36 +173,29 @@ export default {
             }
         },
         dataSource: {
-            description: 'Form\'s data. provided as object properties representing FieldID and value',
+            description: 'Form field\'s data',
             defaultValue: {
-                ItemExternalID: 'Example value'
+                ItemId: '272764514',
+                Quantity: 10,
             },
             control: 'object',
             table: {
                 type: {
-                    summary: 'any'
+                    summary: "{ [key: string]: any }"
                 }
             }
         },
         isLocked: {
-            description: 'Whether the list is disabled',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the list is disabled'
         },
         inline: {
-            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually'
         },
         showTopBar: {
-            description: 'Whether the top bar is displayed',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the top bar is displayed'
         },
         addPadding: {
-            description: 'Whether the container has padding',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the container has padding'
         },
         valueChange: {
             action: 'valueChange',

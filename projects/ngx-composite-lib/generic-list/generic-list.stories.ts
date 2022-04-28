@@ -101,7 +101,6 @@ export default {
                                 Version: '0.3.3',
                                 Type: 1,
                                 CreationDate: '2020-06-08T09:39:08.703Z',
-
                             },
                             {
                                 UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
@@ -109,14 +108,20 @@ export default {
                                 Version: '1.0.53',
                                 Type: 1,
                                 CreationDate: '2020-06-09T07:44:49.883Z'
-
+                            },
+                            {
+                                UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                                Description: 'Manages the embeded Node.js app in the CPI',
+                                Version: '0.0.3',
+                                Type: 2,
+                                CreationDate: '2020-05-25T08:31:44.01Z'
                             }
                         ]
                     }
                 }
             },
             table: {
-                type: {summary: 'IPepGenericListDataSource'}
+                type: { summary: 'IPepGenericListDataSource' }
             }
 
         },
@@ -156,7 +161,7 @@ export default {
                 defaultValue: {
                     summary: null
                 }
-            } 
+            }
 
         },
         breadCrumbsItems: {
@@ -171,36 +176,35 @@ export default {
         },
         uuidMapping: {
             description: 'Column name to be used as unique key',
-            defaultValue: 'key',
-            control: 'text'
+            defaultValue: '',
+            table: {
+                defaultValue: {
+                    summary: `'key'`
+                }
+            }
         },
         disabled: {
-            description: 'Whether the list is disabled',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the list is disabled'
         },
         addPadding: {
-            description: 'Whether the container has padding',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether list container has padding'
         },
         title: {
             description: 'Top bar title',
-            control: 'text'
+            table: {
+                defaultValue: {
+                    summary: null
+                }
+            }
         },
         inline: {
-            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the component\'s width and height have to be set manually',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the component\'s width and height have to be set manually'
         },
         showSearch: {
-            description: 'Whether the search box is displayed',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether the search box is displayed'
         },
         selectionType: {
             description: 'Item selection type',
-            defaultValue: 'multi',
             options: [
                 'multi',
                 'single',
@@ -211,28 +215,22 @@ export default {
                 type: {
                     summary: `'multi' | 'single' | 'none'`,
                 },
-                defaultValue: { summary: 'single' },
+                defaultValue: { summary: 'multi' },
             }
-        },
-        showItemSelection: {
-            description: 'Whether item selection is allowed. Relevant for data view of types \'Card\' and \'Line\' only',
         },
         noDataFoundMsg: {
             description: 'No data found text message',
-            defaultValue: '',
-            control: 'text',
             table: {
-                defaultValue: { summary: '' }
+                defaultValue: {
+                    summary: null
+                }
             }
         },
         supportSorting: {
-            description: 'Whether column sorting is enabled',
-            control: 'boolean'
+            description: 'Whether column sorting is enabled'
         },
         showTopBar: {
-            description: 'Whether the top bar is displayed',
-            //control: 'boolean',
-            
+            description: 'Whether the top bar is displayed'
         },
         pager: {
             description: 'Table paging type',
@@ -250,7 +248,6 @@ export default {
         },
         tableViewType: {
             description: 'List line height type',
-            defaultValue: 'regular',
             options: [
                 'compact',
                 'regular'
@@ -260,13 +257,11 @@ export default {
                 type: {
                     summary: `'compact' | 'regular'`,
                 },
-                defaultValue: { summary: 'regular' },
+                defaultValue: { summary: "'regular'" },
             }
         },
         zebraStripes: {
-            description: 'Whether zebra stripes are displayed',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether zebra stripes are displayed'
         },
         smartFilter: {
             description: 'Smart Filter\'s data and data view',
@@ -330,7 +325,7 @@ export default {
                     summary: 'EventEmitter<IPepFormFieldClickEvent>'
                 }
             }
-            
+
         },
         breadCrumbItemClick: {
             action: 'breadCrumbItemClick',
@@ -350,12 +345,12 @@ export default {
                 'actions',
                 'breadCrumbsItems',
                 'uuidMapping',
+                'disabled',
                 'addPadding',
                 'title',
                 'inline',
                 'showSearch',
                 'selectionType',
-                //'showItemSelection',
                 'noDataFoundMsg',
                 'supportSorting',
                 'showTopBar',
@@ -369,7 +364,7 @@ export default {
             ],
         },
     }
-   
+
 
 } as Meta;
 

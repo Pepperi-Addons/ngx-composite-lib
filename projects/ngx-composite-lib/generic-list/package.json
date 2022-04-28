@@ -12,6 +12,7 @@
                 "@pepperi-addons/ngx-lib/top-bar": "ngx-lib/top-bar",
                 "@pepperi-addons/ngx-lib/search": "ngx-lib/search",
                 "@pepperi-addons/ngx-lib/bread-crumbs": "ngx-lib/bread-crumbs",
+                "@pepperi-addons/ngx-lib/smart-filters": "ngx-lib/smart-filters",
                 "@pepperi-addons/papi-sdk/dist/entities/data-view": "papi-sdk/data-view",
                 "@pepperi-addons/data-views/dist/data-view.converter": "data-views"
             }

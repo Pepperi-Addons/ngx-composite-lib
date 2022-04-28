@@ -124,9 +124,6 @@ export class GenericListComponent implements OnInit {
     selectionType: PepListSelectionType = 'multi';
 
     @Input()
-    showItemSelection = false;
-
-    @Input()
     supportSorting = false;
 
     @Input()
@@ -244,7 +241,7 @@ export class GenericListComponent implements OnInit {
                 }
                 componentRef.instance.supportSorting = this._tableInputs.supportSorting;
                 componentRef.instance.selectionTypeForActions = this._tableInputs.selectionType;
-                componentRef.instance.showCardSelection = true;//this._tableInputs.showItemSelection;
+                componentRef.instance.showCardSelection = this._tableInputs.selectionType !== 'none';
                 componentRef.instance.pagerType = this._tableInputs.pager.type;
                 if (this._tableInputs.pager.type === 'pages') {
                     componentRef.instance.pageSize = this._tableInputs.pager?.size || DEFAULT_PAGE_SIZE;
@@ -289,7 +286,6 @@ export class GenericListComponent implements OnInit {
         this._tableInputs = {
             supportSorting: this.supportSorting,
             selectionType: this.selectionType,
-            showItemSelection: this.showItemSelection,
             pager: this.pager,
             noDataFoundMsg: this.noDataFoundMsg,
             tableViewType: this.tableViewType,
@@ -453,7 +449,6 @@ export class GenericListComponent implements OnInit {
 
     onSelectedItemsChanged(selectedRowsCount: number) {
         //loading menu items after pep-list selected items are updated
-        console.log('onSelectedItemsChanged', selectedRowsCount);
         setTimeout(() => {            
             this.loadMenuItems();
         }, 0);
