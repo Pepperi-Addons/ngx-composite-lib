@@ -48,7 +48,8 @@ import {
     IPepGenericListDataSource,
     IPepGenericListPager,
     IPepGenericListActions,
-    IPepGenericListSmartFilter
+    IPepGenericListSmartFilter,
+    IPepGenericListListInputs
 } from './generic-list.model';
 import { PepGenericListService } from './generic-list.service';
 import { DataViewConverter } from '@pepperi-addons/data-views';
@@ -171,7 +172,7 @@ export class GenericListComponent implements OnInit {
     private _dataView: DataView = {
         Type: 'Grid'
     };
-    private _tableInputs: any;
+    private _listInputs: any;
     private _pepList: any;
     totalRowCount = -1;
     searchString = '';
@@ -223,8 +224,8 @@ export class GenericListComponent implements OnInit {
                 const fromIndex = 0;
                 let toIndex = 0;
 
-                if (this._tableInputs.pager.type === 'pages') {
-                    toIndex = fromIndex + (this._tableInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
+                if (this._listInputs.pager.type === 'pages') {
+                    toIndex = fromIndex + (this._listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
                 } else {
                     toIndex = 100;//TO DO - get value from - this.customList.getTopItems()
                 }
@@ -233,21 +234,21 @@ export class GenericListComponent implements OnInit {
                 this.totalRowCount = data?.totalCount || 0;
 
                 componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
-                componentRef.instance.tableViewType = this._tableInputs.tableViewType;
-                componentRef.instance.zebraStripes = this._tableInputs.zebraStripes;
+                componentRef.instance.tableViewType = this._listInputs.tableViewType;
+                componentRef.instance.zebraStripes = this._listInputs.zebraStripes;
                 if (this.disabled) {
                     componentRef.instance.disabled = true;
                     componentRef.instance.lockItemInnerEvents = true;
                 }
-                componentRef.instance.supportSorting = this._tableInputs.supportSorting;
-                componentRef.instance.selectionTypeForActions = this._tableInputs.selectionType;
-                componentRef.instance.showCardSelection = this._tableInputs.selectionType !== 'none';
-                componentRef.instance.pagerType = this._tableInputs.pager.type;
-                if (this._tableInputs.pager.type === 'pages') {
-                    componentRef.instance.pageSize = this._tableInputs.pager?.size || DEFAULT_PAGE_SIZE;
-                    componentRef.instance.pageIndex = this._tableInputs.pager?.index || 0;
+                componentRef.instance.supportSorting = this._listInputs.supportSorting;
+                componentRef.instance.selectionTypeForActions = this._listInputs.selectionType;
+                componentRef.instance.showCardSelection = this._listInputs.selectionType !== 'none';
+                componentRef.instance.pagerType = this._listInputs.pager.type;
+                if (this._listInputs.pager.type === 'pages') {
+                    componentRef.instance.pageSize = this._listInputs.pager?.size || DEFAULT_PAGE_SIZE;
+                    componentRef.instance.pageIndex = this._listInputs.pager?.index || 0;
                 }
-                componentRef.instance.noDataFoundMsg = this._tableInputs.noDataFoundMsg;
+                componentRef.instance.noDataFoundMsg = this._listInputs.noDataFoundMsg;
                 componentRef.instance.fieldClick.subscribe(($event) => {
                     this.onCustomizeFieldClick($event);
                 });
@@ -283,7 +284,7 @@ export class GenericListComponent implements OnInit {
      * @returns merged pep-list inputs
      */
     private loadTableInputs() {        
-        this._tableInputs = {
+        this._listInputs = {
             supportSorting: this.supportSorting,
             selectionType: this.selectionType,
             pager: this.pager,
@@ -293,8 +294,8 @@ export class GenericListComponent implements OnInit {
         };
         if (this._dataSource.inputs) {
             Object.entries(this._dataSource.inputs).forEach((item: any) => {
-                if (this._genericListService.hasProperty(this._tableInputs, item[0])) {
-                    this._tableInputs[item[0]] = item[1];
+                if (this._genericListService.hasProperty(this._listInputs, item[0])) {
+                    this._listInputs[item[0]] = item[1];
                 }
             });
         }
@@ -312,7 +313,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private loadMenuItems(): void { //TODO
-        if (this._tableInputs.selectionType !== 'none') {
+        if (this._listInputs.selectionType !== 'none') {
             this.getMenuActions().then(
                 x => this.menuActions = x
             );
@@ -419,7 +420,7 @@ export class GenericListComponent implements OnInit {
         this.pepList.updatePage(convertedList, event);
     }
 
-    getItemById(id: string) {
+    getItemById(id: string): ObjectsDataRow | null {
         if (this.pepList) {
             return this._pepList.getItemDataByID(id);
         } else {
@@ -427,7 +428,7 @@ export class GenericListComponent implements OnInit {
         }
     }
 
-    getSelectedItems() {
+    getSelectedItems(): PepSelectionData | null {
         if (this.pepList) {
             return this._pepList.getSelectedItemsData();
         } else {

@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataViewConverter } from '@pepperi-addons/data-views';
 
 import {
-    IPepGenericFormDataSource,
     IPepGenericFormDataView,
     PepGenericFormService
 } from '@pepperi-addons/ngx-composite-lib/generic-form';
@@ -108,8 +107,8 @@ export class GenericFormExampleComponent implements OnInit {
     }
 
     onGetDataClicked() {
-        //console.log('get data', this.genericFormService.getData());
-        this.dataView = {
+        console.log('get data', this.formContainer?.getData());
+       /* this.dataView = {
             UID: 'AAAA-DCBA-FGHD-DDDD',
             Type: 'Form',
             Hidden: false,
@@ -132,7 +131,7 @@ export class GenericFormExampleComponent implements OnInit {
         }
         this.dataSource = {
             ActionDateTime: '2021-10-11T09:26:02Z',
-        }
+        }*/
     }
 
     onSaveDataClicked() {

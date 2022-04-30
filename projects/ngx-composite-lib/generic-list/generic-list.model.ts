@@ -7,7 +7,8 @@ import {
     PepListPagerType,
     PepListSelectionType,
     IPepListSortingChangeEvent,
-    PepListTableViewType
+    PepListTableViewType,
+    PepSelectionData
 } from '@pepperi-addons/ngx-lib/list';
 import {
     PepSmartFilterBaseField,
@@ -18,7 +19,7 @@ import { TmplAstBoundAttribute } from '@angular/compiler';
 export interface IPepGenericListDataSource {
     init(params: IPepGenericListParams): Promise<IPepGenericListInitData>;    
     update?(params: IPepGenericListParams): Promise<any[]>;    
-    inputs?: IPepGenericListTableInputs;
+    inputs?: IPepGenericListListInputs;
 }
 
 export interface IPepGenericListParams {
@@ -42,7 +43,7 @@ export interface IPepGenericListDataRow {
     isSelectableForActions?: boolean;
 }
 
-export interface IPepGenericListTableInputs {      
+export interface IPepGenericListListInputs {      
     supportSorting?: boolean;
     selectionType?: PepListSelectionType;
     pager?: IPepGenericListPager;
@@ -53,7 +54,7 @@ export interface IPepGenericListTableInputs {
 }
 
 export interface IPepGenericListActions {
-    get(data: any): Promise<{
+    get(data: PepSelectionData): Promise<{
         title: string;
         handler: (obj: any) => Promise<void>;
     }[]>;
@@ -69,5 +70,7 @@ export interface IPepGenericListSmartFilter {
     dataView: MenuDataView;
     data?: IPepSmartFilterData[];
 }
+
+
 
 

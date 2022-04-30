@@ -59,6 +59,8 @@ export class GenericListExampleComponent implements OnInit {
             }
         }
     };
+    addPadding = false;
+    title = 'Generic list 2 inline title';
     menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
     disableTable = false;
@@ -254,6 +256,7 @@ export class GenericListExampleComponent implements OnInit {
 
     onClick() {
         // console.log('glist1', this.glist1);
+        console.log('items',this.glist1?.getSelectedItems());
         if (this.glist1) {
             console.log('item 1', this.glist1.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 1', this.glist1.getSelectedItems());
@@ -285,7 +288,8 @@ export class GenericListExampleComponent implements OnInit {
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate
+                    CreationDate: addon.CreationDate,
+                    TestNum: 100000
 
                 }));
                 const rows2 = filteredData.map((item) => {
@@ -316,7 +320,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
                             this.getRegularReadOnlyColumn('CreationDate'),
-                            //this.getNumberColumn('TestNum'),
+                            this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
                         Columns: [
@@ -324,7 +328,8 @@ export class GenericListExampleComponent implements OnInit {
                             { Width: 30 },
                             { Width: 15 },
                             { Width: 20 },
-                            { Width: 20 },
+                            { Width: 15 },
+                            { Width: 5 },
 
                             // { Width: 0 }
                         ],

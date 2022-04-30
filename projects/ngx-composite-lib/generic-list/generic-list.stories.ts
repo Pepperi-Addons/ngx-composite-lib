@@ -86,7 +86,7 @@ export default {
                             FrozenColumnsCount: 0,
                             MinimumColumnWidth: 0
                         },
-                        totalCount: 3,
+                        totalCount: 4,
                         items: [
                             {
                                 UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
@@ -306,6 +306,24 @@ export default {
                 }
             }
         },
+        getItemById: {
+            description: 'Retrieve item\'s data by Id, uuidMapping\'s value is used as search key. if uuidMapping was not provided, default value is used',
+            control: false,
+            table: {
+                type: {
+                    summary: `(id: string) => ObjectsDataRow | null`
+                }
+            }
+        },
+        getSelectedItems: {
+            description: 'Retrieve selected items',
+            control: false,
+            table: {
+                type: {
+                    summary: `() => PepSelectionData | null`
+                }
+            }
+        },
         valueChange: {
             action: 'valueChange',
             description: 'Emits a change event whenever a value is changed',
@@ -358,6 +376,8 @@ export default {
                 'tableViewType',
                 'zebraStripes',
                 'smartFilter',
+                'getItemById',
+                'getSelectedItems',
                 'valueChange',
                 'fieldClick',
                 'breadCrumbItemClick'

@@ -10,16 +10,6 @@ import {
 import { FormDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 
 /**
- * Interface representing the form data
- */
-export interface IPepGenericFormDataSource {
-    /*UID: string;
-    IsEnabled?: boolean;
-    Values: any;*/
-    Values: Array<KeyValuePair<any>>;
-}
-
-/**
  * Interface represending the form data view
  */
 export interface IPepGenericFormDataView extends FormDataView {
@@ -27,17 +17,17 @@ export interface IPepGenericFormDataView extends FormDataView {
 }
 
 /**
- * Interface containing form data and data view
+ * Interface representing form data
  */
 export interface IPepGenericFormData {
-    data: IPepGenericFormDataSource;
-    dataView: IPepGenericFormDataView;
+    UID: string;
+    Values: { [key: string]: any };
 }
 
 export interface IPepGenericFormValueChange {
-    uid: string;
-    apiName: string;
-    value: any;
+    UID: string;
+    ApiName: string;
+    Value: any;
 }
 
 export interface IPepGenericFormFieldUpdate {

@@ -1,6 +1,6 @@
 {
     "name": "@pepperi-addons/ngx-composite-lib",
-    "version": "0.0.16-beta.15",
+    "version": "0.0.16-cardview.3",
     "peerDependencies": {
         "@angular/animations": ">= 12.0.0",
         "@angular/cdk": ">= 12.0.0",

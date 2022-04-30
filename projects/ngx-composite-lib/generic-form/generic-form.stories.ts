@@ -197,6 +197,19 @@ export default {
         addPadding: {
             description: 'Whether the container has padding'
         },
+        getData: {
+            description: 'Retrieve form fields current values',
+            control: false,
+            table: {
+                type: {
+                    summary: `() => IPepGenericFormData`
+                }
+            }
+        },
+        updateFields: {
+            description: 'Update form field(s)',
+            control: false
+        },
         valueChange: {
             action: 'valueChange',
             description: 'Emits a change event whenever a value is changed',
@@ -237,6 +250,8 @@ export default {
                 'inline',
                 'showTopBar',
                 'addPadding',
+                'getData',
+                'updateFields',
                 'valueChange',
                 'fieldClick',
                 'formValidationChange'
