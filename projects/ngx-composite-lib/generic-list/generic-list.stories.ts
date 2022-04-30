@@ -52,7 +52,7 @@ export default {
                                     Type: 'TextBox',
                                     Title: 'Description',
                                     Mandatory: false,
-                                    ReadOnly: true
+                                    ReadOnly: false
                                 },
                                 {
                                     FieldID: 'Version',
@@ -399,3 +399,4 @@ const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
 
 export const Base = Template.bind({});
 Base.args = {}
+
