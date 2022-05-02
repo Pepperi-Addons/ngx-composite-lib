@@ -186,7 +186,7 @@ export default {
             }
         },
         isLocked: {
-            description: 'Whether the list is disabled'
+            description: 'Whether the form is disabled'
         },
         inline: {
             description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually'

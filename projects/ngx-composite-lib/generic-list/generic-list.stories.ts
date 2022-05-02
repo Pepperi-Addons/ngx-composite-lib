@@ -247,7 +247,7 @@ export default {
             }
         },
         tableViewType: {
-            description: 'List line height type',
+            description: 'List line height type. Relevant to data view of type \'Grid\' only',
             options: [
                 'compact',
                 'regular'
@@ -261,7 +261,7 @@ export default {
             }
         },
         zebraStripes: {
-            description: 'Whether zebra stripes are displayed'
+            description: 'Whether zebra stripes are displayed. Relevant to data view of type \'Grid\' only'
         },
         smartFilter: {
             description: 'Smart Filter\'s data and data view',
