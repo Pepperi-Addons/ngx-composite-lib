@@ -6,6 +6,7 @@ import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module
 import { PepListSelectionType } from '@pepperi-addons/ngx-lib/list';
 import { PepBreadCrumbItem } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepGenericListPager } from './generic-list.model';
+import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepperi-addons/ngx-lib/list';
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
 
 export default {
@@ -22,11 +23,11 @@ export default {
             ]
         })
     ],
-    title: 'Components/GenericList',
+    title: 'Components/generic-list',
     component: GenericListComponent,
     argTypes: {
         dataSource: {
-            description: 'This is a data source',
+            description: 'A callback to retrieve the list data and data view',
             defaultValue: {
                 init: async (params: any) => {
                     return {
@@ -51,7 +52,7 @@ export default {
                                     Type: 'TextBox',
                                     Title: 'Description',
                                     Mandatory: false,
-                                    ReadOnly: true
+                                    ReadOnly: false
                                 },
                                 {
                                     FieldID: 'Version',
@@ -85,7 +86,7 @@ export default {
                             FrozenColumnsCount: 0,
                             MinimumColumnWidth: 0
                         },
-                        totalCount: 3,
+                        totalCount: 4,
                         items: [
                             {
                                 UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
@@ -100,7 +101,6 @@ export default {
                                 Version: '0.3.3',
                                 Type: 1,
                                 CreationDate: '2020-06-08T09:39:08.703Z',
-
                             },
                             {
                                 UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
@@ -108,60 +108,103 @@ export default {
                                 Version: '1.0.53',
                                 Type: 1,
                                 CreationDate: '2020-06-09T07:44:49.883Z'
-
+                            },
+                            {
+                                UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                                Description: 'Manages the embeded Node.js app in the CPI',
+                                Version: '0.0.3',
+                                Type: 2,
+                                CreationDate: '2020-05-25T08:31:44.01Z'
                             }
                         ]
                     }
                 }
+            },
+            table: {
+                type: { summary: 'IPepGenericListDataSource' }
             }
 
         },
-        actions: {},
+        actions: {
+            description: 'A callback to retrieve a list of actions in relation to the selected items',
+            defaultValue: {
+                get: async (data: PepSelectionData) => {
+                    if (data?.rows.length === 1 && data?.selectionType !== 0) {
+                        return [
+                            {
+                                title: 'Edit',
+                                handler: async (params: any) => {
+                                    alert('edit');
+                                }
+                            },
+                            {
+                                title: 'Delete',
+                                handler: async (params: any) => {
+                                    alert('delete');
+                                }
+                            }
+                        ]
+                    } else if (data?.rows.length > 1 || data?.selectionType === 0) {
+                        return [
+                            {
+                                title: 'Delete',
+                                handler: async (params: any) => {
+                                    alert('delete');
+                                }
+                            }
+                        ]
+                    } else return [];
+                }
+            },
+            control: 'object',
+            table: {
+                defaultValue: {
+                    summary: null
+                }
+            }
+
+        },
         breadCrumbsItems: {
-            description: 'This is a list of Bread Crumbs items',
+            description: 'A list of breadcrumb items',
             defaultValue: [],
             control: 'array',
             table: {
-                type: {
-                    summary: 'Array<PepBreadCrumbItem>'
-                },
                 defaultValue: {
                     summary: null
                 }
             }
         },
         uuidMapping: {
-            description: 'This is the name of the table column used for UUID Mapping ',
-            defaultValue: 'key',
-            control: 'text'
+            description: 'Column name to be used as unique key',
+            defaultValue: '',
+            table: {
+                defaultValue: {
+                    summary: `'key'`
+                }
+            }
         },
         disabled: {
-            description: 'is the form locked for edit?',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the list is disabled'
         },
         addPadding: {
-            description: 'Add container padding?',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether list container has padding'
         },
         title: {
-            description: 'This is the title of',
-            control: 'text'
+            description: 'Top bar title',
+            table: {
+                defaultValue: {
+                    summary: null
+                }
+            }
         },
         inline: {
-            description: 'Is inline?',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the component\'s width and height have to be set manually'
         },
         showSearch: {
-            description: 'Show search box?',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether the search box is displayed'
         },
         selectionType: {
-            description: 'This is the table selection type',
-            defaultValue: 'single',
+            description: 'Item selection type',
             options: [
                 'multi',
                 'single',
@@ -172,24 +215,22 @@ export default {
                 type: {
                     summary: `'multi' | 'single' | 'none'`,
                 },
-                defaultValue: { summary: 'single' },
+                defaultValue: { summary: 'multi' },
             }
         },
         noDataFoundMsg: {
-            description: 'This is the displayed message in case no data was supplied',
-            defaultValue: '',
-            control: 'text',
+            description: 'No data found text message',
             table: {
-                defaultValue: { summary: '' }
+                defaultValue: {
+                    summary: null
+                }
             }
         },
         supportSorting: {
-            description: 'Support column sorting?',
-            control: 'boolean'
+            description: 'Whether column sorting is enabled'
         },
         showTopBar: {
-            description: 'Show Top Bar?',
-            control: 'boolean'
+            description: 'Whether the top bar is displayed'
         },
         pager: {
             description: 'Table paging type',
@@ -206,8 +247,7 @@ export default {
             }
         },
         tableViewType: {
-            description: 'line height type',
-            defaultValue: 'regular',
+            description: 'List line height type. Relevant to data view of type \'Grid\' only',
             options: [
                 'compact',
                 'regular'
@@ -217,21 +257,113 @@ export default {
                 type: {
                     summary: `'compact' | 'regular'`,
                 },
-                defaultValue: { summary: 'regular' },
+                defaultValue: { summary: "'regular'" },
             }
         },
         zebraStripes: {
-            description: 'show zebra stripes?',
-            defaultValue: false,
-            control: 'boolean'
+            description: 'Whether zebra stripes are displayed. Relevant to data view of type \'Grid\' only'
+        },
+        smartFilter: {
+            description: 'Smart Filter\'s data and data view',
+            defaultValue: {
+                dataView: {
+                    Context: {
+                        Name: '',
+                        Profile: { InternalID: 0 },
+                        ScreenSize: 'Landscape'
+                    },
+                    Type: 'Menu',
+                    Title: '',
+                    Fields: [
+                        {
+                            FieldID: 'BillToName',
+                            Type: 'MultipleStringValues',
+                            Title: 'Bill To Name',
+                            OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+                        },
+                        {
+                            FieldID: 'AllowDecimal',
+                            Type: 'Bool',
+                            Title: 'Allow Decimal'
+                        },
+                        {
+                            FieldID: 'CaseQuantity',
+                            Type: 'Integer',
+                            Title: 'Case Quantity'
+                        }
+                    ],
+                    FrozenColumnsCount: 0,
+                    MinimumColumnWidth: 0
+                }
+            },
+            control: 'object',
+            table: {
+                type: {
+                    summary: 'IPepGenericListSmartFilter'
+                },
+                defaultValue: {
+                    summary: null
+                }
+            }
+        },
+        getItemById: {
+            description: 'Retrieve item\'s data by Id, uuidMapping\'s value is used as search key. if uuidMapping was not provided, default value is used',
+            control: false,
+            table: {
+                type: {
+                    summary: `(id: string) => ObjectsDataRow | null`
+                }
+            }
+        },
+        getSelectedItems: {
+            description: 'Retrieve selected items',
+            control: false,
+            table: {
+                type: {
+                    summary: `() => PepSelectionData | null`
+                }
+            }
+        },
+        valueChange: {
+            action: 'valueChange',
+            description: 'Emits a change event whenever a value is changed',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepFormFieldValueChangeEvent>'
+                }
+            }
+        },
+        fieldClick: {
+            action: 'fieldClick',
+            description: 'Emits a click event whenever a field is clicked',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepFormFieldClickEvent>'
+                }
+            }
+
+        },
+        breadCrumbItemClick: {
+            action: 'breadCrumbItemClick',
+            description: 'Emits a click event whenever a breadcrumb item is clicked',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepBreadCrumbItemClickEvent>'
+                }
+            }
         }
     },
     parameters: {
         controls: {
             include: [
                 'dataSource',
+                'actions',
                 'breadCrumbsItems',
                 'uuidMapping',
+                'disabled',
                 'addPadding',
                 'title',
                 'inline',
@@ -242,174 +374,29 @@ export default {
                 'showTopBar',
                 'pager',
                 'tableViewType',
-                'zebraStripes'
-            ],
-        },
-    }
-    /*
-    argTypes: {
-        dataSource: {
-            description: 'This is data source object',
-            defaultValue: {
-                init: async (params: any) => {
-                    return {
-                        dataView: {
-                            Type: 'Grid'
-                        },
-                        totalCount: 0,
-                        items: []
-                    };
-                }
-            },
-            control: 'object',
-            table: {
-                type: {
-                    summary: 'IPepGenericListDataSource'
-                }
-            }
-        },
-        actions: {
-            description: 'This is the legacy query',
-            defaultValue: {
-                get: async (data: any) => {
-                    return []
-                }
-            },
-            control: 'object',
-            table: {
-                type: {
-                    summary: 'IPepGenericListActions'
-                }
-            }
-        },
-        uuidMapping: {
-            description: 'This is the name of the table column used for UUID Mapping ',
-            defaultValue: 'key',
-            control: 'text'
-        },
-        addPadding: {
-            description: 'Add container padding?',
-            defaultValue: false,
-            control: 'boolean'
-        },
-        title: {
-            description: 'This is the title of',         
-            control: 'text',            
-            table: {
-                defaultValue: ''
-            }
-        },
-        inline: {
-            description: 'Is inline?',
-            defaultValue: false,
-            control: 'boolean'
-        },
-        showSearch: {
-            description: 'Show search box?',
-            defaultValue: false,
-            control: 'boolean'
-        },
-        selectionType: {
-            description: 'This is the table selection type',
-            defaultValue: 'multi',
-            options: [
-                'multi',
-                'single',
-                'none'
-            ],
-            control: { type: 'radio' }, table: {
-                type: {
-                    summary: `'multi' | 'single' | 'none'`,
-                },
-                defaultValue: { summary: 'multi' },
-            }
-        },
-        noDataFoundMsg: {
-            description: 'This is the displayed message in case no data was supplied',
-            defaultValue: '',
-            control: 'text'           
-        },
-        supportSorting: {
-            description: 'Support column sorting?',
-            defaultValue: false,
-            control: 'boolean'
-        },
-        showTopBar: {
-            description: 'Show Top Bar?',
-            defaultValue: false,
-            control: 'boolean'
-        },
-        breadCrumbsItems: {
-            description: 'This is a list of Bread Crumbs items',
-            defaultValue: [],
-            control: 'array',
-            table: {
-                type: {
-                    summary: 'Array<PepBreadCrumbItem>'
-                },
-                defaultValue: {
-                    summary: null
-                }
-            }
-        },
-        pager: {
-            description: 'This is the legacy query',
-            defaultValue: {
-                type: 'scroll',
-                size: 50,
-                index: 0
-            },
-            control: {
-                type: 'object',
-            },
-            table: {
-                type: {
-                    summary: 'IPepGenericListPager'
-                },
-                defaultValue: {
-                    summary: {
-                        type: 'scroll',
-                        size: 50,
-                        index: 0
-                    }
-                }
-
-            }
-        }
-    },
-    parameters: {
-        controls: {
-            include: [
-                'dataSource',
-                'actions',
-                'uuidMapping',
-                'addPadding',
-                'title',
-                'inline',
-                'showSearch',
-                'selectionType',
-                'noDataFoundMsg',
-                'supportSorting',
-                'showTopBar',
-                'breadCrumbsItems',
-                'pager',
-                'fieldClick',
+                'zebraStripes',
+                'smartFilter',
+                'getItemById',
+                'getSelectedItems',
                 'valueChange',
+                'fieldClick',
                 'breadCrumbItemClick'
             ],
         },
-    }  */
+    }
+
 
 } as Meta;
 
 const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
-    props: args,
-    /*props: {
+    props: {
+        ...args,
         fieldClick: action('fieldClick'),
         valueChange: action('valueChange'),
         breadCrumbItemClick: action('breadCrumbItemClick')
-    } */
+    }
 });
 
 export const Base = Template.bind({});
 Base.args = {}
+

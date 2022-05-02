@@ -13,7 +13,7 @@ import {
     IPepGenericFormDataView,
     IPepGenericFormValueChange,
     IPepGenericFormFieldUpdate,
-    IPepGenericFormDataSource
+    IPepGenericFormData
 } from './generic-form.model';
 import {
     UIControl,
@@ -161,7 +161,7 @@ export class GenericFormComponent implements OnInit {
      * @param field object containing the data of the required update
      */
     private updateFieldValue(fieldChanged: IPepGenericFormValueChange) {
-        this._data[fieldChanged.apiName] = fieldChanged.value;
+        this._data[fieldChanged.ApiName] = fieldChanged.Value;
     }
 
     private getOptionalValues(fieldId: string) {
@@ -169,7 +169,7 @@ export class GenericFormComponent implements OnInit {
         return item?.optionalValues || [];
     }
 
-    getData() {
+    getData(): IPepGenericFormData {
         return {
             UID: this._formData.UID,
             Values: this._data
@@ -180,7 +180,7 @@ export class GenericFormComponent implements OnInit {
     * updates form field(s) params
     * @param fields
     */
-    updateFields(fields: Array<IPepGenericFormFieldUpdate>) {
+    updateFields(fields: IPepGenericFormFieldUpdate[]) {
         fields.forEach((field) => {
             const index = this._formData.Fields.findIndex((item) => item.ApiName === field.FieldId);
             if (index >= 0) {
@@ -198,9 +198,9 @@ export class GenericFormComponent implements OnInit {
 
     onValueChanged(event: any) {
         const field: IPepGenericFormValueChange = {
-            uid: event.id,
-            apiName: event.key,
-            value: event.value
+            UID: event.id,
+            ApiName: event.key,
+            Value: event.value
         };
         this.updateFieldValue(field);
         this.valueChange.emit(field);
@@ -208,9 +208,9 @@ export class GenericFormComponent implements OnInit {
 
     onfieldClicked(event: any) {
         const field: IPepGenericFormValueChange = {
-            uid: event.id,
-            apiName: event.key,
-            value: event.value
+            UID: event.id,
+            ApiName: event.key,
+            Value: event.value
         };
         this.updateFieldValue(field);
         this.fieldClick.emit(field);

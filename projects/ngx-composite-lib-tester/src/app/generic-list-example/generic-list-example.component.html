@@ -1,8 +1,9 @@
 <div class="example-wrapper">
-    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false" [showTopBar]="true"
-        [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'" [breadCrumbsItems]="breadCrumbsItems"
-        [disabled]="disableTable" [pager]="pager" title="Generic list inline title" [showSearch]="true"
-        (breadCrumbItemClick)="onBreadCrumbClick($event)">
+
+    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="false"
+        [showTopBar]="true" [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'"
+        [breadCrumbsItems]="breadCrumbsItems" [disabled]="disableTable" [pager]="pager"
+        title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
                 (menuItemClick)="onMenuItemClicked($event)">
@@ -11,14 +12,13 @@
                 (click)="onBtnClicked()">
             </pep-button>
         </ng-container>
-        <!-- <ng-container left-bottom-area>           
-            <pep-button class="pep-spacing-element" [value]="'Old'" [sizeType]="'sm'" [styleType]="'strong'"                >
-            </pep-button>
-        </ng-container> -->
+      
     </pep-generic-list>
 
-    <!-- <pep-generic-list #glist2 [dataSource]="dataSource2" [actions]="actions2" [inline]="true" [showTopBar]="true"
-        [uuidMapping]="'UUID'" [disabled]="disableTable" [pager]="pager" title="Generic list 2 inline title"
+
+
+    <!-- <pep-generic-list #glist2 [dataSource]="dataSourceLine" [actions]="actions2" [addPadding]="addPadding" [inline]="true" [showTopBar]="true"
+        [uuidMapping]="'UUIS'" [disabled]="disableTable" [selectionType]="'multi'" [pager]="pager" [title]="title"
         [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"
@@ -29,6 +29,7 @@
             </pep-button>
         </ng-container>
     </pep-generic-list> -->
+
 </div>
 <pep-button class="pep-spacing-element" [value]="'Try me'" [sizeType]="'sm'" [styleType]="'strong'" (click)="onClick()">
 </pep-button>

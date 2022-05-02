@@ -142,7 +142,25 @@
                     "options": {}
                 }
             }
-        }
+        },
+        "storybook": {
+            "projectType": "application",
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+              "build": {
+                "builder": "@angular-devkit/build-angular:browser",
+                "options": {
+                  "tsConfig": "tsconfig.json",
+                  "styles": [
+                   ".storybook/theme.scss"
+                  ],
+                  "scripts": []
+                }
+              }
+            }
+          }
     },
     "defaultProject": "ngx-composite-lib"
 }

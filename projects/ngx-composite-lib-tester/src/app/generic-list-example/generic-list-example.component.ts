@@ -7,13 +7,13 @@ import {
     IPepGenericListInitData,
     PepGenericListService
 
-} from '@pepperi-addons/ngx-composite-lib/generic-list';
+} from 'projects/ngx-composite-lib/generic-list'; //from '@pepperi-addons/ngx-composite-lib/generic-list';
 
 import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepperi-addons/ngx-lib/list';
 import { TranslateService } from '@ngx-translate/core';
 import { GenericListComponent } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepBreadCrumbItem, IPepBreadCrumbItemClickEvent } from '@pepperi-addons/ngx-lib/bread-crumbs';
-import { FakeData, FakeSmartFilterFields } from './fake-data';
+import { FakeData, FakeSmartFilterFields, FakeCardsData, FakeCardsDataView, FakeLineDataView, FakeLineData } from './fake-data';
 
 
 @Component({
@@ -41,25 +41,39 @@ export class GenericListExampleComponent implements OnInit {
         init: async (params: any) => {
             return {
                 dataView: {
-                    Type: 'Grid'
+                    Type: 'Card'
                 },
                 totalCount: -1,
                 items: []
             }
         }
     };
+    dataSourceLine: IPepGenericListDataSource = {
+        init: async (params: any) => {
+            return {
+                dataView: {
+                    Type: 'Line'
+                },
+                totalCount: -1,
+                items: []
+            }
+        }
+    };
+    addPadding = false;
+    title = 'Generic list 2 inline title';
     menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
     disableTable = false;
     pager: IPepGenericListPager = {
         type: 'pages',
-        size: 10,
+        size: 5,
         index: 0
     };
     selectionType: any = 'multi';
     supportSorting = false;
     firstFieldAsLink = false;
     tableViewType: PepListTableViewType = 'compact';
+
     //private selectedRowID = '';
 
 
@@ -77,6 +91,7 @@ export class GenericListExampleComponent implements OnInit {
 
         this.dataSource = this.getDataSource();
         this.dataSource2 = this.getDataSourceEmpty();
+        this.dataSourceLine = this.getDataSourceLine();
 
     }
 
@@ -87,6 +102,26 @@ export class GenericListExampleComponent implements OnInit {
             Title: columnId,
             Mandatory: false,
             ReadOnly: true
+        }
+    }
+
+    private getNumberColumn(columnId: string) {
+        return {
+            FieldID: columnId,
+            Type: 'NumberInteger',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: true
+        }
+    }
+
+    getColumn(columnId: string, type: string, isEnabled: boolean) {
+        return {
+            FieldID: columnId,
+            Type: type,//'Currency',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: !isEnabled
         }
     }
 
@@ -132,7 +167,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
-                            alert('delete');
+                            //   alert('delete');
                         }
                     }
                 ]
@@ -153,6 +188,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
+                            console.log('ddd', ddd);
                             alert('delete');
                         }
                     }
@@ -162,6 +198,7 @@ export class GenericListExampleComponent implements OnInit {
                     {
                         title: 'Delete',
                         handler: async (ddd) => {
+                            console.log('ddd 2', ddd);
                             alert('delete');
                         }
                     }
@@ -218,12 +255,15 @@ export class GenericListExampleComponent implements OnInit {
     }
 
     onClick() {
+        // console.log('glist1', this.glist1);
+        console.log('items',this.glist1?.getSelectedItems());
         if (this.glist1) {
             console.log('item 1', this.glist1.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 1', this.glist1.getSelectedItems());
         }
+        //  console.log('glist2', this.glist2);
         if (this.glist2) {
-            console.log('item 2', this.glist2.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
+            console.log('item 2', this.glist2.getItemById('7e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 2', this.glist2.getSelectedItems());
         }
 
@@ -240,15 +280,17 @@ export class GenericListExampleComponent implements OnInit {
         return {
             init: async (params: any) => {
                 const dataList = FakeData.Addons;
-                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                //const filteredData = dataList.slice(0, 5);
+                // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate
+                    CreationDate: addon.CreationDate,
+                    TestNum: 100000
+
                 }));
                 const rows2 = filteredData.map((item) => {
                     return {
@@ -278,6 +320,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
                             this.getRegularReadOnlyColumn('CreationDate'),
+                            this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
                         Columns: [
@@ -285,7 +328,9 @@ export class GenericListExampleComponent implements OnInit {
                             { Width: 30 },
                             { Width: 15 },
                             { Width: 20 },
-                            { Width: 20 },
+                            { Width: 15 },
+                            { Width: 5 },
+
                             // { Width: 0 }
                         ],
                         FrozenColumnsCount: 0,
@@ -295,7 +340,7 @@ export class GenericListExampleComponent implements OnInit {
                     items: res
 
                 });
-            },            
+            },
             /*inputs: () => {
                 return Promise.resolve(
                     {
@@ -309,8 +354,8 @@ export class GenericListExampleComponent implements OnInit {
             update: async (params: any) => {
                 //                console.log('update', params);
                 const dataList = FakeData.Addons;
-                const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                //const filteredData = dataList.slice(5, 10);
+                //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = dataList.slice(5, 10);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,
@@ -329,48 +374,63 @@ export class GenericListExampleComponent implements OnInit {
         } as IPepGenericListDataSource
     }
 
-    getDataSourceEmpty() {        
+    getDataSourceEmpty() {
         return {
             init: (params: any) => {
-                const dataList = FakeData.Addons;
-                //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                const filteredData = dataList.slice(10, 15);
-                //  console.log('filteredData 2', filteredData.length);
-                const res = filteredData.map(addon => ({
-                    UUID: addon.UUID,
-                    Description: addon.Addon.Description,
-                    Version: addon.Version,
-                    Type: addon.Type,
-                    CreationDate: addon.CreationDate,
-                }));
+
                 return Promise.resolve({
                     dataView: {
+                        InternalID: 3098435,
+                        Type: "Card",
+                        Title: "Sales Rep Form",
+                        Hidden: false,
+                        CreationDateTime: "2018-04-22T07:58:02Z",
+                        ModificationDateTime: "2018-04-22T07:58:13Z",
                         Context: {
-                            Name: '',
-                            Profile: { InternalID: 0 },
-                            ScreenSize: 'Landscape'
+                            "Object": {
+                                "Resource": "transactions",
+                                "InternalID": 138173,
+                                "Name": "sales avner"
+                            },
+                            "Name": "OrderCenterBarcodeLinesView",
+                            "ScreenSize": "Tablet",
+                            "Profile": {
+                                "InternalID": 46273,
+                                "Name": "Rep"
+                            }
                         },
-                        Type: 'Grid',
-                        Title: '',
-                        Fields: [
-                            this.getRegularReadOnlyColumn('UUID'),
-                            this.getRegularReadOnlyColumn('Description'),
-                            this.getRegularReadOnlyColumn('Version'),
-                            this.getRegularReadOnlyColumn('Type'),
-                            this.getRegularReadOnlyColumn('CreationDate')
+                        ListData: {},
+                        Fields: FakeCardsDataView,
+                        "Rows": [
+                            {
+                                "Mode": "MatchParent"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            },
+                            {
+                                "Mode": "Fixed"
+                            }
                         ],
-                        Columns: [
-                            { Width: 15 },
-                            { Width: 30 },
-                            { Width: 15 },
-                            { Width: 20 },
-                            { Width: 20 }
-                        ],
-                        FrozenColumnsCount: 0,
-                        MinimumColumnWidth: 0
+                        "Columns": [
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {}
+                        ]
                     },
-                    totalCount: res.length * 2,
-                    items: res
+
+                    totalCount: FakeCardsData.length * 2,
+                    items: FakeCardsData
 
                 });
             },
@@ -388,17 +448,56 @@ export class GenericListExampleComponent implements OnInit {
                 }));
                 return Promise.resolve(res);
             },
-            /*inputs: () => {
-                return Promise.resolve(
-                    {
-                        selectionType: 'single',
-                        firstFieldAsLink: true
-                    }
-                );
-            },*/
             inputs: {
                 selectionType: 'single',
                 firstFieldAsLink: true
+            }
+        } as IPepGenericListDataSource
+    }
+
+    getDataSourceLine() {
+        return {
+            init: (params: any) => {
+                return Promise.resolve({
+                    dataView: {
+                        "InternalID": 2884561,
+                        "Type": "Line",
+                        "Title": "Sales Rep Form",
+                        "Hidden": false,
+                        "CreationDateTime": "2017-12-03T09:50:14Z",
+                        "ModificationDateTime": "2017-12-03T09:50:14Z",
+                        "Context": {
+                            "Object": {
+                                "Resource": "transactions",
+                                "InternalID": 138173,
+                                "Name": "sales avner"
+                            },
+                            "Name": "OrderCenterFlatMatrixLine",
+                            "ScreenSize": "Tablet",
+                            "Profile": {
+                                "InternalID": 46273,
+                                "Name": "Rep"
+                            }
+                        },
+                        "ListData": {},
+                        "Fields": FakeLineDataView,
+                        "Rows": [],
+                        "Columns": [
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {}
+                        ]
+                    },
+                    totalCount: FakeLineData.length * 2,
+                    items: FakeLineData
+                });
             }
         } as IPepGenericListDataSource
     }

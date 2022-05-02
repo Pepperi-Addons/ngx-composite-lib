@@ -5,6 +5,7 @@ import { PepGenericFormModule } from './generic-form.module';
 import { GenericFormComponent } from './generic-form.component';
 import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module';
 
+
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
 
 export default {
@@ -16,18 +17,16 @@ export default {
         // The necessary modules for the component to work on Storybook
         moduleMetadata({
             imports: [
-                
                 PepGenericFormModule,
                 PepNgxHelperModule
-            ],
-           // declarations: [GenericFormComponent]
+            ]
         })
     ],
-    title: 'Components/GenericForm',
+    title: 'Components/generic-form',
     component: GenericFormComponent,
     argTypes: {
         dataView: {
-            description: 'this is the form data view',
+            description: 'Form\'s data view',
             defaultValue: {
                 Type: 'Form',
                 Hidden: false,
@@ -174,46 +173,73 @@ export default {
             }
         },
         dataSource: {
-            description: 'this is the form data object',
-            defaultValue: {},
+            description: 'Form field\'s data',
+            defaultValue: {
+                ItemId: '272764514',
+                Quantity: 10,
+            },
+            control: 'object',
             table: {
                 type: {
-                    summary: 'any'
+                    summary: "{ [key: string]: any }"
                 }
             }
         },
         isLocked: {
-            description: 'is the form locked for edit?',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the form is disabled'
         },
         inline: {
-            description: 'is the component inline?',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually'
         },
         showTopBar: {
-            description: 'is the top bar visible?',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the top bar is displayed'
         },
         addPadding: {
-            description: 'add padding to container?',
-            defaultValue: false,
-            control: 'boolean',
+            description: 'Whether the container has padding'
+        },
+        getData: {
+            description: 'Retrieve form fields current values',
+            control: false,
+            table: {
+                type: {
+                    summary: `() => IPepGenericFormData`
+                }
+            }
+        },
+        updateFields: {
+            description: 'Update form field(s)',
+            control: false
         },
         valueChange: {
             action: 'valueChange',
-            control: false
+            description: 'Emits a change event whenever a value is changed',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepGenericFormValueChange>'
+                }
+            }
         },
         fieldClick: {
             action: 'fieldClick',
-            control: false
-        }/*,
+            description: 'Emits a click event whenever a field is clicked',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<IPepGenericFormValueChange>'
+                }
+            }
+        },
         formValidationChange: {
             action: 'formValidationChange',
-            control: false
-        } */
+            description: 'Event emitted whenever the form is changed indicating whether the form is valid',
+            control: false,
+            table: {
+                type: {
+                    summary: 'EventEmitter<boolean>'
+                }
+            }
+        } 
     },
     parameters: {
         controls: {
@@ -224,30 +250,24 @@ export default {
                 'inline',
                 'showTopBar',
                 'addPadding',
+                'getData',
+                'updateFields',
                 'valueChange',
                 'fieldClick',
-               // 'formValidationChange'
+                'formValidationChange'
             ],
         },
     }
 
 } as Meta;
 
-/*
 const Template: Story<GenericFormComponent> = (args: GenericFormComponent) => ({
-    props: args,
-   template: `
-        <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
-        (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)" (formValidationChange)="formValidationChange($event)"></pep-generic-form>
-    `
-}); */
-
-const Template: Story = (args) => ({
-    props: args,
-    template: `
-        <pep-generic-form [dataView]="dataView" [dataSource]="dataSource" [isLocked]="isLocked" [inline]="inline" [showTopBar]="showTopBar" [addPadding]="addPadding"
-        (valueChange)="valueChange($event)" (fieldClick)="fieldClick($event)"></pep-generic-form>
-    `
+    props: {
+        ...args,
+        valueChange: action('valueChange'),
+        fieldClick: action('fieldClick'),
+        formValidationChange: action('formValidationChange')
+    }
 });
 
 export const Base = Template.bind({});

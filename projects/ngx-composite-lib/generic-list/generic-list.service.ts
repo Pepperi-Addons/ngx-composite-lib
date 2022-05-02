@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IPepGenericListSmartFilter } from './generic-list.model';
+import {
+    IPepGenericListSmartFilter,
+    IPepGenericListDataRow
+} from './generic-list.model';
 import {
     PepSmartFilterBaseField,
     IPepSmartFilterData,
@@ -32,20 +35,33 @@ export class PepGenericListService {
         return Object.prototype.hasOwnProperty.call(obj, prop);
     }
 
-    convertToPepRowData(object: any, dataView: any, uuidMapping: string) {
-        const row = new PepRowData();
-        let itemFields;
+    getListViewType(dataViewType: string) {
+        switch (dataViewType) {
+            case 'Grid':
+                return 'table';
+            case 'Card':
+                return 'cards';
+            case 'Line':
+                return 'lines';
+            default:
+                return 'table';
+        }
+    }
 
-        if (this.hasProperty(object, 'fields') && typeof object.fields === 'object') {
-            itemFields = object.fields;
-            if (object.isEditable === false) {
+    convertToPepRowData(item: any, dataView: any, uuidMapping: string) {
+        const row = new PepRowData();
+        let itemFields: any;
+
+        if (this.hasProperty(item, 'fields') && typeof item.fields === 'object') {
+            itemFields = item.fields;
+            if (item.isEditable === false) {
                 row.IsEditable = false;
             }
-            if (object.isSelectableForActions === false) {
+            if (item.isSelectableForActions === false) {
                 row.IsSelectableForActions = false;
             }
         } else {
-            itemFields = object;
+            itemFields = item;
         }
 
         row.UUID = itemFields[uuidMapping] || undefined;
@@ -56,11 +72,11 @@ export class PepGenericListService {
                 const field = dataView.Fields[index] as GridDataViewField;
                 row.Fields.push({
                     ApiName: field.FieldID,
-                    Title: this._translate.instant(field.Title),
+                    Title: field.Title ? this._translate.instant(field.Title) : '',
                     XAlignment: 1,
                     FormattedValue: (itemFields[field.FieldID] || '').toString(),
                     Value: (itemFields[field.FieldID] || '').toString(),
-                    ColumnWidth: dataView.Columns[index].Width,
+                    ColumnWidth: dataView.Columns[index]?.Width || undefined,
                     AdditionalValue: '',
                     OptionalValues: [],
                     FieldType: DataViewFieldTypes[field.Type],
