@@ -370,7 +370,7 @@ export class GenericListComponent implements OnInit {
         if (data) {
             this._dataView = data.dataView;           
 
-            if (data.items?.length > 0) {
+            if (data.items?.length > 0 && !data.isPepRowData) {
                 data.items = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));
             }
         }
