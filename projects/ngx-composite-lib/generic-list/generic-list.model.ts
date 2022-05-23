@@ -35,6 +35,7 @@ export interface IPepGenericListInitData {
     dataView: DataView;
     totalCount: number;
     items: any[];   
+    isPepRowData?: boolean;
 }
 
 export interface IPepGenericListDataRow {
