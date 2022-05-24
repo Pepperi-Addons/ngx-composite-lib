@@ -16,7 +16,6 @@ import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
-import { PepDIMXModule } from 'projects/ngx-composite-lib/dimx-export';
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 import { GenericListExampleComponent } from './generic-list-example/generic-list-example.component';
 import { GenericFormExampleComponent } from './generic-form-example/generic-form-example.component';
@@ -47,7 +46,6 @@ import { CommonModule } from '@angular/common';
         PepTextboxModule,
         PepShadowSettingsModule,
         PepGroupButtonsSettingsModule,
-        PepDIMXModule,
         PepFileStatusPanelModule,
         PepGenericListModule,
         PepGenericFormModule,
