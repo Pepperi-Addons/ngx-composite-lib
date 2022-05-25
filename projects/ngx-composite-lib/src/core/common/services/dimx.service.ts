@@ -26,8 +26,8 @@ export interface DIMXExportOptions {
 @Injectable()
 export class PepDIMXHelperService {
     private dimxFunctions!: { 
-        DIMXImport: (options: DIMXImportOptions) => void, 
-        DIMXExport: (options: DIMXExportOptions) => void 
+        DIMXImport: (options?: DIMXImportOptions) => void, 
+        DIMXExport: (options?: DIMXExportOptions) => void 
     };
 
     constructor(
@@ -52,7 +52,7 @@ export class PepDIMXHelperService {
         });
     }
 
-    import(options: DIMXImportOptions) {
+    import(options?: DIMXImportOptions) {
         if (typeof(this.dimxFunctions?.DIMXImport) === 'function') {
             this.dimxFunctions.DIMXImport(options);
         } else {
@@ -60,7 +60,7 @@ export class PepDIMXHelperService {
         }
     }
 
-    export(options: DIMXExportOptions) {
+    export(options?: DIMXExportOptions) {
         if (typeof(this.dimxFunctions?.DIMXExport) === 'function') {
             this.dimxFunctions.DIMXExport(options);
         } else {
