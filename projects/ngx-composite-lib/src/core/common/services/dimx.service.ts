@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef } from "@angular/core";
-import { PepRemoteLoaderService } from "@pepperi-addons/ngx-lib/remote-loader";
+import { PepAddonBlockLoaderService } from "@pepperi-addons/ngx-lib/remote-loader";
 
 export interface DIMXHostObject {
     DIMXAddonUUID: string;
@@ -31,12 +31,12 @@ export class PepDIMXHelperService {
     };
 
     constructor(
-        private remoteLoaderService: PepRemoteLoaderService
+        private addonBlockLoaderService: PepAddonBlockLoaderService
     ) {
     }
 
     register(viewContainerRef: ViewContainerRef, dimxHostObject: DIMXHostObject, onDIMXProcessDoneCallback: (dimxEvent: any) => void) {
-        this.remoteLoaderService.loadAddonBlockInContainer({
+        this.addonBlockLoaderService.loadAddonBlockInContainer({
             container: viewContainerRef,
             name: 'DIMX',
             hostObject: dimxHostObject,
