@@ -1,0 +1,106 @@
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions' as ngx-functions;
+
+@use '../src/core/style/components/data-view-builder';
+
+.mapped-fields-container {
+    display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+            "side-area    main-area";
+
+    .available-fields-side-area {
+        grid-area: side-area;
+        width: 240px;
+        max-width: 240px;
+        padding-top: ngx-variables.$spacing-2xl;
+        margin-inline-end: ngx-variables.$double-content-margin;
+    }
+    
+    .mapped-fields-main-area {
+        grid-area: main-area;
+        padding-top: ngx-variables.$spacing-2xl;
+        
+        .mapped-fields-top-area {
+            height: ngx-variables.$top-bar-field-height;
+            display: flex;
+            align-items: center;
+
+            &.pep-border-bottom {
+                margin-bottom: ngx-variables.$content-margin;
+            }
+        }
+        
+        .drop-field-here-area {
+            @include data-view-builder.mapped-field-item-container();
+            @include ngx-mixins.state-weak-default();
+            @include ngx-mixins.inline(ngx-functions.get-pep-color(color-system-primary, color-flat-r-20), 1px, dashed);
+
+            &.cdk-drop-list-dragging {
+                @include ngx-mixins.focus();
+                
+                &:hover {
+                    @include ngx-mixins.state-regular-hover(true);
+                    @include ngx-mixins.focus();
+                }
+        
+                // Hide the placeholder when 
+                ::ng-deep.placeholder-item {
+                    display: none;
+                }
+            }
+        }
+
+        .mapped-fields-area {
+            display: flex;
+            flex-direction: column;
+            // row-gap: ngx-variables.$content-margin;
+            column-gap: ngx-variables.$content-margin;
+            
+            &:not(.no-row-gap) {
+                row-gap: ngx-variables.$content-margin;
+            }
+
+            &.cdk-drop-list-dragging {
+                ::ng-deep.placeholder-item {
+                    @include data-view-builder.mapped-field-item-container();
+                    @include ngx-mixins.state-regular-default(true);
+                    @include ngx-mixins.focus();
+                    height: ngx-variables.$draggable-item-height;
+                }
+            }
+
+            // The mapped-field-container style declared in style.scss because when dragging in list the item added to the end of the dom and we cannot style it here (component context).
+            .mapped-field-container { 
+                cursor: grab;
+                @include data-view-builder.mapped-field-container();
+
+                &.cdk-drag-placeholder {
+                    // opacity: 0;
+                    // @include ngx-mixins.state-regular-default(true);
+                    @include ngx-mixins.focus();
+
+                    .fields-wrapper {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            .menu-separator {
+                @include data-view-builder.mapped-field-item-container();
+                height: ngx-variables.$content-margin;
+
+                .add-separator {
+                    position: relative;
+                    display: none;
+                }
+
+                &:hover .add-separator {
+                    display: block;
+                }
+            }
+        }
+    }
+}

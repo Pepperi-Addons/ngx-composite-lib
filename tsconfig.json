@@ -12,10 +12,6 @@
         "declaration": false,
         "downlevelIteration": true,        
         "paths": {
-            // "ngx-composite-lib": [
-            //     "dist/ngx-composite-lib/ngx-composite-lib",
-            //     "dist/ngx-composite-lib"
-            // ],
             "@pepperi-addons/ngx-composite-lib": [
                 "dist/ngx-composite-lib"
             ],
@@ -28,10 +24,6 @@
             "@storybook-settings/*": [
                 ".storybook/*"
             ]
-            // "@pepperi-addons/ngx-composite-lib": [
-            //     "dist/ngx-composite-lib/ngx-composite-lib",
-            //     "dist/ngx-composite-lib"
-            // ]
         },
         "experimentalDecorators": true,        
         "moduleResolution": "node",

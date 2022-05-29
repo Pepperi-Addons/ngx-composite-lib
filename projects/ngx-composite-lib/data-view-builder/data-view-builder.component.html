@@ -1,0 +1,76 @@
+<pep-page-layout >
+    <ng-container pep-top-area>
+        <pep-top-bar [title]="title">
+            <div header-end-content>
+                <!-- <pep-button class="pep-spacing-element" [value]="'Cancel' | translate" (buttonClick)="backClicked()"></pep-button> -->
+                <pep-button class="pep-spacing-element" [value]="'Save' | translate" styleType="strong" (buttonClick)="saveClicked()"></pep-button>
+            </div>
+        </pep-top-bar>
+    </ng-container>
+    <ng-container pep-main-area>
+        <div *ngIf="dataView && availableFields" class="mapped-fields-container">
+            <div class="available-fields-side-area">
+                <pep-draggable-items [items]="availableFields" [title]="'DATA_VIEW_BUILDER.AVAILABLE_FIELDS' | translate" titleType="with-bottom-border" titleSizeType="md"
+                    itemPlaceholderType="weak" [showSearch]="true" [dropAreaIds]="['emptyDropArea', 'mappedFields']" (itemDragStarted)="onDragStart($event)" (itemDragEnded)="onDragEnd($event)">
+                </pep-draggable-items>
+            </div>
+            <div pep-main-area class="mapped-fields-main-area">
+                <div class="mapped-fields-top-area pep-border-bottom"
+                    [title]="builderTitle + ' ' + builderTitleHint ? ('(' + builderTitleHint + ')') : ''">
+                    <span class="title-md">{{ builderTitle }}&nbsp;</span>
+                    <span *ngIf="builderTitleHint" class="color-dimmed">({{ builderTitleHint }})</span>
+                </div>
+
+                <div>
+                    <ng-container *ngIf="mappedFields === null || mappedFields.length === 0; then emptyTemplate; else notEmptyTemplate"></ng-container>
+                    <ng-template #emptyTemplate>
+                        <div id="emptyDropArea" class="drop-field-here-area" cdkDropList (cdkDropListDropped)="onDropField($event)">
+                            <mat-icon class="pep-spacing-element">
+                                <pep-icon name="arrow_down_alt"></pep-icon>
+                            </mat-icon>
+                            <span class="body-sm ellipsis">
+                                {{ 'DATA_VIEW_BUILDER.EMPTY_DROP_AREA_TEXT' | translate }}
+                            </span> 
+                        </div>
+                    </ng-template>
+                    <ng-template #notEmptyTemplate>
+                        <div id="mappedFields" class="mapped-fields-area" [ngClass]="{ 'no-row-gap': !isGrabbing && type === 'menu' }"
+                            cdkDropList [cdkDropListData]="mappedFields" (cdkDropListDropped)="onDropField($event)">
+                            <ng-container *ngFor="let mappedField of mappedFields; let i = index" >
+                                <div class="mapped-field-container" cdkDrag (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
+                                    <ng-container *ngTemplateOutlet="mappedFieldTemplate; context: {mappedField: mappedField}"></ng-container>
+                                </div>
+                                <div *ngIf="!isGrabbing" class="menu-separator">
+                                    <pep-button class="add-separator" styleType="regular" sizeType="sm" iconName="number_plus" 
+                                        [value]="'DATA_VIEW_BUILDER.ADD_SEPARATOR' | translate" (buttonClick)="addSeparator(i+1)"></pep-button>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-template>
+
+                    <!-- {{ mappedFields | json}} -->
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</pep-page-layout>
+
+<ng-template #mappedFieldTemplate let-mappedField="mappedField">
+    <ng-container *ngIf="mappedField.fieldKey === ''; then separatorTemplate; else menuItemTemplate"></ng-container>
+
+    <ng-template #separatorTemplate>
+        Separator
+    </ng-template>
+    <ng-template #menuItemTemplate>
+        <div class="fields-wrapper">
+            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE' | translate" [value]="mappedField.fieldKey" [disabled]="true">
+            </pep-textbox>
+            
+            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE' | translate"
+                [value]="mappedField.title" (valueChange)="onTitleChanged($event, mappedField)">
+            </pep-textbox>
+    
+            <pep-button class="del-button" iconName="system_bin" (buttonClick)="onDeleteMappedField($event, mappedField)"></pep-button>
+        </div>
+    </ng-template>
+</ng-template>

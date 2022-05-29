@@ -11,6 +11,13 @@
         "SIZE": "Shadow size",
         "INTENSITY": "Shadow intensity"
     },
+    "DATA_VIEW_BUILDER": {
+        "AVAILABLE_FIELDS": "Available fields",
+        "MENU_ITEM_KEY_TITLE": "Menu item",
+        "MENU_ITEM_VALUE_TITLE": "Item title",
+        "EMPTY_DROP_AREA_TEXT": "Drop here from available fields",
+        "ADD_SEPARATOR": "Add separator"
+    },
     "GENERAL": {
         "NONE": "None",
         "XS": "XS",
@@ -43,5 +50,16 @@
     "ACTIONS": {
         "RESET": "Reset",
         "CLOSE": "Close"
+    },
+    "MESSAGES": {
+        "DIALOG_INFO_TITLE": "Info",
+        "DIALOG_ERROR_TITLE": "Error",
+        "DIALOG_DELETE_TITLE": "Delete",
+        "DELETE_DIALOG_CONTENT": "Are you sure?",
+        "OPERATION_SUCCESS_CONTENT": "Operation success.",
+        "MAPPED_FIELDS_UNMAPPED_ENTRIES_CONTENT": "There are unmapped entries. ‘Ok’ will remove them from the list.",
+        "MAPPED_FIELDS_SAVED_DIALOG_CONTENT": "The mapped fields are saved.",
+        "DIALOG_ERROR_CONTENT": "General error - please contact your administrator.",
+        "DIALOG_ERROR_DETAILS": "<br/><small> Error details: {{error}} </small>"
     }
 }
