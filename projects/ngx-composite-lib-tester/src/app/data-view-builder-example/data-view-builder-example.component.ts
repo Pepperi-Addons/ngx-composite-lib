@@ -10,7 +10,7 @@ import { MenuDataView } from '@pepperi-addons/papi-sdk';
 export class DataViewBuilderExampleComponent implements OnInit {
 
     availableFields: Array<IPepDraggableItem> = [];
-    dataView: MenuDataView | undefined;
+    dataView!: MenuDataView;
 
     constructor(
     ) { 

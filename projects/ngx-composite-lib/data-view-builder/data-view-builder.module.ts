@@ -15,7 +15,10 @@ import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepDraggableItemsModule } from '@pepperi-addons/ngx-lib/draggable-items';
 import { PepIconRegistry, PepIconModule, pepIconSystemClose, pepIconArrowDownAlt, pepIconSystemBin, pepIconNumberPlus } from '@pepperi-addons/ngx-lib/icon';
 
+import { DataViewBuilderService } from './data-view-builder.service';
+
 import { DataViewBuilderComponent } from './data-view-builder.component';
+import { MenuDataViewComponent } from './menu-data-view/menu-data-view.component';
 
 const pepIcons = [
     pepIconSystemClose,
@@ -26,7 +29,7 @@ const pepIcons = [
 
 @NgModule({
     declarations: [
-        DataViewBuilderComponent
+        DataViewBuilderComponent, MenuDataViewComponent
     ],
     imports: [
         CommonModule,
@@ -43,6 +46,7 @@ const pepIcons = [
         PepDraggableItemsModule,
     ],
     exports: [DataViewBuilderComponent],
+    providers: [DataViewBuilderService]
 })
 export class PepDataViewBuilderModule {
     constructor(
