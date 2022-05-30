@@ -16,7 +16,7 @@
             </div>
             <div pep-main-area class="mapped-fields-main-area">
                 <div class="mapped-fields-top-area pep-border-bottom"
-                    [title]="builderTitle + ' ' + builderTitleHint ? ('(' + builderTitleHint + ')') : ''">
+                    [title]="builderTitle + ' ' + (builderTitleHint ? ('(' + builderTitleHint + ')') : '')">
                     <span class="title-md">{{ builderTitle }}&nbsp;</span>
                     <span *ngIf="builderTitleHint" class="color-dimmed">({{ builderTitleHint }})</span>
                 </div>
@@ -37,10 +37,11 @@
                         <div id="mappedFields" class="mapped-fields-area" [ngClass]="{ 'no-row-gap': !isGrabbing && type === 'menu' }"
                             cdkDropList [cdkDropListData]="mappedFields" (cdkDropListDropped)="onDropField($event)">
                             <ng-container *ngFor="let mappedField of mappedFields; let i = index" >
-                                <div class="mapped-field-container" cdkDrag (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
+                                <div class="mapped-field-container" [ngClass]="{ 'separator-container': mappedField.fieldKey === '' }" 
+                                    cdkDrag (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
                                     <ng-container *ngTemplateOutlet="mappedFieldTemplate; context: {mappedField: mappedField}"></ng-container>
                                 </div>
-                                <div *ngIf="!isGrabbing" class="menu-separator">
+                                <div *ngIf="!isGrabbing" class="add-separator-container">
                                     <pep-button class="add-separator" styleType="regular" sizeType="sm" iconName="number_plus" 
                                         [value]="'DATA_VIEW_BUILDER.ADD_SEPARATOR' | translate" (buttonClick)="addSeparator(i+1)"></pep-button>
                                 </div>
@@ -56,11 +57,8 @@
 </pep-page-layout>
 
 <ng-template #mappedFieldTemplate let-mappedField="mappedField">
-    <ng-container *ngIf="mappedField.fieldKey === ''; then separatorTemplate; else menuItemTemplate"></ng-container>
+    <ng-container *ngIf="mappedField.fieldKey !== ''; then menuItemTemplate; else separatorTemplate"></ng-container>
 
-    <ng-template #separatorTemplate>
-        Separator
-    </ng-template>
     <ng-template #menuItemTemplate>
         <div class="fields-wrapper">
             <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE' | translate" [value]="mappedField.fieldKey" [disabled]="true">
@@ -70,7 +68,39 @@
                 [value]="mappedField.title" (valueChange)="onTitleChanged($event, mappedField)">
             </pep-textbox>
     
-            <pep-button class="del-button" iconName="system_bin" (buttonClick)="onDeleteMappedField($event, mappedField)"></pep-button>
+            <pep-button class="center-button" iconName="system_bin" [title]="'ACTIONS.DELETE' | translate" (buttonClick)="onDeleteMappedField($event, mappedField)"></pep-button>
         </div>
     </ng-template>
+    <ng-template #separatorTemplate>
+        <div class="separator-wrapper ">
+            <div class="pep-spacing-element title title-md color-dimmed">
+                <span [title]="mappedField.title">{{ mappedField.title }}</span>
+            </div>
+            <div class="list-actions">
+                <pep-button iconName="system_edit" [title]="'ACTIONS.EDIT' | translate" sizeType="xs" styleType="regular" (buttonClick)="onEditSeparatorField($event, mappedField)"></pep-button>
+                <pep-button iconName="system_bin" [title]="'ACTIONS.DELETE' | translate" sizeType="xs" styleType="regular" (buttonClick)="onDeleteMappedField($event, mappedField)"></pep-button>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #separatorTitleModalTemplate let-data>
+    <pep-dialog [title]="'DATA_VIEW_BUILDER.SEPARATOR_TITLE' | translate">
+        <ng-container pep-dialog-content>
+            <pep-textbox #txt [label]="'DATA_VIEW_BUILDER.ADD_A_TITLE' | translate" [(value)]="data.value">
+            </pep-textbox>
+        </ng-container>
+        <ng-container pep-dialog-actions>
+            <div class="pep-spacing-element-negative">
+                <button mat-button class="pep-spacing-element pep-button md weak"
+                    (click)="closeDialog()">
+                    {{'Cancel' | translate}}
+                </button>
+                <button mat-button class="pep-spacing-element pep-button md strong"
+                    (click)="setDialogValue(txt.value)">
+                    {{ 'Save' | translate}}
+                </button>
+            </div>
+        </ng-container>
+    </pep-dialog>
 </ng-template>

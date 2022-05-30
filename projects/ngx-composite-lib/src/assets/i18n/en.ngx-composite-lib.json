@@ -16,7 +16,9 @@
         "MENU_ITEM_KEY_TITLE": "Menu item",
         "MENU_ITEM_VALUE_TITLE": "Item title",
         "EMPTY_DROP_AREA_TEXT": "Drop here from available fields",
-        "ADD_SEPARATOR": "Add separator"
+        "ADD_SEPARATOR": "Add separator",
+        "SEPARATOR_TITLE": "Separator title",
+        "ADD_A_TITLE": "Add a title"
     },
     "GENERAL": {
         "NONE": "None",
@@ -49,7 +51,9 @@
     },
     "ACTIONS": {
         "RESET": "Reset",
-        "CLOSE": "Close"
+        "CLOSE": "Close",
+        "DELETE": "Delete",
+        "EDIT": "Edit"
     },
     "MESSAGES": {
         "DIALOG_INFO_TITLE": "Info",

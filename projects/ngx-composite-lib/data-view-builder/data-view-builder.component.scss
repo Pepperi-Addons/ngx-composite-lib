@@ -82,13 +82,14 @@
                     // @include ngx-mixins.state-regular-default(true);
                     @include ngx-mixins.focus();
 
-                    .fields-wrapper {
+                    .fields-wrapper,
+                    .separator-wrapper {
                         opacity: 0;
                     }
                 }
             }
 
-            .menu-separator {
+            .add-separator-container {
                 @include data-view-builder.mapped-field-item-container();
                 height: ngx-variables.$content-margin;
 

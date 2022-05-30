@@ -1,5 +1,6 @@
 import { CdkDragStart, CdkDragEnd, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PepLoaderService } from '@pepperi-addons/ngx-lib';
@@ -15,6 +16,8 @@ import { PepDataViewBuilderType, IMappedFieldBase, IMappedMenuField } from './da
     styleUrls: ['./data-view-builder.component.scss']
 })
 export class DataViewBuilderComponent implements OnInit {
+    @ViewChild('separatorTitleModalTemplate', { read: TemplateRef }) separatorTitleModalTemplate!: TemplateRef<any>;
+    
     @Input() title: string = '';
     @Input() builderTitle: string = '';
     @Input() builderTitleHint: string = '';
@@ -29,6 +32,7 @@ export class DataViewBuilderComponent implements OnInit {
     
     mappedFields: Array<IMappedMenuField> = [];
     isGrabbing = false;
+    private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(
         private loaderService: PepLoaderService,
@@ -172,12 +176,12 @@ export class DataViewBuilderComponent implements OnInit {
     }
 
     onTitleChanged(event: string, mappedField: IMappedMenuField) {
-        const index = this.mappedFields.findIndex( ms => ms.fieldKey === mappedField.fieldKey);
+        const index = this.mappedFields.findIndex( ms => ms === mappedField);
         this.mappedFields[index].title = event;
     }
 
     onDeleteMappedField(event: IPepButtonClickEvent, mappedField: IMappedMenuField) {
-        const index = this.mappedFields.findIndex( ms => ms.fieldKey === mappedField.fieldKey);
+        const index = this.mappedFields.findIndex( ms => ms === mappedField);
         if (index > -1) {
             this.mappedFields.splice(index, 1);
 
@@ -185,4 +189,20 @@ export class DataViewBuilderComponent implements OnInit {
         }
     }
 
+    onEditSeparatorField(event: IPepButtonClickEvent, mappedField: IMappedMenuField) {
+        this.dialogRef = this.dialogService.openDialog(this.separatorTitleModalTemplate, { value: mappedField.title });
+        this.dialogRef.afterClosed().subscribe((titleValue) => {
+            if (titleValue !== undefined) {
+                mappedField.title = titleValue;
+            }
+        });
+    }
+
+    setDialogValue(value: string) {
+        this.closeDialog(value);
+    }
+
+    closeDialog(value: string | undefined = undefined) {
+        this.dialogRef?.close(value);
+    }
 }

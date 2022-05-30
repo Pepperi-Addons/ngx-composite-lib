@@ -1,4 +1,5 @@
 @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/functions' as ngx-functions;
 @use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
 
 /* You can add global styles to this file, and also import other style files */
@@ -11,17 +12,24 @@ html {
 @mixin mapped-field-item-container() {
     max-width: 600px;
     // height: 6rem;
-    border-radius: ngx-variables.$border-radius-md;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-inline: ngx-variables.$spacing-lg;
+    border-radius: ngx-variables.$border-radius-md;
+    
+    &:not(.separator-container) {
+        padding-inline: ngx-variables.$spacing-lg;
+    }
 }
 
 @mixin mapped-field-container() {
     @include mapped-field-item-container();
-    @include ngx-mixins.state-regular-default(true);
-    gap: ngx-variables.$double-content-margin;
+    
+    &:not(.separator-container) {
+        gap: ngx-variables.$double-content-margin;
+        @include ngx-mixins.state-regular-default(true);
+        // border-color: ngx-functions.get-pep-color(color-system-primary, color-tran-50);
+    }
 
     .fields-wrapper {
         display: grid;
@@ -31,8 +39,21 @@ html {
         padding-top: 0.5rem;
 
         // To align with the other fields.
-        .del-button {
+        .center-button {
             margin-top: ngx-variables.$form-field-title-height;
+        }
+    }
+
+    .separator-wrapper {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr auto;
+        padding-bottom: ngx-variables.$spacing-xs;
+        border-bottom: 1px solid ngx-functions.get-pep-color(color-regular, color-flat-r-20);
+
+        .list-actions {
+            display: flex;
+            gap: ngx-variables.$spacing-xs
         }
     }
 }
