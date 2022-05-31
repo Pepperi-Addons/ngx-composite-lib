@@ -52,7 +52,26 @@ export class DataViewBuilderExampleComponent implements OnInit {
             { title: 'field 2', data: 'field2' },
             { title: 'field 3', data: 'field3' },
             { title: 'tomer test', data: 'tomer_test' },
-            { title: 'tomer admin', data: 'tomer_admin' }
+            { title: 'tomer admin', data: 'tomer_admin' },
+            { title: '1field 1', data: 'field1' },
+            { title: '1field 2', data: 'field2' },
+            { title: '1field 3', data: 'field3' },
+            { title: '1tomer test', data: 'tomer_test' },
+            { title: '1tomer admin', data: 'tomer_admin' },
+            { title: '2field 1', data: 'field1' },
+            { title: '2field 2', data: 'field2' },
+            { title: '2field 3', data: 'field3' },
+            { title: '2tomer test', data: 'tomer_test' },
+            { title: '2tomer admin', data: 'tomer_admin' },
+            { title: '3field 1', data: 'field1' },
+            { title: '3field 2', data: 'field2' },
+            { title: '3field 3', data: 'field3' },
+            { title: '3tomer test', data: 'tomer_test' },
+            { title: '3tomer admin', data: 'tomer_admin' }
         ]
+    }
+
+    onDataViewChange(event: any) {
+        console.log('onDataViewChange', event);
     }
 }

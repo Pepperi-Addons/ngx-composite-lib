@@ -79,7 +79,7 @@ export class DataViewBuilderComponent implements OnInit {
 
     private notifyDataViewChange() {
         this.dataViewChange.emit(this.dataView);
-        console.log(this.dataView);
+        // console.log(this.dataView);
     }
 
     ngOnInit() {
