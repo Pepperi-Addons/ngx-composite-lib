@@ -2,31 +2,45 @@
 
 .mapped-fields-container {
     display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas: 
-            "side-area    main-area";
+    height: 100%;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+        "side-area    main-area";
 
     .available-fields-side-area {
         grid-area: side-area;
         width: 240px;
         max-width: 240px;
+        overflow: auto;
+        height: inherit;
         padding-top: ngx-variables.$spacing-2xl;
         margin-inline-end: ngx-variables.$double-content-margin;
     }
     
     .mapped-fields-main-area {
+        display: grid;
+        grid-template-rows: auto 1fr;
         grid-area: main-area;
         padding-top: ngx-variables.$spacing-2xl;
-        
+        overflow: auto;
+        height: inherit;
+
         .mapped-fields-top-area {
             height: ngx-variables.$top-bar-field-height;
             display: flex;
             align-items: center;
 
-            &.pep-border-bottom {
-                margin-bottom: ngx-variables.$content-margin;
-            }
+            // &.pep-border-bottom {
+            //     margin-bottom: ngx-variables.$content-margin;
+            // }
+        }
+
+        .data-view-by-type-area {
+            overflow: auto;
+            height: inherit;
+            padding-top: ngx-variables.$content-margin;
+            padding-bottom: ngx-variables.$content-margin;
+            padding-inline: ngx-variables.$spacing-xs;
         }
     }
 }

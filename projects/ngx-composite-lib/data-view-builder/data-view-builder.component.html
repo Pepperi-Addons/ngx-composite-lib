@@ -28,13 +28,13 @@
                         <span *ngIf="builderTitleHint" class="color-dimmed">({{ builderTitleHint }})</span>
                     </div>
                     
-                    <ng-container [ngSwitch]="type">
+                    <div class="data-view-by-type-area" [ngSwitch]="type">
                         <ng-container *ngSwitchCase="'menu'">
                             <menu-data-view [fields]="dataView?.Fields || []" [emptyDropAreaId]="emptyDropAreaId" [mappedFieldsId]="mappedFieldsId" (fieldsChange)="onFieldsChanged($event)"></menu-data-view>
                         </ng-container>
                         <!-- <ng-container *ngSwitchDefault>
                         </ng-container> -->
-                    </ng-container>
+                    </div>
                 </div>
             </div>
         </ng-template>
