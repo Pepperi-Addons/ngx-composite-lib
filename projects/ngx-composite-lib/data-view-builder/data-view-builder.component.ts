@@ -11,7 +11,7 @@ import { DataViewBuilderService } from './data-view-builder.service';
     styleUrls: ['./data-view-builder.component.scss']
 })
 export class DataViewBuilderComponent implements OnInit {
-    @Input() title: string = '';
+    // @Input() title: string = '';
     @Input() builderTitle: string = '';
     @Input() builderTitleHint: string = '';
     
@@ -59,7 +59,7 @@ export class DataViewBuilderComponent implements OnInit {
 
     private setAvailableFieldPermission(field: string, disable: boolean) {
         // Find the item in the available fields
-        const item = this.availableFields.find(as => as.data === field);
+        const item = this.availableFields.find(as => as.data.key === field);
         
         // If exist disable or enable it.
         if (item) {

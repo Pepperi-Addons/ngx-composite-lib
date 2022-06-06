@@ -43,7 +43,7 @@ export class MenuDataViewComponent implements OnInit {
     
     private addNewField(draggableItem: IPepDraggableItem, index: number) {
         // Add new menuField to the mappedFields.
-        const menuField: MenuDataViewField = { FieldID: draggableItem.data, Title: draggableItem.title };
+        const menuField: MenuDataViewField = { FieldID: draggableItem.data.key, Title: draggableItem.title };
         this.spliceMappedFields(index, 0, menuField);
     }
     

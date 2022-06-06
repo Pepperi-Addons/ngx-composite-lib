@@ -48,26 +48,26 @@ export class DataViewBuilderExampleComponent implements OnInit {
         }
 
         this.availableFields = [
-            { title: 'field 1', data: 'field1' },
-            { title: 'field 2', data: 'field2' },
-            { title: 'field 3', data: 'field3' },
-            { title: 'tomer test', data: 'tomer_test' },
-            { title: 'tomer admin', data: 'tomer_admin' },
-            { title: '1field 1', data: '1field1' },
-            { title: '1field 2', data: '1field2' },
-            { title: '1field 3', data: '1field3' },
-            { title: '1tomer test', data: '1tomer_test' },
-            { title: '1tomer admin', data: '1tomer_admin' },
-            { title: '2field 1', data: '2field1' },
-            { title: '2field 2', data: '2field2' },
-            { title: '2field 3', data: '2field3' },
-            { title: '2tomer test', data: '2tomer_test' },
-            { title: '2tomer admin', data: '2tomer_admin' },
-            { title: '3field 1', data: '3field1' },
-            { title: '3field 2', data: '3field2' },
-            { title: '3field 3', data: '3field3' },
-            { title: '3tomer test', data: '3tomer_test' },
-            { title: '3tomer admin', data: '3tomer_admin' }
+            { title: 'field 1', data: { key: 'field1' } },
+            { title: 'field 2', data: { key: 'field2' } },
+            { title: 'field 3', data: { key: 'field3' } },
+            { title: 'tomer test', data: { key: 'tomer_test' } },
+            { title: 'tomer admin', data: { key: 'tomer_admin' } },
+            { title: '1field 1', data: { key: '1field1' } },
+            { title: '1field 2', data: { key: '1field2' } },
+            { title: '1field 3', data: { key: '1field3' } },
+            { title: '1tomer test', data: { key: '1tomer_test' } },
+            { title: '1tomer admin', data: { key: '1tomer_admin' } },
+            { title: '2field 1', data: { key: '2field1' } },
+            { title: '2field 2', data: { key: '2field2' } },
+            { title: '2field 3', data: { key: '2field3' } },
+            { title: '2tomer test', data: { key: '2tomer_test' } },
+            { title: '2tomer admin', data: { key: '2tomer_admin' } },
+            { title: '3field 1', data: { key: '3field1' } },
+            { title: '3field 2', data: { key: '3field2' } },
+            { title: '3field 3', data: { key: '3field3' } },
+            { title: '3tomer test', data: { key: '3tomer_test' } },
+            { title: '3tomer admin', data: { key: '3tomer_admin' } }
         ]
     }
 

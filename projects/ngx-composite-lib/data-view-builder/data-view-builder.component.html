@@ -1,12 +1,10 @@
 <pep-page-layout >
-    <ng-container pep-top-area>
+    <!-- <ng-container pep-top-area>
         <pep-top-bar [title]="title">
             <div header-end-content>
-                <!-- <pep-button class="pep-spacing-element" [value]="'Cancel' | translate" (buttonClick)="backClicked()"></pep-button> -->
-                <!-- <pep-button class="pep-spacing-element" [value]="'Save' | translate" styleType="strong" (buttonClick)="saveClicked()"></pep-button> -->
             </div>
         </pep-top-bar>
-    </ng-container>
+    </ng-container> -->
     <ng-container pep-main-area>
         <ng-container *ngIf="type === 'not-supported' ; then notSupportedTemplate; else supportedTemplate"></ng-container>
         <ng-template #notSupportedTemplate>
