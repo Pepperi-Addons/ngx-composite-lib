@@ -15,7 +15,15 @@ export class DataViewBuilderComponent implements OnInit {
     @Input() builderTitle: string = '';
     @Input() builderTitleHint: string = '';
     
-    @Input() availableFields: Array<IPepDraggableItem> = [];
+    private _availableFields: Array<IPepDraggableItem> = [];
+    @Input()
+    set availableFields(value: Array<IPepDraggableItem>) {
+        this._availableFields = value;
+        this.setTitlesMap();
+    }
+    get availableFields(): Array<IPepDraggableItem> {
+        return this._availableFields;
+    }
     
     private _dataView!: BaseDataView;
     @Input()
@@ -35,6 +43,8 @@ export class DataViewBuilderComponent implements OnInit {
     
     emptyDropAreaId = 'emptyDropArea';
     mappedFieldsId = 'mappedFields';
+
+    availableFieldsTitles: Map<string, string> = new Map<string, string>();
 
     constructor(
         private dataViewBuilderService: DataViewBuilderService
@@ -73,6 +83,20 @@ export class DataViewBuilderComponent implements OnInit {
         if (this.dataView && this.dataView.Fields) {
             for (let index = 0; index < this.dataView.Fields.length; index++) {
                 this.setAvailableFieldPermission(this.dataView.Fields[index].FieldID, true);
+            }
+        }
+    }
+
+    private setTitlesMap() {
+        this.availableFieldsTitles.clear();
+
+        if (this.availableFields?.length > 0) {
+            for (let index = 0; index < this.availableFields.length; index++) {
+                const availableField = this.availableFields[index];
+
+                if (availableField?.data?.key.length > 0) {
+                    this.availableFieldsTitles.set(availableField.data.key, availableField.title);
+                }
             }
         }
     }

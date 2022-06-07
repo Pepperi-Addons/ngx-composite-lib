@@ -17,7 +17,10 @@ export class MenuDataViewComponent implements OnInit {
     @ViewChild('separatorTitleModalTemplate', { read: TemplateRef }) separatorTitleModalTemplate!: TemplateRef<any>;
 
     @Input() 
-    fields: Array<DataViewField> = [];
+    fields: Array<DataViewField> = []; // The data view fields.
+
+    @Input()
+    availableFieldsTitles: Map<string, string> = new Map<string, string>(); // <FieldID, Original Title> from the available fields.
 
     @Input() 
     emptyDropAreaId: string = '';
@@ -27,7 +30,6 @@ export class MenuDataViewComponent implements OnInit {
 
     @Output()
     fieldsChange: EventEmitter<DataViewField[]> = new EventEmitter<DataViewField[]>();
-
     
     isGrabbing = false;
     private dialogRef: MatDialogRef<any> | null = null;

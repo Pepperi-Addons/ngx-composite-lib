@@ -33,7 +33,7 @@
             <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE' | translate" [value]="menuField.FieldID" [disabled]="true">
             </pep-textbox>
             
-            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE' | translate"
+            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE' | translate" [hint]="'(' + (availableFieldsTitles.get(menuField.FieldID) || '') + ')'"
                 [value]="menuField.Title" (valueChange)="onTitleChanged($event, menuField)">
             </pep-textbox>
     

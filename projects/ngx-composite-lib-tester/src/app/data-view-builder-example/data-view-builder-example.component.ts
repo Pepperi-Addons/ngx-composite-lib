@@ -38,11 +38,11 @@ export class DataViewBuilderExampleComponent implements OnInit {
             "Fields": [
                 {
                     "FieldID": "tomer_test",
-                    "Title": "dac3b036-ee5c-40b8-84d3-3a5ba97fc86d"
+                    "Title": "tomer test"
                 },
                 {
                     "FieldID": "tomer_admin",
-                    "Title": "dac3b036-ee5c-40b8-84d3-3a5ba97fc86d"
+                    "Title": "tomer admin"
                 }
             ]
         }
