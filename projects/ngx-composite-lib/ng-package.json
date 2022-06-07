@@ -12,6 +12,8 @@
         "umdModuleIds": {
             "@ngx-translate/core": "translate",
             "@pepperi-addons/ngx-lib": "ngx-lib",
+            "@pepperi-addons/ngx-lib/icon": "ngx-lib/icon",
+            "@pepperi-addons/ngx-lib/remote-loader": "ngx-lib/remote-loader",
             "ngx-translate-multi-http-loader": "ngx-translate-multi-http-loader",
             "moment": "moment"
         }

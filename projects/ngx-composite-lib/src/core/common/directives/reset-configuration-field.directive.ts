@@ -15,7 +15,8 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set disabled(value: boolean) {
         this._disabled = value;
-        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
+        // this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
+        this.setButtonStyle(this.resetButton);
     }
     get disabled(): boolean {
         return this._disabled;
@@ -25,7 +26,8 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     @Input() 
     set hideReset(value: boolean) {
         this._hideReset = value;
-        this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
+        // this.renderer.setStyle(this.buttonContainer, 'visibility', this.getVisibility());
+        this.setButtonStyle(this.resetButton);
     }
     get hideReset(): boolean {
         return this._hideReset;
@@ -48,6 +50,7 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     
     private unlistener: (() => void) | undefined;
     private buttonContainer!: HTMLDivElement;
+    private resetButton!: HTMLButtonElement;
 
     constructor(
         private renderer:Renderer2,
@@ -82,18 +85,20 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
     }
 
     private setButtonStyle(button: HTMLButtonElement) {
-        const css = `
-            display: flex !important;
-            align-items: center !important;
-            height: 1rem !important;
-            line-height: unset !important;
-            padding: unset !important;
-            background: unset !important;
-            font-size: var(--pep-button-2xs-font-size) !important;
-            visibility: ${this.getVisibility()};
-        `;
-
-        button.setAttribute("style", css);
+        if (button) {
+            const css = `
+                display: flex !important;
+                align-items: center !important;
+                height: 1rem !important;
+                line-height: unset !important;
+                padding: unset !important;
+                background: unset !important;
+                font-size: var(--pep-button-2xs-font-size) !important;
+                visibility: ${this.getVisibility()};
+            `;
+    
+            button.setAttribute("style", css);
+        }
     }
 
     private setSvgStyle(svg: SVGElement) {
@@ -109,33 +114,31 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         this.renderer.addClass(this.buttonContainer, 'pep-reset-configuration-field-container');
 
         // Append button
-        const button: HTMLButtonElement = this.renderer.createElement('button');
+        this.resetButton = this.renderer.createElement('button');
         await this.translate.get('ACTIONS.RESET').toPromise().then(resetText => {
             const buttonText = this.renderer.createText(resetText);
-            this.renderer.appendChild(button, buttonText);
+            this.renderer.appendChild(this.resetButton, buttonText);
         });
         
-        this.renderer.addClass(button, 'pep-button');
+        this.renderer.addClass(this.resetButton, 'pep-button');
         // this.renderer.addClass(button, this.styleType);
         // this.renderer.addClass(button, this.styleStateType);
-        this.renderer.addClass(button, 'color-link');
-        this.renderer.addClass(button, this.sizeType);
-        this.setButtonStyle(button);
+        this.renderer.addClass(this.resetButton, 'color-link');
+        this.renderer.addClass(this.resetButton, this.sizeType);
+        this.setButtonStyle(this.resetButton);
         // this.renderer.addClass(button, 'reset-configuration-field-button');
         
-        this.unlistener = this.renderer.listen(button, 'click', () => this.onResetClicked());
+        this.unlistener = this.renderer.listen(this.resetButton, 'click', () => this.onResetClicked());
         
-        this.renderer.appendChild(this.buttonContainer, button);
+        this.renderer.appendChild(this.buttonContainer, this.resetButton);
 
         // Append svg
         const svgIcon = this.pepIconService.getSvgIcon(pepIconDeviceResponsive.name);
         this.setSvgStyle(svgIcon);
         this.renderer.appendChild(this.buttonContainer, svgIcon);
 
-
         return this.buttonContainer;
     }
-
     
     ngAfterViewInit(): void {
         this.getResetElement().then(element => {
