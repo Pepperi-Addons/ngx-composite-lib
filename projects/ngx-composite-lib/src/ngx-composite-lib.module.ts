@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // import { TranslateModule } from '@ngx-translate/core';
-// import { CommonModule } from '@angular/common';
 // import { HttpClientModule } from '@angular/common/http';
 // import { ReactiveFormsModule } from '@angular/forms';
 import { PepResetConfigurationFieldDirective } from './core/common/directives/reset-configuration-field.directive';
-import { PepDIMXHelperService } from './core/common/services/dimx.service';
+import { PepDIMXHelperService, PepCompositeLibUtilitiesService } from './core/common/services/index';
 
 import { PepRemoteLoaderModule } from '@pepperi-addons/ngx-lib/remote-loader';
 
@@ -23,7 +23,7 @@ const utilitiesList = [
         utilitiesList
     ],
     imports: [
-        // CommonModule, HttpClientModule, ReactiveFormsModule
+        CommonModule,
         PepIconModule,
         PepRemoteLoaderModule,
     ],
@@ -33,6 +33,7 @@ const utilitiesList = [
     ],
     providers: [
         PepDIMXHelperService,
+        PepCompositeLibUtilitiesService
     ]
 })
 export class PepNgxCompositeLibModule {
