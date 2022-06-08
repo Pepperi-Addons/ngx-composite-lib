@@ -15,6 +15,7 @@ import {
     ObjectsDataRow,
     PepGuid,
     UIControl,
+    PepLoaderService
 } from '@pepperi-addons/ngx-lib';
 import { Subscription } from 'rxjs';
 import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
@@ -113,6 +114,9 @@ export class GenericListComponent implements OnInit {
     title = '';
 
     @Input()
+    description = '';
+
+    @Input()
     inline = false;
 
     @Input()
@@ -168,6 +172,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private _resize$: Subscription = new Subscription();
+    private _loader$: Subscription = new Subscription();
 
     private _dataView: DataView = {
         Type: 'Grid'
@@ -194,11 +199,15 @@ export class GenericListComponent implements OnInit {
         private _resolver: ComponentFactoryResolver,
         private _dataConvertorService: PepDataConvertorService,
         private _layoutService: PepLayoutService,
+        private _loaderService: PepLoaderService,
        // private _translate: TranslateService,
         private _genericListService: PepGenericListService
     ) {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {
             //            
+        });
+        this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {
+
         });
     }
 
@@ -359,6 +368,7 @@ export class GenericListComponent implements OnInit {
     }
    
     private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
+        this._loaderService.show();
         const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -366,6 +376,7 @@ export class GenericListComponent implements OnInit {
             fromIndex: fromIndex,
             toIndex: toIndex
         });
+        this._loaderService.hide();
 
         if (data) {
             this._dataView = data.dataView;           
@@ -381,6 +392,7 @@ export class GenericListComponent implements OnInit {
 
     private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
         if (this._dataSource.update) {
+            this._loaderService.show();
             const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -389,6 +401,7 @@ export class GenericListComponent implements OnInit {
                 toIndex: toIndex,
                 pageIndex: pageIndex
             });
+            this._loaderService.hide();
 
             if (dataList?.length > 0) {
                 return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
@@ -480,6 +493,9 @@ export class GenericListComponent implements OnInit {
     ngOnDestroy() {
         if (this._resize$) {
             this._resize$.unsubscribe();
+        }
+        if (this._loader$) {
+            this._loader$.unsubscribe();
         }
     }
 

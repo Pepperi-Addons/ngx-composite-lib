@@ -39,10 +39,35 @@
         grid-column: 2 / 3;
         grid-row: 2 / 3
     }
+
+    .list-description {
+        font-size: ngx-variables.$fs-xs;
+        max-width: 640px;
+        padding: ngx-variables.$spacing-sm 0;
+    }
+
+    .bread-crumbs {
+        padding: ngx-variables.$spacing-md 0 ngx-variables.$spacing-sm 0;
+     }
+}
+.none-inline {
+    .list-description {
+        font-size: ngx-variables.$fs-sm;
+        max-width: 720px;
+        padding: ngx-variables.$spacing-sm ngx-variables.$spacing-xs;
+    }
+
+    .bread-crumbs {
+        padding: ngx-variables.$spacing-md ngx-variables.$spacing-xs ngx-variables.$spacing-sm ngx-variables.$spacing-xs;
+     }
 }
 
 ::ng-deep.pep-top-bar-container:not(.inline) {
     margin-inline: ngx-variables.$spacing-xs;
+}
+
+::ng-deep.pep-top-bar-container.inline {
+    height: ngx-variables.$top-bar-field-height !important;
 }
 
 .noDataFoundMsg{
@@ -55,6 +80,3 @@
     align-items: center;
 }
 
-.bread-crumbs {
-   padding: ngx-variables.$spacing-lg 0 ngx-variables.$spacing-sm 0;
-}
