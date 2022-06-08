@@ -3,6 +3,9 @@
         <div *ngIf="showTopBar" class="inline-top-bar-container">
             <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
         </div>
+        <ng-container *ngIf="description">
+            <div class="list-description">{{description}}</div>
+        </ng-container>
         <ng-container *ngIf="breadCrumbsItems.length">
             <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
         </ng-container>
@@ -12,13 +15,15 @@
     </ng-container>
     <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
 </div>
-
-<pep-page-layout *ngIf="!inline" [addPadding]="addPadding" [showShadow]="showSmartFilter">
+<pep-page-layout *ngIf="!inline" class="none-inline" [addPadding]="addPadding" [showShadow]="showSmartFilter">
     <ng-container *ngIf="showSmartFilter" pep-side-area>
         <ng-container *ngTemplateOutlet="smartFilterTemplate"></ng-container>
     </ng-container>
     <ng-container *ngIf="showTopBar" pep-top-area>
         <ng-container *ngTemplateOutlet="topBarTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="description" pep-top-area>
+        <div class="list-description">{{description}}</div>
     </ng-container>
     <ng-container *ngIf="breadCrumbsItems.length" pep-top-area>
         <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
