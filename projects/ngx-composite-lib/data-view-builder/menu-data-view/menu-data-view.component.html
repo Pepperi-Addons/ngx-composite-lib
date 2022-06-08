@@ -1,0 +1,75 @@
+<ng-container *ngIf="fields === null || fields.length === 0; then emptyTemplate; else notEmptyTemplate"></ng-container>
+<ng-template #emptyTemplate>
+    <div [id]="emptyDropAreaId" class="drop-field-here-area" cdkDropList (cdkDropListDropped)="onDropField($event)">
+        <mat-icon class="pep-spacing-element">
+            <pep-icon name="arrow_down_alt"></pep-icon>
+        </mat-icon>
+        <span class="body-sm ellipsis">
+            {{ 'DATA_VIEW_BUILDER.EMPTY_DROP_AREA_TEXT' | translate }}
+        </span> 
+    </div>
+</ng-template>
+<ng-template #notEmptyTemplate>
+    <div [id]="mappedFieldsId" class="mapped-fields-area" [ngClass]="{ 'no-row-gap': !isGrabbing }"
+        cdkDropList [cdkDropListData]="fields" (cdkDropListDropped)="onDropField($event)">
+        <ng-container *ngFor="let menuField of fields; let i = index" >
+            <div class="mapped-field-container" [ngClass]="{ 'separator-container': menuField.FieldID === '' }" 
+                cdkDrag (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
+                <ng-container *ngTemplateOutlet="mappedFieldTemplate; context: { menuField: menuField }"></ng-container>
+            </div>
+            <div *ngIf="!isGrabbing" class="add-separator-container">
+                <pep-button class="add-separator" styleType="regular" sizeType="sm" iconName="number_plus" 
+                    [value]="'DATA_VIEW_BUILDER.ADD_SEPARATOR' | translate" (buttonClick)="addSeparator(i+1)"></pep-button>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #mappedFieldTemplate let-menuField="menuField">
+    <ng-container *ngIf="menuField.FieldID !== ''; then menuItemTemplate; else separatorTemplate"></ng-container>
+
+    <ng-template #menuItemTemplate>
+        <div class="fields-wrapper">
+            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE' | translate" [value]="menuField.FieldID" [disabled]="true">
+            </pep-textbox>
+            
+            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE' | translate" [hint]="'(' + (availableFieldsTitles.get(menuField.FieldID) || '') + ')'"
+                [value]="menuField.Title" (valueChange)="onTitleChanged($event, menuField)">
+            </pep-textbox>
+    
+            <pep-button class="center-button" iconName="system_bin" [title]="'ACTIONS.DELETE' | translate" (buttonClick)="onDeleteMappedField($event, menuField)"></pep-button>
+        </div>
+    </ng-template>
+    <ng-template #separatorTemplate>
+        <div class="separator-wrapper ">
+            <div class="pep-spacing-element title title-md color-dimmed">
+                <span [title]="menuField.Title">{{ menuField.Title }}</span>
+            </div>
+            <div class="list-actions">
+                <pep-button iconName="system_edit" [title]="'ACTIONS.EDIT' | translate" sizeType="xs" styleType="regular" (buttonClick)="onEditSeparatorField($event, menuField)"></pep-button>
+                <pep-button iconName="system_bin" [title]="'ACTIONS.DELETE' | translate" sizeType="xs" styleType="regular" (buttonClick)="onDeleteMappedField($event, menuField)"></pep-button>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #separatorTitleModalTemplate let-data>
+    <pep-dialog [title]="'DATA_VIEW_BUILDER.SEPARATOR_TITLE' | translate">
+        <ng-container pep-dialog-content>
+            <pep-textbox #txt [label]="'DATA_VIEW_BUILDER.ADD_A_TITLE' | translate" [(value)]="data.value">
+            </pep-textbox>
+        </ng-container>
+        <ng-container pep-dialog-actions>
+            <div class="pep-spacing-element-negative">
+                <button mat-button class="pep-spacing-element pep-button md weak"
+                    (click)="closeDialog()">
+                    {{'Cancel' | translate}}
+                </button>
+                <button mat-button class="pep-spacing-element pep-button md strong"
+                    (click)="setDialogValue(txt.value)">
+                    {{ 'Save' | translate}}
+                </button>
+            </div>
+        </ng-container>
+    </pep-dialog>
+</ng-template>

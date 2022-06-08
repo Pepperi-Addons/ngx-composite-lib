@@ -96,7 +96,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
             case 'vertical-align':{
                 return [
                     { key: 'start', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.TOP'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
-                    { key: 'center', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
+                    { key: 'middle', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
                     { key: 'end', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) }
                 ];
             }

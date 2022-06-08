@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
-import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-export';
 
 @Component({
     selector: 'app-components-example',
@@ -8,7 +7,6 @@ import { DIMXComponent as DIMXComponent } from 'projects/ngx-composite-lib/dimx-
     styleUrls: ['./components-example.component.scss'],
 })
 export class ComponentsExampleComponent implements OnInit {
-    @ViewChild('dimx') dimx:DIMXComponent | undefined;
     public files: Array<FileStatus> = [];
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter();
@@ -28,22 +26,19 @@ export class ComponentsExampleComponent implements OnInit {
     menuItemClick(value: any){
         console.log(`menu item was clicked with value ${JSON.stringify(value)}`);
        
-        switch(value["source"]["key"]){
-            case "dimxexport":
-                this.dimx?.DIMXExportRun({"DIMXExportFormat":"csv"});
-                break;
-            case "dimximport":
-                this.dimx?.uploadFile({});
+        // TODO: add dimx addon loader example code here
+        switch(value["source"]["key"]) {
+            // case "dimxexport":
+            //     this.dimx?.DIMXExportRun({"DIMXExportFormat":"csv"});
+            //     break;
+            // case "dimximport":
+            //     this.dimx?.uploadFile({});
                 
-                break;
+            //     break;
             default:
                 console.log("default reached in menuItemClick switch-case");
         }
         
-    }
-
-    onDIMXProcessDone(event:any){
-        console.log(`DIMXProcessDone: ${JSON.stringify(event)}`);
     }
 
     menuClick(value: any){

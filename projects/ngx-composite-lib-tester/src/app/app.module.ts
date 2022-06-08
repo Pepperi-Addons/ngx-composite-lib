@@ -14,12 +14,13 @@ import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shado
 import { PepGroupButtonsSettingsModule } from '@pepperi-addons/ngx-composite-lib/group-buttons-settings';
 import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
+import { PepDataViewBuilderModule } from '@pepperi-addons/ngx-composite-lib/data-view-builder';
 
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
-import { PepDIMXModule } from 'projects/ngx-composite-lib/dimx-export';
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 import { GenericListExampleComponent } from './generic-list-example/generic-list-example.component';
 import { GenericFormExampleComponent } from './generic-form-example/generic-form-example.component';
+import { DataViewBuilderExampleComponent } from './data-view-builder-example/data-view-builder-example.component';
 
 import {
     TranslateModule,
@@ -33,7 +34,8 @@ import { CommonModule } from '@angular/common';
         AppComponent,
         ComponentsExampleComponent,
         GenericListExampleComponent,
-        GenericFormExampleComponent
+        GenericFormExampleComponent,
+        DataViewBuilderExampleComponent,
     ],
     imports: [
         CommonModule,
@@ -47,10 +49,10 @@ import { CommonModule } from '@angular/common';
         PepTextboxModule,
         PepShadowSettingsModule,
         PepGroupButtonsSettingsModule,
-        PepDIMXModule,
         PepFileStatusPanelModule,
         PepGenericListModule,
         PepGenericFormModule,
+        PepDataViewBuilderModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
