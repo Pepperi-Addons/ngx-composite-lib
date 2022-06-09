@@ -292,6 +292,8 @@ export class GenericListExampleComponent implements OnInit {
                 const filteredData = [...dataList, ...dataList];
                 //const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
+                await this.getItems();
+
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,
@@ -379,6 +381,16 @@ export class GenericListExampleComponent implements OnInit {
                 selectionType: 'multi'
             }
         } as IPepGenericListDataSource
+    }
+
+    getItems() {
+        
+        return new Promise(resolve => {
+            setTimeout(() => {
+                const dataList = FakeData.Addons;
+                resolve([...dataList, ...dataList]);
+            }, 8000);
+        });
     }
 
     getDataSource2() {
