@@ -2,5 +2,5 @@
 <pep-color [value]="color.value" [label]="title + ' ' + ('COLOR_SETTINGS.COLOR' | translate)" [disabled]="!color.use" (valueChange)="onColorChanged($event)">
 </pep-color>
 <pep-slider [label]="title + ' ' + ('COLOR_SETTINGS.OPACITY' | translate)" [hint]="color.opacity.toString() || ''" [minValue]="0" [maxValue]="100" [disabled]="!color.use" [value]="color.opacity" 
-    [background]="getSliderBackground()" (inputChange)="onSliderValueChanged($event)">
+    [background]="getSliderBackground()" (inputChange)="onSliderInputChanged($event)" (valueChange)="onSliderValueChanged($event)">
 </pep-slider>
