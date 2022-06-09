@@ -14,7 +14,9 @@ export class DataViewBuilderService {
         return this._isGrabbingSubject.asObservable().pipe(distinctUntilChanged());
     }
 
-    constructor() { }
+    constructor() { 
+        //
+    }
 
     private changeCursorOnDragStart() {
         document.body.classList.add('inheritCursors');
