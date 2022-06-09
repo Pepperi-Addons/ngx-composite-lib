@@ -273,7 +273,8 @@ export class GenericListExampleComponent implements OnInit {
             console.log('item 2', this.glist2.getItemById('7e51566e-7035-42dd-a7c2-fb92bc4ed135'));
             console.log('selected itens 2', this.glist2.getSelectedItems());
         }
-
+        console.log('page index', this.glist1?.getPageIndex());
+        //console.log('page index', this.glist1.);
 
         //console.log('item', this.glist1.getItemById('2e51566e-7035-42dd-a7c2-fb92bc4ed135'));
         // console.log('selected itens', this.genericListService.getSelectedItems());
@@ -641,5 +642,6 @@ export class GenericListExampleComponent implements OnInit {
 
     onBtn2Clicked() {
         //
+        
     }
 }
