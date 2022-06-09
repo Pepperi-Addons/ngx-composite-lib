@@ -378,7 +378,9 @@ export class GenericListComponent implements OnInit {
             fromIndex: fromIndex,
             toIndex: toIndex
         });
-        this._loaderService.hide();
+        setTimeout(() => {
+            this._loaderService.hide();
+        }, 50);
 
         if (data) {
             this._dataView = data.dataView;
@@ -405,7 +407,9 @@ export class GenericListComponent implements OnInit {
                 toIndex: toIndex,
                 pageIndex: pageIndex
             });
-            this._loaderService.hide();
+            setTimeout(() => {
+                this._loaderService.hide();
+            }, 50);
 
             if (dataList?.length > 0) {
                 return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
@@ -451,6 +455,10 @@ export class GenericListComponent implements OnInit {
         } else {
             return null;
         }
+    }
+
+    getPageIndex() {
+        return this.pepList.pageIndex;
     }
 
     onActionItemClicked(action: IPepMenuItemClickEvent): void {

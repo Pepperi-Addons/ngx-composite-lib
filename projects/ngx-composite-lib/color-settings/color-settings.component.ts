@@ -76,6 +76,10 @@ export class ColorSettingsComponent implements OnInit {
         this.color.value = value;
         this.raiseColorChange();
     }
+    
+    onSliderInputChanged(value: number) {
+        this.color.opacity = value;
+    }
 
     onSliderValueChanged(value: number) {
         this.color.opacity = value;
