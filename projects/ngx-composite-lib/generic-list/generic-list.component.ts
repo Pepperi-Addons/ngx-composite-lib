@@ -207,7 +207,7 @@ export class GenericListComponent implements OnInit {
             //            
         });
         this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {
-
+            //
         });
     }
 
