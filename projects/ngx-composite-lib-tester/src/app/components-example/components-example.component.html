@@ -12,7 +12,7 @@
         (menuItemClick)="menuItemClick($event)"
         (menuClick)="menuClick($event)"
     ></pep-menu>
-    <pep-color-settings title="Color"></pep-color-settings>
+    <pep-color-settings [title]="'Color'" [checkAACompliant]="false" [showAACompliant]="true"></pep-color-settings>
     <pep-shadow-settings></pep-shadow-settings>
     <!-- <pep-button value="click here"></pep-button> -->
     <pep-group-buttons-settings [groupType]="'vertical-align'" [title]="'Group buttons'" [subHeader]="'Eisenberg'"
