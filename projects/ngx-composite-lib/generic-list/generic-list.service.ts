@@ -12,10 +12,7 @@ import { PepQueryBuilderService, IPepQueryBuilderField } from '@pepperi-addons/n
 import { PepRowData } from '@pepperi-addons/ngx-lib';
 import { GridDataViewField, DataViewFieldTypes } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 
-
-@Injectable(/*{
-    providedIn: 'root'
-}*/)
+@Injectable()
 export class PepGenericListService {
 
     constructor(

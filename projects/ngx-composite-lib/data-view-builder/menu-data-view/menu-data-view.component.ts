@@ -23,7 +23,7 @@ export class MenuDataViewComponent implements OnInit {
     availableFieldsTitles: Map<string, string> = new Map<string, string>(); // <FieldID, Original Title> from the available fields.
 
     @Input() 
-    emptyDropAreaId: string = '';
+    emptyDropAreaId = '';
 
     @Input() 
     mappedFieldsId = '';
@@ -69,6 +69,7 @@ export class MenuDataViewComponent implements OnInit {
     }
 
     ngOnInit() {
+        //
     }
 
     addSeparator(index: number) {

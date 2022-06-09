@@ -63,11 +63,12 @@ export class GenericListExampleComponent implements OnInit {
     title = 'Generic list 2 inline title';
     menuItems = new Array<PepMenuItem>();
     breadCrumbsItems = new Array<PepBreadCrumbItem>();
+    description = 'Some description';
     disableTable = false;
     pager: IPepGenericListPager = {
         type: 'pages',
-        size: 5,
-        index: 0
+        size: 10,
+        index: 1
     };
     selectionType: any = 'multi';
     supportSorting = false;
@@ -229,7 +230,11 @@ export class GenericListExampleComponent implements OnInit {
     onBreadCrumbClick(event: IPepBreadCrumbItemClickEvent) {
         console.log('onBreadCrumbClick', event);
         if (event?.source?.text === 'Crumb1') {
-            this.pager.type = 'pages';
+            this.pager = {
+                type: 'pages',
+                size: 10,
+                index: 1
+            };
             this.selectionType = 'multi';
             this.firstFieldAsLink = false;
             this.supportSorting = false;
@@ -241,15 +246,17 @@ export class GenericListExampleComponent implements OnInit {
 
 
         } else {
-            this.pager.type = 'scroll';
+            
             //this.selectionType = 'single';
             //this.firstFieldAsLink = true;
+            
+            this.pager.type = 'scroll';
             this.tableViewType = 'regular';
             this.supportSorting = true;
             this.smartFilter = undefined;/*{
                 dataView: this.getSmartFilters2()
             } */
-            this.dataSource = this.getDataSourceEmpty();
+            this.dataSource = this.getDataSource2();
 
         }
     }
@@ -281,7 +288,8 @@ export class GenericListExampleComponent implements OnInit {
             init: async (params: any) => {
                 const dataList = FakeData.Addons;
                 // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
-                const filteredData = dataList.slice(0, 5);
+                const filteredData = [...dataList, ...dataList];
+                //const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
@@ -336,7 +344,7 @@ export class GenericListExampleComponent implements OnInit {
                         FrozenColumnsCount: 0,
                         MinimumColumnWidth: 0
                     },
-                    totalCount: res.length * 2,
+                    totalCount: res.length,
                     items: res
 
                 });
@@ -366,10 +374,105 @@ export class GenericListExampleComponent implements OnInit {
                 return Promise.resolve(res);
             },
             inputs: {
-                pager: {
-                    type: 'scroll'
-                },
+               
                 selectionType: 'multi'
+            }
+        } as IPepGenericListDataSource
+    }
+
+    getDataSource2() {
+        return {
+            init: async (params: any) => {
+                const dataList = FakeData.Addons;
+                // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = [...dataList, ...dataList];
+                //const filteredData = dataList.slice(0, 5);
+                //console.log('init params', params);
+                const res = filteredData.map(addon => ({
+                    UUID: addon.UUID,
+                    Description: addon.Addon.Description,
+                    Version: addon.Version,
+                    Type: addon.Type,
+                    CreationDate: addon.CreationDate,
+                    TestNum: 100000
+
+                }));
+                const rows2 = filteredData.map((item) => {
+                    return {
+                        fields: {
+                            UUID: item.UUID,
+                            Description: item.Addon.Description,
+                            Version: item.Version,
+                            Type: item.Type,
+                            CreationDate: item.CreationDate
+                        },
+                        isEditable: true,
+                        isSelectableForActions: false,
+                    }
+                });
+                return Promise.resolve({
+                    dataView: {
+                        Context: {
+                            Name: '',
+                            Profile: { InternalID: 0 },
+                            ScreenSize: 'Landscape'
+                        },
+                        Type: 'Grid',
+                        Title: '',
+                        Fields: [
+                            this.getRegularReadOnlyColumn('UUID'),
+                            this.getRegularReadOnlyColumn('Description'),
+                            this.getRegularReadOnlyColumn('Version'),
+                            this.getLinkColumn('Type'),
+                            this.getRegularReadOnlyColumn('CreationDate'),
+                            this.getNumberColumn('TestNum'),
+                            //this.getHiddenColumn('FirstName'),
+                        ],
+                        Columns: [
+                            { Width: 15 },
+                            { Width: 30 },
+                            { Width: 15 },
+                            { Width: 20 },
+                            { Width: 15 },
+                            { Width: 5 },
+
+                            // { Width: 0 }
+                        ],
+                        FrozenColumnsCount: 0,
+                        MinimumColumnWidth: 0
+                    },
+                    totalCount: res.length,
+                    items: res
+
+                });
+            },
+            /*inputs: () => {
+                return Promise.resolve(
+                    {
+                        pager: {
+                            type: 'scroll'
+                        },
+                        selectionType: 'multi'
+                    }
+                );
+            },*/
+            update: async (params: any) => {
+                //                console.log('update', params);
+                const dataList = FakeData.Addons;
+                //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
+                const filteredData = dataList.slice(5, 10);
+                const res = filteredData.map(addon => ({
+                    UUID: addon.UUID,
+                    Description: addon.Addon.Description,
+                    Version: addon.Version,
+                    Type: addon.Type,
+                    CreationDate: addon.CreationDate,
+                }));
+                return Promise.resolve(res);
+            },
+            inputs: {
+               
+                selectionType: 'single'
             }
         } as IPepGenericListDataSource
     }

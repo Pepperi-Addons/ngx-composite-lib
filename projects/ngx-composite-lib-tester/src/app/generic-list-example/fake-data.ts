@@ -475,7 +475,9 @@ export const FakeSmartFilterFields = [
         FieldID: 'CaseQuantity',
         Type: 'Integer',
         Title: 'Case Quantity'
-    }
+    },
+    { FieldID: 'TSAAttachmentTest', Title: 'TSA Attachment Test', Type: 'String' },
+    { FieldID: 'ActionDateTime', Title: 'Action Date Time', Type: 'DateTime' },
 ]
 
 export const FakeCardsDataView = [

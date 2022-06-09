@@ -11,10 +11,11 @@ import {
 //import { TranslateService } from '@ngx-translate/core';
 import {
     PepDataConvertorService,
-    PepLayoutService,    
+    PepLayoutService,
     ObjectsDataRow,
     PepGuid,
     UIControl,
+    PepLoaderService
 } from '@pepperi-addons/ngx-lib';
 import { Subscription } from 'rxjs';
 import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
@@ -39,9 +40,9 @@ import {
 } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepSearchClickEvent, PepSearchComponent } from '@pepperi-addons/ngx-lib/search';
 
-import { 
-    DataView, 
-    GridDataView 
+import {
+    DataView,
+    GridDataView
 } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import {
     IPepGenericListInitData,
@@ -113,6 +114,9 @@ export class GenericListComponent implements OnInit {
     title = '';
 
     @Input()
+    description = '';
+
+    @Input()
     inline = false;
 
     @Input()
@@ -168,6 +172,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private _resize$: Subscription = new Subscription();
+    private _loader$: Subscription = new Subscription();
 
     private _dataView: DataView = {
         Type: 'Grid'
@@ -194,11 +199,15 @@ export class GenericListComponent implements OnInit {
         private _resolver: ComponentFactoryResolver,
         private _dataConvertorService: PepDataConvertorService,
         private _layoutService: PepLayoutService,
-       // private _translate: TranslateService,
+        private _loaderService: PepLoaderService,
+        // private _translate: TranslateService,
         private _genericListService: PepGenericListService
     ) {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {
             //            
+        });
+        this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {
+            //
         });
     }
 
@@ -268,22 +277,22 @@ export class GenericListComponent implements OnInit {
                     this.onSortingChange($event);
                 });
                 let convertedList: ObjectsDataRow[] = [];
-                if (data) {                   
+                if (data) {
                     if (data.items?.length) {
                         convertedList = this._dataConvertorService.convertListData(data.items);
-                    }                    
+                    }
                     const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
                     componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
                 }
             }
         }, 0);
-    }   
+    }
 
     /**
      * loads inputs in case they are provided and merge with selector inputs
      * @returns merged pep-list inputs
      */
-    private loadTableInputs() {        
+    private loadTableInputs() {
         this._listInputs = {
             supportSorting: this.supportSorting,
             selectionType: this.selectionType,
@@ -357,8 +366,11 @@ export class GenericListComponent implements OnInit {
         this.searchString = '';
         this.search?.initSearch();
     }
-   
+
     private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
+        setTimeout(() => {
+            this._loaderService.show();
+        }, 50);
         const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -366,9 +378,10 @@ export class GenericListComponent implements OnInit {
             fromIndex: fromIndex,
             toIndex: toIndex
         });
+        this._loaderService.hide();
 
         if (data) {
-            this._dataView = data.dataView;           
+            this._dataView = data.dataView;
 
             if (data.items?.length > 0 && !data.isPepRowData) {
                 data.items = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));
@@ -381,6 +394,9 @@ export class GenericListComponent implements OnInit {
 
     private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
         if (this._dataSource.update) {
+            setTimeout(() => {
+                this._loaderService.show();
+            }, 50);
             const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -389,6 +405,7 @@ export class GenericListComponent implements OnInit {
                 toIndex: toIndex,
                 pageIndex: pageIndex
             });
+            this._loaderService.hide();
 
             if (dataList?.length > 0) {
                 return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
@@ -450,7 +467,7 @@ export class GenericListComponent implements OnInit {
 
     onSelectedItemsChanged(selectedRowsCount: number) {
         //loading menu items after pep-list selected items are updated
-        setTimeout(() => {            
+        setTimeout(() => {
             this.loadMenuItems();
         }, 0);
     }
@@ -480,6 +497,9 @@ export class GenericListComponent implements OnInit {
     ngOnDestroy() {
         if (this._resize$) {
             this._resize$.unsubscribe();
+        }
+        if (this._loader$) {
+            this._loader$.unsubscribe();
         }
     }
 

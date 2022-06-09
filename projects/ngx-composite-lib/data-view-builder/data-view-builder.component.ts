@@ -12,8 +12,8 @@ import { DataViewBuilderService } from './data-view-builder.service';
 })
 export class DataViewBuilderComponent implements OnInit {
     // @Input() title: string = '';
-    @Input() builderTitle: string = '';
-    @Input() builderTitleHint: string = '';
+    @Input() builderTitle = '';
+    @Input() builderTitleHint = '';
     
     private _availableFields: Array<IPepDraggableItem> = [];
     @Input()
@@ -107,7 +107,7 @@ export class DataViewBuilderComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        //
     }
 
     onDragStart(event: CdkDragStart) {

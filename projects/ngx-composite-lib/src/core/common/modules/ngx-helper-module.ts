@@ -28,6 +28,7 @@ const staticTraslationLoader: TranslateLoader = {
         }) 
     ]
 })
+// This module is helper module for storybook
 export class PepNgxHelperModule { 
     constructor(
         private translate: TranslateService,
