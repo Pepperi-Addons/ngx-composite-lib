@@ -230,10 +230,11 @@ export class GenericListComponent implements OnInit {
                 //merge selector inputs with callback inputs
                 this.loadTableInputs();
 
-                const fromIndex = this._listInputs.pager.size * this._listInputs.pager.index;
+                let fromIndex = 0;
                 let toIndex = 0;               
 
                 if (this._listInputs.pager.type === 'pages') {
+                    fromIndex = this._listInputs.pager.size * this._listInputs.pager.index;
                     toIndex = fromIndex + (this._listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
                 } else {
                     toIndex = 100;//TO DO - get value from - this.customList.getTopItems()
