@@ -9,8 +9,8 @@ import { PepColorSettings } from './color-settings.model';
 })
 export class ColorSettingsComponent implements OnInit {
     @Input() title = '';
-    @Input() checkAACompliant = true;
-    @Input() showAACompliant = true;
+    @Input() checkAAComplient = true;
+    @Input() showAAComplient = true;
 
     private _color: PepColorSettings = new PepColorSettings();
     @Input()
