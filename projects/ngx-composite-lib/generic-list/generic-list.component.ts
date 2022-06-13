@@ -369,9 +369,9 @@ export class GenericListComponent implements OnInit {
     }
 
     private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
-        // setTimeout(() => {
-        //     this._loaderService.show();
-        // }, 150);
+        setTimeout(() => {
+            this._loaderService.show();
+        }, 150);
         const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -379,9 +379,9 @@ export class GenericListComponent implements OnInit {
             fromIndex: fromIndex,
             toIndex: toIndex
         });
-        // setTimeout(() => {
-        //     this._loaderService.hide();
-        // }, 150);
+        setTimeout(() => {
+            this._loaderService.hide();
+        }, 150);
 
         if (data) {
             this._dataView = data.dataView;
@@ -397,9 +397,9 @@ export class GenericListComponent implements OnInit {
 
     private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
         if (this._dataSource.update) {
-            // setTimeout(() => {
-            //     this._loaderService.show();
-            // }, 150);
+            setTimeout(() => {
+                this._loaderService.show();
+            }, 150);
             const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -408,9 +408,9 @@ export class GenericListComponent implements OnInit {
                 toIndex: toIndex,
                 pageIndex: pageIndex
             });
-            // setTimeout(() => {
-            //     this._loaderService.hide();
-            // }, 150);
+            setTimeout(() => {
+                this._loaderService.hide();
+            }, 150);
 
             if (dataList?.length > 0) {
                 return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
