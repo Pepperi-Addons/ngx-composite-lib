@@ -189,7 +189,7 @@ export default {
             description: 'Whether the form is disabled'
         },
         inline: {
-            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the container width and height have to be set manually'
+            description: 'false → is when you want to use the Generic List as a page (Full view, Unique URL). true → if you want to use the Generic List as a part of a page'
         },
         showTopBar: {
             description: 'Whether the top bar is displayed'
