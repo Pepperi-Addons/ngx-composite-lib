@@ -116,6 +116,17 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
+    private getComboBoxColumn(columnId: string) {
+        return {
+            FieldID: columnId,
+            Type: 'ComboBox',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: false,
+            OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+        }        
+    }
+
     getColumn(columnId: string, type: string, isEnabled: boolean) {
         return {
             FieldID: columnId,
@@ -300,6 +311,7 @@ export class GenericListExampleComponent implements OnInit {
                     Version: addon.Version,
                     Type: addon.Type,
                     CreationDate: addon.CreationDate,
+                    Country: addon.Addon.Country,
                     TestNum: 100000
 
                 }));
@@ -330,7 +342,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Description'),
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
-                            this.getRegularReadOnlyColumn('CreationDate'),
+                            this.getComboBoxColumn('Country'),
                             this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
@@ -386,10 +398,10 @@ export class GenericListExampleComponent implements OnInit {
     getItems() {
         
         return new Promise(resolve => {
-            setTimeout(() => {
+            //setTimeout(() => {
                 const dataList = FakeData.Addons;
                 resolve([...dataList, ...dataList]);
-            }, 8000);
+            //}, 8000);
         });
     }
 
@@ -407,6 +419,7 @@ export class GenericListExampleComponent implements OnInit {
                     Version: addon.Version,
                     Type: addon.Type,
                     CreationDate: addon.CreationDate,
+                    Country: addon.Addon.Country,
                     TestNum: 100000
 
                 }));

@@ -1,7 +1,8 @@
 import {
     DataView,
     GridDataView,
-    MenuDataView
+    MenuDataView,
+    GridDataViewField
 } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 import {
     PepListPagerType,
@@ -70,6 +71,10 @@ export interface IPepGenericListPager {
 export interface IPepGenericListSmartFilter {    
     dataView: MenuDataView;
     data?: IPepSmartFilterData[];
+}
+
+export interface IPepGenericListDataView extends GridDataViewField {
+    OptionalValues: any[];
 }
 
 
