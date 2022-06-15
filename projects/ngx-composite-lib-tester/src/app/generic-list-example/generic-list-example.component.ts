@@ -310,8 +310,7 @@ export class GenericListExampleComponent implements OnInit {
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate,
-                    Country: addon.Addon.Country,
+                    CreationDate: addon.CreationDate,                    
                     TestNum: 100000
 
                 }));
@@ -342,7 +341,8 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Description'),
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
-                            this.getComboBoxColumn('Country'),
+                            this.getRegularReadOnlyColumn('CreationDate'),
+                           // this.getComboBoxColumn('Country'),
                             this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
@@ -418,8 +418,7 @@ export class GenericListExampleComponent implements OnInit {
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate,
-                    Country: addon.Addon.Country,
+                    CreationDate: addon.CreationDate,                    
                     TestNum: 100000
 
                 }));

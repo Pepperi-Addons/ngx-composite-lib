@@ -230,6 +230,15 @@ export default {
                 }
             }
         },
+        description: {
+            description: 'List description',
+            table: {
+                defaultValue: {
+                    summary: null
+                }
+            }
+        },
+
         inline: {
             description: 'false → is when you want to use the Generic List as a page (Full view, Unique URL). true → if you want to use the Generic List as a part of a page'
         },
@@ -370,6 +379,7 @@ export default {
                 'disabled',
                 'addPadding',
                 'title',
+                "description",
                 'inline',
                 'showSearch',
                 'selectionType',
