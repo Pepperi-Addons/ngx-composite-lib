@@ -1,8 +1,6 @@
 // Define pep lib theme and include theme styles for pep components.
 @use '~@pepperi-addons/ngx-lib/theming' as ngx-theming;
 
-//@use '~@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
-
 @include ngx-theming.pepperi-theme();
 
 body {

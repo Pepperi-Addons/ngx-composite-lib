@@ -10,7 +10,16 @@
         "noFallthroughCasesInSwitch": true,
         "sourceMap": true,
         "declaration": false,
-        "downlevelIteration": true,        
+        "downlevelIteration": true,
+        "experimentalDecorators": true,        
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2020",
+        "module": "es2020",
+        "lib": [
+            "es2020",
+            "dom"
+        ],        
         "paths": {
             "@pepperi-addons/ngx-composite-lib": [
                 "dist/ngx-composite-lib"
@@ -24,16 +33,7 @@
             "@storybook-settings/*": [
                 ".storybook/*"
             ]
-        },
-        "experimentalDecorators": true,        
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "target": "es2017",
-        "module": "es2020",
-        "lib": [
-            "es2018",
-            "dom"
-        ]
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
