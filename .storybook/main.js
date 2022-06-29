@@ -16,4 +16,4 @@ module.exports = {
   }
 }
 
-//~@pepperi-addons/ngx-lib/theming
+//@pepperi-addons/ngx-lib/theming

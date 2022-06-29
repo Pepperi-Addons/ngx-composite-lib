@@ -1,5 +1,5 @@
 // 1. Add ngx-lib styles
-@use '~@pepperi-addons/ngx-lib/theming';
+@use '@pepperi-addons/ngx-lib/theming';
 @include theming.pepperi-theme();
 
 // 2. Configuration and helpers

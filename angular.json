@@ -27,9 +27,9 @@
                         "tsConfig": "projects/ngx-composite-lib-tester/tsconfig.app.json",
                         "stylePreprocessorOptions": {
                             "includePaths": [
-                              "dist",
-                              "node_modules",
-                              "node_modules/@pepperi-addons"
+                                "dist",
+                                "node_modules",
+                                "node_modules/@pepperi-addons"
                             ]
                         },
                         "assets": [
