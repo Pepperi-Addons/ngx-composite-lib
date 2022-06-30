@@ -10,38 +10,6 @@ import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepp
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
 
 
-const getActions = () => {
-    return {
-        get: async (data: PepSelectionData) => {
-            if (data?.rows.length === 1 && data?.selectionType !== 0) {
-                return [
-                    {
-                        title: 'Edit',
-                        handler: async (params: any) => {
-                            alert('edit');
-                        }
-                    },
-                    {
-                        title: 'Delete',
-                        handler: async (params: any) => {
-                            alert('delete');
-                        }
-                    }
-                ]
-            } else if (data?.rows.length > 1 || data?.selectionType === 0) {
-                return [
-                    {
-                        title: 'Delete',
-                        handler: async (params: any) => {
-                            alert('delete');
-                        }
-                    }
-                ]
-            } else return [];
-        }
-    }
-}
-
 export default {
     /* 👇 The title prop is optional.
     * See https://storybook.js.org/docs/angular/configure/overview#configure-story-loading
@@ -369,7 +337,7 @@ export default {
             }
         }
     },
-    parameters: {               
+    parameters: {
         controls: {
             include: [
                 'dataSource',
@@ -397,6 +365,11 @@ export default {
                 'breadCrumbItemClick'
             ],
         },
+        docs: {
+            description: {
+              component: 'The Generic List is made out of 3 main components: 1) Topbar, 2) Smart filters and 3) List. You can use them all or just the List, or any other combination - its up to you, the developer, to decide. **Inline** - `false` → is when you want to use the Generic List as a page (Full view, Unique URL) - `true` → if you want to use the Generic List as a part of a page'
+            }
+          }
     }
 
 
@@ -408,13 +381,23 @@ const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
         fieldClick: action('fieldClick'),
         valueChange: action('valueChange'),
         breadCrumbItemClick: action('breadCrumbItemClick')
-    }
+    },
+    template: `
+        <div style="height: 40vh">
+            <pep-generic-list [dataSource]="dataSource" [actions]="actions" [breadCrumbsItems]="breadCrumbsItems" [uuidMapping]="uuidMapping" [disabled]="disabled" 
+                [addPadding]="addPadding" [title]="title" [description]="description" [inline]="inline" [showSearch]="showSearch" [selectionType]="selectionType"
+                [noDataFoundMsg]="noDataFoundMsg" [supportSorting]="supportSorting" [supportSorting]="supportSorting" [showTopBar]="showTopBar" [pager]="pager"
+                [tableViewType]="tableViewType" [zebraStripes]="zebraStripes" [smartFilter]="smartFilter" (valueChange)="valueChange" (fieldClick)="fieldClick" 
+                (breadCrumbItemClick)="breadCrumbItemClick">
+            </pep-generic-list>
+        </div>
+    `
 });
 
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
-Base.args = {    
-    showTopBar: true   
+Base.args = {
+    showTopBar: true
 }
 
 export const NoDataFoundMsg = Template.bind({});
@@ -479,12 +462,12 @@ NoDataFoundMsg.args = {
                     MinimumColumnWidth: 0
                 },
                 totalCount: 0,
-                items: [                    
+                items: [
                 ]
             }
         }
     }
-} 
+}
 
 export const breadCrumbsItems = Template.bind({});
 breadCrumbsItems.storyName = 'Bread Crumbs Items';

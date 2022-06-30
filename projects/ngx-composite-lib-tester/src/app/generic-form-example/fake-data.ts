@@ -259,7 +259,8 @@ export const FakeDataViewFields: any[] = [
                 Vertical: 'Stretch'
             }
         },
-        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }],
+        AdditionalProps: {emptyOption: false}
     },
     {
         FieldID: 'ShipToName',
