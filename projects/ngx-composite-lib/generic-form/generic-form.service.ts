@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ObjectsDataRowCell } from '@pepperi-addons/ngx-lib';
 
 
 @Injectable()
@@ -19,27 +18,18 @@ export class PepGenericFormService {
         return Object.prototype.hasOwnProperty.call(obj, prop);
     }
 
-    createFormField(controlField: any, value: any, optionalValues: any[]) {
-        const field = new ObjectsDataRowCell();
+    createFormField(data: any) {
+        let field: any = {};
        
-        field.ApiName = controlField.ApiName;
-        field.Value = value;
-        field.FieldType = controlField.FieldType;
-        field.Enabled = !controlField.ReadOnly;
-        field.Visible = !controlField.Hidden;
-       /* field.Accessory = "";
-        field.AdditionalValue = "";
-        field.BackgroundColor = "";
-        field.FormattedValue = "";*/
+        field.ApiName = data.ApiName;
+        field.Value = data.controlFieldValue;
+        field.FieldType = data.FieldType;
+        field.Enabled = !data.ReadOnly;
+        field.Visible = !data.Hidden;
         field.GroupFields = [];
         field.Highlighted = false;
-       // field.NotificationInfo = "";
-        field.OptionalValues = optionalValues;
-       /* field.ReferenceObjectInternalType = "";
-        field.ReferenceObjectSubType = "";
-        field.ReferenceObjectType = '0';
-        field.TextColor = "";
-        field.UiPageKey = "";*/
+        field.OptionalValues = data.OptionalValues;
+        field.AdditionalProps = data.AdditionalProps;    
 
         return field;
     }

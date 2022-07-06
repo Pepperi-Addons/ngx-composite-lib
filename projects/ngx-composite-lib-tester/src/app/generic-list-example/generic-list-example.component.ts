@@ -184,7 +184,7 @@ export class GenericListExampleComponent implements OnInit {
                     }
                 ]
             } else return [];
-        }
+        } 
     }
 
     actions2: IPepGenericListActions = {
@@ -398,10 +398,10 @@ export class GenericListExampleComponent implements OnInit {
     getItems() {
         
         return new Promise(resolve => {
-            //setTimeout(() => {
+            setTimeout(() => {
                 const dataList = FakeData.Addons;
                 resolve([...dataList, ...dataList]);
-            //}, 8000);
+            }, 4000);
         });
     }
 

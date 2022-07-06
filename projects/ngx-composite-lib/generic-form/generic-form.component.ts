@@ -24,7 +24,6 @@ import {
 } from '@pepperi-addons/ngx-lib';
 import { DataViewConverter } from '@pepperi-addons/data-views';
 import { PepGenericFormService } from './generic-form.service';
-// import { } from './'
 
 
 @Component({
@@ -45,15 +44,14 @@ export class GenericFormComponent implements OnInit {
     set dataSource(val: any) {
         this._data = val;
     }
-    
-    private _optionalValues: any[] = [];
+        
     private _formData: ObjectsDataRow;
-    private _uiControl: UIControl;
+    private _uiControl: UIControl; 
     @Input()
     set dataView(val: IPepGenericFormDataView) {
         this.initForm(val);
     }
-
+    
     @Input()
     isLocked = false;
 
@@ -110,17 +108,8 @@ export class GenericFormComponent implements OnInit {
                 this._formData.UID = dataView.UID || PepGuid.newGuid();
                 const uiControlData = DataViewConverter.toUIControlData(dataView);
                 if (uiControlData) {
-                    if (uiControlData?.ControlFields) {
-                        dataView.Fields?.forEach((field: any) => {
-                            if (field.OptionalValues?.length) {
-                                this._optionalValues.push({
-                                    fieldId: field.FieldID,
-                                    optionalValues: field.OptionalValues
-                                });
-                            }
-                        });
+                    if (uiControlData?.ControlFields) {                        
                         this._uiControl.ControlFields = uiControlData.ControlFields.map((field: any) => this._genericFormService.convertToUiControlField(field));
-
                     }
                     this._uiControl.Columns = uiControlData.Columns;
 
@@ -130,13 +119,27 @@ export class GenericFormComponent implements OnInit {
                             let value = '';
                             if (this._genericFormService.hasProperty(this._data, item.ApiName)) {
                                 value = this._data[item.ApiName];
-                            }
-                            this._formData.Fields.push(this._genericFormService.createFormField(item, value, this.getOptionalValues(item.ApiName)) as ObjectsDataRowCell);
+                            }                            
+                            let dataViewField: any;
+                            if (dataView.Fields) {
+                                dataViewField = dataView.Fields.find(field => field.FieldID === item.ApiName);                                
+                            }                                 
+                            const controlFieldData = {
+                                ...item,
+                                ...{
+                                    controlFieldValue: value
+                                },
+                                ...{
+                                    OptionalValues: dataViewField?.OptionalValues?.length ? dataViewField.OptionalValues : [],
+                                    AdditionalProps: dataViewField?.AdditionalProps || null
+                                }
+                            }                      
+                            this._formData.Fields.push(this._genericFormService.createFormField(controlFieldData));
                         });
 
                         componentRef.instance.layoutType = 'form';
                         componentRef.instance.layout = this._uiControl;
-                        componentRef.instance.data = this._formData;
+                        componentRef.instance.data = this._formData;                        
                         componentRef.instance.isInternal = false;
                         componentRef.instance.lockFields = this.isLocked;
                         componentRef.instance.valueChange.subscribe(($event) => {
@@ -162,11 +165,6 @@ export class GenericFormComponent implements OnInit {
      */
     private updateFieldValue(fieldChanged: IPepGenericFormValueChange) {
         this._data[fieldChanged.ApiName] = fieldChanged.Value;
-    }
-
-    private getOptionalValues(fieldId: string) {
-        const item = this._optionalValues.find((item: any) => item.fieldId === fieldId);
-        return item?.optionalValues || [];
     }
 
     getData(): IPepGenericFormData {
