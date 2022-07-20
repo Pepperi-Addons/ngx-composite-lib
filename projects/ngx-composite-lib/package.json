@@ -1,6 +1,6 @@
 {
     "name": "@pepperi-addons/ngx-composite-lib",
-    "version": "0.4.0-angular14.4",
+    "version": "0.4.0-angular14.5",
     "peerDependencies": {
         "@angular/animations": ">= 14.0.2",
         "@angular/cdk": ">= 14.0.2",
@@ -13,7 +13,7 @@
         "@angular/platform-browser-dynamic": ">= 14.0.2",
         "@ngx-translate/core": "^14.0.0",
         "@ngx-translate/http-loader": "^7.0.0",
-        "@pepperi-addons/ngx-lib": "^0.4.0-angular14.18",
+        "@pepperi-addons/ngx-lib": "^0.4.0-angular14.37",
         "@angular-architects/module-federation": "^12.5.3",
         "@angular-architects/module-federation-tools": "^12.5.3",
         "ngx-translate-multi-http-loader": "^3.0.0",
