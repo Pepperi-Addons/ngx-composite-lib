@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
     IPepGenericListSmartFilter,
-    IPepGenericListDataRow
+    IPepGenericListDataView
 } from './generic-list.model';
 import {
     PepSmartFilterBaseField,
@@ -66,7 +66,7 @@ export class PepGenericListService {
 
         if (dataView?.Fields && dataView.Columns) {
             for (let index = 0; index < dataView.Fields.length; index++) {
-                const field = dataView.Fields[index] as GridDataViewField;
+                const field = dataView.Fields[index] as IPepGenericListDataView;
                 row.Fields.push({
                     ApiName: field.FieldID,
                     Title: field.Title ? this._translate.instant(field.Title) : '',
@@ -75,7 +75,7 @@ export class PepGenericListService {
                     Value: (itemFields[field.FieldID] || '').toString(),
                     ColumnWidth: dataView.Columns[index]?.Width || undefined,
                     AdditionalValue: '',
-                    OptionalValues: [],
+                    OptionalValues: field.OptionalValues || [],
                     FieldType: DataViewFieldTypes[field.Type],
                     ReadOnly: field.ReadOnly,
                     Enabled: !field.ReadOnly

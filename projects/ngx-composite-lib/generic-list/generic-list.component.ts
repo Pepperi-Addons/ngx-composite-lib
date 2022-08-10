@@ -230,10 +230,11 @@ export class GenericListComponent implements OnInit {
                 //merge selector inputs with callback inputs
                 this.loadTableInputs();
 
-                const fromIndex = 0;
+                let fromIndex = 0;
                 let toIndex = 0;
 
                 if (this._listInputs.pager.type === 'pages') {
+                    fromIndex = this._listInputs.pager.size * this._listInputs.pager.index;
                     toIndex = fromIndex + (this._listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
                 } else {
                     toIndex = 100;//TO DO - get value from - this.customList.getTopItems()
@@ -368,9 +369,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
-        setTimeout(() => {
-            this._loaderService.show();
-        }, 50);
+        this._loaderService.show();
         const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -378,9 +377,7 @@ export class GenericListComponent implements OnInit {
             fromIndex: fromIndex,
             toIndex: toIndex
         });
-        setTimeout(() => {
-            this._loaderService.hide();
-        }, 50);
+        this._loaderService.hide();
 
         if (data) {
             this._dataView = data.dataView;
@@ -396,9 +393,7 @@ export class GenericListComponent implements OnInit {
 
     private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
         if (this._dataSource.update) {
-            setTimeout(() => {
-                this._loaderService.show();
-            }, 50);
+            this._loaderService.show();
             const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -407,9 +402,7 @@ export class GenericListComponent implements OnInit {
                 toIndex: toIndex,
                 pageIndex: pageIndex
             });
-            setTimeout(() => {
-                this._loaderService.hide();
-            }, 50);
+            this._loaderService.hide();
 
             if (dataList?.length > 0) {
                 return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));

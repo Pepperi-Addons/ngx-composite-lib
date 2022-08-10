@@ -9,6 +9,7 @@ import { IPepGenericListPager } from './generic-list.model';
 import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepperi-addons/ngx-lib/list';
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
 
+
 export default {
     /* 👇 The title prop is optional.
     * See https://storybook.js.org/docs/angular/configure/overview#configure-story-loading
@@ -197,8 +198,17 @@ export default {
                 }
             }
         },
+        description: {
+            description: 'List description',
+            table: {
+                defaultValue: {
+                    summary: null
+                }
+            }
+        },
+
         inline: {
-            description: 'Whether the component is located within a container that includes additional elements. when inline is set to true, the component\'s width and height have to be set manually'
+            description: 'false → is when you want to use the Generic List as a page (Full view, Unique URL). true → if you want to use the Generic List as a part of a page'
         },
         showSearch: {
             description: 'Whether the search box is displayed'
@@ -265,37 +275,8 @@ export default {
         },
         smartFilter: {
             description: 'Smart Filter\'s data and data view',
-            defaultValue: {
-                dataView: {
-                    Context: {
-                        Name: '',
-                        Profile: { InternalID: 0 },
-                        ScreenSize: 'Landscape'
-                    },
-                    Type: 'Menu',
-                    Title: '',
-                    Fields: [
-                        {
-                            FieldID: 'BillToName',
-                            Type: 'MultipleStringValues',
-                            Title: 'Bill To Name',
-                            OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
-                        },
-                        {
-                            FieldID: 'AllowDecimal',
-                            Type: 'Bool',
-                            Title: 'Allow Decimal'
-                        },
-                        {
-                            FieldID: 'CaseQuantity',
-                            Type: 'Integer',
-                            Title: 'Case Quantity'
-                        }
-                    ],
-                    FrozenColumnsCount: 0,
-                    MinimumColumnWidth: 0
-                }
-            },
+            defaultValue: null
+            ,
             control: 'object',
             table: {
                 type: {
@@ -366,6 +347,7 @@ export default {
                 'disabled',
                 'addPadding',
                 'title',
+                "description",
                 'inline',
                 'showSearch',
                 'selectionType',
@@ -383,6 +365,11 @@ export default {
                 'breadCrumbItemClick'
             ],
         },
+        docs: {
+            description: {
+              component: 'The Generic List is made out of 3 main components: 1) Topbar, 2) Smart filters and 3) List. You can use them all or just the List, or any other combination - its up to you, the developer, to decide. **Inline** - `false` → is when you want to use the Generic List as a page (Full view, Unique URL) - `true` → if you want to use the Generic List as a part of a page'
+            }
+          }
     }
 
 
@@ -394,9 +381,145 @@ const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
         fieldClick: action('fieldClick'),
         valueChange: action('valueChange'),
         breadCrumbItemClick: action('breadCrumbItemClick')
-    }
+    },
+    template: `
+        <div style="height: 40vh">
+            <pep-generic-list [dataSource]="dataSource" [actions]="actions" [breadCrumbsItems]="breadCrumbsItems" [uuidMapping]="uuidMapping" [disabled]="disabled" 
+                [addPadding]="addPadding" [title]="title" [description]="description" [inline]="inline" [showSearch]="showSearch" [selectionType]="selectionType"
+                [noDataFoundMsg]="noDataFoundMsg" [supportSorting]="supportSorting" [supportSorting]="supportSorting" [showTopBar]="showTopBar" [pager]="pager"
+                [tableViewType]="tableViewType" [zebraStripes]="zebraStripes" [smartFilter]="smartFilter" (valueChange)="valueChange" (fieldClick)="fieldClick" 
+                (breadCrumbItemClick)="breadCrumbItemClick">
+            </pep-generic-list>
+        </div>
+    `
 });
 
 export const Base = Template.bind({});
-Base.args = {}
+Base.storyName = 'Basic';
+Base.args = {
+    showTopBar: true
+}
+
+export const NoDataFoundMsg = Template.bind({});
+NoDataFoundMsg.storyName = 'No Data Found Message';
+NoDataFoundMsg.args = {
+    dataSource: {
+        init: async (params: any) => {
+            return {
+                dataView: {
+                    Context: {
+                        Name: '',
+                        Profile: { InternalID: 0 },
+                        ScreenSize: 'Landscape'
+                    },
+                    Type: 'Grid',
+                    Title: '',
+                    Fields: [
+                        {
+                            FieldID: 'UUID',
+                            Type: 'TextBox',
+                            Title: 'UUID',
+                            Mandatory: false,
+                            ReadOnly: true
+                        },
+                        {
+                            FieldID: 'Description',
+                            Type: 'TextBox',
+                            Title: 'Description',
+                            Mandatory: false,
+                            ReadOnly: false
+                        },
+                        {
+                            FieldID: 'Version',
+                            Type: 'TextBox',
+                            Title: 'Version',
+                            Mandatory: false,
+                            ReadOnly: true
+                        },
+                        {
+                            FieldID: 'Type',
+                            Type: 'TextBox',
+                            Title: 'Type',
+                            Mandatory: false,
+                            ReadOnly: true
+                        },
+                        {
+                            FieldID: 'CreationDate',
+                            Type: 'TextBox',
+                            Title: 'Creation Date',
+                            Mandatory: false,
+                            ReadOnly: true
+                        }
+                    ],
+                    Columns: [
+                        { Width: 15 },
+                        { Width: 30 },
+                        { Width: 15 },
+                        { Width: 20 },
+                        { Width: 20 }
+                    ],
+                    FrozenColumnsCount: 0,
+                    MinimumColumnWidth: 0
+                },
+                totalCount: 0,
+                items: [
+                ]
+            }
+        }
+    }
+}
+
+export const breadCrumbsItems = Template.bind({});
+breadCrumbsItems.storyName = 'Bread Crumbs Items';
+breadCrumbsItems.args = {
+    breadCrumbsItems: [
+        {
+            key: '1',
+            text: 'Item1',
+            title: 'Item 1'
+        },
+        {
+            key: '2',
+            text: 'Item2',
+            title: 'Item 2'
+        }
+    ]
+}
+
+export const SmartFilter = Template.bind({});
+SmartFilter.storyName = 'Smart filter';
+SmartFilter.args = {
+    smartFilter: {
+        dataView: {
+            Context: {
+                Name: '',
+                Profile: { InternalID: 0 },
+                ScreenSize: 'Landscape'
+            },
+            Type: 'Menu',
+            Title: '',
+            Fields: [
+                {
+                    FieldID: 'BillToName',
+                    Type: 'MultipleStringValues',
+                    Title: 'Bill To Name',
+                    OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+                },
+                {
+                    FieldID: 'AllowDecimal',
+                    Type: 'Bool',
+                    Title: 'Allow Decimal'
+                },
+                {
+                    FieldID: 'CaseQuantity',
+                    Type: 'Integer',
+                    Title: 'Case Quantity'
+                }
+            ] as any
+        }
+    }
+}
+
+
+
 

@@ -1,10 +1,9 @@
-<pep-checkbox class="checkbox-as-title" [label]="title" [renderTitle]="false" [value]="color.use" (valueChange)="onUseChanged($event)"></pep-checkbox>
-<pep-color [value]="color.value" [label]="title + ' ' + ('COLOR_SETTINGS.COLOR' | translate)" 
-           [disabled]="!color.use"
-           [checkAAComplient]="checkAACompliant" 
-           [showAAComplient]="showAACompliant" 
-           (valueChange)="onColorChanged($event)">
+<pep-checkbox class="checkbox-as-title" [label]="title" [renderTitle]="false" [value]="color.use"
+    (valueChange)="onUseChanged($event)"></pep-checkbox>
+<pep-color [value]="color.value" [label]="title + ' ' + ('COLOR_SETTINGS.COLOR' | translate)" [disabled]="!color.use"
+    [checkAAComplient]="checkAAComplient" [showAAComplient]="showAAComplient" (valueChange)="onColorChanged($event)">
 </pep-color>
-<pep-slider [label]="title + ' ' + ('COLOR_SETTINGS.OPACITY' | translate)" [hint]="color.opacity.toString() || ''" [minValue]="0" [maxValue]="100" [disabled]="!color.use" [value]="color.opacity" 
-    [background]="getSliderBackground()" (inputChange)="onSliderInputChanged($event)" (valueChange)="onSliderValueChanged($event)">
+<pep-slider [label]="title + ' ' + ('COLOR_SETTINGS.OPACITY' | translate)" [hint]="color.opacity.toString() || ''"
+    [minValue]="0" [maxValue]="100" [disabled]="!color.use" [value]="color.opacity" [background]="getSliderBackground()"
+    (inputChange)="onSliderInputChanged($event)" (valueChange)="onSliderValueChanged($event)">
 </pep-slider>

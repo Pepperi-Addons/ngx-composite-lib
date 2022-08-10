@@ -116,6 +116,17 @@ export class GenericListExampleComponent implements OnInit {
         }
     }
 
+    private getComboBoxColumn(columnId: string) {
+        return {
+            FieldID: columnId,
+            Type: 'ComboBox',
+            Title: columnId,
+            Mandatory: false,
+            ReadOnly: false,
+            OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+        }        
+    }
+
     getColumn(columnId: string, type: string, isEnabled: boolean) {
         return {
             FieldID: columnId,
@@ -173,7 +184,7 @@ export class GenericListExampleComponent implements OnInit {
                     }
                 ]
             } else return [];
-        }
+        } 
     }
 
     actions2: IPepGenericListActions = {
@@ -292,12 +303,14 @@ export class GenericListExampleComponent implements OnInit {
                 const filteredData = [...dataList, ...dataList];
                 //const filteredData = dataList.slice(0, 5);
                 //console.log('init params', params);
+                await this.getItems();
+
                 const res = filteredData.map(addon => ({
                     UUID: addon.UUID,
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate,
+                    CreationDate: addon.CreationDate,                    
                     TestNum: 100000
 
                 }));
@@ -329,6 +342,7 @@ export class GenericListExampleComponent implements OnInit {
                             this.getRegularReadOnlyColumn('Version'),
                             this.getLinkColumn('Type'),
                             this.getRegularReadOnlyColumn('CreationDate'),
+                           // this.getComboBoxColumn('Country'),
                             this.getNumberColumn('TestNum'),
                             //this.getHiddenColumn('FirstName'),
                         ],
@@ -381,6 +395,16 @@ export class GenericListExampleComponent implements OnInit {
         } as IPepGenericListDataSource
     }
 
+    getItems() {
+        
+        return new Promise(resolve => {
+            setTimeout(() => {
+                const dataList = FakeData.Addons;
+                resolve([...dataList, ...dataList]);
+            }, 4000);
+        });
+    }
+
     getDataSource2() {
         return {
             init: async (params: any) => {
@@ -394,7 +418,7 @@ export class GenericListExampleComponent implements OnInit {
                     Description: addon.Addon.Description,
                     Version: addon.Version,
                     Type: addon.Type,
-                    CreationDate: addon.CreationDate,
+                    CreationDate: addon.CreationDate,                    
                     TestNum: 100000
 
                 }));
