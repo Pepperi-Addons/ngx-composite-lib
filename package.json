@@ -58,8 +58,8 @@
         "zone.js": "~0.11.5"
     },
     "devDependencies": {
-        "@angular-architects/module-federation": "^14.3.0",
-        "@angular-architects/module-federation-tools": "^14.3.0",
+        "@angular-architects/module-federation": "^14.3.8",
+        "@angular-architects/module-federation-tools": "^14.3.10",
         "@angular-devkit/build-angular": "14.0.2",
         "@angular/cli": "^14.0.2",
         "@angular/compiler-cli": "^14.0.2",
