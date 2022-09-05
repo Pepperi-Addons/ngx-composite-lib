@@ -62,14 +62,6 @@
      }
 }
 
-::ng-deep.pep-top-bar-container:not(.inline) {
-    margin-inline: ngx-variables.$spacing-xs;
-}
-
-::ng-deep.pep-top-bar-container.inline {
-    height: ngx-variables.$top-bar-field-height !important;
-}
-
 .noDataFoundMsg{
     margin: 1rem 0;
     height: calc(100% - 2rem);
