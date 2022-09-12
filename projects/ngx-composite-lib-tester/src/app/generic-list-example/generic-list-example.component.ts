@@ -298,7 +298,7 @@ export class GenericListExampleComponent implements OnInit {
     getDataSource() {
         return {
             init: async (params: any) => {
-                const dataList = FakeData.Addons;
+                const dataList = FakeData.Addons;                
                 // const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
                 const filteredData = [...dataList, ...dataList];
                 //const filteredData = dataList.slice(0, 5);
@@ -375,7 +375,7 @@ export class GenericListExampleComponent implements OnInit {
                 );
             },*/
             update: async (params: any) => {
-                //                console.log('update', params);
+                //                console.log('update', params);               
                 const dataList = FakeData.Addons;
                 //const filteredData = dataList.slice(params.fromIndex, params.toIndex + 1);
                 const filteredData = dataList.slice(5, 10);

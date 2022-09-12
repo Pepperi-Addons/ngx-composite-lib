@@ -178,7 +178,16 @@ export class GenericFormComponent implements OnInit {
     * updates form field(s) params
     * @param fields
     */
-    updateFields(fields: IPepGenericFormFieldUpdate[]) {
+    updateFields(fields: IPepGenericFormFieldUpdate[]) {                
+        // update data view with current data
+        for (const [key, value] of Object.entries(this._data)) {
+            const index = this._formData.Fields.findIndex((item) => item.ApiName === key);
+            if (index >= 0) {
+                const item = this._formData.Fields[index] as { [k: string]: any };
+                item.Value = value;
+            }
+        }
+        
         fields.forEach((field) => {
             const index = this._formData.Fields.findIndex((item) => item.ApiName === field.FieldId);
             if (index >= 0) {

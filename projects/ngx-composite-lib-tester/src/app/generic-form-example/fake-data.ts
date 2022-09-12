@@ -56,7 +56,7 @@ export const FakeDataViewFields: any[] = [
     {
         FieldID: 'GeneralInformation',
         Type: 'Separator',
-        Title: 'General Information 2',
+        Title: 'General Information',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
@@ -77,10 +77,10 @@ export const FakeDataViewFields: any[] = [
         }
     },
     {
-        FieldID: 'ItemExternalID',
-        Type: 'TextBox',
-        Title: 'Item Code',
-        Mandatory: true,
+        FieldID: 'GeneralInformationTwo',
+        Type: 'TextHeader',
+        Title: 'Description',
+        Mandatory: false,
         ReadOnly: false,
         Layout: {
             Origin: {
@@ -88,7 +88,7 @@ export const FakeDataViewFields: any[] = [
                 Y: 1
             },
             Size: {
-                Width: 1,
+                Width: 2,
                 Height: 0
             }
         },
@@ -99,29 +99,8 @@ export const FakeDataViewFields: any[] = [
             }
         }
     },
-    {
-        FieldID: 'ActionDateTime',
-        Type: 'DateAndTime',
-        Title: 'Action Date Time',
-        Mandatory: false,
-        ReadOnly: false,
-        Layout: {
-            Origin: {
-                X: 1,
-                Y: 1
-            },
-            Size: {
-                Width: 1,
-                Height: 0
-            }
-        },
-        Style: {
-            Alignment: {
-                Horizontal: 'Stretch',
-                Vertical: 'Stretch'
-            }
-        }
-    },
+    
+    
     {
         FieldID: 'WrntyID',
         Type: 'LimitedLengthTextBox',
@@ -169,18 +148,87 @@ export const FakeDataViewFields: any[] = [
         }
     },
     {
-        FieldID: 'DeliveryDate',
-        Type: 'Date',
-        Title: 'Delivery Date',
+        FieldID: 'TSATsaTextTest2',
+        Type: 'TextBox',
+        Title: 'TSA Tsa Text Test',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
             Origin: {
-                X: 0,
+                X: 2,
+                Y: 2
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'TSATsaTextTest3',
+        Type: 'TextBox',
+        Title: 'TSA Tsa Text Test',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 3,
+                Y: 2
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'TSATsaTextTest4',
+        Type: 'TextBox',
+        Title: 'TSA Tsa Text Test',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 4,
+                Y: 2
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'ActionDateTime',
+        Type: 'Date',
+        Title: 'Action DateTime',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 1,
                 Y: 3
             },
             Size: {
-                Width: 2,
+                Width: 3,
                 Height: 0
             }
         },
@@ -261,7 +309,7 @@ export const FakeDataViewFields: any[] = [
         },
         OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }],
         AdditionalProps: {emptyOption: false}
-    },
+    },   
     {
         FieldID: 'ShipToName',
         Type: 'TextBox',
