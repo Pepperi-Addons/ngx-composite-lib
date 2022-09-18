@@ -29,7 +29,7 @@
         "LG": "LG",
         "XL": "XL",
         "FONT_WEIGHT": {
-            "NORMAL": "Normal",
+            "REGULAR": "Regular",
             "BOLD": "Bold",
             "BOLDER": "Bolder"
         },
