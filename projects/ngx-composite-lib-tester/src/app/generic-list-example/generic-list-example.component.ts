@@ -359,7 +359,7 @@ export class GenericListExampleComponent implements OnInit {
                         FrozenColumnsCount: 0,
                         MinimumColumnWidth: 0
                     },
-                    totalCount: res.length,
+                    totalCount: 0,
                     items: res
 
                 });

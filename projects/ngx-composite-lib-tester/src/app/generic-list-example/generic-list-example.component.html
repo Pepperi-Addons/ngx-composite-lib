@@ -1,8 +1,8 @@
 <div class="example-wrapper">
 
-    <pep-generic-list #glist1 [dataSource]="dataSource" [actions]="actions" [smartFilter]="smartFilter" [inline]="true"
-        [showTopBar]="true" [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'"
-        [breadCrumbsItems]="breadCrumbsItems" [description]="description" [disabled]="disableTable" [pager]="pager"
+    <pep-generic-list #glist1 [dataSource]="dataSource"  [actions]="actions" [smartFilter]="smartFilter" [inline]="true"
+        [showTopBar]="true" [tableViewType]="tableViewType" [zebraStripes]="true" [uuidMapping]="'UUID'" [emptyState]="{show: true}"
+        [breadCrumbsItems]="breadCrumbsItems" [description]="description" [disabled]="disableTable" [pager]="pager" [selectionType]="'single'"
         title="Generic list inline title" [showSearch]="true" (breadCrumbItemClick)="onBreadCrumbClick($event)">
         <ng-container right-buttons>
             <pep-menu class="pep-spacing-element" [items]="menuItems" [sizeType]="'sm'"

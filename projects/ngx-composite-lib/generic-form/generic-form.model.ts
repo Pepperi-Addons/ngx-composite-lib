@@ -1,10 +1,17 @@
-import { FormDataView } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
+import { FormDataView, BaseFormDataViewField } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
+import { KeyValuePair } from '@pepperi-addons/ngx-lib'; 
 
 /**
  * Interface represending the form data view
  */
 export interface IPepGenericFormDataView extends FormDataView {
     UID?: string;
+    Fields: IPepGenericFormDataViewField[];
+}
+
+export interface IPepGenericFormDataViewField extends BaseFormDataViewField {
+    OptionalValues: Array<KeyValuePair<string>>;
+    AdditionalProps: { [key: string]: any };
 }
 
 /**
@@ -33,6 +40,6 @@ export interface IPepGenericFormDataParams {
     BackgroundColor?: string;
     TextColor?: string;
     Highlighted?: boolean;   
-    OptionalValues?: [];   
+    OptionalValues?: Array<KeyValuePair<string>>;   
 }
 

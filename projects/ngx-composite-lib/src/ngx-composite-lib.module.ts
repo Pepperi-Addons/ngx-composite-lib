@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { TranslateModule } from '@ngx-translate/core';
+//import { TranslateModule } from '@ngx-translate/core';
 // import { HttpClientModule } from '@angular/common/http';
 // import { ReactiveFormsModule } from '@angular/forms';
 import { PepResetConfigurationFieldDirective } from './core/common/directives/reset-configuration-field.directive';
@@ -29,7 +29,7 @@ const utilitiesList = [
     ],
     exports: [
         utilitiesList
-        // TranslateModule
+        //TranslateModule
     ],
     providers: [
         PepDIMXHelperService,

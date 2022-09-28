@@ -66,5 +66,11 @@
         "MAPPED_FIELDS_SAVED_DIALOG_CONTENT": "The mapped fields are saved.",
         "DIALOG_ERROR_CONTENT": "General error - please contact your administrator.",
         "DIALOG_ERROR_DETAILS": "<br/><small> Error details: {{error}} </small>"
+    },
+    "GENERIC_LIST": {
+        "EMPTY_STATE": {
+            "TITLE": "Nothing to see here",
+            "DESCRIPTION": "Add or create an item to populate this list"
+        }
     }
 }

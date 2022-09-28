@@ -8,7 +8,7 @@ import {
 
 
 export const FakeData: any = {
-    GeneralInformation: '',
+    GeneralInformation: 'Rich Text Example',
   //  ItemExternalID: 'Abcd',
     ActionDateTime: '2021-11-22T09:26:02Z',
     WrntyID: '272764514',
@@ -55,7 +55,7 @@ export const FakeData: any = {
 export const FakeDataViewFields: any[] = [
     {
         FieldID: 'GeneralInformation',
-        Type: 'Separator',
+        Type: 'RichTextHTML',
         Title: 'General Information',
         Mandatory: false,
         ReadOnly: false,
@@ -74,6 +74,10 @@ export const FakeDataViewFields: any[] = [
                 Horizontal: 'Stretch',
                 Vertical: 'Stretch'
             }
+        },
+        AdditionalProps: {
+            renderTitle: false,
+            renderEnlargeButton: false
         }
     },
     {

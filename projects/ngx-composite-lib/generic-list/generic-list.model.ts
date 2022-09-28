@@ -53,6 +53,7 @@ export interface IPepGenericListListInputs {
     tableViewType?: PepListTableViewType;
     zebraStripes?: boolean;
     smartFilter?: IPepGenericListSmartFilter;
+    emptyState?: IPepGenericEmptyState;
 }
 
 export interface IPepGenericListActions {
@@ -77,6 +78,11 @@ export interface IPepGenericListDataView extends GridDataViewField {
     OptionalValues: any[];
 }
 
+export interface IPepGenericEmptyState { 
+    show: boolean;
+    title?: string;
+    description?: string;
+}
 
 
 

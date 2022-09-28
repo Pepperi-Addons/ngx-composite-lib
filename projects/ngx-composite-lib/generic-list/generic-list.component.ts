@@ -8,7 +8,7 @@ import {
     ViewContainerRef,
     ComponentFactoryResolver
 } from '@angular/core';
-//import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
     PepDataConvertorService,
     PepLayoutService,
@@ -50,7 +50,8 @@ import {
     IPepGenericListPager,
     IPepGenericListActions,
     IPepGenericListSmartFilter,
-    IPepGenericListListInputs
+    IPepGenericListListInputs,
+    IPepGenericEmptyState
 } from './generic-list.model';
 import { PepGenericListService } from './generic-list.service';
 import { DataViewConverter } from '@pepperi-addons/data-views';
@@ -63,17 +64,17 @@ import {
 @Component({
     selector: 'pep-generic-list',
     templateUrl: './generic-list.component.html',
-    styleUrls: ['./generic-list.component.scss'],
+    styleUrls: ['./generic-list.component.scss', './generic-list.component.theme.scss'],
     providers: [PepGenericListService]
 })
 export class GenericListComponent implements OnInit {
     @ViewChild('search') search: PepSearchComponent | undefined;
-
+    
     private _pepListContainer: ViewContainerRef | undefined;
     @ViewChild('pepListContainer', { read: ViewContainerRef })
     set pepListContainer(val: ViewContainerRef) {
         this._pepListContainer = val;
-    }
+    } 
 
     private _dataSource: IPepGenericListDataSource = {
         init: async (params: any) => {
@@ -91,7 +92,7 @@ export class GenericListComponent implements OnInit {
         this._dataSource = val;
         this._sorting = undefined;
         this.initSearch();
-        this.initTable();
+        this.initList();
     }
 
     @Input()
@@ -124,6 +125,9 @@ export class GenericListComponent implements OnInit {
 
     @Input()
     noDataFoundMsg = '';
+
+    @Input()
+    emptyState: IPepGenericEmptyState | undefined = undefined;
 
     @Input()
     selectionType: PepListSelectionType = 'multi';
@@ -177,11 +181,13 @@ export class GenericListComponent implements OnInit {
     private _dataView: DataView = {
         Type: 'Grid'
     };
-    private _listInputs: any;
     private _pepList: any;
+    onLoad = true;
+    listInputs: any;
     totalRowCount = -1;
     searchString = '';
     showSmartFilter = false;
+    showEmptyState = false;
     internalSmartFilter: {
         fields: PepSmartFilterBaseField[],
         data: IPepSmartFilterData[]
@@ -200,10 +206,11 @@ export class GenericListComponent implements OnInit {
         private _dataConvertorService: PepDataConvertorService,
         private _layoutService: PepLayoutService,
         private _loaderService: PepLoaderService,
-        // private _translate: TranslateService,
+        private _translate: TranslateService,
         private _genericListService: PepGenericListService
     ) {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {
+            console.log('size', size);
             //            
         });
         this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {
@@ -215,76 +222,95 @@ export class GenericListComponent implements OnInit {
         //
     }
 
-    private async initTable() {
-        setTimeout(async () => {
-            if (this._dataSource &&
-                this._pepListContainer) {
-
-                if (this._pepListContainer.length > 0) {
-                    this._pepListContainer.remove();
-                }
-                const factory = this._resolver.resolveComponentFactory(PepListComponent);
-                const componentRef = this._pepListContainer.createComponent(factory);
-                this.pepList = componentRef.instance;
-
+    private async initList() {
+        this.onLoad = true;
+        setTimeout(async () => { //making sure all input data is available
+            if (this._dataSource) {
                 //merge selector inputs with callback inputs
                 this.loadTableInputs();
 
                 let fromIndex = 0;
                 let toIndex = 0;
 
-                if (this._listInputs.pager.type === 'pages') {
-                    fromIndex = this._listInputs.pager.size * this._listInputs.pager.index;
-                    toIndex = fromIndex + (this._listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
+                if (this.listInputs.pager.type === 'pages') {
+                    fromIndex = this.listInputs.pager.size * this.listInputs.pager.index;
+                    toIndex = fromIndex + (this.listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;
                 } else {
                     toIndex = 100;//TO DO - get value from - this.customList.getTopItems()
                 }
 
                 const data = await this.loadData(fromIndex, toIndex);
                 this.totalRowCount = data?.totalCount || 0;
-
-                componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
-                componentRef.instance.tableViewType = this._listInputs.tableViewType;
-                componentRef.instance.zebraStripes = this._listInputs.zebraStripes;
-                if (this.disabled) {
-                    componentRef.instance.disabled = true;
-                    componentRef.instance.lockItemInnerEvents = true;
+               
+                if (this.listInputs?.emptyState.show === true) {
+                    this.setEmptyState();
                 }
-                componentRef.instance.supportSorting = this._listInputs.supportSorting;
-                componentRef.instance.selectionTypeForActions = this._listInputs.selectionType;
-                componentRef.instance.showCardSelection = this._listInputs.selectionType !== 'none';
-                componentRef.instance.pagerType = this._listInputs.pager.type;
-                if (this._listInputs.pager.type === 'pages') {
-                    componentRef.instance.pageSize = this._listInputs.pager?.size || DEFAULT_PAGE_SIZE;
-                    componentRef.instance.pageIndex = this._listInputs.pager?.index || 0;
-                }
-                componentRef.instance.noDataFoundMsg = this._listInputs.noDataFoundMsg;
-                componentRef.instance.fieldClick.subscribe(($event) => {
-                    this.onCustomizeFieldClick($event);
-                });
-                componentRef.instance.selectedItemsChange.subscribe(($event) => {
-                    this.onSelectedItemsChanged($event);
-                });
-                componentRef.instance.loadItems.subscribe(($event) => {
-                    this.onLoadItems($event);
-                });
-                componentRef.instance.loadPage.subscribe(($event) => {
-                    this.onLoadPage($event);
-                });
-                componentRef.instance.valueChange.subscribe(($event) => {
-                    this.onValueChanged($event)
-                });
-                componentRef.instance.sortingChange.subscribe(($event) => {
-                    this.onSortingChange($event);
-                });
-                let convertedList: ObjectsDataRow[] = [];
-                if (data) {
-                    if (data.items?.length) {
-                        convertedList = this._dataConvertorService.convertListData(data.items);
+                this.onLoad = false;
+                //show empty state
+                if (this.showEmptyState) {
+                    if (!this.listInputs.emptyState.title) {
+                        this.listInputs.emptyState.title = this._translate.instant('GENERIC_LIST.EMPTY_STATE.TITLE');
                     }
-                    const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
-                    componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
+                    if (!this.listInputs.emptyState.description) {
+                        this.listInputs.emptyState.description = this._translate.instant('GENERIC_LIST.EMPTY_STATE.DESCRIPTION');
+                    }
+                    return;
                 }
+                setTimeout(() => {
+                    if (this._pepListContainer) {
+                        if (this._pepListContainer.length > 0) {
+                            this._pepListContainer.remove();
+                        }
+                        const factory = this._resolver.resolveComponentFactory(PepListComponent);
+                        const componentRef = this._pepListContainer.createComponent(factory);
+                        this.pepList = componentRef.instance;
+                        
+                        componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
+                        componentRef.instance.tableViewType = this.listInputs.tableViewType;
+                        componentRef.instance.zebraStripes = this.listInputs.zebraStripes;
+                        if (this.disabled) {
+                            componentRef.instance.disabled = true;
+                            componentRef.instance.lockItemInnerEvents = true;
+                        }
+                        componentRef.instance.supportSorting = this.listInputs.supportSorting;
+                        componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;
+                        console.log('componentRef.instance.selectionTypeForActions', componentRef.instance.selectionTypeForActions);
+                        componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';
+                        componentRef.instance.pagerType = this.listInputs.pager.type;
+                        if (this.listInputs.pager.type === 'pages') {
+                            componentRef.instance.pageSize = this.listInputs.pager?.size || DEFAULT_PAGE_SIZE;
+                            componentRef.instance.pageIndex = this.listInputs.pager?.index || 0;
+                        }
+                        componentRef.instance.noDataFoundMsg = this.listInputs.noDataFoundMsg;
+                        componentRef.instance.fieldClick.subscribe(($event) => {
+                            this.onCustomizeFieldClick($event);
+                        });
+                        componentRef.instance.selectedItemsChange.subscribe(($event) => {
+                            this.onSelectedItemsChanged($event);
+                        });
+                        componentRef.instance.loadItems.subscribe(($event) => {
+                            this.onLoadItems($event);
+                        });
+                        componentRef.instance.loadPage.subscribe(($event) => {
+                            this.onLoadPage($event);
+                        });
+                        componentRef.instance.valueChange.subscribe(($event) => {
+                            this.onValueChanged($event)
+                        });
+                        componentRef.instance.sortingChange.subscribe(($event) => {
+                            this.onSortingChange($event);
+                        });
+                        let convertedList: ObjectsDataRow[] = [];
+                        if (data) {
+                            if (data.items?.length) {
+                                convertedList = this._dataConvertorService.convertListData(data.items);
+                            }
+                            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
+                            componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
+                        }
+
+                    }
+                }, 0);
             }
         }, 0);
     }
@@ -294,21 +320,31 @@ export class GenericListComponent implements OnInit {
      * @returns merged pep-list inputs
      */
     private loadTableInputs() {
-        this._listInputs = {
+        this.listInputs = {
             supportSorting: this.supportSorting,
             selectionType: this.selectionType,
             pager: this.pager,
             noDataFoundMsg: this.noDataFoundMsg,
             tableViewType: this.tableViewType,
-            zebraStripes: this.zebraStripes
+            zebraStripes: this.zebraStripes,
+            emptyState: this.emptyState
         };
         if (this._dataSource.inputs) {
             Object.entries(this._dataSource.inputs).forEach((item: any) => {
-                if (this._genericListService.hasProperty(this._listInputs, item[0])) {
-                    this._listInputs[item[0]] = item[1];
+                if (this._genericListService.hasProperty(this.listInputs, item[0])) {
+                    this.listInputs[item[0]] = item[1];
                 }
             });
         }
+    }
+
+    /**
+     * detemines whether empty state is to be displayed
+     */
+    private setEmptyState() {
+        this.showEmptyState = this.totalRowCount === 0 &&
+            this.searchString === '' &&
+            this._appliedFilters.length === 0;
     }
 
     private getUiControl(data: any): UIControl {
@@ -323,7 +359,7 @@ export class GenericListComponent implements OnInit {
     }
 
     private loadMenuItems(): void { //TODO
-        if (this._listInputs.selectionType !== 'none') {
+        if (this.listInputs.selectionType !== 'none') {
             this.getMenuActions().then(
                 x => this.menuActions = x
             );
@@ -378,7 +414,6 @@ export class GenericListComponent implements OnInit {
             toIndex: toIndex
         });
         this._loaderService.hide();
-
         if (data) {
             this._dataView = data.dataView;
 
@@ -463,7 +498,7 @@ export class GenericListComponent implements OnInit {
 
     onSearchChanged(event: IPepSearchClickEvent) {
         this.searchString = event.value;
-        this.initTable();
+        this.initList();
     }
 
     onSelectedItemsChanged(selectedRowsCount: number) {
@@ -487,12 +522,12 @@ export class GenericListComponent implements OnInit {
 
     onSortingChange(event: IPepListSortingChangeEvent) {
         this._sorting = event;
-        this.initTable();
+        this.initList();
     }
 
     onFiltersChange(filters: IPepSmartFilterData[]) {
         this._appliedFilters = filters;
-        this.initTable();
+        this.initList();
     }
 
     ngOnDestroy() {

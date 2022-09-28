@@ -1,7 +1,7 @@
 <div id="loadingSpinnerModal" *ngIf="showHeader" [hidden]="!showLoader" pepRtlClass>
     <div id="loadingSpinner">
         <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]"
-            [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+            [ngStyle]="{ 'background-color': customizationService.getLoadingSpinnerColor() }"></div>
     </div>
 </div>
 <div class="pep-layout" dir="{{ layoutService.isRtl() ? 'rtl' : 'ltr' }}">

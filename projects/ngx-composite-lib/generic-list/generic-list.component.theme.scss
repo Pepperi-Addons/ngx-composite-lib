@@ -1,0 +1,10 @@
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/functions' as ngx-functions;
+
+.list-empty-state {
+    ::ng-deep {
+        .svg-icon {
+            fill: ngx-functions.get-pep-color(color-system-primary, color-tran-10);
+        }
+    }
+   
+}
