@@ -29,9 +29,10 @@
         "LG": "LG",
         "XL": "XL",
         "FONT_WEIGHT": {
-            "NORMAL": "Normal",
+            "REGULAR": "Regular",
             "BOLD": "Bold",
-            "BOLDER": "Bolder"
+            "BOLDER": "Bolder",
+            "REGULAR": "Regular"
         },
         "WIDTH_SIZE": {
             "NARROW": "Narrow",

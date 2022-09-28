@@ -109,7 +109,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
             }
             case 'font-weight':{
                 return [
-                    { key: 'normal', value: this.translate.instant('GENERAL.FONT_WEIGHT.NORMAL'), callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'regular', value: this.translate.instant('GENERAL.FONT_WEIGHT.REGULAR'), callback: (event: any) => this.onKeyChange(event) },
                     { key: 'bold', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLD'), callback: (event: any) => this.onKeyChange(event) },
                     { key: 'bolder', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLDER'), callback: (event: any) => this.onKeyChange(event) }
                 ]
