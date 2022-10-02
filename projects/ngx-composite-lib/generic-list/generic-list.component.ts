@@ -242,7 +242,7 @@ export class GenericListComponent implements OnInit {
                 const data = await this.loadData(fromIndex, toIndex);
                 this.totalRowCount = data?.totalCount || 0;
                
-                if (this.listInputs?.emptyState.show === true) {
+                if (this.listInputs?.emptyState?.show === true) {
                     this.setEmptyState();
                 }
                 this.onLoad = false;
