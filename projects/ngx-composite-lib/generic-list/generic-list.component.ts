@@ -5,8 +5,7 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewContainerRef,
-    ComponentFactoryResolver
+    ViewContainerRef
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -15,7 +14,8 @@ import {
     ObjectsDataRow,
     PepGuid,
     UIControl,
-    PepLoaderService
+    PepLoaderService,
+    PepRowData
 } from '@pepperi-addons/ngx-lib';
 import { Subscription } from 'rxjs';
 import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
@@ -51,7 +51,7 @@ import {
     IPepGenericListActions,
     IPepGenericListSmartFilter,
     IPepGenericListListInputs,
-    IPepGenericEmptyState
+    IPepGenericListEmptyState
 } from './generic-list.model';
 import { PepGenericListService } from './generic-list.service';
 import { DataViewConverter } from '@pepperi-addons/data-views';
@@ -69,12 +69,12 @@ import {
 })
 export class GenericListComponent implements OnInit {
     @ViewChild('search') search: PepSearchComponent | undefined;
-    
+
     private _pepListContainer: ViewContainerRef | undefined;
     @ViewChild('pepListContainer', { read: ViewContainerRef })
     set pepListContainer(val: ViewContainerRef) {
         this._pepListContainer = val;
-    } 
+    }
 
     private _dataSource: IPepGenericListDataSource = {
         init: async (params: any) => {
@@ -127,7 +127,7 @@ export class GenericListComponent implements OnInit {
     noDataFoundMsg = '';
 
     @Input()
-    emptyState: IPepGenericEmptyState | undefined = undefined;
+    emptyState: IPepGenericListEmptyState | undefined;
 
     @Input()
     selectionType: PepListSelectionType = 'multi';
@@ -202,15 +202,13 @@ export class GenericListComponent implements OnInit {
     menuActions: Array<PepMenuItem> = [];
 
     constructor(
-        private _resolver: ComponentFactoryResolver,
         private _dataConvertorService: PepDataConvertorService,
         private _layoutService: PepLayoutService,
         private _loaderService: PepLoaderService,
         private _translate: TranslateService,
         private _genericListService: PepGenericListService
     ) {
-        this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {
-            console.log('size', size);
+        this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {            
             //            
         });
         this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {
@@ -240,8 +238,8 @@ export class GenericListComponent implements OnInit {
                 }
 
                 const data = await this.loadData(fromIndex, toIndex);
-                this.totalRowCount = data?.totalCount || 0;
-               
+                this.totalRowCount = data?.length || 0;
+
                 if (this.listInputs?.emptyState?.show === true) {
                     this.setEmptyState();
                 }
@@ -256,15 +254,16 @@ export class GenericListComponent implements OnInit {
                     }
                     return;
                 }
-                setTimeout(() => {
+                setTimeout(async () => {
                     if (this._pepListContainer) {
                         if (this._pepListContainer.length > 0) {
                             this._pepListContainer.remove();
                         }
-                        const factory = this._resolver.resolveComponentFactory(PepListComponent);
-                        const componentRef = this._pepListContainer.createComponent(factory);
+                        const { PepListComponent } = await import('@pepperi-addons/ngx-lib/list');
+                        const componentRef = this._pepListContainer.createComponent(PepListComponent);
+
                         this.pepList = componentRef.instance;
-                        
+
                         componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
                         componentRef.instance.tableViewType = this.listInputs.tableViewType;
                         componentRef.instance.zebraStripes = this.listInputs.zebraStripes;
@@ -274,7 +273,7 @@ export class GenericListComponent implements OnInit {
                         }
                         componentRef.instance.supportSorting = this.listInputs.supportSorting;
                         componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;
-                        console.log('componentRef.instance.selectionTypeForActions', componentRef.instance.selectionTypeForActions);
+                        
                         componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';
                         componentRef.instance.pagerType = this.listInputs.pager.type;
                         if (this.listInputs.pager.type === 'pages') {
@@ -302,11 +301,15 @@ export class GenericListComponent implements OnInit {
                         });
                         let convertedList: ObjectsDataRow[] = [];
                         if (data) {
-                            if (data.items?.length) {
-                                convertedList = this._dataConvertorService.convertListData(data.items);
+                            if (data?.length) {
+                                convertedList = this._dataConvertorService.convertListData(data);
                             }
-                            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(data.dataView));
-                            componentRef.instance.initListData(uiControl, data.totalCount, convertedList);
+                            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(this._dataView));
+                            const selectedItems = this._genericListService.getSelectedItems(convertedList);
+                            if (selectedItems?.length) {
+                                componentRef.instance.setSelectedIds(selectedItems);
+                            }                           
+                            componentRef.instance.initListData(uiControl, convertedList.length, convertedList);
                         }
 
                     }
@@ -404,31 +407,33 @@ export class GenericListComponent implements OnInit {
         this.search?.initSearch();
     }
 
-    private async loadData(fromIndex: number, toIndex: number): Promise<IPepGenericListInitData> {
+    private async loadData(fromIndex: number, toIndex: number): Promise<PepRowData[]> {
         this._loaderService.show();
+        let converedData: PepRowData[] = [];
         const data: IPepGenericListInitData = await this._dataSource.init({
             searchString: this.searchString || undefined,
             filters: this._appliedFilters.length ? this._appliedFilters : undefined,
             sorting: this._sorting || undefined,
             fromIndex: fromIndex,
             toIndex: toIndex
-        });
+        });        
         this._loaderService.hide();
         if (data) {
             this._dataView = data.dataView;
 
-            if (data.items?.length > 0 && !data.isPepRowData) {
-                data.items = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));
+            if (data.items?.length > 0 && !data.isPepRowData) {                
+                converedData = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));
             }
         }
 
-        return data;
+        return converedData;
     }
 
 
-    private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined) {
+    private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined): Promise<PepRowData[]> {
         if (this._dataSource.update) {
             this._loaderService.show();
+            let converedData: PepRowData[] = [];
             const dataList = await this._dataSource.update({
                 searchString: this.searchString || undefined,
                 filters: this._appliedFilters.length ? this._appliedFilters : undefined,
@@ -440,10 +445,9 @@ export class GenericListComponent implements OnInit {
             this._loaderService.hide();
 
             if (dataList?.length > 0) {
-                return dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
-            } else {
-                return [];
-            }
+                converedData = dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));
+            } 
+            return converedData;
         } else {
             return [];
         }
@@ -455,6 +459,10 @@ export class GenericListComponent implements OnInit {
     private async onLoadItems(event: IPepListLoadItemsEvent) {
         const list = await this.updateDataList(event.fromIndex, event.toIndex);
         const convertedList = this._dataConvertorService.convertListData(list);
+        const selectedItems = this._genericListService.getSelectedItems(convertedList);
+        if (selectedItems?.length) {
+            this.pepList.setSelectedIds(selectedItems);
+        }
         this.pepList.updateItems(convertedList, event);
     }
 
@@ -466,6 +474,10 @@ export class GenericListComponent implements OnInit {
         const toIndex = Math.min(fromIndex + event.pageSize - 1, this.totalRowCount - 1);
         const list = await this.updateDataList(fromIndex, toIndex, event.pageIndex);
         const convertedList = this._dataConvertorService.convertListData(list);
+        const selectedItems = this._genericListService.getSelectedItems(convertedList);
+        if (selectedItems?.length) {
+            this.pepList.setSelectedIds(selectedItems);
+        }
         this.pepList.updatePage(convertedList, event);
     }
 

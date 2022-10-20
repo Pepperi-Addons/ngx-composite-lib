@@ -9,7 +9,7 @@ import {
 
 export const FakeData: any = {
     GeneralInformation: 'Rich Text Example',
-  //  ItemExternalID: 'Abcd',
+    //  ItemExternalID: 'Abcd',
     ActionDateTime: '2021-11-22T09:26:02Z',
     WrntyID: '272764514',
     TSATsaTextTest: 'Some text',
@@ -103,8 +103,8 @@ export const FakeDataViewFields: any[] = [
             }
         }
     },
-    
-    
+
+
     {
         FieldID: 'WrntyID',
         Type: 'LimitedLengthTextBox',
@@ -268,7 +268,7 @@ export const FakeDataViewFields: any[] = [
     },
     {
         FieldID: 'BranchDbId',
-        Type: 'EmptyComboBox',
+        Type: 'MultiTickBox',
         Title: 'Branch Db Id',
         Mandatory: false,
         ReadOnly: false,
@@ -287,11 +287,12 @@ export const FakeDataViewFields: any[] = [
                 Horizontal: 'Stretch',
                 Vertical: 'Stretch'
             }
-        }
+        },
+        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }],
     },
     {
         FieldID: 'BillToName',
-        Type: 'ComboBox',
+        Type: 'MultipleStringValues',
         Title: 'Bill To Name',
         Mandatory: false,
         ReadOnly: false,
@@ -312,8 +313,8 @@ export const FakeDataViewFields: any[] = [
             }
         },
         OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }],
-        AdditionalProps: {emptyOption: false}
-    },   
+        AdditionalProps: { emptyOption: false }
+    },
     {
         FieldID: 'ShipToName',
         Type: 'TextBox',
@@ -335,7 +336,8 @@ export const FakeDataViewFields: any[] = [
                 Horizontal: 'Stretch',
                 Vertical: 'Stretch'
             }
-        }
+        },
+        AdditionalProps: { regex: /^[0-9]*$/}
     },
     {
         FieldID: 'BillToAddress',
@@ -499,9 +501,9 @@ export const FakeDataViewFields: any[] = [
         }
     },
     {
-        FieldID: 'TSADropdown',
-        Type: 'ComboBox',
-        Title: 'TSA Dropdown',
+        FieldID: 'TSADropdown2',
+        Type: 'MultipleStringValues',
+        Title: 'TSA Dropdown new',
         Mandatory: false,
         ReadOnly: false,
         Layout: {
@@ -519,7 +521,8 @@ export const FakeDataViewFields: any[] = [
                 Horizontal: 'Stretch',
                 Vertical: 'Stretch'
             }
-        }
+        },
+        OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
     },
     {
         FieldID: 'AccountTSAAccountDropdown',
@@ -657,8 +660,8 @@ export const FakeDataViewFields: any[] = [
                 Vertical: 'Stretch'
             }
         }
-    }, 
-    
+    },
+
 ];
 
 export const FakeDataOld: ObjectsDataRowCell[] = [

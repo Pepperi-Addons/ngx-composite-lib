@@ -314,7 +314,7 @@ export class GenericListExampleComponent implements OnInit {
                     TestNum: 100000
 
                 }));
-                const rows2 = filteredData.map((item) => {
+                const res2 = filteredData.map((item, index) => {
                     return {
                         fields: {
                             UUID: item.UUID,
@@ -324,7 +324,8 @@ export class GenericListExampleComponent implements OnInit {
                             CreationDate: item.CreationDate
                         },
                         isEditable: true,
-                        isSelectableForActions: false,
+                        isSelected: index % 2 === 0,
+                        isSelectableForActions: true,
                     }
                 });
                 return Promise.resolve({
@@ -359,8 +360,8 @@ export class GenericListExampleComponent implements OnInit {
                         FrozenColumnsCount: 0,
                         MinimumColumnWidth: 0
                     },
-                    totalCount: 0,
-                    items: res
+                    totalCount: res2.length * 2,
+                    items: res2
 
                 });
             },
