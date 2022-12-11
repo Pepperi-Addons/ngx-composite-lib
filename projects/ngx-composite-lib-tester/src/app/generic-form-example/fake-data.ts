@@ -132,7 +132,7 @@ export const FakeDataViewFields: any[] = [
         FieldID: 'TSATsaTextTest',
         Type: 'TextBox',
         Title: 'TSA Tsa Text Test',
-        Mandatory: false,
+        Mandatory: true,
         ReadOnly: false,
         Layout: {
             Origin: {
@@ -337,7 +337,7 @@ export const FakeDataViewFields: any[] = [
                 Vertical: 'Stretch'
             }
         },
-        AdditionalProps: { regex: /^[0-9]*$/}
+        AdditionalProps: { regex: /^[a-zA-Z]*$/}
     },
     {
         FieldID: 'BillToAddress',
