@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
+import { PepDialogService, PepDialogData, PepDialogSizeType, PepDialogActionButton } from '@pepperi-addons/ngx-lib/dialog';
 
 @Component({
     selector: 'app-components-example',
@@ -11,7 +12,7 @@ export class ComponentsExampleComponent implements OnInit {
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter();
     
-    constructor() { 
+    constructor(private dialog: PepDialogService) { 
         //
     }
 
@@ -60,5 +61,20 @@ export class ComponentsExampleComponent implements OnInit {
                 this.files = [];
             }
         }, 2000);
+    }
+
+    testOpenDialog() {
+        const data = new PepDialogData({
+            title: 'dialog title',
+            content: 'dialog content text',
+            actionsType: 'close'
+          });
+          const config = this.dialog.getDialogConfig({ minWidth: '30rem' }, 'regular');
+      
+          this.dialog.openDefaultDialog(data, config).afterClosed().subscribe(action => {
+            if (action) {
+              console.log('action', action);
+            }
+          });
     }
 }

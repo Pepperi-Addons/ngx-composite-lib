@@ -246,11 +246,15 @@ export class GenericListComponent implements OnInit {
                 this.onLoad = false;
                 //show empty state
                 if (this.showEmptyState) {
-                    if (!this.listInputs.emptyState.title) {
-                        this.listInputs.emptyState.title = this._translate.instant('GENERIC_LIST.EMPTY_STATE.TITLE');
+                    if (!this.listInputs.emptyState.title) {                        
+                        this._translate.get('GENERIC_LIST.EMPTY_STATE.TITLE').subscribe(text => {                            
+                            this.listInputs.emptyState.title = text;
+                        });
                     }
-                    if (!this.listInputs.emptyState.description) {
-                        this.listInputs.emptyState.description = this._translate.instant('GENERIC_LIST.EMPTY_STATE.DESCRIPTION');
+                    if (!this.listInputs.emptyState.description) {                        
+                        this._translate.get('GENERIC_LIST.EMPTY_STATE.DESCRIPTION').subscribe(text => {                            
+                            this.listInputs.emptyState.description = text;
+                        });
                     }
                     return;
                 }

@@ -23,6 +23,7 @@ export class PepGenericFormService {
        
         field.ApiName = data.ApiName;
         field.Value = data.controlFieldValue;
+        field.FormattedValue =  data.controlFieldValue;
         field.FieldType = data.FieldType;
         field.Enabled = !data.ReadOnly;
         field.Visible = !data.Hidden;

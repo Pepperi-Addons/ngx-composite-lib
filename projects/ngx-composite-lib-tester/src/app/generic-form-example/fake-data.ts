@@ -52,6 +52,105 @@ export const FakeData: any = {
 
 }
 
+export const FakeDataViewFields: any [] = [
+    {
+        FieldID: 'GeneralInformation',
+        Type: 'RichTextHTML',
+        Title: 'General Information',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 0,
+                Y: 0
+            },
+            Size: {
+                Width: 2,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        },
+        AdditionalProps: {
+            renderTitle: false,
+            renderEnlargeButton: false
+        }
+    },
+    {
+        FieldID: 'GeneralInformationTwo',
+        Type: 'TextHeader',
+        Title: 'Description',
+        Mandatory: false,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 0,
+                Y: 1
+            },
+            Size: {
+                Width: 2,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'WrntyID',
+        Type: 'LimitedLengthTextBox',
+        Title: 'ID',
+        Mandatory: false,
+        ReadOnly: true,
+        Layout: {
+            Origin: {
+                X: 0,
+                Y: 2
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+    {
+        FieldID: 'TSATsaTextTest',
+        Type: 'TextBox',
+        Title: 'TSA Tsa Text Test',
+        Mandatory: true,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 1,
+                Y: 2
+            },
+            Size: {
+                Width: 1,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        }
+    },
+]
+/*
 export const FakeDataViewFields: any[] = [
     {
         FieldID: 'GeneralInformation',
@@ -103,8 +202,6 @@ export const FakeDataViewFields: any[] = [
             }
         }
     },
-
-
     {
         FieldID: 'WrntyID',
         Type: 'LimitedLengthTextBox',
@@ -132,7 +229,7 @@ export const FakeDataViewFields: any[] = [
         FieldID: 'TSATsaTextTest',
         Type: 'TextBox',
         Title: 'TSA Tsa Text Test',
-        Mandatory: false,
+        Mandatory: true,
         ReadOnly: false,
         Layout: {
             Origin: {
@@ -662,7 +759,7 @@ export const FakeDataViewFields: any[] = [
         }
     },
 
-];
+]; */
 
 export const FakeDataOld: ObjectsDataRowCell[] = [
     {

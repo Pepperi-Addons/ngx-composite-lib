@@ -26,6 +26,7 @@ export class GenericFormExampleComponent implements OnInit {
     };*/
     dataSource: any = FakeData;
     isLocked = false;
+    isFormValid = false;
 
     dataView: IPepGenericFormDataView = {
         UID: 'ABCD-DCBA-FGHD-POLK',
@@ -165,5 +166,10 @@ export class GenericFormExampleComponent implements OnInit {
                 }
             }
         ]);
+    }
+
+    onFormValidationChange(value: any) {
+        console.log('onFormValidationChange', value);
+        this.isFormValid = value;
     }
 }

@@ -1,20 +1,13 @@
 <div class="components-container">
-    <pep-menu
-        [text]="'text'"
-        iconName="system_menu"
-        type="action"
-        styleType="weak"
-        sizeType="md"
-        classNames="hahah"
-        [items]="menuItems"
-        [selectedItem]="selectedMenuItem"
-        [disabled]="false"
-        (menuItemClick)="menuItemClick($event)"
-        (menuClick)="menuClick($event)"
-    ></pep-menu>
+    <pep-menu [text]="'text'" iconName="system_menu" type="action" styleType="weak" sizeType="md" classNames="hahah"
+        [items]="menuItems" [selectedItem]="selectedMenuItem" [disabled]="false" (menuItemClick)="menuItemClick($event)"
+        (menuClick)="menuClick($event)"></pep-menu>
     <pep-color-settings title="Color"></pep-color-settings>
     <pep-shadow-settings></pep-shadow-settings>
     <!-- <pep-button value="click here"></pep-button> -->
     <pep-group-buttons-settings [groupType]="'vertical-align'" [title]="'Group buttons'" [subHeader]="'Eisenberg'"
-        pepResetConfigurationField="'group-buttons-test'" [dir]="'ltr'" [resetHostEvents]="hostEvents" ></pep-group-buttons-settings>
+        pepResetConfigurationField="'group-buttons-test'" [dir]="'ltr'" [resetHostEvents]="hostEvents">
+    </pep-group-buttons-settings>
+    <pep-button [value]="'test dialog'" [sizeType]="'sm'" [styleType]="'regular'" (click)="testOpenDialog()">
+    </pep-button>
 </div>

@@ -22,12 +22,13 @@ const pepIcons = [
     pepIconLeafSkiny, pepIconSystemView
 ]
 
+/*
 export function appInitializerFactory(translate: TranslateService) {
     return () => {
         translate.setDefaultLang('en');
         return firstValueFrom(translate.use('en'));
     }
-}
+}*/
 
 @NgModule({
     declarations: [
@@ -53,12 +54,12 @@ export function appInitializerFactory(translate: TranslateService) {
     ],
     providers: [
         PepGenericListService,
-        {
+        /*{
             provide: APP_INITIALIZER,
             useFactory: appInitializerFactory,
             deps: [TranslateService],
             multi: true
-        }
+        } */
     ]
 })
 export class PepGenericListModule { 

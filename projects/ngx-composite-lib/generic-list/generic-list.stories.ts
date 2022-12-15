@@ -236,6 +236,18 @@ export default {
                 }
             }
         },
+        emptyState: {
+            description: 'No data found page',
+            defaultValue: null,
+            table: {
+                type: {
+                    summary: 'IPepGenericListEmptyState'
+                },
+                defaultValue: {
+                    summary: null
+                }
+            }
+        },
         supportSorting: {
             description: 'Whether column sorting is enabled'
         },
