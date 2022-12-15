@@ -51,6 +51,7 @@ export class GenericFormExampleComponent implements OnInit {
 
     };
 
+    isFormValid = true;
 
     inline = false;
     form: FormGroup = this.fb.group({
@@ -76,7 +77,10 @@ export class GenericFormExampleComponent implements OnInit {
 
     }
 
-
+    onFormValidationChange(event: any) {
+        debugger;
+        this.isFormValid = event;
+    }
 
     onValueChanged(event: any) {
         console.log('on form value changed', event)

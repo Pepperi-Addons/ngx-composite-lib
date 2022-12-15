@@ -1,6 +1,6 @@
+{{ isFormValid }}
 <pep-generic-form #formContainer [dataSource]="dataSource" [dataView]="dataView" [inline]="inline" [showTopBar]="true"
     [isLocked]="isLocked" (valueChange)="onValueChanged($event)" (formValidationChange)="onFormValidationChange($event)">
-
     <ng-container right-buttons>
         <pep-button class="pep-spacing-element" [value]="'Save'" [disabled]="!isFormValid" [sizeType]="inline ? 'sm' : 'md'"
             [styleType]="'strong'" (click)="onSaveDataClicked()">

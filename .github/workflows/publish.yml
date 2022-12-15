@@ -25,7 +25,7 @@ jobs:
 
     # Install node modules
     - name: Installation
-      run: npm install --ignore-scripts
+      run: npm install --force
 
     # Set up git
     - name: Setup GIT

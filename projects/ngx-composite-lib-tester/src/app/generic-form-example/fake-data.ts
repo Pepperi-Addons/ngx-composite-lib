@@ -434,7 +434,7 @@ export const FakeDataViewFields: any[] = [
                 Vertical: 'Stretch'
             }
         },
-        AdditionalProps: { regex: /^[0-9]*$/}
+        AdditionalProps: { regex: /^[a-zA-Z]*$/}
     },
     {
         FieldID: 'BillToAddress',

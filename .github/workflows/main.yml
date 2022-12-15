@@ -29,7 +29,7 @@ jobs:
  
     # Install node modules
     - name: Installation
-      run: npm install --ignore-scripts
+      run: npm install --force
     
     # Make sure everything compiles
     - name: Compilation & testing
