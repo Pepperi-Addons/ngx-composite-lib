@@ -6,7 +6,7 @@ export class PepShadowSettings {
     size: PepSizeType;
     intensity: PepShadowIntensityType;
 
-    constructor(use: boolean = false, size: PepSizeType = 'md', intensity: PepShadowIntensityType = 'soft') {
+    constructor(use = false, size: PepSizeType = 'md', intensity: PepShadowIntensityType = 'soft') {
         this.use =  use;
         this.size = size;
         this.intensity = intensity;

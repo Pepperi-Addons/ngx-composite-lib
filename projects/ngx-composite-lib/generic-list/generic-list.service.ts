@@ -147,7 +147,7 @@ export class PepGenericListService {
     }
 
     getSelectedItems(items: ObjectsDataRow[]) {
-        let selectedItems = [];
+        const selectedItems = [];
 
         for (let i = 0; i < items.length; i++) {
             if (items[i].IsSelected) {
