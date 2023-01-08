@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
     IPepGenericListSmartFilter,
-    IPepGenericListDataView
+    IPepGenericListDataViewField
 } from './generic-list.model';
 import {
     PepSmartFilterBaseField,
     IPepSmartFilterData,
 } from '@pepperi-addons/ngx-lib/smart-filters';
 import { PepQueryBuilderService, IPepQueryBuilderField } from '@pepperi-addons/ngx-lib/query-builder';
-import { PepRowData } from '@pepperi-addons/ngx-lib';
+import {
+    PepRowData,
+    ObjectsDataRow
+} from '@pepperi-addons/ngx-lib';
 import { GridDataViewField, DataViewFieldTypes } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 
 @Injectable()
@@ -57,6 +60,9 @@ export class PepGenericListService {
             if (item.isSelectableForActions === false) {
                 row.IsSelectableForActions = false;
             }
+            if (item.isEditable && item.isSelectableForActions && item.isSelected) {
+                row.IsSelected = true;
+            }
         } else {
             itemFields = item;
         }
@@ -66,7 +72,7 @@ export class PepGenericListService {
 
         if (dataView?.Fields && dataView.Columns) {
             for (let index = 0; index < dataView.Fields.length; index++) {
-                const field = dataView.Fields[index] as IPepGenericListDataView;
+                const field = dataView.Fields[index] as IPepGenericListDataViewField;
                 row.Fields.push({
                     ApiName: field.FieldID,
                     Title: field.Title ? this._translate.instant(field.Title) : '',
@@ -138,6 +144,18 @@ export class PepGenericListService {
         }
 
         return smartFields;
+    }
+
+    getSelectedItems(items: ObjectsDataRow[]) {
+        let selectedItems = [];
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].IsSelected) {
+                selectedItems.push(items[i].UID);
+            }
+        }
+
+        return selectedItems;
     }
 
 

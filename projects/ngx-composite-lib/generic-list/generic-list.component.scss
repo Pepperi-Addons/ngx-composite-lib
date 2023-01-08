@@ -1,5 +1,6 @@
 
 @use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
 
 :host {
     height: inherit;
@@ -13,6 +14,78 @@
 
 .list-container {
     height: 100%;
+}
+
+.list-empty-state {
+    height: 100%;
+    background: rgb(247, 247, 247);
+    border-radius: ngx-variables.$border-radius-md;    
+    position: relative;
+    overflow: hidden;
+    @include ngx-mixins.align-center;
+    flex-direction: column;    
+
+    .leaf-skiny {
+        z-index: ngx-variables.$z-index-lowest;
+        height: 52rem;
+        position: absolute;
+        left: -10rem;
+        top: -2rem;
+        pointer-events: none;
+        transform: scale(1.4);
+    }
+
+    .leaf-round {
+        z-index: ngx-variables.$z-index-lowest;  
+        height: 45rem;
+        position: absolute;
+        right: -13rem;
+        top: -7rem;
+        pointer-events: none;
+        transform: rotate(45deg) scale(1);
+    }
+
+    .list-empty-title {
+        @include ngx-mixins.font-title(ngx-variables.$fs-2xl, ngx-variables.$lh-2xl);
+        z-index: ngx-variables.$z-index-low;    
+        padding-inline: ngx-variables.$spacing-lg;         
+    }
+
+    .list-empty-descr {
+        @include ngx-mixins.font-body(ngx-variables.$fs-md, ngx-variables.$lh-md);
+        z-index: ngx-variables.$z-index-low;
+        padding-inline: ngx-variables.$spacing-lg; 
+    }
+
+     /* > Large */
+     @media (min-width: (ngx-variables.$screen-max-size-md + 1)) {
+      
+     }
+
+     /* > Medium */
+     @media (max-width: ngx-variables.$screen-max-size-md) {
+         .leaf-skiny {
+            top: -5rem;
+            left: -11rem;
+            transform: scale(1.1);
+         }
+         .leaf-round {
+             right: -12rem;
+             top: -7rem;
+             transform: rotate(45deg) scale(.9);
+         }
+         
+    }
+    
+    /* > Small */
+     @media (max-width: ngx-variables.$screen-max-size-sm) {
+        .leaf-round {
+            display: none;
+        }
+        .list-empty-title, .list-empty-descr {
+            padding-inline: ngx-variables.$spacing-md; 
+         }
+    }
 }
 
 .inline-container {

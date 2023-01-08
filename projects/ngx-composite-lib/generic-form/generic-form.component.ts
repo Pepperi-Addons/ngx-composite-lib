@@ -5,10 +5,10 @@ import {
     Output,
     ViewChild,
     ViewContainerRef,
-    EventEmitter,
-    ComponentFactoryResolver,
+    EventEmitter,   
+    Type,
 } from '@angular/core';
-import { PepFormComponent } from '@pepperi-addons/ngx-lib/form';
+//import { PepFormComponent } from '@pepperi-addons/ngx-lib/form';
 import {
     IPepGenericFormDataView,
     IPepGenericFormValueChange,
@@ -44,14 +44,14 @@ export class GenericFormComponent implements OnInit {
     set dataSource(val: any) {
         this._data = val;
     }
-        
+
     private _formData: ObjectsDataRow;
-    private _uiControl: UIControl; 
+    private _uiControl: UIControl;
     @Input()
     set dataView(val: IPepGenericFormDataView) {
         this.initForm(val);
     }
-    
+
     @Input()
     isLocked = false;
 
@@ -75,8 +75,7 @@ export class GenericFormComponent implements OnInit {
 
     private _pepForm: any;
 
-    constructor(
-        private _resolver: ComponentFactoryResolver,
+    constructor(        
         private layoutService: PepLayoutService,
         public _genericFormService: PepGenericFormService
     ) {
@@ -88,27 +87,27 @@ export class GenericFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        //
+        //        
     }
 
     private initForm(dataView: IPepGenericFormDataView) {
-        setTimeout(() => {
+        setTimeout(async () => {
             if (this._pepFormContainer) {
                 if (this._pepFormContainer.length) {
                     this._pepFormContainer.remove();
                     this._formData = new ObjectsDataRow();
                     this._uiControl = new UIControl();
-                }
+                }               
+                const { PepFormComponent } = await import('@pepperi-addons/ngx-lib/form');                  
+                const componentRef = this._pepFormContainer.createComponent(PepFormComponent);    
 
-                const factory = this._resolver.resolveComponentFactory(PepFormComponent);
-                const componentRef = this._pepFormContainer.createComponent(factory);
                 this._pepForm = componentRef.instance;
 
                 this._formData.IsEditable = !this.isLocked;
                 this._formData.UID = dataView.UID || PepGuid.newGuid();
                 const uiControlData = DataViewConverter.toUIControlData(dataView);
                 if (uiControlData) {
-                    if (uiControlData?.ControlFields) {                        
+                    if (uiControlData?.ControlFields) {
                         this._uiControl.ControlFields = uiControlData.ControlFields.map((field: any) => this._genericFormService.convertToUiControlField(field));
                     }
                     this._uiControl.Columns = uiControlData.Columns;
@@ -119,11 +118,11 @@ export class GenericFormComponent implements OnInit {
                             let value = '';
                             if (this._genericFormService.hasProperty(this._data, item.ApiName)) {
                                 value = this._data[item.ApiName];
-                            }                            
+                            }
                             let dataViewField: any;
                             if (dataView.Fields) {
-                                dataViewField = dataView.Fields.find(field => field.FieldID === item.ApiName);                                
-                            }                                 
+                                dataViewField = dataView.Fields.find(field => field.FieldID === item.ApiName);
+                            }
                             const controlFieldData = {
                                 ...item,
                                 ...{
@@ -133,13 +132,13 @@ export class GenericFormComponent implements OnInit {
                                     OptionalValues: dataViewField?.OptionalValues?.length ? dataViewField.OptionalValues : [],
                                     AdditionalProps: dataViewField?.AdditionalProps || null
                                 }
-                            }                      
+                            }
                             this._formData.Fields.push(this._genericFormService.createFormField(controlFieldData));
                         });
 
                         componentRef.instance.layoutType = 'form';
                         componentRef.instance.layout = this._uiControl;
-                        componentRef.instance.data = this._formData;                        
+                        componentRef.instance.data = this._formData;
                         componentRef.instance.isInternal = false;
                         componentRef.instance.lockFields = this.isLocked;
                         componentRef.instance.valueChange.subscribe(($event) => {
@@ -179,6 +178,15 @@ export class GenericFormComponent implements OnInit {
     * @param fields
     */
     updateFields(fields: IPepGenericFormFieldUpdate[]) {
+        // update data view with current data
+        for (const [key, value] of Object.entries(this._data)) {
+            const index = this._formData.Fields.findIndex((item) => item.ApiName === key);
+            if (index >= 0) {
+                const item = this._formData.Fields[index] as { [k: string]: any };
+                item.Value = value;
+            }
+        }
+
         fields.forEach((field) => {
             const index = this._formData.Fields.findIndex((item) => item.ApiName === field.FieldId);
             if (index >= 0) {

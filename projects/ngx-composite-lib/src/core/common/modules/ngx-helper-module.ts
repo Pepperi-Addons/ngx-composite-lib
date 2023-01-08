@@ -25,11 +25,11 @@ const staticTraslationLoader: TranslateLoader = {
                 provide: TranslateLoader,
                 useValue: staticTraslationLoader
             },
-        }) 
+        })
     ]
 })
 // This module is helper module for storybook
-export class PepNgxHelperModule { 
+export class PepNgxHelperModule {
     constructor(
         private translate: TranslateService,
         private customizationService: PepCustomizationService
@@ -37,5 +37,5 @@ export class PepNgxHelperModule {
         this.customizationService.setThemeVariables();
         translate.setDefaultLang('en');
         translate.use('en');
-    } 
+    }
 }

@@ -13,7 +13,9 @@
     <ng-container *ngIf="showSmartFilter">
         <ng-container *ngTemplateOutlet="smartFilterTemplate"></ng-container>
     </ng-container>
-    <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+    <ng-container *ngIf="!onLoad">
+        <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+    </ng-container>
 </div>
 <pep-page-layout *ngIf="!inline" class="none-inline" [addPadding]="addPadding" [showShadow]="showSmartFilter">
     <ng-container *ngIf="showSmartFilter" pep-side-area>
@@ -28,7 +30,7 @@
     <ng-container *ngIf="breadCrumbsItems.length" pep-top-area>
         <ng-container *ngTemplateOutlet="breadCrumbsTemplate"></ng-container>
     </ng-container>
-    <div pep-main-area class="main-area-container">
+    <div *ngIf="!onLoad" pep-main-area class="main-area-container">
         <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
     </div>
 </pep-page-layout>
@@ -71,7 +73,19 @@
 </ng-template>
 
 <ng-template #listTemplate>
-    <div class="list-container">
+    <div *ngIf="showEmptyState" class="list-empty-state">
+        <div class="list-empty-title">{{ listInputs.emptyState.title }}</div>
+        <div class="list-empty-descr">{{ listInputs.emptyState.description }}</div>
+        <pep-icon name="leaf_skiny" class="leaf-skiny"></pep-icon>
+        <pep-icon name="leaf_round" class="leaf-round"></pep-icon>
+        <!-- <mat-icon class="leaf-skiny">
+            <pep-icon name="leaf_skiny"></pep-icon>
+        </mat-icon> -->
+        <!-- <mat-icon class="leaf-round">
+            <pep-icon name="leaf_round"></pep-icon>
+        </mat-icon> -->
+    </div>
+    <div *ngIf="!showEmptyState" class="list-container">
         <ng-container #pepListContainer></ng-container>
     </div>
 </ng-template>

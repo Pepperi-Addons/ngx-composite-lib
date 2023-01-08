@@ -1,9 +1,13 @@
 import {
     DataView,
     GridDataView,
+    CardDataView,
+    LineDataView,
     MenuDataView,
-    GridDataViewField
+    GridDataViewField,
+    BaseFormDataViewField
 } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
+import { KeyValuePair } from '@pepperi-addons/ngx-lib'; 
 import {
     PepListPagerType,
     PepListSelectionType,
@@ -33,26 +37,29 @@ export interface IPepGenericListParams {
 }
 
 export interface IPepGenericListInitData {
-    dataView: DataView;
+    dataView: GridDataView | CardDataView | LineDataView;
     totalCount: number;
-    items: any[];   
+    items: {[key: string]: any}[] | IPepGenericListDataRow[];   
     isPepRowData?: boolean;
 }
 
 export interface IPepGenericListDataRow {
-    fields: any[];
+    fields: {[key: string]: any}[];
     isEditable?: boolean;
+    isSelected?: boolean;
     isSelectableForActions?: boolean;
 }
 
 export interface IPepGenericListListInputs {      
     supportSorting?: boolean;
+    hideSelectAll?: boolean;
     selectionType?: PepListSelectionType;
     pager?: IPepGenericListPager;
     noDataFoundMsg?: string;
     tableViewType?: PepListTableViewType;
     zebraStripes?: boolean;
     smartFilter?: IPepGenericListSmartFilter;
+    emptyState?: IPepGenericListEmptyState;
 }
 
 export interface IPepGenericListActions {
@@ -73,10 +80,19 @@ export interface IPepGenericListSmartFilter {
     data?: IPepSmartFilterData[];
 }
 
-export interface IPepGenericListDataView extends GridDataViewField {
+/*export interface IPepGenericListDataView extends GridDataViewField {
     OptionalValues: any[];
+} */
+
+export interface IPepGenericListDataViewField extends BaseFormDataViewField {    
+    OptionalValues?: Array<KeyValuePair<string>>;        
 }
 
+export interface IPepGenericListEmptyState { 
+    show: boolean;
+    title?: string;
+    description?: string;
+}
 
 
 
