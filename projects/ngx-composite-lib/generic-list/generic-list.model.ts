@@ -52,6 +52,7 @@ export interface IPepGenericListDataRow {
 
 export interface IPepGenericListListInputs {      
     supportSorting?: boolean;
+    hideSelectAll?: boolean;
     selectionType?: PepListSelectionType;
     pager?: IPepGenericListPager;
     noDataFoundMsg?: string;

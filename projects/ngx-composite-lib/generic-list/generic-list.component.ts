@@ -136,6 +136,9 @@ export class GenericListComponent implements OnInit {
     supportSorting = false;
 
     @Input()
+    hideSelectAll = false;
+    
+    @Input()
     pager: IPepGenericListPager = {
         type: 'scroll'
     }
@@ -273,6 +276,7 @@ export class GenericListComponent implements OnInit {
                         }
                         componentRef.instance.supportSorting = this.listInputs.supportSorting;
                         componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;
+                        componentRef.instance.hideAllSelectionInMulti = this.listInputs.hideSelectAll;
                         
                         componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';
                         componentRef.instance.pagerType = this.listInputs.pager.type;
@@ -325,6 +329,7 @@ export class GenericListComponent implements OnInit {
     private loadTableInputs() {
         this.listInputs = {
             supportSorting: this.supportSorting,
+            hideSelectAll: this.hideSelectAll,
             selectionType: this.selectionType,
             pager: this.pager,
             noDataFoundMsg: this.noDataFoundMsg,

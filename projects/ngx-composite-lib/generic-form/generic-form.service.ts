@@ -19,7 +19,7 @@ export class PepGenericFormService {
     }
 
     createFormField(data: any) {
-        let field: any = {};
+        const field: any = {};
        
         field.ApiName = data.ApiName;
         field.Value = data.controlFieldValue;
