@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
     IPepGenericListSmartFilter,
-    IPepGenericListDataViewField
+    IPepGenericListDataViewField,
+    IPepSmartFilters
 } from './generic-list.model';
 import {
     PepSmartFilterBaseField,
@@ -110,30 +111,26 @@ export class PepGenericListService {
         }
     }
 
-    convertToSmartFilter(smartFilter: IPepGenericListSmartFilter) {        
-        let convertedData: {
-            fields: PepSmartFilterBaseField[],
-            data: IPepSmartFilterData[],
-            title: string
-        } = {
+    convertToSmartFilter(input: IPepGenericListSmartFilter) {        
+        let smartFilters: IPepSmartFilters = {
             fields: [],
             data: [],
             title: 'Filters'
         }
 
-        if (smartFilter) {
-            if (smartFilter.dataView) {
-                convertedData.fields = this.createSmartFilterFields(smartFilter.dataView);
-                if (smartFilter.data?.length) {
-                    convertedData.data = smartFilter.data;
+        if (input) {
+            if (input.dataView) {
+                smartFilters.fields = this.createSmartFilterFields(input.dataView);
+                if (input.data?.length) {
+                    smartFilters.data = input.data;
                 }
             }
-            if (smartFilter.title) {
-                convertedData.title = smartFilter.title;
+            if (input.title) {
+                smartFilters.title = input.title;
             }
         }
 
-        return convertedData;        
+        return smartFilters;        
     }
 
     createSmartFilterFields(dataView: any) {

@@ -50,7 +50,7 @@ import {
     IPepGenericListPager,
     IPepGenericListActions,
     IPepGenericListSmartFilter,
-    IPepGenericListListInputs,
+    IPepSmartFilters,
     IPepGenericListEmptyState
 } from './generic-list.model';
 import { PepGenericListService } from './generic-list.service';
@@ -151,8 +151,8 @@ export class GenericListComponent implements OnInit {
 
     @Input()
     set smartFilter(val: IPepGenericListSmartFilter) {
-        this.internalSmartFilter = this._genericListService.convertToSmartFilter(val);
-        this.showSmartFilter = this.internalSmartFilter.fields.length > 0;
+        this.smartFilters = this._genericListService.convertToSmartFilter(val);
+        this.showSmartFilter = this.smartFilters.fields.length > 0;
     }
 
     @Input()
@@ -191,13 +191,11 @@ export class GenericListComponent implements OnInit {
     searchString = '';
     showSmartFilter = false;
     showEmptyState = false;
-    internalSmartFilter: {
-        fields: PepSmartFilterBaseField[],
-        data: IPepSmartFilterData[]
-    } = {
-            fields: [],
-            data: []
-        };
+    smartFilters: IPepSmartFilters = {
+        fields: [],
+        data: [],
+        title: 'Filters'
+    };
     private _appliedFilters: IPepSmartFilterData[] = [];
     private _sorting: IPepListSortingChangeEvent | undefined = undefined;
 
