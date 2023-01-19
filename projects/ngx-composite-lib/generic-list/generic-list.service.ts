@@ -110,21 +110,30 @@ export class PepGenericListService {
         }
     }
 
-    convertToSmartFilter(smartFilter: IPepGenericListSmartFilter) {
-        let convertedFields: PepSmartFilterBaseField[] = [];
-        let filterData: IPepSmartFilterData[] = [];
+    convertToSmartFilter(smartFilter: IPepGenericListSmartFilter) {        
+        let convertedData: {
+            fields: PepSmartFilterBaseField[],
+            data: IPepSmartFilterData[],
+            title: string
+        } = {
+            fields: [],
+            data: [],
+            title: 'Filters'
+        }
 
-        if (smartFilter?.dataView) {
-            convertedFields = this.createSmartFilterFields(smartFilter.dataView);
-            if (smartFilter.data?.length) {
-                filterData = smartFilter.data;
+        if (smartFilter) {
+            if (smartFilter.dataView) {
+                convertedData.fields = this.createSmartFilterFields(smartFilter.dataView);
+                if (smartFilter.data?.length) {
+                    convertedData.data = smartFilter.data;
+                }
+            }
+            if (smartFilter.title) {
+                convertedData.title = smartFilter.title;
             }
         }
 
-        return {
-            fields: convertedFields,
-            data: filterData
-        }
+        return convertedData;        
     }
 
     createSmartFilterFields(dataView: any) {
@@ -147,7 +156,7 @@ export class PepGenericListService {
     }
 
     getSelectedItems(items: ObjectsDataRow[]) {
-        let selectedItems = [];
+        const selectedItems = [];
 
         for (let i = 0; i < items.length; i++) {
             if (items[i].IsSelected) {

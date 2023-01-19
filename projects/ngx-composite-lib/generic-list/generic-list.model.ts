@@ -52,6 +52,7 @@ export interface IPepGenericListDataRow {
 
 export interface IPepGenericListListInputs {      
     supportSorting?: boolean;
+    hideSelectAll?: boolean;
     selectionType?: PepListSelectionType;
     pager?: IPepGenericListPager;
     noDataFoundMsg?: string;
@@ -77,6 +78,7 @@ export interface IPepGenericListPager {
 export interface IPepGenericListSmartFilter {    
     dataView: MenuDataView;
     data?: IPepSmartFilterData[];
+    title?: string;
 }
 
 /*export interface IPepGenericListDataView extends GridDataViewField {
