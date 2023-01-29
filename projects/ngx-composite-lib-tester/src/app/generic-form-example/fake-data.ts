@@ -18,6 +18,7 @@ export const FakeData: any = {
     BranchDbId: '1',
     BillToName: 'AD',
     ShipToName: 'Someone',
+    ButtunTest: 'Yar',
     /*BillToAddress: {
         Value: 'Israel',
         GroupFields: [
@@ -149,6 +150,30 @@ export const FakeDataViewFields: any [] = [
             }
         }
     },
+    {
+        FieldID: 'ButtunTest',
+        Type: 'Button',
+        Title: 'TSA Tsa Btn Test',
+        Mandatory: true,
+        ReadOnly: false,
+        Layout: {
+            Origin: {
+                X: 0,
+                Y: 3
+            },
+            Size: {
+                Width: 2,
+                Height: 0
+            }
+        },
+        Style: {
+            Alignment: {
+                Horizontal: 'Stretch',
+                Vertical: 'Stretch'
+            }
+        },
+        
+    }
 ]
 /*
 export const FakeDataViewFields: any[] = [

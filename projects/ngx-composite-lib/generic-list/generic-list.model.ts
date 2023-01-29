@@ -87,10 +87,6 @@ export interface IPepSmartFilters {
     title: string
 }
 
-/*export interface IPepGenericListDataView extends GridDataViewField {
-    OptionalValues: any[];
-} */
-
 export interface IPepGenericListDataViewField extends BaseFormDataViewField {    
     OptionalValues?: Array<KeyValuePair<string>>;        
 }

@@ -51,8 +51,6 @@ export class GenericFormExampleComponent implements OnInit {
 
     };
 
-    isFormValid = true;
-
     inline = false;
     form: FormGroup = this.fb.group({
         key: 'key1field',
@@ -76,11 +74,12 @@ export class GenericFormExampleComponent implements OnInit {
         //  console.log('data view 2', this.dataView);
 
     }
+    /*
 
     onFormValidationChange(event: any) {
         debugger;
         this.isFormValid = event;
-    }
+    }*/
 
     onValueChanged(event: any) {
         console.log('on form value changed', event)
@@ -164,9 +163,9 @@ export class GenericFormExampleComponent implements OnInit {
         this.dataSource = FakeData;*/
         this.formContainer?.updateFields([
             {
-                FieldId: 'ActionDateTime',
+                FieldId: 'ButtunTest',
                 Params: {
-                    Enabled: false
+                    Value: 'New val' + Math.floor(Math.random() * 10)
                 }
             }
         ]);

@@ -194,6 +194,10 @@ export class GenericFormComponent implements OnInit {
                     if (this._genericFormService.hasProperty(this._formData.Fields[index], key)) {
                         const item = this._formData.Fields[index] as { [k: string]: any };
                         item[key] = value;
+                        if (key === 'Value') {
+                            //manually updating formattedValue because FormattedValue is legacy used by webapp
+                            item.FormattedValue = value;
+                        }
                     }
                 }
             }

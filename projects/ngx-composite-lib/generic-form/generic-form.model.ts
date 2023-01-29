@@ -41,5 +41,6 @@ export interface IPepGenericFormDataParams {
     TextColor?: string;
     Highlighted?: boolean;   
     OptionalValues?: Array<KeyValuePair<string>>;   
+    [key: string]: any;
 }
 
