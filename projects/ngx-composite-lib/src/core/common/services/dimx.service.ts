@@ -52,7 +52,7 @@ export class PepDIMXHelperService {
     }
 
     register(viewContainerRef: ViewContainerRef, dimxHostObject: DIMXHostObject, onDIMXProcessDoneCallback: (dimxEvent: any) => void) {
-        this.addonBlockLoaderService.loadAddonBlockInContainer({
+        return this.addonBlockLoaderService.loadAddonBlockInContainer({
             container: viewContainerRef,
             name: 'DIMX',
             hostObject: dimxHostObject,
