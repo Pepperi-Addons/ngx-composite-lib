@@ -14,8 +14,8 @@
         </ng-template>
         <ng-template #supportedTemplate>
             <div *ngIf="dataView && availableFields" class="mapped-fields-container">
-                <div class="available-fields-side-area">
-                    <pep-draggable-items [items]="availableFields" [title]="'DATA_VIEW_BUILDER.AVAILABLE_FIELDS' | translate" titleType="with-bottom-border" titleSizeType="md"
+                <div *ngIf="availableFields" class="available-fields-side-area">
+                    <pep-draggable-items [items]="availableFields" [title]="('DATA_VIEW_BUILDER.AVAILABLE' | translate) + (builderTitle.toLowerCase())" titleType="with-bottom-border" titleSizeType="md"
                         itemPlaceholderType="weak" [showSearch]="true" [dropAreaIds]="['emptyDropArea', 'mappedFields']" (itemDragStarted)="onDragStart($event)" (itemDragEnded)="onDragEnd($event)">
                     </pep-draggable-items>
                 </div>
@@ -28,7 +28,7 @@
                     
                     <div class="data-view-by-type-area" [ngSwitch]="type">
                         <ng-container *ngSwitchCase="'menu'">
-                            <menu-data-view [fields]="dataView?.Fields || []" [availableFieldsTitles]="availableFieldsTitles" [emptyDropAreaId]="emptyDropAreaId"
+                            <menu-data-view [fields]="dataView?.Fields || []" [availableFieldsTitles]="availableFieldsTitles" [emptyDropAreaId]="emptyDropAreaId" [builderTitle]="builderTitle"
                                 [mappedFieldsId]="mappedFieldsId" (fieldsChange)="onFieldsChanged($event)">
                             </menu-data-view>
                         </ng-container>

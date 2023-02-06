@@ -13,10 +13,11 @@
     },
     "DATA_VIEW_BUILDER": {
         "TYPE_NOT_SUPPORTED": "This data view type is not supported",
-        "AVAILABLE_FIELDS": "Available fields",
+        "AVAILABLE": "Available ",
         "MENU_ITEM_KEY_TITLE": "Item key",
         "MENU_ITEM_VALUE_TITLE": "Item title",
-        "EMPTY_DROP_AREA_TEXT": "Drop here from available fields",
+        "EMPTY_DROP_AREA_TEXT": "Drop here from available",
+        "FIELDS": "Fields",
         "ADD_SEPARATOR": "Add separator",
         "SEPARATOR_TITLE": "Separator title",
         "ADD_A_TITLE": "Add a title"

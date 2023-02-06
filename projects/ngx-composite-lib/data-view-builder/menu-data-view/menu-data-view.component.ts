@@ -16,6 +16,8 @@ import { DataViewBuilderService } from '../data-view-builder.service';
 export class MenuDataViewComponent implements OnInit {
     @ViewChild('separatorTitleModalTemplate', { read: TemplateRef }) separatorTitleModalTemplate!: TemplateRef<any>;
 
+    @Input() builderTitle = '';
+
     @Input() 
     fields: Array<DataViewField> = []; // The data view fields.
 
@@ -35,6 +37,7 @@ export class MenuDataViewComponent implements OnInit {
     private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(
+        private translateService: TranslateService,
         private dialogService: PepDialogService,
         private dataViewBuilderService: DataViewBuilderService
     ) { 
@@ -69,7 +72,9 @@ export class MenuDataViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        //
+       this.translateService.get('DATA_VIEW_BUILDER.FIELDS').toPromise().then((fields) => {
+            this.builderTitle = this.builderTitle?.length ? this.builderTitle :  fields;
+        });
     }
 
     addSeparator(index: number) {

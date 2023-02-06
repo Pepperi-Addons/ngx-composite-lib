@@ -4,6 +4,7 @@ import { IPepDraggableItem } from '@pepperi-addons/ngx-lib/draggable-items';
 import { BaseDataView, DataViewField } from '@pepperi-addons/papi-sdk';
 import { PepDataViewBuilderType } from './data-view-builder.model';
 import { DataViewBuilderService } from './data-view-builder.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'pep-data-view-builder',
@@ -47,7 +48,8 @@ export class DataViewBuilderComponent implements OnInit {
     availableFieldsTitles: Map<string, string> = new Map<string, string>();
 
     constructor(
-        private dataViewBuilderService: DataViewBuilderService
+        private dataViewBuilderService: DataViewBuilderService,
+        private  translateService: TranslateService
     ) {
         //
     }
@@ -107,7 +109,9 @@ export class DataViewBuilderComponent implements OnInit {
     }
 
     ngOnInit() {
-        //
+        this.translateService.get('DATA_VIEW_BUILDER.FIELDS').toPromise().then((fields) => {
+            this.builderTitle = this.builderTitle?.length ? this.builderTitle :  fields;
+        });
     }
 
     onDragStart(event: CdkDragStart) {
