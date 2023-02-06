@@ -112,7 +112,7 @@ export class PepGenericListService {
     }
 
     convertToSmartFilter(input: IPepGenericListSmartFilter) {        
-        let smartFilters: IPepSmartFilters = {
+        const smartFilters: IPepSmartFilters = {
             fields: [],
             data: [],
             title: 'Filters'
