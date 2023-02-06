@@ -16,7 +16,7 @@ import {
 } from '@pepperi-addons/ngx-lib';
 import { GridDataViewField, DataViewFieldTypes } from '@pepperi-addons/papi-sdk/dist/entities/data-view';
 
-@Injectable()
+@Injectable() 
 export class PepGenericListService {
 
     constructor(

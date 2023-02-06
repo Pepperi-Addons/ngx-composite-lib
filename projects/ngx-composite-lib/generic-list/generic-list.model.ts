@@ -81,7 +81,7 @@ export interface IPepGenericListSmartFilter {
     title?: string;
 }
 
-export interface IPepSmartFilters {
+export interface IPepSmartFilters { 
     fields: PepSmartFilterBaseField[],
     data: IPepSmartFilterData[],
     title: string
