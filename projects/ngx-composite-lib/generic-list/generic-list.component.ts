@@ -239,8 +239,7 @@ export class GenericListComponent implements OnInit {
                 }
 
                 const data = await this.loadData(fromIndex, toIndex);
-                this.totalRowCount = data?.length || 0;
-
+                
                 if (this.listInputs?.emptyState?.show === true) {
                     this.setEmptyState();
                 }
@@ -315,9 +314,9 @@ export class GenericListComponent implements OnInit {
                             if (selectedItems?.length) {
                                 componentRef.instance.setSelectedIds(selectedItems);
                             }                           
-                            componentRef.instance.initListData(uiControl, convertedList.length, convertedList);
+                            
+                            componentRef.instance.initListData(uiControl, this.totalRowCount, convertedList);
                         }
-
                     }
                 }, 0);
             }
@@ -425,6 +424,10 @@ export class GenericListComponent implements OnInit {
             toIndex: toIndex
         });        
         this._loaderService.hide();
+
+        // Set the total count
+        this.totalRowCount = data?.totalCount || 0;
+
         if (data) {
             this._dataView = data.dataView;
 
