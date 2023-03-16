@@ -18,7 +18,7 @@
                 <ng-container *ngTemplateOutlet="mappedFieldTemplate; context: { menuField: menuField }"></ng-container>
             </div>
             <div *ngIf="!isGrabbing" class="add-separator-container">
-                <pep-button class="add-separator" styleType="regular" sizeType="sm" iconName="number_plus" 
+                <pep-button *ngIf="showAddSeparator" class="add-separator" styleType="regular" sizeType="sm" iconName="number_plus" 
                     [value]="'DATA_VIEW_BUILDER.ADD_SEPARATOR' | translate" (buttonClick)="addSeparator(i+1)"></pep-button>
             </div>
         </ng-container>
@@ -30,10 +30,10 @@
 
     <ng-template #menuItemTemplate>
         <div class="fields-wrapper">
-            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE' | translate" [value]="menuField.FieldID" [disabled]="true">
+            <pep-textbox [label]="itemKeyLabel" [value]="menuField.FieldID" [disabled]="true">
             </pep-textbox>
             
-            <pep-textbox [label]="'DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE' | translate" [hint]="'(' + (availableFieldsTitles.get(menuField.FieldID) || '') + ')'"
+            <pep-textbox [label]="itemTitleLabel" [hint]="'(' + (availableFieldsTitles.get(menuField.FieldID) || '') + ')'"
                 [value]="menuField.Title" (valueChange)="onTitleChanged($event, menuField)">
             </pep-textbox>
     

@@ -29,7 +29,7 @@
                     <div class="data-view-by-type-area" [ngSwitch]="type">
                         <ng-container *ngSwitchCase="'menu'">
                             <menu-data-view [fields]="dataView?.Fields || []" [availableFieldsTitles]="availableFieldsTitles" [emptyDropAreaId]="emptyDropAreaId"
-                                [mappedFieldsId]="mappedFieldsId" (fieldsChange)="onFieldsChanged($event)">
+                                [mappedFieldsId]="mappedFieldsId" (fieldsChange)="onFieldsChanged($event)" [showAddSeparator]="false">
                             </menu-data-view>
                         </ng-container>
                         <!-- <ng-container *ngSwitchDefault>
