@@ -4,12 +4,14 @@ import { GroupButtonsSettingsComponent } from './group-buttons-settings.componen
 import { PepNgxLibModule } from '@pepperi-addons/ngx-lib';
 import { PepFieldTitleModule } from '@pepperi-addons/ngx-lib/field-title';
 import { PepGroupButtonsModule } from '@pepperi-addons/ngx-lib/group-buttons';
-import { PepIconModule, PepIconRegistry, pepIconTextAlignCenter, pepIconTextAlignLeft, pepIconTextAlignRight } from '@pepperi-addons/ngx-lib/icon';
+import { pepIconArrowLeftAlt, pepIconArrowRightAlt, PepIconModule, PepIconRegistry, pepIconTextAlignCenter, pepIconTextAlignLeft, pepIconTextAlignRight } from '@pepperi-addons/ngx-lib/icon';
 
 const pepIcons = [
     pepIconTextAlignCenter, 
     pepIconTextAlignLeft, 
-    pepIconTextAlignRight
+    pepIconTextAlignRight,
+    pepIconArrowRightAlt,
+    pepIconArrowLeftAlt
 ]
 
 @NgModule({

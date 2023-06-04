@@ -14,6 +14,9 @@ export class DataViewBuilderComponent implements OnInit {
     // @Input() title: string = '';
     @Input() builderTitle = '';
     @Input() builderTitleHint = '';
+    @Input() showAddSeparator = true;
+    @Input() itemKeyLabel = '';
+    @Input() itemTitleLabel = '';
     
     private _availableFields: Array<IPepDraggableItem> = [];
     @Input()

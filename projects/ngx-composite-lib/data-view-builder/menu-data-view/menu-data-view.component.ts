@@ -28,6 +28,15 @@ export class MenuDataViewComponent implements OnInit {
     @Input() 
     mappedFieldsId = '';
 
+    @Input()
+    showAddSeparator = true;
+
+    @Input()
+    itemKeyLabel = '';
+
+    @Input()
+    itemTitleLabel = '';
+
     @Output()
     fieldsChange: EventEmitter<DataViewField[]> = new EventEmitter<DataViewField[]>();
     
@@ -35,6 +44,7 @@ export class MenuDataViewComponent implements OnInit {
     private dialogRef: MatDialogRef<any> | null = null;
     
     constructor(
+        private translate: TranslateService,
         private dialogService: PepDialogService,
         private dataViewBuilderService: DataViewBuilderService
     ) { 
@@ -69,7 +79,16 @@ export class MenuDataViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        //
+        if(this.itemKeyLabel == ''){
+            this.translate.get('DATA_VIEW_BUILDER.MENU_ITEM_KEY_TITLE').toPromise().then((res) => {
+                this.itemKeyLabel = res;
+            });
+        }
+        if(this.itemTitleLabel == ''){
+            this.translate.get('DATA_VIEW_BUILDER.MENU_ITEM_VALUE_TITLE').toPromise().then((res) => {
+                this.itemTitleLabel = res;
+            });
+        }
     }
 
     addSeparator(index: number) {
