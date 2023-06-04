@@ -100,6 +100,12 @@ export class GroupButtonsSettingsComponent implements OnInit {
                     { key: 'end', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) }
                 ];
             }
+            case 'left-right-arrows':{
+                return [
+                    { key: 'left', iconName: 'arrow_left_alt', callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'right', iconName: 'arrow_right_alt', callback: (event: any) => this.onKeyChange(event) }
+                ];
+            }
             case 'horizontal-align': {
                 return [
                     { key: 'left', iconName: 'text_align_right', callback: (event: any) => this.onKeyChange(event) },
