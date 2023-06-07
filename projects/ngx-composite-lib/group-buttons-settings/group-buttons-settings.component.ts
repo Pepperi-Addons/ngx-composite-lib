@@ -42,7 +42,8 @@ export class GroupButtonsSettingsComponent implements OnInit {
     none: PepButton = {key: 'none'};
     
     sizes: Array<PepButton> = [];
-    
+    defaultCallback = (event: any) => this.onKeyChange(event);
+
     // pepB: PepSizeType | 'none' = "xs";
 
     constructor(
@@ -52,7 +53,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
 
     ngOnInit(): void { 
         // Get the first translation for load all translations.
-        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').subscribe((typeSoft) => {
+        this.translate.get('GENERAL.NONE').subscribe((res) => {
             this.none = { key: 'none', value: this.translate.instant('GENERAL.NONE'), callback: () => this.onKeyChange(null) };
             
             this.arrayMerge();
@@ -81,15 +82,24 @@ export class GroupButtonsSettingsComponent implements OnInit {
     getButtonsArray() {
         switch(this.groupType){
             case 'custom':{
+                // Set default callback if not exist.
+                for (let index = 0; index < this.btnsArray.length; index++) {
+                    const btn = this.btnsArray[index];
+                    
+                    if (!btn.callback) {
+                        btn.callback = this.defaultCallback;
+                    }
+                }
+
                 return this.btnsArray;
             }
             case 'sizes':{
                 return [
-                    { key: 'xs', value: this.translate.instant('GENERAL.XS'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: (event: any) => this.onKeyChange(event) }
+                    { key: 'xs', value: this.translate.instant('GENERAL.XS'), callback: this.defaultCallback },
+                    { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: this.defaultCallback },
+                    { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: this.defaultCallback },
+                    { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: this.defaultCallback },
+                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: this.defaultCallback }
                 ];
             }
             case 'vertical-align':{
@@ -101,29 +111,29 @@ export class GroupButtonsSettingsComponent implements OnInit {
             }
             case 'left-right-arrows':{
                 return [
-                    { key: 'left', iconName: 'arrow_left_alt', callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'right', iconName: 'arrow_right_alt', callback: (event: any) => this.onKeyChange(event) }
+                    { key: 'left', iconName: 'arrow_left_alt', callback: this.defaultCallback },
+                    { key: 'right', iconName: 'arrow_right_alt', callback: this.defaultCallback }
                 ];
             }
             case 'horizontal-align': {
                 return [
-                    { key: 'left', iconName: 'text_align_right', callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'center', iconName: 'text_align_center', callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'right', iconName: 'text_align_left', callback: (event: any) => this.onKeyChange(event) },
+                    { key: 'left', iconName: 'text_align_right', callback: this.defaultCallback },
+                    { key: 'center', iconName: 'text_align_center', callback: this.defaultCallback },
+                    { key: 'right', iconName: 'text_align_left', callback: this.defaultCallback },
                 ];
             }
             case 'font-weight':{
                 return [
-                    { key: 'regular', value: this.translate.instant('GENERAL.FONT_WEIGHT.REGULAR'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'bold', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLD'), callback: (event: any) => this.onKeyChange(event) },
-                    { key: 'bolder', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLDER'), callback: (event: any) => this.onKeyChange(event) }
+                    { key: 'regular', value: this.translate.instant('GENERAL.FONT_WEIGHT.REGULAR'), callback: this.defaultCallback },
+                    { key: 'bold', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLD'), callback: this.defaultCallback },
+                    { key: 'bolder', value: this.translate.instant('GENERAL.FONT_WEIGHT.BOLDER'), callback: this.defaultCallback }
                 ]
             }
             case 'width-sizes':{
                 return [
-                        { key: 'narrow', value: this.translate.instant('GENERAL.WIDTH_SIZE.NARROW'), callback: (event: any) => this.onKeyChange(event) },
-                        { key: 'regular', value: this.translate.instant('GENERAL.WIDTH_SIZE.REGULAR'), callback: (event: any) => this.onKeyChange(event) },
-                        { key: 'wide', value: this.translate.instant('GENERAL.WIDTH_SIZE.WIDE'), callback: (event: any) => this.onKeyChange(event) }
+                    { key: 'narrow', value: this.translate.instant('GENERAL.WIDTH_SIZE.NARROW'), callback: this.defaultCallback },
+                    { key: 'regular', value: this.translate.instant('GENERAL.WIDTH_SIZE.REGULAR'), callback: this.defaultCallback },
+                    { key: 'wide', value: this.translate.instant('GENERAL.WIDTH_SIZE.WIDE'), callback: this.defaultCallback }
                 ];
             }
 
