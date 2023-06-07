@@ -52,8 +52,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
 
     ngOnInit(): void { 
         // Get the first translation for load all translations.
-        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').toPromise().then((typeSoft) => {
-            
+        this.translate.get('SHADOW_SETTINGS.INTENSITY_SOFT').subscribe((typeSoft) => {
             this.none = { key: 'none', value: this.translate.instant('GENERAL.NONE'), callback: () => this.onKeyChange(null) };
             
             this.arrayMerge();
