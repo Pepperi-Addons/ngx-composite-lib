@@ -31,8 +31,7 @@
         "FONT_WEIGHT": {
             "REGULAR": "Regular",
             "BOLD": "Bold",
-            "BOLDER": "Bolder",
-            "REGULAR": "Regular"
+            "BOLDER": "Bolder"
         },
         "WIDTH_SIZE": {
             "NARROW": "Narrow",
