@@ -42,7 +42,7 @@ export class GroupButtonsSettingsComponent implements OnInit {
     none: PepButton = {key: 'none'};
     
     sizes: Array<PepButton> = [];
-    defaultCallback = (event: any) => this.onKeyChange(event);
+    defaultCallback = (event: IPepButtonClickEvent) => this.onKeyChange(event);
 
     // pepB: PepSizeType | 'none' = "xs";
 
@@ -104,9 +104,9 @@ export class GroupButtonsSettingsComponent implements OnInit {
             }
             case 'vertical-align':{
                 return [
-                    { key: 'start', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.TOP'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
-                    { key: 'middle', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) },
-                    { key: 'end', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM'), callback: (event: IPepButtonClickEvent) => this.onKeyChange(event) }
+                    { key: 'start', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.TOP'), callback: this.defaultCallback },
+                    { key: 'middle', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.MIDDLE'), callback: this.defaultCallback },
+                    { key: 'end', value: this.translate.instant('GENERAL.VERTICAL_ALIGN.BOTTOM'), callback: this.defaultCallback }
                 ];
             }
             case 'left-right-arrows':{
