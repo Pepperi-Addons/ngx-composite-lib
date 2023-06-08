@@ -92,26 +92,36 @@
     height: inherit;
     display: grid;    
     grid-template-rows: auto 1fr;
-    grid-template-columns: auto 1fr;
+    
+    &:not(.with-smart-filters) {
+        .header-area {
+            grid-row: 1 / 2
+        }
+        .list-container {
+            grid-row: 2 / 3
+        }
+    }
+
+    &.with-smart-filters {
+        grid-template-columns: auto 1fr;
+        
+        .header-area {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2
+        }
+        .smart-filter-area {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3
+        }
+        .list-container {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3
+        }
+    }
 
     &.add-padding {
         padding-inline: ngx-variables.$content-padding;
     }    
-
-    .header-area {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2
-    }
-
-    .smart-filter-area {
-        grid-column: 1 / 2;
-        grid-row: 1 / 3
-    }
-
-    .list-container {
-        grid-column: 2 / 3;
-        grid-row: 2 / 3
-    }
 
     .list-description {
         font-size: ngx-variables.$fs-xs;

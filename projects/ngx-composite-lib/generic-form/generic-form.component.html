@@ -33,7 +33,8 @@
 </ng-template>
 
 <ng-template #formTemplate>
-    <div class="form-view">
+    <!-- class="form-view"  -->
+    <div [ngClass]="{'form-view': showTopBar, 'padding-bottom': !showTopBar}">
         <ng-container #pepFormContainer></ng-container>
     </div>
 </ng-template>
