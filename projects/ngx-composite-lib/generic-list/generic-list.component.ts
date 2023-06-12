@@ -27,7 +27,8 @@ import {
     IPepListSortingChangeEvent,
     DEFAULT_PAGE_SIZE,
     IPepListLoadItemsEvent,
-    PepListTableViewType
+    PepListTableViewType,
+    IPepListSortingData
 } from '@pepperi-addons/ngx-lib/list';
 import {
     PepMenuItem,
@@ -134,6 +135,12 @@ export class GenericListComponent implements OnInit {
 
     @Input()
     supportSorting = false;
+
+    @Input()
+    sorting: IPepListSortingData | undefined;
+
+    @Input()
+    cacheSize = -1;
 
     @Input()
     hideSelectAll = false;
@@ -276,6 +283,9 @@ export class GenericListComponent implements OnInit {
                             componentRef.instance.lockItemInnerEvents = true;
                         }
                         componentRef.instance.supportSorting = this.listInputs.supportSorting;
+                        componentRef.instance.sorting = this.listInputs.sorting;
+                        componentRef.instance.cacheSize = this.listInputs.cacheSize;
+
                         componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;
                         componentRef.instance.hideAllSelectionInMulti = this.listInputs.hideSelectAll;
                         
@@ -330,6 +340,8 @@ export class GenericListComponent implements OnInit {
     private loadTableInputs() {
         this.listInputs = {
             supportSorting: this.supportSorting,
+            sorting: this.sorting,
+            cacheSize: this.cacheSize,
             hideSelectAll: this.hideSelectAll,
             selectionType: this.selectionType,
             pager: this.pager,
