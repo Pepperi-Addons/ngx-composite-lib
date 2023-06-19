@@ -58,7 +58,8 @@ import { PepGenericListService } from './generic-list.service';
 import { DataViewConverter } from '@pepperi-addons/data-views';
 import {
     IPepSmartFilterData,
-    PepSmartFilterBaseField
+    PepSmartFilterBaseField,
+    PepSmartFiltersComponent
 } from '@pepperi-addons/ngx-lib/smart-filters';
 
 
@@ -70,6 +71,7 @@ import {
 })
 export class GenericListComponent implements OnInit {
     @ViewChild('search') search: PepSearchComponent | undefined;
+    @ViewChild('smartFiltersComponent') smartFiltersComponent: PepSmartFiltersComponent | undefined;
 
     private _pepListContainer: ViewContainerRef | undefined;
     @ViewChild('pepListContainer', { read: ViewContainerRef })
@@ -93,6 +95,7 @@ export class GenericListComponent implements OnInit {
         this._dataSource = val;
         this._sorting = undefined;
         this.initSearch();
+        this.initSmartSearch();
         this.initList();
     }
 
@@ -423,6 +426,11 @@ export class GenericListComponent implements OnInit {
     private initSearch() {
         this.searchString = '';
         this.search?.initSearch();
+    }
+
+    private initSmartSearch() {
+        this._appliedFilters = [];
+        this.smartFiltersComponent?.clearFilters();
     }
 
     private async loadData(fromIndex: number, toIndex: number): Promise<PepRowData[]> {
