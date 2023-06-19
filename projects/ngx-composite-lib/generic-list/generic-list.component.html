@@ -61,7 +61,7 @@
 
 <ng-template #smartFilterTemplate>    
     <pep-side-bar #sideNav [ngClass]="{'smart-filter-area': inline}"> 
-        <pep-smart-filters [title]="smartFilters.title" [fields]="smartFilters.fields"
+        <pep-smart-filters #smartFiltersComponent [title]="smartFilters.title" [fields]="smartFilters.fields"
             [filters]="smartFilters.data" (filtersChange)="onFiltersChange($event)">
         </pep-smart-filters>
     </pep-side-bar>
