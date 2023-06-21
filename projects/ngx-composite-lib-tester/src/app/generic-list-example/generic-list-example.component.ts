@@ -497,8 +497,8 @@ export class GenericListExampleComponent implements OnInit {
                 return Promise.resolve(res);
             },
             inputs: {
-               
-                selectionType: 'single'
+                selectAll: true,
+                selectionType: 'multi'
             }
         } as IPepGenericListDataSource
     }
