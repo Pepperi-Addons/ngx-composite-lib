@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { GenericListComponent } from './generic-list.component';
 import { MatIconModule } from '@angular/material/icon';
-import { PepNgxLibModule } from '@pepperi-addons/ngx-lib';
+import { PepNgxLibModule, PepSessionService } from '@pepperi-addons/ngx-lib';
 import { PepListModule } from '@pepperi-addons/ngx-lib/list';
 import { PepFormModule } from '@pepperi-addons/ngx-lib/form';
 import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
@@ -54,6 +54,7 @@ export function appInitializerFactory(translate: TranslateService) {
     ],
     providers: [
         PepGenericListService,
+        PepSessionService
         /*{
             provide: APP_INITIALIZER,
             useFactory: appInitializerFactory,
