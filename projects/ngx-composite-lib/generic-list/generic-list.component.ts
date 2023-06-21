@@ -173,7 +173,7 @@ export class GenericListComponent implements OnInit {
     breadCrumbsItems: PepBreadCrumbItem[] = new Array<PepBreadCrumbItem>();
 
     @Input()
-    selectAll: boolean = false
+    selectAll = false
 
     @Output()
     fieldClick = new EventEmitter<IPepFormFieldClickEvent>();
