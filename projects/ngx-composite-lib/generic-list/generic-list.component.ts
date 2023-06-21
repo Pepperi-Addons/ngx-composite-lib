@@ -29,7 +29,8 @@ import {
     DEFAULT_PAGE_SIZE,
     IPepListLoadItemsEvent,
     PepListTableViewType,
-    IPepListSortingData
+    IPepListSortingData,
+    IPepListStartIndexChangeEvent
 } from '@pepperi-addons/ngx-lib/list';
 import {
     PepMenuItem,
@@ -175,6 +176,9 @@ export class GenericListComponent implements OnInit {
     @Input()
     selectAll = false
 
+    @Input()
+    scrollPosition = 0
+
     @Output()
     fieldClick = new EventEmitter<IPepFormFieldClickEvent>();
 
@@ -183,6 +187,9 @@ export class GenericListComponent implements OnInit {
 
     @Output()
     breadCrumbItemClick = new EventEmitter<IPepBreadCrumbItemClickEvent>();
+
+    @Output()
+    startIndexChange = new EventEmitter<IPepListStartIndexChangeEvent>()
 
     set pepList(val: PepListComponent) {
         this._pepList = val;
@@ -307,6 +314,9 @@ export class GenericListComponent implements OnInit {
                             this._sessionService.setObject('AllSelected', true)
                         }
                         componentRef.instance.noDataFoundMsg = this.listInputs.noDataFoundMsg;
+                        componentRef.instance.startIndexChange.subscribe($event => {
+                            this.startIndexChange.emit($event)
+                        })
                         componentRef.instance.fieldClick.subscribe(($event) => {
                             this.onCustomizeFieldClick($event);
                         });
@@ -338,6 +348,7 @@ export class GenericListComponent implements OnInit {
                             
                             componentRef.instance.initListData(uiControl, this.totalRowCount, convertedList);
                         }
+                        componentRef.instance.scrollToIndex(this.scrollPosition)
                     }
                 }, 0);
             }
