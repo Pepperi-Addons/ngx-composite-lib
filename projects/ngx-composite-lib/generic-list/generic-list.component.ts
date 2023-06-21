@@ -15,7 +15,8 @@ import {
     PepGuid,
     UIControl,
     PepLoaderService,
-    PepRowData
+    PepRowData,
+    PepSessionService
 } from '@pepperi-addons/ngx-lib';
 import { Subscription } from 'rxjs';
 import { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';
@@ -171,6 +172,9 @@ export class GenericListComponent implements OnInit {
     @Input()
     breadCrumbsItems: PepBreadCrumbItem[] = new Array<PepBreadCrumbItem>();
 
+    @Input()
+    selectAll: boolean = false
+
     @Output()
     fieldClick = new EventEmitter<IPepFormFieldClickEvent>();
 
@@ -217,7 +221,8 @@ export class GenericListComponent implements OnInit {
         private _layoutService: PepLayoutService,
         private _loaderService: PepLoaderService,
         private _translate: TranslateService,
-        private _genericListService: PepGenericListService
+        private _genericListService: PepGenericListService,
+        private _sessionService: PepSessionService
     ) {
         this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {            
             //            
@@ -277,7 +282,7 @@ export class GenericListComponent implements OnInit {
                         const componentRef = this._pepListContainer.createComponent(PepListComponent);
 
                         this.pepList = componentRef.instance;
-
+                        
                         componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);
                         componentRef.instance.tableViewType = this.listInputs.tableViewType;
                         componentRef.instance.zebraStripes = this.listInputs.zebraStripes;
@@ -291,12 +296,15 @@ export class GenericListComponent implements OnInit {
 
                         componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;
                         componentRef.instance.hideAllSelectionInMulti = this.listInputs.hideSelectAll;
-                        
+
                         componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';
                         componentRef.instance.pagerType = this.listInputs.pager.type;
                         if (this.listInputs.pager.type === 'pages') {
                             componentRef.instance.pageSize = this.listInputs.pager?.size || DEFAULT_PAGE_SIZE;
                             componentRef.instance.pageIndex = this.listInputs.pager?.index || 0;
+                        }
+                        if(this.selectionType == "multi" && this.selectAll){
+                            this._sessionService.setObject('AllSelected', true)
                         }
                         componentRef.instance.noDataFoundMsg = this.listInputs.noDataFoundMsg;
                         componentRef.instance.fieldClick.subscribe(($event) => {
@@ -351,7 +359,8 @@ export class GenericListComponent implements OnInit {
             noDataFoundMsg: this.noDataFoundMsg,
             tableViewType: this.tableViewType,
             zebraStripes: this.zebraStripes,
-            emptyState: this.emptyState
+            emptyState: this.emptyState,
+            selectAll: this.selectAll
         };
         if (this._dataSource.inputs) {
             Object.entries(this._dataSource.inputs).forEach((item: any) => {
