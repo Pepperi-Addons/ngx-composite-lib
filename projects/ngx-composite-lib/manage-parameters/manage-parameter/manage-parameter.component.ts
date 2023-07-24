@@ -23,10 +23,10 @@ export class ManageParameterComponent implements OnInit {
     
     form!: GenericFormComponent;
     parameter: IParamemeter | undefined = undefined;
-    showType: boolean = false;
-    showAccessibility: boolean = false;
+    showType = false;
+    showAccessibility = false;
     dataView!: IPepGenericFormDataView;
-    isValid: boolean = true;
+    isValid = true;
 
     constructor ( private dialogRef: MatDialogRef<ManageParameterComponent>,
         private manageParametersService: ManageParametersService,
@@ -61,7 +61,7 @@ export class ManageParameterComponent implements OnInit {
     }
 
     getParameter(parameter: IParamemeter): IParamemeter {
-        let ret: IParamemeter = JSON.parse(JSON.stringify(parameter));
+        const ret: IParamemeter = JSON.parse(JSON.stringify(parameter));
         Object.keys(parameter || {}).forEach(prop => {
             if (typeof(parameter[prop]) != 'boolean') {
                 // if the value is null/undefined, don't copy it

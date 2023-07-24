@@ -16,10 +16,10 @@ import { ManageParametersService } from './manage-parameters.service';
 export class ManageParametersComponent implements OnInit {
 
     @Input()
-    showType: boolean = false;
+    showType = false;
 
     @Input()
-    showAccessibility: boolean = false;
+    showAccessibility = false;
 
     // If columns are not defined, the default columns will be used (default is with no Internal - Accessibility).
     @Input()
@@ -29,7 +29,7 @@ export class ManageParametersComponent implements OnInit {
     parameters: IParamemeter[] = [];
 
     @Input()
-    parametersTitle: string = '';
+    parametersTitle = '';
 
     @Output()
     parametersChange = new EventEmitter<IParamemeter[]>();
@@ -104,7 +104,7 @@ export class ManageParametersComponent implements OnInit {
         this.openCreateParamForm('edit', event.value);
     }
 
-    openCreateParamForm(formMode: ParameterFormType, paramName: string = '') {
+    openCreateParamForm(formMode: ParameterFormType, paramName = '') {
         const paramItem = this.parameters.find(x => x.Key === paramName);
         const defaultParam: IParamemeter = {
             DefaultValue: '',
@@ -114,7 +114,7 @@ export class ManageParametersComponent implements OnInit {
             Description: ''
         };
 
-        let parameter = { ...defaultParam, ...paramItem };
+        const parameter = { ...defaultParam, ...paramItem };
     
         const formData: IParameterFormData = {
             Parameter: parameter,
@@ -130,7 +130,7 @@ export class ManageParametersComponent implements OnInit {
         
         this.dialogService.openDialog(ManageParameterComponent, formData, config).afterClosed().subscribe((value: IParamemeter) => {
             if (value) {
-                let index = this.parameters.findIndex(param => param.Key === value.Key);
+                const index = this.parameters.findIndex(param => param.Key === value.Key);
                 // if the param doesn't exist, push to the end of the array, otherwise edit existing
                 if (index < 0) {
                     this.parameters.push(value);

@@ -15,7 +15,7 @@ export class ManageParametersService {
     }
 
     private getAvailableTypes(): KeyValuePair<string>[] {
-        let types = SchemeFieldTypes.filter(type => ['Array', 'DateTime', 'Resource', 'ContainedResource', 'DynamicResource', 'ContainedDynamicResource', 'MultipleStringValues'].includes(type) === false);
+        const types = SchemeFieldTypes.filter(type => ['Array', 'DateTime', 'Resource', 'ContainedResource', 'DynamicResource', 'ContainedDynamicResource', 'MultipleStringValues'].includes(type) === false);
         return types.map(type => {
             return {
                 Key: type,
