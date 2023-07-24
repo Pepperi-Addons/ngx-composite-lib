@@ -1,0 +1,20 @@
+<pep-generic-list class="generic-list"
+    [title]="parametersTitle || ('MANAGE_PARAMETERS.TITLE' | translate)"
+    [showTopBar]="true" 
+    [dataSource]="dataSource" 
+    [inline]="true"
+    [actions]="actions"
+    [addPadding]="false"
+    [uuidMapping]="'Name'"
+    (fieldClick)="onFieldClick($event)"
+    >
+    <ng-container right-buttons>
+        <pep-button 
+            class="pep-spacing-element"
+            [sizeType]="'sm'" 
+            [value]="'MANAGE_PARAMETERS.ADD_BUTTON_TITLE' | translate"
+            [styleType]="'strong'" 
+            (buttonClick)="openCreateParamForm('add', '')"
+        ></pep-button>
+    </ng-container>
+</pep-generic-list>
