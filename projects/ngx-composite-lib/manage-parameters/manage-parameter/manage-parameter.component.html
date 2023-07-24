@@ -1,0 +1,26 @@
+<pep-dialog [title]="(incoming.Mode === 'edit' ? 'MANAGE_PARAMETERS.EDIT_FORM_TITLE' : 'MANAGE_PARAMETERS.ADD_FORM_TITLE') | translate">
+    <ng-container pep-dialog-content>
+        <pep-generic-form #addForm [dataSource]="parameter" [dataView]="dataView" (formValidationChange)="isValid = $event" (valueChange)="onValueChanged($event)">
+
+        </pep-generic-form>
+    </ng-container>
+    <ng-container pep-dialog-actions>
+        <div class="pep-spacing-element-negative" style="display: flex;">         
+            <pep-button 
+                class="pep-spacing-element"
+                [sizeType]="'md'" 
+                [value]="'Cancel' | translate" 
+                [styleType]="'weak'" 
+                (buttonClick)="close()"
+        ></pep-button>
+            <pep-button 
+                class="pep-spacing-element"
+                [sizeType]="'md'" 
+                [value]="(incoming.Mode === 'edit' ? 'Update' : 'Save') | translate"
+                [styleType]="'strong'" 
+                (buttonClick)="saveParameter()"
+                [disabled]="!isValid"
+            ></pep-button>
+        </div>
+    </ng-container>
+</pep-dialog>

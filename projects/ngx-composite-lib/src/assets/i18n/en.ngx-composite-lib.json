@@ -72,5 +72,24 @@
             "TITLE": "Nothing to see here",
             "DESCRIPTION": "Add or create an item to populate this list"
         }
+    },
+    "MANAGE_PARAMETERS": {
+        "TITLE": "Parameters",
+        "ADD_BUTTON_TITLE": "Add parameter",
+        "EMPTY_STATE_TITLE":"No parameters here yet :-(",
+        "EMPTY_STATE_DESCRIPTION":"Click on the \"Add parameter\" button above to get things going",
+        "DELETE_DIALOG_TITLE": "Delete Param {{param_name}}",
+        "DELETE_DIALOG_CONTENT": "Are you sure you want to delete this parameter?",
+        "KEY_TITLE": "Key",
+        "KEY_REGEX_ERROR": "Parameter Key cannot contain special characters on spaces",
+        "DESCRIPTION_TITLE": "Description",
+        "TYPE_TITLE": "Type",
+        "DEFAULT_VALUE_TITLE": "Default Value",
+        "INTERNAL_TITLE": "Internal",
+        "ACCESSIBILITY_TITLE": "Accessibility",
+        "EDIT_FORM_TITLE": "Edit parameter",
+        "INTERNAL_DESCRIPTION": "The Variable Accessibility feature enables you to classify variables as either external or internal, defining their intended usage within this context.\n When marked as external, a parameter is accessible by external components using the picker \n When marked as internal, parameter is hidden from external entities, though available during the context run time",
+        "ADD_FORM_TITLE": "Add parameter"
     }
+
 }
