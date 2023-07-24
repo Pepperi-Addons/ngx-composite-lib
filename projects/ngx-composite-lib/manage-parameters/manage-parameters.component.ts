@@ -105,11 +105,11 @@ export class ManageParametersComponent implements OnInit {
     }
 
     openCreateParamForm(formMode: ParameterFormType, paramName: string = '') {
-        const paramItem = this.parameters.find(x => x.Name === paramName);
+        const paramItem = this.parameters.find(x => x.Key === paramName);
         const defaultParam: IParamemeter = {
             DefaultValue: '',
             Internal: false,
-            Name: '',
+            Key: '',
             Type: 'String',
             Description: ''
         };
@@ -130,7 +130,7 @@ export class ManageParametersComponent implements OnInit {
         
         this.dialogService.openDialog(ManageParameterComponent, formData, config).afterClosed().subscribe((value: IParamemeter) => {
             if (value) {
-                let index = this.parameters.findIndex(param => param.Name === value.Name);
+                let index = this.parameters.findIndex(param => param.Key === value.Key);
                 // if the param doesn't exist, push to the end of the array, otherwise edit existing
                 if (index < 0) {
                     this.parameters.push(value);
@@ -153,7 +153,7 @@ export class ManageParametersComponent implements OnInit {
 
         this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(async (isDeletePressed) => {
             if (isDeletePressed) {
-                const index = this.parameters.findIndex(x => x.Name === paramName);
+                const index = this.parameters.findIndex(x => x.Key === paramName);
                 if (index > -1) {
                     this.parameters.splice(index, 1);
                     this.notifyParametersChange();

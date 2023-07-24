@@ -83,9 +83,9 @@ export class ManageParametersService {
                 return { Width: column.Width }
             });
         } else {
-            // Add Name and Description fields.
+            // Add Key and Description fields.
             fields = [
-                this.getDataViewField('Name', 'Link', this.translate.instant('MANAGE_PARAMETERS.NAME_TITLE'), false, true),
+                this.getDataViewField('Key', 'Link', this.translate.instant('MANAGE_PARAMETERS.KEY_TITLE'), false, true),
                 this.getDataViewField('Description', 'TextBox', this.translate.instant('MANAGE_PARAMETERS.DESCRIPTION_TITLE'), false, true),
             ];
 
@@ -126,10 +126,10 @@ export class ManageParametersService {
         const fieldTypes = this.getAvailableTypes();
         const noEmptyOption = { emptyOption: false };
 
-        // Add Name and Description fields.
+        // Add Key and Description fields.
         const fields = [
-            this.getDataViewField('Name', 'TextBox', this.translate.instant('MANAGE_PARAMETERS.NAME_TITLE'), formMode === 'add', formMode != 'add', [], 
-                { regex: '^([a-zA-Z0-9-_])*$', regexError: this.translate.instant('MANAGE_PARAMETERS.NAME_REGEX_ERROR')}
+            this.getDataViewField('Key', 'TextBox', this.translate.instant('MANAGE_PARAMETERS.KEY_TITLE'), formMode === 'add', formMode != 'add', [], 
+                { regex: '^([a-zA-Z0-9-_])*$', regexError: this.translate.instant('MANAGE_PARAMETERS.KEY_REGEX_ERROR')}
             ),
             this.getDataViewField('Description', 'TextArea', this.translate.instant('MANAGE_PARAMETERS.DESCRIPTION_TITLE'), false, false, [], {}, 
                 { Size: { Width:1, Height:2 } }
@@ -161,10 +161,10 @@ export class ManageParametersService {
         }
 
         return {
-            Type: "Form",
+            Type: 'Form',
             Fields: fields,
             Context: {
-                Name: "",
+                Name: '',
                 Profile: { },
                 ScreenSize: 'Tablet'
             }

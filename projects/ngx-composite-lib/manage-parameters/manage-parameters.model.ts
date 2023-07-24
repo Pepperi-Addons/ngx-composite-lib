@@ -39,7 +39,7 @@ export interface IParametersColumn {
 }
 
 export interface IParamemeter {
-    Name: string;
+    Key: string;
     Type: SchemeFieldType;
     Description?: string;
     DefaultValue: any;
