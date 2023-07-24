@@ -108,11 +108,15 @@ export class ManageParametersComponent implements OnInit {
         const paramItem = this.parameters.find(x => x.Key === paramName);
         const defaultParam: IParamemeter = {
             DefaultValue: '',
-            Internal: false,
             Key: '',
             Type: 'String',
             Description: ''
         };
+
+        // Add Accessibility field only if showAccessibility is true.
+        if (this.showAccessibility) {
+            defaultParam['Internal'] = false;
+        }
 
         const parameter = { ...defaultParam, ...paramItem };
     
