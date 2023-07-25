@@ -90,6 +90,9 @@
         "EDIT_FORM_TITLE": "Edit parameter",
         "INTERNAL_DESCRIPTION": "The Variable Accessibility feature enables you to classify variables as either external or internal, defining their intended usage within this context.\n When marked as external, a parameter is accessible by external components using the picker \n When marked as internal, parameter is hidden from external entities, though available during the context run time",
         "ADD_FORM_TITLE": "Add parameter"
+    },
+    "FLOW_PICKER_BUTTON": {
+        "CHOOSE_FLOW": "Choose flow"
     }
 
 }
