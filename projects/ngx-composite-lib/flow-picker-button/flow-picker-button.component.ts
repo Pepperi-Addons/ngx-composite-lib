@@ -17,11 +17,15 @@ export class FlowPickerButtonComponent implements OnInit {
         // If there is a flow key - search for the flow name.
         if (value?.runFlowData?.FlowKey) {
             this.setChoosenFlow(value.runFlowData.FlowKey);
+        } else {
+            this.initChoosenFlow('');
         }
     }
     get flowHostObject(): any {
         return this._flowHostObject;
     }
+
+    @Input() disabled = false;
 
     @Output()
     flowChange: EventEmitter<any> = new EventEmitter<any>();
@@ -29,11 +33,20 @@ export class FlowPickerButtonComponent implements OnInit {
     protected choosenFlowName = '';
     protected choosenFlowKey = '';
 
+    constructor(
+        private viewContainerRef: ViewContainerRef,
+        private addonBlockLoaderService: PepAddonBlockLoaderService, 
+        private flowPickerService: FlowPickerService) { }
+
+    private initChoosenFlow(flowKey: string) {
+        this.choosenFlowKey = flowKey;
+        this.choosenFlowName = '';
+    }
+
     private setChoosenFlow(flowKey: string) {
         // If this is not the same flow key
         if (this.choosenFlowKey !== flowKey) {
-            this.choosenFlowKey = flowKey;
-            this.choosenFlowName = '';
+            this.initChoosenFlow(flowKey);
     
             // Search for the flow name.
             this.flowPickerService.searchFlows(flowKey).then(flows => {;
@@ -43,11 +56,6 @@ export class FlowPickerButtonComponent implements OnInit {
             });
         }
     }
-
-    constructor(
-        private viewContainerRef: ViewContainerRef,
-        private addonBlockLoaderService: PepAddonBlockLoaderService, 
-        private flowPickerService: FlowPickerService) { }
 
     ngOnInit() {
         // Do nothing.
@@ -64,9 +72,12 @@ export class FlowPickerButtonComponent implements OnInit {
                     // If flow key exist - search for the flow name.
                     if (event.data?.FlowKey) {
                         this.setChoosenFlow(event.data.FlowKey);
+                        this.flowChange.emit(event.data);
+                    } else {
+                        this.initChoosenFlow('');
+                        this.flowChange.emit(null);
                     }
 
-                    this.flowChange.emit(event.data);
                     dialogRef?.close();
                 } else if (event.action === 'on-cancel') {
                     dialogRef?.close();
