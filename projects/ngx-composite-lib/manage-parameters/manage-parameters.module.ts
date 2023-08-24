@@ -7,6 +7,7 @@ import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
 import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
+import { ManageParametersService } from './manage-parameters.service';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
         PepGenericListModule,
         PepGenericFormModule
     ],
+    providers: [ManageParametersService],
     exports: [ManageParametersComponent],
 })
 export class PepManageParametersModule { }

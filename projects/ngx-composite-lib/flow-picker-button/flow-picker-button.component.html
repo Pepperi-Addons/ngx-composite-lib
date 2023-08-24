@@ -1,0 +1,4 @@
+<pep-button class="flow-button" 
+    [value]="choosenFlowKey ? (choosenFlowName || choosenFlowKey) : ('FLOW_PICKER_BUTTON.CHOOSE_FLOW' | translate)" 
+    [disabled]="disabled" (buttonClick)="openFlowPickerDialog()">
+</pep-button>
