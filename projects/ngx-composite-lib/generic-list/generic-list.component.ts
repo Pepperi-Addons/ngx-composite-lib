@@ -191,6 +191,9 @@ export class GenericListComponent implements OnInit {
     @Output()
     startIndexChange = new EventEmitter<IPepListStartIndexChangeEvent>()
 
+    @Output()
+    listLoad: EventEmitter<void> = new EventEmitter<void>();
+
     set pepList(val: PepListComponent) {
         this._pepList = val;
     }
@@ -330,10 +333,13 @@ export class GenericListComponent implements OnInit {
                             this.onLoadPage($event);
                         });
                         componentRef.instance.valueChange.subscribe(($event) => {
-                            this.onValueChanged($event)
+                            this.onValueChanged($event);
                         });
                         componentRef.instance.sortingChange.subscribe(($event) => {
                             this.onSortingChange($event);
+                        });
+                        componentRef.instance.listLoad.subscribe(($event) => {
+                            this.onListLoad();
                         });
                         let convertedList: ObjectsDataRow[] = [];
                         if (data) {
@@ -590,6 +596,10 @@ export class GenericListComponent implements OnInit {
     onFiltersChange(filters: IPepSmartFilterData[]) {
         this._appliedFilters = filters;
         this.initList();
+    }
+
+    onListLoad(): void {
+        this.listLoad.emit();
     }
 
     ngOnDestroy() {
