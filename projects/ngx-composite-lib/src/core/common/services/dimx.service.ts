@@ -11,12 +11,14 @@ export interface DIMXImportOptions {
     Delimiter?: string;
     OwnerID?: string;
     ActionID?: string;
+    AdditionalData?: unknown
 }
 
 export interface DIMXRecursiveImportOptions {
     OverwriteObject?: boolean;
     OwnerID?: string;
     ActionID?: string;
+    AdditionalData?: unknown
 }
 
 export interface DIMXExportOptions {
@@ -27,6 +29,7 @@ export interface DIMXExportOptions {
     DIMXExportFields?: string;
     DIMXExportDelimiter?: string;
     ActionID?: string;
+    AdditionalData?: unknown
 }
 
 export interface DIMXRecursiveExportOptions {
@@ -35,6 +38,7 @@ export interface DIMXRecursiveExportOptions {
     DIMXExportWhere?: string;
     DIMXExportFields?: string;
     ActionID?: string;
+    AdditionalData?: unknown
 }
 
 @Injectable()
