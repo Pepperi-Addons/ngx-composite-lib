@@ -49,7 +49,7 @@ export class FlowPickerButtonComponent implements OnInit {
             this.initChoosenFlow(flowKey);
     
             // Search for the flow name.
-            this.flowPickerService.searchFlows(flowKey).then(flows => {;
+            this.flowPickerService.searchFlows(flowKey).then(flows => {
                 if (flows?.Objects?.length > 0) {
                     this.choosenFlowName = flows.Objects[0].Name || undefined;
                 }
