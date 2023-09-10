@@ -39,8 +39,7 @@ export class IconPickerComponent implements OnInit {
             size: 'large',
             hostEventsCallback: async (event) => {
                 if (event.action === 'on-done') {
-                    this.iconChange.emit(event.data);
-                    this.iconURL = event.data;
+                    this.iconChange.emit(event);
                     dialogRef?.close();
                 } else if (event.action === 'on-cancel') {
                     dialogRef?.close();
