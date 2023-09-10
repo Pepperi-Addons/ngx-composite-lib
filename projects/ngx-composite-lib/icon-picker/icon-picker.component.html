@@ -1,0 +1,28 @@
+<label class="title-xl ellipsis">{{header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)}}</label>
+<div class="main-cont">
+    <div class="selected-cont">
+        <pep-field-title [label]="preview_header !== '' ? preview_header : ('ICON_PICKER_BUTTON.SELECTED' | translate)" 
+                         [disabled]="disabled" 
+                         [xAlignment]="dir === 'rtl' ? 'right' : 'left'">
+        </pep-field-title>
+        <!-- <pep-button
+            iconName="system_bolt"
+            [disabled]="disabled">
+           
+        </pep-button> -->
+        <div class="pep-button md weak">
+            <img *ngIf="iconURL !== ''" [src]="iconURL"/>
+        </div>
+    </div>
+    <div class="choose-btn-cont">
+        <pep-field-title [label]="select_btn_header !== '' ? select_btn_header : ('ICON_PICKER_BUTTON.CHOOSE_ICON_HEADER' | translate)" 
+                         [disabled]="disabled" 
+                         [xAlignment]="dir === 'rtl' ? 'right' : 'left'">
+        </pep-field-title>
+        <pep-button
+            [value]="'ICON_PICKER_BUTTON.CHOOSE_ICON' | translate" 
+            styleType="regular"
+            [disabled]="disabled" (buttonClick)="openIconPickerDialog()">
+        </pep-button>
+    </div>
+</div>
