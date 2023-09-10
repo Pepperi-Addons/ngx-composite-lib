@@ -1,4 +1,11 @@
-<label class="title-xl ellipsis">{{header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)}}</label>
+<label *ngIf="!useCheckBoxHeader" class="title-xl ellipsis">{{header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)}}</label>
+<pep-checkbox *ngIf="useCheckBoxHeader" 
+        class="checkbox-as-title" 
+        [value]="!disabled" 
+        [label]="header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)" 
+        [renderTitle]="false" 
+        (valueChange)="onUseIconChange($event)">
+</pep-checkbox>
 <div class="main-cont">
     <div class="selected-cont">
         <pep-field-title [label]="preview_header !== '' ? preview_header : ('ICON_PICKER_BUTTON.SELECTED' | translate)" 

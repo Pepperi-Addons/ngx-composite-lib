@@ -15,10 +15,14 @@ export class IconPickerComponent implements OnInit {
     @Input() select_btn_header = '';
     @Input() dir: 'rtl' | 'ltr' = 'ltr';
     @Input() iconURL = '';
+    @Input() useCheckBoxHeader = true;
 
     @Output()
     iconChange: EventEmitter<any> = new EventEmitter<any>();
     
+    @Output()
+    iconDisableChange: EventEmitter<any> = new EventEmitter<any>();
+
     constructor(
         private viewContainerRef: ViewContainerRef,
         private addonBlockLoaderService: PepAddonBlockLoaderService) { }
@@ -26,6 +30,8 @@ export class IconPickerComponent implements OnInit {
     ngOnInit() {
         // Do nothing.
     }
+
+   
 
     openIconPickerDialog() {
         const dialogRef = this.addonBlockLoaderService.loadAddonBlockInDialog({
@@ -38,7 +44,7 @@ export class IconPickerComponent implements OnInit {
             },
             size: 'large',
             hostEventsCallback: async (event) => {
-                if (event.action === 'on-done') {
+                if (event?.action === 'on-save') {
                     this.iconChange.emit(event);
                     dialogRef?.close();
                 } else if (event.action === 'on-cancel') {
@@ -46,5 +52,10 @@ export class IconPickerComponent implements OnInit {
                 }
             }
         });
+    }
+
+    onUseIconChange(event: boolean){
+       this.disabled = !this.disabled;
+       this.iconDisableChange.emit(event);
     }
 }
