@@ -42,7 +42,7 @@ export class IconPickerComponent implements OnInit {
                 allowedAssetsTypes: 'images',
                 inDialog: true
             },
-            size: 'large',
+            size: 'full-screen',
             hostEventsCallback: async (event) => {
                 if (event?.action === 'on-save') {
                     this.iconChange.emit(event);
