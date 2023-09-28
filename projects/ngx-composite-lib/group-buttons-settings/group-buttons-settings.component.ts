@@ -99,7 +99,8 @@ export class GroupButtonsSettingsComponent implements OnInit {
                     { key: 'sm', value: this.translate.instant('GENERAL.SM'), callback: this.defaultCallback },
                     { key: 'md', value: this.translate.instant('GENERAL.MD'), callback: this.defaultCallback },
                     { key: 'lg', value: this.translate.instant('GENERAL.LG'), callback: this.defaultCallback },
-                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: this.defaultCallback }
+                    { key: 'xl', value: this.translate.instant('GENERAL.XL'), callback: this.defaultCallback },
+                    { key: '2xl', value: this.translate.instant('GENERAL.XXL'), callback: this.defaultCallback }
                 ];
             }
             case 'vertical-align':{

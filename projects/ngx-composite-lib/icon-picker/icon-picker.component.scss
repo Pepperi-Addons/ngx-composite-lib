@@ -1,0 +1,32 @@
+:host {
+    width: 100%;
+}
+
+.main-cont{
+    display: flex;
+    gap: 0.5rem; 
+    width: 100%;
+
+    .selected-cont{
+        width: 3.5rem;
+        align-self: end;
+        display: flex;
+        flex-direction: column;
+
+        .pep-button{
+            display: flex;
+            align-items: center;
+
+            img{
+                max-height: 1.5rem;
+                max-width: 1.5rem;
+            }
+        }
+    }
+    .choose-btn-cont{
+        width: -webkit-fill-available;
+        align-self: end;
+        display: flex;
+        flex-direction: column;  
+    }
+}
