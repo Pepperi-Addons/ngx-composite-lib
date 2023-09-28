@@ -17,7 +17,8 @@
 }
 
 .list-empty-state {
-    height: 100%;
+    padding-top: ngx-variables.$spacing-lg;
+    height: calc(100% - #{ngx-variables.$spacing-lg});
     background: rgb(247, 247, 247);
     border-radius: ngx-variables.$border-radius-md;    
     position: relative;
