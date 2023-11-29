@@ -1,4 +1,4 @@
 /*
- * export from ngx-composite-lib/flow-picker-button
+ * export from ngx-composite-lib/icon-picker
  */
 export * from './public-api';
