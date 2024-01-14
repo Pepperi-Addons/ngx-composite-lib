@@ -19,9 +19,9 @@ export class RichTextComponent implements OnInit {
     @Input() mandatory = false;
     @Input() disabled = false;
     @Input() readonly = false;
-    @Input() maxFieldCharacters: number = 300;
+    @Input() maxFieldCharacters = 300;
     @Input() xAlignment: PepHorizontalAlignment = DEFAULT_HORIZONTAL_ALIGNMENT;
-    @Input() sanitize: boolean = true;
+    @Input() sanitize = true;
     @Input() rowSpan = 1;
     @Input() visible = true;
     @Input() isActive = false;
