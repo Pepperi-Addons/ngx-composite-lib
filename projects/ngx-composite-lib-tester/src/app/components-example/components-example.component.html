@@ -10,5 +10,9 @@
     </pep-group-buttons-settings>
     <pep-button [value]="'open dialog'" [sizeType]="'sm'" [styleType]="'regular'" (click)="testOpenDialog()">
     </pep-button>
-    <pep-icon-picker [disabled]="true" [useCheckBoxHeader]="false"></pep-icon-picker>
+    <pep-icon-picker [disabled]="false" [useCheckBoxHeader]="false"></pep-icon-picker>
+    <pep-rich-text [value]="'This is test text'" 
+        [label]="'Rich text test'" [inlineMode]="false" >
+
+    </pep-rich-text>
 </div>
