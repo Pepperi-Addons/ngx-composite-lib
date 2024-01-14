@@ -1,0 +1,23 @@
+<pep-rich-html-textarea [key]="key" 
+                        [value]="value"
+                        [label]="label" 
+                        [mandatory]="mandatory"
+                        [disabled]="disabled"
+                        [readonly]="readonly"
+                        [maxFieldCharacters]="maxFieldCharacters" 
+                        [xAlignment]="xAlignment" 
+                        [toolbarOptions]="toolbarOptions"
+                        [rowSpan]="rowSpan" 
+                        [visible]="visible"
+                        
+                        [isActive]="isActive"
+                        [showTitle]="showTitle"
+                        [renderTitle]="renderTitle"
+                        [renderEnlargeButton]="renderEnlargeButton"
+                        [layoutType]="layoutType"
+                        [inlineMode]="inlineMode"
+                        (editorCreated)="onEditorOpen($event)">
+</pep-rich-html-textarea>
+<pep-button [sizeType]="'sm'" [classNames]="'pep-spacing-element quill-editor-image-btn'" 
+                [iconName]="'system_image'" (buttonClick)="openAssetsPickerDialog()">
+</pep-button>

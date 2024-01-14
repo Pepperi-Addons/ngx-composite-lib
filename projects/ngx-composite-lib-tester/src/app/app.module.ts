@@ -16,6 +16,7 @@ import { PepFileStatusPanelModule } from '@pepperi-addons/ngx-composite-lib/file
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 import { PepDataViewBuilderModule } from '@pepperi-addons/ngx-composite-lib/data-view-builder';
 import { PepIconPickerModule } from 'projects/ngx-composite-lib/icon-picker';
+import { PepRichTextModule } from 'projects/ngx-composite-lib/rich-text/rich-text.module';
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
 import { ComponentsExampleComponent } from './components-example/components-example.component';
 import { GenericListExampleComponent } from './generic-list-example/generic-list-example.component';
@@ -53,6 +54,7 @@ import { CommonModule } from '@angular/common';
         PepGenericListModule,
         PepGenericFormModule,
         PepIconPickerModule,
+        PepRichTextModule,
         PepDataViewBuilderModule,
         TranslateModule.forRoot({
             loader: {
