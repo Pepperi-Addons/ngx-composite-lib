@@ -16,7 +16,8 @@
                         [renderEnlargeButton]="renderEnlargeButton"
                         [layoutType]="layoutType"
                         [inlineMode]="inlineMode"
-                        (editorCreated)="onEditorOpen($event)">
+                        (editorCreated)="onEditorOpen($event)"
+                        (valueChange)="valueChanged($event)">
 </pep-rich-html-textarea>
 <pep-button [sizeType]="'sm'" [classNames]="'pep-spacing-element quill-editor-image-btn'" 
                 [iconName]="'system_image'" (buttonClick)="openAssetsPickerDialog()">
