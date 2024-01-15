@@ -87,17 +87,9 @@ export class RichTextComponent implements OnInit {
             const newButton = document.querySelector('.quill-editor-image-btn')?.cloneNode(true);
             
             if(imageButton && newButton){
-               
-                    
-                    newButton.addEventListener("click", () => { this.openAssetsPickerDialog();});
-                    imageButton.parentNode?.appendChild(newButton);
-                    imageButton.setAttribute('style','display:none');
-               
-                //const toolbar = editor.getModule('toolbar');
-                //toolbar.addHandler('image', this.uploadImageHandler(editor));
-                //imageButton.parentNode?.replaceChild(newButton,imageButton);
-                //imageButton.remove();
-                
+                newButton.addEventListener("click", () => { this.openAssetsPickerDialog();});
+                imageButton.parentNode?.appendChild(newButton);
+                imageButton.setAttribute('style','display:none');    
             }
         }
     }
@@ -117,6 +109,7 @@ export class RichTextComponent implements OnInit {
                     const range = this.quillEditor.getSelection() || { index: 0, length: 0};
                     if(event.url){
                         this.quillEditor.insertEmbed(range.index, 'image', event.url);
+                        this.assetChanged.emit(event.url);
                     }
                     dialogRef?.close();
                 } else if (event.action === 'on-cancel') {
