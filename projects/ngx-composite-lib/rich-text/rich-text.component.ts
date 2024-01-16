@@ -45,7 +45,7 @@ export class RichTextComponent implements OnInit {
     }
 
     @Output()
-        assetChanged: EventEmitter<any> = new EventEmitter<any>();
+        valueChange: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
         private viewContainerRef: ViewContainerRef,
@@ -87,21 +87,14 @@ export class RichTextComponent implements OnInit {
             const newButton = document.querySelector('.quill-editor-image-btn')?.cloneNode(true);
             
             if(imageButton && newButton){
-               
-                    
-                    newButton.addEventListener("click", () => { this.openAssetsPickerDialog();});
-                    imageButton.parentNode?.appendChild(newButton);
-                    imageButton.setAttribute('style','display:none');
-               
-                //const toolbar = editor.getModule('toolbar');
-                //toolbar.addHandler('image', this.uploadImageHandler(editor));
-                //imageButton.parentNode?.replaceChild(newButton,imageButton);
-                //imageButton.remove();
-                
+                newButton.addEventListener("click", () => { this.openAssetsPickerDialog();});
+                //newButton.addEventListener("click", () => { this.insertAssets('https://pfs.pepperi.com/50d42a3f-f21d-40fa-8c24-a1359b04dbb7/ad909780-0c23-401e-8e8e-f514cc4f6aa2/Assets/logo.jpg');});
+                imageButton.parentNode?.appendChild(newButton);
+                imageButton.setAttribute('style','display:none');    
             }
         }
     }
-
+    
     openAssetsPickerDialog() {
         const dialogRef = this.addonBlockLoaderService.loadAddonBlockInDialog({
             container: this.viewContainerRef,
@@ -114,9 +107,8 @@ export class RichTextComponent implements OnInit {
             size: 'full-screen',
             hostEventsCallback: async (event) => {
                 if (event?.action === 'on-save') {
-                    const range = this.quillEditor.getSelection() || { index: 0, length: 0};
                     if(event.url){
-                        this.quillEditor.insertEmbed(range.index, 'image', event.url);
+                        this.insertAssets(event.url);
                     }
                     dialogRef?.close();
                 } else if (event.action === 'on-cancel') {
@@ -124,5 +116,14 @@ export class RichTextComponent implements OnInit {
                 }
             }
         });
+    }
+
+    insertAssets(assetUrl: string){
+        const range = this.quillEditor.getSelection() || { index: 0, length: 0};
+        this.quillEditor.insertEmbed(range.index, 'image', assetUrl);
+    }
+
+    valueChanged(event: any){
+        this.valueChange.emit(event);
     }
 }
