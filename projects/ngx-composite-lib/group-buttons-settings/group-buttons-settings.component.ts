@@ -137,6 +137,12 @@ export class GroupButtonsSettingsComponent implements OnInit {
                     { key: 'wide', value: this.translate.instant('GENERAL.WIDTH_SIZE.WIDE'), callback: this.defaultCallback }
                 ];
             }
+            case 'boolean':{
+                return [
+                    { key: 'true', value: this.translate.instant('GENERAL.BOOLEAN.TRUE'), callback: this.defaultCallback },
+                    { key: 'false', value: this.translate.instant('GENERAL.BOOLEAN.FALSE'), callback: this.defaultCallback }
+                ];
+            }
 
             default: {
                 return [];
