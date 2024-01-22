@@ -41,7 +41,7 @@ export class GenericListExampleComponent implements OnInit {
         init: async (params: any) => {
             return {
                 dataView: {
-                    Type: 'Card'
+                    Type: 'Grid'
                 },
                 totalCount: -1,
                 items: []
@@ -360,8 +360,8 @@ export class GenericListExampleComponent implements OnInit {
                         FrozenColumnsCount: 0,
                         MinimumColumnWidth: 0
                     },
-                    totalCount: 0,
-                    items: []
+                    totalCount: res.length,
+                    items: res
 
                 });
             },
@@ -391,7 +391,7 @@ export class GenericListExampleComponent implements OnInit {
             },
             inputs: {
                
-                selectionType: 'multi'
+                // selectionType: 'multi'
             }
         } as IPepGenericListDataSource
     }
@@ -497,7 +497,6 @@ export class GenericListExampleComponent implements OnInit {
                 return Promise.resolve(res);
             },
             inputs: {
-               
                 selectionType: 'single'
             }
         } as IPepGenericListDataSource
