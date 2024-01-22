@@ -152,12 +152,17 @@ export class PepGenericListService {
         return smartFields;
     }
 
+    // TODO: This func is copy from ngx-lib write it in one place.
+    private getUniqItemId(itemId: string, itemType = ''): string {
+        return itemId + ',' + itemType;
+    }
+
     getSelectedItems(items: ObjectsDataRow[]) {
         const selectedItems = [];
 
         for (let i = 0; i < items.length; i++) {
             if (items[i].IsSelected) {
-                selectedItems.push(items[i].UID);
+                selectedItems.push(this.getUniqItemId(items[i].UID, items[i].Type?.toString()));
             }
         }
 
