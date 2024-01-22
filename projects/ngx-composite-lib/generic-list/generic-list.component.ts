@@ -340,6 +340,7 @@ export class GenericListComponent implements OnInit {
                             this.onSortingChange($event);
                         });
                         componentRef.instance.listLoad.subscribe(($event) => {
+                            this.onSelectedItemsChanged(this._pepList.selectedItems.length);
                             this.onListLoad();
                         });
                         let convertedList: ObjectsDataRow[] = [];

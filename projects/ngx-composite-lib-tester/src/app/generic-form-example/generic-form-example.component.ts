@@ -77,7 +77,6 @@ export class GenericFormExampleComponent implements OnInit {
     /*
 
     onFormValidationChange(event: any) {
-        debugger;
         this.isFormValid = event;
     }*/
 
