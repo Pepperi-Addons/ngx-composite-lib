@@ -1,0 +1,27 @@
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins';
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/functions';
+
+.show-if-badge {
+    @include mixins.pep-badge();
+    position: relative;
+    right: 0;
+    
+    &.rtl-direction {
+        right: unset;
+        left: 0;
+    }
+
+    .mat-icon {
+        right: 0;
+        height: 2.5rem;
+        width: 2.5rem;
+        margin-top: -1rem;
+        margin-right: -1.25rem;
+
+        ::ng-deep.svg-icon {
+            fill: functions.get-pep-color(color-system-primary-invert, color-base);
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+    }
+}
