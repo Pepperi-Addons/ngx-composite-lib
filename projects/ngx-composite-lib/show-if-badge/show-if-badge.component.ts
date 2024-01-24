@@ -7,8 +7,8 @@ import { PepLayoutService } from '@pepperi-addons/ngx-lib';
     styleUrls: ['./show-if-badge.component.scss']
 })
 
-export class ShowIfBadgeComponent implements OnInit {
-    @Input() showIf: boolean = false;
+export class ShowIfBadgeComponent {
+    @Input() showIf = false;
     
     protected isRtl = false;
     
@@ -16,9 +16,5 @@ export class ShowIfBadgeComponent implements OnInit {
         protected layoutService: PepLayoutService,
     ) { 
         this.isRtl = this.layoutService.isRtl();
-    }
-
-    ngOnInit(): void {
-      
     }
 }
