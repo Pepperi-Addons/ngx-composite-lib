@@ -33,7 +33,9 @@ export class ShowIfBadgeComponent {
     ngOnInit(){
         setTimeout(() => {
             const badge = document.getElementsByClassName("mat-badge-content")[0] as HTMLElement;
-            badge.setAttribute('style', 'background-color:'+ this.backgroundColor + '!important');
+                if(badge){
+                    badge.setAttribute('style', 'background-color:'+ this.backgroundColor + '!important');
+                }
           }, 0);
     }
 }
