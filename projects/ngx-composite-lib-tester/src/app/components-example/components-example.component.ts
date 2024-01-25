@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { PepColorSettings } from '@pepperi-addons/ngx-composite-lib/color-settings';
 import { FileStatus } from '@pepperi-addons/ngx-composite-lib/file-status-panel';
 import { PepDialogService, PepDialogData, PepDialogSizeType, PepDialogActionButton } from '@pepperi-addons/ngx-lib/dialog';
 
@@ -21,7 +22,7 @@ export class ComponentsExampleComponent implements OnInit {
         this.addFiles();
         
     }
-
+    badgeColor = new PepColorSettings(true, 'hsl(50, 0%, 90%)', 75);
     menuItems = [{"key":'dimxexport', "text":"Export"}, {"key":'dimximport', "text":"Import"}];
     selectedMenuItem = {"key":'dimxexport'};
     menuItemClick(value: any){
