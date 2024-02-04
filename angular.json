@@ -36,8 +36,11 @@
                             ]
                         },
                         "assets": [
-                            "projects/ngx-composite-lib-tester/src/favicon.ico",
-                            "projects/ngx-composite-lib-tester/src/assets",
+                            {
+                                "glob": "**/favicon.ico",
+                                "input": "projects/ngx-composite-lib/src",
+                                "output": ""
+                            },
                             {
                                 "glob": "**/*",
                                 "input": "node_modules/@pepperi-addons/ngx-lib/src/assets",
@@ -148,24 +151,6 @@
                         "karmaConfig": "projects/ngx-composite-lib/karma.conf.js"
                     }
                 }
-            }
-        },
-        "storybook": {
-            "projectType": "application",
-            "root": "",
-            "sourceRoot": "src",
-            "prefix": "app",
-            "architect": {
-              "build": {
-                "builder": "@angular-devkit/build-angular:browser",
-                "options": {
-                  "tsConfig": "tsconfig.json",
-                  "styles": [
-                   ".storybook/theme.scss"
-                  ],
-                  "scripts": []
-                }
-              }
             }
         }
     }

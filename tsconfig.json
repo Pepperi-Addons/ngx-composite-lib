@@ -21,6 +21,12 @@
             "dom"
         ],        
         "paths": {
+            "ngx-composite-lib": [
+                "dist/ngx-composite-lib"
+            ],
+            "ngx-composite-lib/*": [
+                "dist/ngx-composite-lib/*"
+            ],
             "@pepperi-addons/ngx-composite-lib": [
                 "dist/ngx-composite-lib"
             ],
@@ -39,6 +45,8 @@
         "fullTemplateTypeCheck": true,
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
-        "strictTemplates": true
+        "strictTemplates": true,
+        // Needed for Moment.js since it doesn't have a default export.
+        "allowSyntheticDefaultImports": true
     }
 }

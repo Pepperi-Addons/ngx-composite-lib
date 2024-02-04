@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 //import { CommonModule } from '@angular/common';
 import { PepGenericFormModule } from './generic-form.module';
 import { GenericFormComponent } from './generic-form.component';
-import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module';
+import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
 
 
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
@@ -18,7 +18,7 @@ export default {
         moduleMetadata({
             imports: [
                 PepGenericFormModule,
-                PepNgxHelperModule
+                SBNgxCompositeHelperModule
             ]
         })
     ],

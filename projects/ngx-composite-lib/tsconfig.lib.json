@@ -13,7 +13,9 @@
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
-        "enableResourceInlining": true
+        "enableResourceInlining": true,
+        // Needed for Moment.js since it doesn't have a default export.
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "src/test.ts",

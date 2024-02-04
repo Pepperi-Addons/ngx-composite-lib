@@ -2,7 +2,7 @@ import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { PepGenericListModule } from './generic-list.module';
 import { GenericListComponent } from './generic-list.component';
-import { PepNgxHelperModule } from '../src/core/common/modules/ngx-helper-module';
+import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
 import { PepListSelectionType } from '@pepperi-addons/ngx-lib/list';
 import { PepBreadCrumbItem } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepGenericListPager } from './generic-list.model';
@@ -20,7 +20,7 @@ export default {
         moduleMetadata({
             imports: [
                 PepGenericListModule,
-                PepNgxHelperModule
+                SBNgxCompositeHelperModule
             ]
         })
     ],
