@@ -475,6 +475,7 @@ export class GenericListComponent implements OnInit {
 
         // Set the total count
         this.totalRowCount = data?.totalCount || 0;
+        this.setEmptyState();
 
         if (data) {
             this._dataView = data.dataView;
