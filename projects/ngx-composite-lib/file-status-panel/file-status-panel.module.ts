@@ -7,6 +7,7 @@ import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
 import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
 import { PepIconModule, PepIconRegistry, pepIconArrowRightAlt } from '@pepperi-addons/ngx-lib/icon';
 import { PepSnackBarModule } from '@pepperi-addons/ngx-lib/snack-bar';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 const pepIcons = [
     pepIconArrowRightAlt,
@@ -25,7 +26,17 @@ const pepIcons = [
         PepDialogModule,
         PepSnackBarModule
     ],
-    exports: [FileStatusPanelComponent]
+    exports: [FileStatusPanelComponent],
+    providers:[
+        {
+        provide: MatSnackBarRef,
+        useValue: {}
+        }, 
+        {
+            provide: MAT_SNACK_BAR_DATA,
+            useValue: {} // Add any data you wish to test if it is passed/used correctly
+        }
+    ]
 })
 
 export class PepFileStatusPanelModule { 
