@@ -24,9 +24,9 @@
     "GENERAL": {
         "NONE": "None",
         "XS": "XS",
-        "SM": "SM",
-        "MD": "MD",
-        "LG": "LG",
+        "SM": "S",
+        "MD": "M",
+        "LG": "L",
         "XL": "XL",
         "XXL": "XXL",
         "FONT_WEIGHT": {

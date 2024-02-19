@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
+import { PepStyleType } from '@pepperi-addons/ngx-lib';
 import { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';
 import { FlowPickerService } from './flow-picker-button.service';
 
@@ -26,7 +27,8 @@ export class FlowPickerButtonComponent implements OnInit {
     }
 
     @Input() disabled = false;
-
+    @Input() styleType: PepStyleType = 'weak';
+    
     @Output()
     flowChange: EventEmitter<any> = new EventEmitter<any>();
     
