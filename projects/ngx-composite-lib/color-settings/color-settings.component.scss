@@ -1,4 +1,9 @@
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+
 :host {
     width: 100%;
     // max-width: 200px;
+
+    display: grid;
+    gap: ngx-variables.$spacing-lg;
 }

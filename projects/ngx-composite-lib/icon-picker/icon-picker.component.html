@@ -1,6 +1,6 @@
-<label *ngIf="!useCheckBoxHeader" class="title-xl ellipsis">{{header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)}}</label>
+<label *ngIf="!useCheckBoxHeader" class="title-{{titleSize}} ellipsis">{{header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)}}</label>
 <pep-checkbox *ngIf="useCheckBoxHeader" 
-        class="checkbox-as-title" 
+        class="{{ titleSize === 'xl' ? 'checkbox-as-title' : 'checkbox-as-sub-title' }}" 
         [value]="!disabled" 
         [label]="header !== '' ? header : ('ICON_PICKER_BUTTON.MAIN_HEADER' | translate)" 
         [renderTitle]="false" 

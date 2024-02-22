@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
+import { PepSizeType } from '@pepperi-addons/ngx-lib';
 import { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';
 
 
@@ -16,6 +17,7 @@ export class IconPickerComponent implements OnInit {
     @Input() dir: 'rtl' | 'ltr' = 'ltr';
     @Input() iconURL = '';
     @Input() useCheckBoxHeader = true;
+    @Input() titleSize: PepSizeType = 'xl';
 
     @Output()
     iconChange: EventEmitter<any> = new EventEmitter<any>();

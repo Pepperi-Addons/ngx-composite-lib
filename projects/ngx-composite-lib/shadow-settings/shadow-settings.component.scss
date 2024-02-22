@@ -4,9 +4,12 @@
     width: 100%;
     // max-width: 200px;
 
-    .shadow-size-group,
-    .shadow-type-group {
-        display: block;
-        margin-bottom: ngx-variables.$form-spacing;
-    }
+    display: grid;
+    gap: ngx-variables.$spacing-lg;
+    
+    // .shadow-size-group,
+    // .shadow-type-group {
+    //     display: block;
+    //     margin-bottom: ngx-variables.$form-spacing;
+    // }
 }
