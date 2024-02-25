@@ -1,4 +1,9 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import {
+    Meta,
+    Story,
+    moduleMetadata,
+    componentWrapperDecorator,
+} from '@storybook/angular';
 import { ColorSettingsComponent } from './color-settings.component';
 import { PepColorSettingsModule } from './color-settings.module';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
@@ -14,13 +19,16 @@ export default {
         moduleMetadata({
             imports: [PepColorSettingsModule, SBNgxCompositeHelperModule],
         }),
+        componentWrapperDecorator(
+            (story) => `<div style="width: 30vw">${story}</div>`
+        ),
     ],
     title: 'Components/color-settings',
     component: ColorSettingsComponent,
     argTypes: {
         title: {
             description: 'title',
-            defaultValue: 'Title',
+            defaultValue: 'Picker',
         },
         checkAAComplient: {
             description: 'Check AAComplient checkbox',
@@ -31,7 +39,8 @@ export default {
             defaultValue: true,
         },
         color: {
-            description: 'Color object',
+            description:
+                'Color - Can include RGB,HSL,HEX ; Can`t include: Named Css Color (black,red etc..),Should not include Alpha',
             defaultValue: { use: false, value: 'hsl(0, 0%, 57%)', opacity: 50 },
         },
         colorChange: {
@@ -39,6 +48,7 @@ export default {
         },
     },
     parameters: {
+        layout: 'centered',
         controls: {
             include: [
                 'title',
@@ -56,10 +66,22 @@ const Template: Story<ColorSettingsComponent> = (
 ) => ({
     props: {
         ...args,
-        colorChange: action('colorChange')
+        colorChange: action('colorChange'),
     },
 });
 
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
 Base.args = {};
+
+export const Story1 = Template.bind({});
+Story1.storyName = 'AA Checkbox is unchecked';
+Story1.args = {
+    checkAAComplient: false,
+};
+
+export const Story2 = Template.bind({});
+Story2.storyName = 'Without AA checkbox';
+Story2.args = {
+    showAAComplient: false,
+};
