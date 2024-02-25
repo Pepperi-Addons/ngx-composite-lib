@@ -77,9 +77,11 @@ export class PepResetConfigurationFieldDirective implements AfterViewInit, OnDes
         const css = `
             display: flex;
             justify-content: flex-end;
-            float: ${this.getFloat()};
-            margin-bottom: 1rem;
-        `;
+            `;
+            
+        // This was removed.
+        // float: ${this.getFloat()};
+        // margin-bottom: 1rem;
 
         this.buttonContainer.setAttribute("style", css);
     }
