@@ -32,7 +32,7 @@ export default {
     },
     parameters: {
         controls: {
-            include: ['showIf', 'iconName', 'backgroundColor'],
+            include: ["showIf"],
         },
         layout: 'centered',
     },

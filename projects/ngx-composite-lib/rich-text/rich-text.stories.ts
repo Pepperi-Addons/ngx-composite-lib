@@ -134,3 +134,23 @@ const Template: Story<RichTextComponent> = (args: RichTextComponent) => ({
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
 Base.args = {};
+
+
+export const Story1 = Template.bind({});
+Story1.storyName = 'Inline false';
+Story1.args = {
+    inlineMode: false
+};
+
+export const Story2 = Template.bind({});
+Story2.storyName = 'With content';
+Story2.args = {
+    value: 'This is the best rich text component ever',
+};
+
+export const Story3 = Template.bind({});
+Story3.storyName = 'With content read-only';
+Story3.args = {
+    value: 'Again this is the best rich text component ever',
+    readonly: true
+};

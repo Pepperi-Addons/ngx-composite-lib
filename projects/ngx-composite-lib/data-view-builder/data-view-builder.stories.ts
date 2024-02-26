@@ -4,8 +4,6 @@ import { PepDataViewBuilderModule } from './data-view-builder.module';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
 import { action } from '@storybook/addon-actions';
 
-
-
 export default {
     /* 👇 The title prop is optional.
      * See https://storybook.js.org/docs/angular/configure/overview#configure-story-loading
@@ -42,14 +40,13 @@ export default {
         },
         availableFields: {
             description: 'Available fields',
-            defaultValue: []
+            defaultValue: [],
         },
         dataViewChange: {
             description: 'Emit event with data view changes object',
         },
         dataView: {
             description: 'Dataview object',
-            defaultValue: { Type: 'Menu' },
         },
     },
     parameters: {
@@ -94,6 +91,7 @@ Base.args = {
             data: { key: 'random-key3', 'random-key3': 'value' },
         },
     ],
+    dataView: { Type: 'Menu' },
 };
 
 // export const Story1 = Template.bind({}); //need to show drag and drop bug to Tomer.P
@@ -118,7 +116,6 @@ Base.args = {
 //         Fields: [{ FieldID: 'random-key4' }, { FieldID: 'random-key5' }],
 //     },
 // };
-
 
 // export const Story2 = Template.bind({});
 // Story2.storyName = 'With all fields dragged';

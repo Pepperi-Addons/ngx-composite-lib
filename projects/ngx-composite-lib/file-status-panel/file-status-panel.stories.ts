@@ -112,36 +112,44 @@ export const Base: any = Template.bind({});
 Base.storyName = 'Basic';
 Base.args = {
     title: 'Here is the title',
-    content: [{ key: 123, name: 'Name', status: 'Status' }],
+    content: [{ key: 123, name: 'SalesOrder.txt', status: 'Loaded' }],
+};
+Base.parameters = {
+    docs: {
+        description: {
+            component:
+                '[Code Usage Example](https://github.com/search?q=org%3APepperi-Addons+filestatuspanel+repo%3APepperi-Addons%2Fassets_manager_client&type=code) <br /> [HTML Usage example](https://github.com/search?q=org%3APepperi-Addons%20pep-file-status-panel&type=code)',
+        },
+    },
 };
 
 export const Story1: any = Template.bind({});
 Story1.storyName = 'With 5 status updates';
 Story1.args = {
-    title: '5 yey',
+    title: 'Processing',
     content: [
-        { key: 123, name: 'Name', status: 'Status' },
-        { key: 124, name: 'Name', status: 'Status' },
-        { key: 125, name: 'Name', status: 'Status' },
-        { key: 126, name: 'Name', status: 'Status' },
-        { key: 127, name: 'Name', status: 'Status' },
+        { key: 123, name: 'SalesOrder.txt', status: 'Already Loaded' },
+        { key: 124, name: 'API_Items.csv', status: 'Done' },
+        { key: 125, name: 'Related_Items_Collection.csv', status: 'Done' },
+        { key: 126, name: 'Frog.jpg', status: 'Loaded' },
+        { key: 127, name: 'Invoices.csv', status: 'Loaded' },
     ],
 };
 
 export const Story2: any = Template.bind({});
 Story2.storyName = 'With 10 status updates';
 Story2.args = {
-    title: '10 yey',
+    title: 'Processing',
     content: [
-        { key: 123, name: 'Name', status: 'Status' },
-        { key: 124, name: 'Name', status: 'Status' },
-        { key: 125, name: 'Name', status: 'Status' },
-        { key: 126, name: 'Name', status: 'Status' },
-        { key: 127, name: 'Name', status: 'Status' },
-        { key: 128, name: 'Name', status: 'Status' },
-        { key: 129, name: 'Name', status: 'Status' },
-        { key: 130, name: 'Name', status: 'Status' },
-        { key: 131, name: 'Name', status: 'Status' },
-        { key: 132, name: 'Name', status: 'Status' },
+        { key: 123, name: 'SalesOrder.txt', status: 'Already Loaded' },
+        { key: 124, name: 'API_Items.csv', status: 'Done' },
+        { key: 125, name: 'Related_Items_Collection.csv', status: 'Done' },
+        { key: 126, name: 'Frog.jpg', status: 'Loaded' },
+        { key: 127, name: 'Invoices.csv', status: 'Loaded' },
+        { key: 128, name: 'Flame_Thrower.jgp', status: 'Failed' },
+        { key: 129, name: 'UDC_Collection_2.csv', status: 'Done' },
+        { key: 130, name: 'Script_22.txt', status: 'Loaded' },
+        { key: 131, name: 'Sales_Order_66.xml', status: 'In Progress' },
+        { key: 132, name: 'YehudaKeisarLive.mp3', status: 'Done' },
     ],
 };

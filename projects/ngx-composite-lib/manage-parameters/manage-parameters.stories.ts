@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, Story, moduleMetadata,componentWrapperDecorator } from '@storybook/angular';
 import { ManageParametersComponent } from './manage-parameters.component';
 import { PepManageParametersModule } from './manage-parameters.module';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
@@ -14,6 +14,9 @@ export default {
         moduleMetadata({
             imports: [PepManageParametersModule, SBNgxCompositeHelperModule],
         }),
+        componentWrapperDecorator(
+            (story) => `<div style="height: 21vh">${story}</div>`
+        ),
     ],
     title: 'Components/manage-parameters',
     component: ManageParametersComponent,
@@ -100,3 +103,11 @@ const Template: Story<ManageParametersComponent> = (
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
 Base.args = {};
+
+export const Story1 = Template.bind({});
+Story1.storyName = 'Empty state';
+Story1.args = {
+    parametersColumns: [],
+    parameters:[]
+
+};

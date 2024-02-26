@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, Story, moduleMetadata,componentWrapperDecorator } from '@storybook/angular';
 import { PepGroupButtonsSettingsModule } from './group-buttons-settings.module';
 import { GroupButtonsSettingsComponent } from './group-buttons-settings.component';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
@@ -17,6 +17,9 @@ export default {
                 SBNgxCompositeHelperModule,
             ],
         }),
+        componentWrapperDecorator(
+            (story) => `<div style="width: 50vw">${story}</div>`
+        ),
     ],
     title: 'Components/group-buttons-settings',
     component: GroupButtonsSettingsComponent,
@@ -31,11 +34,11 @@ export default {
         },
         groupType: {
             description: 'Group Type',
-            defaultValue: 'custom',
+            defaultValue: 'sizes',
         },
         useNone: {
             description: 'Use None option on group buttons',
-            defaultValue: false
+            defaultValue: false,
         },
         dir: {
             description: 'Text direction (ltr/rtl)',
@@ -43,6 +46,7 @@ export default {
         },
         btnKey: {
             description: 'Buttons keys',
+            defaultValue: 'xs'
         },
         btnkeyChange: {
             description: 'Buttons key change event',
@@ -57,9 +61,11 @@ export default {
         },
         excludeKeys: {
             description: 'excludeKeys',
+            defaultValue: [],
         },
     },
     parameters: {
+        layout:'centered',
         controls: {
             include: [
                 'header',
@@ -81,10 +87,18 @@ const Template: Story<GroupButtonsSettingsComponent> = (
 ) => ({
     props: {
         ...args,
-        btnkeyChange: action('btnkeyChange')
+        btnkeyChange: action('btnkeyChange'), 
     },
 });
 
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
-Base.args = {};
+Base.args = {
+    btnKey:'xs'
+};
+
+export const Story1 = Template.bind({});
+Story1.storyName = 'Without preset value';
+Story1.args = {
+    btnKey:'none'
+};
