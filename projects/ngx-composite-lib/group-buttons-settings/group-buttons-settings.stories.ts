@@ -18,7 +18,7 @@ export default {
             ],
         }),
         componentWrapperDecorator(
-            (story) => `<div style="width: 50vw">${story}</div>`
+            (story) => `<div style="width: 30vw">${story}</div>`
         ),
     ],
     title: 'Components/group-buttons-settings',

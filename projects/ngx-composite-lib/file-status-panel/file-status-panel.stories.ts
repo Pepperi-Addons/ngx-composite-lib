@@ -44,7 +44,7 @@ export default {
             ],
         }),
         componentWrapperDecorator(
-            (story) => `<div style="width: 25vw">${story}</div>`
+            (story) => `<div style="width: 12.5vw">${story}</div>`
         ),
     ],
     title: 'Components/file-status-panel',
@@ -146,10 +146,10 @@ Story2.args = {
         { key: 125, name: 'Related_Items_Collection.csv', status: 'Done' },
         { key: 126, name: 'Frog.jpg', status: 'Loaded' },
         { key: 127, name: 'Invoices.csv', status: 'Loaded' },
-        { key: 128, name: 'Flame_Thrower.jgp', status: 'Failed' },
+        { key: 128, name: 'Flame_Thrower.html', status: 'Failed' },
         { key: 129, name: 'UDC_Collection_2.csv', status: 'Done' },
         { key: 130, name: 'Script_22.txt', status: 'Loaded' },
         { key: 131, name: 'Sales_Order_66.xml', status: 'In Progress' },
-        { key: 132, name: 'YehudaKeisarLive.mp3', status: 'Done' },
+        { key: 132, name: 'YehudaKeisarLive.pdf', status: 'Done' },
     ],
 };

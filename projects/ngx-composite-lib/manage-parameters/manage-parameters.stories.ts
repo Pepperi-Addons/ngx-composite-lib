@@ -15,7 +15,7 @@ export default {
             imports: [PepManageParametersModule, SBNgxCompositeHelperModule],
         }),
         componentWrapperDecorator(
-            (story) => `<div style="height: 21vh">${story}</div>`
+            (story) => `<div style="height: 30vh">${story}</div>`
         ),
     ],
     title: 'Components/manage-parameters',
