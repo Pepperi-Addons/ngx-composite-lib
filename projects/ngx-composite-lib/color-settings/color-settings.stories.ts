@@ -19,11 +19,8 @@ export default {
         moduleMetadata({
             imports: [PepColorSettingsModule, SBNgxCompositeHelperModule],
         }),
-        componentWrapperDecorator(
-            (story) => `<div style="width: 30vw">${story}</div>`
-        ),
     ],
-    title: 'Components/color-settings',
+    title: 'Pages-Components/color-settings',
     component: ColorSettingsComponent,
     argTypes: {
         title: {

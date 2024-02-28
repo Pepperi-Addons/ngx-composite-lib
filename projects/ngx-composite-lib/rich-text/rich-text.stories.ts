@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, Story, moduleMetadata,componentWrapperDecorator } from '@storybook/angular';
 import { PepRichTextModule } from './rich-text.module';
 import { RichTextComponent } from './rich-text.component';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
@@ -14,6 +14,9 @@ export default {
         moduleMetadata({
             imports: [PepRichTextModule, SBNgxCompositeHelperModule],
         }),
+        componentWrapperDecorator(
+            (story) => `<div style="">${story}</div>`
+        ),
     ],
     title: 'Components/rich-text',
     component: RichTextComponent,
@@ -78,7 +81,7 @@ export default {
             description: 'Render Enlarge Button',
         },
         layoutType: {
-            description: 'Layout Type',
+            description: 'Layout Types: "form"/"table"/"card"',
             defaultValue: 'form',
         },
         inlineMode: {
@@ -99,7 +102,6 @@ export default {
     parameters: {
         controls: {
             include: [
-                'key',
                 'value',
                 'label',
                 'mandatory',
@@ -107,7 +109,6 @@ export default {
                 'readonly',
                 'maxFieldCharacters',
                 'xAlignment',
-                'sanitize',
                 'rowSpan',
                 'visible',
                 'isActive',

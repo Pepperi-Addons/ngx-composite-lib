@@ -18,7 +18,7 @@ export default {
             (story) => `<div style="width: 30vw">${story}</div>`
         ),
     ],
-    title: 'Components/shadow-settings',
+    title: 'Pages-Components/shadow-settings',
     component: ShadowSettingsComponent,
     argTypes: {
         shadow: {

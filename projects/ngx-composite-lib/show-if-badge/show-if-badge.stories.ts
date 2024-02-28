@@ -14,7 +14,7 @@ export default {
             imports: [PepShowIfBadgeModule, SBNgxCompositeHelperModule],
         }),
     ],
-    title: 'Components/show-if-badge',
+    title: 'Pages-Components/show-if-badge',
     component: ShowIfBadgeComponent,
     argTypes: {
         showIf: {

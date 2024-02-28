@@ -21,7 +21,7 @@ export default {
             (story) => `<div style="width: 30vw">${story}</div>`
         ),
     ],
-    title: 'Components/group-buttons-settings',
+    title: 'Pages-Components/group-buttons-settings',
     component: GroupButtonsSettingsComponent,
     argTypes: {
         header: {
