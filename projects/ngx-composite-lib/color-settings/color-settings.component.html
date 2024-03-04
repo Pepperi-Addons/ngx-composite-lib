@@ -1,5 +1,7 @@
 <div>
-    <pep-checkbox class="checkbox-as-title" [label]="title" [renderTitle]="false" [value]="color.use"
+    <pep-checkbox 
+        class="{{ titleSize === 'xl' ? 'checkbox-as-title' : 'checkbox-as-sub-title' }}" 
+        [label]="title" [renderTitle]="false" [value]="color.use"
         (valueChange)="onUseChanged($event)"></pep-checkbox>
     <pep-color [value]="color.value" [label]="title + ' ' + ('COLOR_SETTINGS.COLOR' | translate)" [disabled]="!color.use"
         [checkAAComplient]="checkAAComplient" [showAAComplient]="showAAComplient" (valueChange)="onColorChanged($event)">

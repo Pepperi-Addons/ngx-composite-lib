@@ -10,6 +10,7 @@ import { PepShadowIntensityType, PepShadowSettings } from './shadow-settings.mod
     styleUrls: ['./shadow-settings.component.scss']
 })
 export class ShadowSettingsComponent implements OnInit {
+    @Input() titleSize: PepSizeType = 'xl';
 
     private _shadow: PepShadowSettings = new PepShadowSettings();
     @Input()

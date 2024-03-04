@@ -1,4 +1,4 @@
-<label *ngIf="header != ''" class="body-xl bold ellipsis">{{header}}</label>
+<label *ngIf="header != ''" class="body-{{titleSize}} {{bold ? 'bold' : ''}} ellipsis">{{header}}</label>
 <pep-field-title *ngIf="subHeader !=''" [label]="subHeader" [disabled]="disabled" [xAlignment]="dir === 'rtl' ? 'right' : 'left'"></pep-field-title>
 <pep-group-buttons [buttons]="btnsArray" 
                    [selectedButtonKey]="btnKey" 

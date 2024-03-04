@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PepColorService } from '@pepperi-addons/ngx-lib';
+import { PepColorService, PepSizeType } from '@pepperi-addons/ngx-lib';
 import { PepColorSettings } from './color-settings.model';
 
 @Component({
@@ -11,6 +11,7 @@ export class ColorSettingsComponent implements OnInit {
     @Input() title = '';
     @Input() checkAAComplient = true;
     @Input() showAAComplient = true;
+    @Input() titleSize: PepSizeType = 'xl';
 
     private _color: PepColorSettings = new PepColorSettings();
     @Input()
