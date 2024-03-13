@@ -43,7 +43,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@pepperi-addons/data-views": "0.0.2",
-    "@pepperi-addons/ngx-lib": "^0.4.2-beta.189",
+    "@pepperi-addons/ngx-lib": "^0.4.2-beta.190",
     "@pepperi-addons/papi-sdk": "^1.53.0",
     "@storybook/addon-a11y": "^6.5.16",
     "@tweenjs/tween.js": "^17.1.1",

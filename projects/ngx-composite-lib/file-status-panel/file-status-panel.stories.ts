@@ -91,8 +91,6 @@ function openFilePanel(event: any, args: any) {
         },
         config
     );
-
-    snackBarRef.afterDismissed().subscribe((res) => {});
 }
 
 const Template: Story<FileStatusPanelComponent> = (
