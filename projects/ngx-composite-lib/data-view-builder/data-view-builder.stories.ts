@@ -31,36 +31,22 @@ export default {
             defaultValue: true,
         },
         itemKeyLabel: {
-            defaultValue: 'Label key',
+            defaultValue: 'itemKeyLabel',
             description: 'itemKeyLabel',
         },
         itemTitleLabel: {
-            description: 'Item title label',
+            description: 'itemTitleLabel',
             defaultValue: '',
         },
         availableFields: {
             description: 'Available fields',
-            defaultValue: [
-                {
-                    title: 'First Field',
-                    data: { key: 'random-key1', 'random-key1': 'value' },
-                },
-                {
-                    title: 'Second Field',
-                    data: { key: 'random-key2', 'random-key2': 'value' },
-                },
-                {
-                    title: 'Third Field',
-                    data: { key: 'random-key3', 'random-key3': 'value' },
-                },
-            ],
+            defaultValue: [],
         },
         dataViewChange: {
             description: 'Emit event with data view changes object',
         },
         dataView: {
             description: 'Dataview object',
-            defaultValue: { Type: 'Menu' },
         },
     },
     parameters: {
@@ -90,4 +76,66 @@ const Template: Story<DataViewBuilderComponent> = (
 
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
-Base.args = {};
+Base.args = {
+    availableFields: [
+        {
+            title: 'First Field',
+            data: { key: 'random-key1', 'random-key1': 'value' },
+        },
+        {
+            title: 'Second Field',
+            data: { key: 'random-key2', 'random-key2': 'value' },
+        },
+        {
+            title: 'Third Field',
+            data: { key: 'random-key3', 'random-key3': 'value' },
+        },
+    ],
+    dataView: { Type: 'Menu' },
+};
+
+// export const Story1 = Template.bind({}); //need to show drag and drop bug to Tomer.P
+// Story1.storyName = 'With partial fields dragged';
+// Story1.args = {
+//     availableFields:[
+//         {
+//             title: 'First Field',
+//             data: { key: 'random-key4', 'random-key4': 'value' },
+//         },
+//         {
+//             title: 'Second Field',
+//             data: { key: 'random-key5', 'random-key5': 'value' },
+//         },
+//         {
+//             title: 'Third Field',
+//             data: { key: 'random-key6', 'random-key6': 'value' },
+//         },
+//     ],
+//     dataView: {
+//         Type: 'Menu',
+//         Fields: [{ FieldID: 'random-key4' }, { FieldID: 'random-key5' }],
+//     },
+// };
+
+// export const Story2 = Template.bind({});
+// Story2.storyName = 'With all fields dragged';
+// Story2.args = {
+//     availableFields: [
+//         {
+//             title: 'First Field',
+//             data: { key: 'random-key7', 'random-key7': 'value' },
+//         },
+//         {
+//             title: 'Second Field',
+//             data: { key: 'random-key8', 'random-key8': 'value' },
+//         },
+//         {
+//             title: 'Third Field',
+//             data: { key: 'random-key9', 'random-key9': 'value' },
+//         },
+//     ],
+//     dataView: {
+//         Type: 'Menu',
+//         Fields: [{ FieldID: 'random-key7' }, { FieldID: 'random-key8' },{ FieldID: 'random-key9' }],
+//     },
+// };

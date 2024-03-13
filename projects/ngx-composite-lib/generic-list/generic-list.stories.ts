@@ -6,23 +6,23 @@ import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-modul
 import { PepListSelectionType } from '@pepperi-addons/ngx-lib/list';
 import { PepBreadCrumbItem } from '@pepperi-addons/ngx-lib/bread-crumbs';
 import { IPepGenericListPager } from './generic-list.model';
-import { PepSelectionData, DEFAULT_PAGE_SIZE, PepListTableViewType } from '@pepperi-addons/ngx-lib/list';
+import {
+    PepSelectionData,
+    DEFAULT_PAGE_SIZE,
+    PepListTableViewType,
+} from '@pepperi-addons/ngx-lib/list';
 //import { SBNgxHelperModule } from '@storybook-settings/typings/';
-
 
 export default {
     /* 👇 The title prop is optional.
-    * See https://storybook.js.org/docs/angular/configure/overview#configure-story-loading
-    * to learn how to generate automatic titles
-    */
+     * See https://storybook.js.org/docs/angular/configure/overview#configure-story-loading
+     * to learn how to generate automatic titles
+     */
     decorators: [
         // The necessary modules for the component to work on Storybook
         moduleMetadata({
-            imports: [
-                PepGenericListModule,
-                SBNgxCompositeHelperModule
-            ]
-        })
+            imports: [PepGenericListModule, SBNgxCompositeHelperModule],
+        }),
     ],
     title: 'Components/generic-list',
     component: GenericListComponent,
@@ -36,7 +36,7 @@ export default {
                             Context: {
                                 Name: '',
                                 Profile: { InternalID: 0 },
-                                ScreenSize: 'Landscape'
+                                ScreenSize: 'Landscape',
                             },
                             Type: 'Grid',
                             Title: '',
@@ -46,46 +46,46 @@ export default {
                                     Type: 'TextBox',
                                     Title: 'UUID',
                                     Mandatory: false,
-                                    ReadOnly: true
+                                    ReadOnly: true,
                                 },
                                 {
                                     FieldID: 'Description',
                                     Type: 'TextBox',
                                     Title: 'Description',
                                     Mandatory: false,
-                                    ReadOnly: false
+                                    ReadOnly: false,
                                 },
                                 {
                                     FieldID: 'Version',
                                     Type: 'TextBox',
                                     Title: 'Version',
                                     Mandatory: false,
-                                    ReadOnly: true
+                                    ReadOnly: true,
                                 },
                                 {
                                     FieldID: 'Type',
                                     Type: 'TextBox',
                                     Title: 'Type',
                                     Mandatory: false,
-                                    ReadOnly: true
+                                    ReadOnly: true,
                                 },
                                 {
                                     FieldID: 'CreationDate',
                                     Type: 'TextBox',
                                     Title: 'Creation Date',
                                     Mandatory: false,
-                                    ReadOnly: true
-                                }
+                                    ReadOnly: true,
+                                },
                             ],
                             Columns: [
                                 { Width: 15 },
                                 { Width: 30 },
                                 { Width: 15 },
                                 { Width: 20 },
-                                { Width: 20 }
+                                { Width: 20 },
                             ],
                             FrozenColumnsCount: 0,
-                            MinimumColumnWidth: 0
+                            MinimumColumnWidth: 0,
                         },
                         totalCount: 4,
                         items: [
@@ -94,40 +94,43 @@ export default {
                                 Description: 'Manage your add-ons',
                                 Version: 'v1.0',
                                 Type: 1,
-                                CreationDate: '2020-04-22T11:56:09.863Z'
+                                CreationDate: '2020-04-22T11:56:09.863Z',
                             },
                             {
                                 UUID: 'bd629d5f-a7b4-4d03-9e7c-67865a6d82a9',
-                                Description: 'Manage the addons (install, uninstall, upgrade)',
+                                Description:
+                                    'Manage the addons (install, uninstall, upgrade)',
                                 Version: '0.3.3',
                                 Type: 1,
                                 CreationDate: '2020-06-08T09:39:08.703Z',
                             },
                             {
                                 UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
-                                Description: 'Run, Schedule and Audit your jobs',
+                                Description:
+                                    'Run, Schedule and Audit your jobs',
                                 Version: '1.0.53',
                                 Type: 1,
-                                CreationDate: '2020-06-09T07:44:49.883Z'
+                                CreationDate: '2020-06-09T07:44:49.883Z',
                             },
                             {
                                 UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
-                                Description: 'Manages the embeded Node.js app in the CPI',
+                                Description:
+                                    'Manages the embeded Node.js app in the CPI',
                                 Version: '0.0.3',
                                 Type: 2,
-                                CreationDate: '2020-05-25T08:31:44.01Z'
-                            }
-                        ]
-                    }
-                }
+                                CreationDate: '2020-05-25T08:31:44.01Z',
+                            },
+                        ],
+                    };
+                },
             },
             table: {
-                type: { summary: 'IPepGenericListDataSource' }
-            }
-
+                type: { summary: 'IPepGenericListDataSource' },
+            },
         },
         actions: {
-            description: 'A callback to retrieve a list of actions in relation to the selected items',
+            description:
+                'A callback to retrieve a list of actions in relation to the selected items',
             defaultValue: {
                 get: async (data: PepSelectionData) => {
                     if (data?.rows.length === 1 && data?.selectionType !== 0) {
@@ -136,34 +139,36 @@ export default {
                                 title: 'Edit',
                                 handler: async (params: any) => {
                                     alert('edit');
-                                }
+                                },
                             },
                             {
                                 title: 'Delete',
                                 handler: async (params: any) => {
                                     alert('delete');
-                                }
-                            }
-                        ]
-                    } else if (data?.rows.length > 1 || data?.selectionType === 0) {
+                                },
+                            },
+                        ];
+                    } else if (
+                        data?.rows.length > 1 ||
+                        data?.selectionType === 0
+                    ) {
                         return [
                             {
                                 title: 'Delete',
                                 handler: async (params: any) => {
                                     alert('delete');
-                                }
-                            }
-                        ]
+                                },
+                            },
+                        ];
                     } else return [];
-                }
+                },
             },
             control: 'object',
             table: {
                 defaultValue: {
-                    summary: null
-                }
-            }
-
+                    summary: null,
+                },
+            },
         },
         breadCrumbsItems: {
             description: 'A list of breadcrumb items',
@@ -171,151 +176,152 @@ export default {
             control: 'array',
             table: {
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
         uuidMapping: {
             description: 'Column name to be used as unique key',
             defaultValue: '',
             table: {
                 defaultValue: {
-                    summary: `'key'`
-                }
-            }
+                    summary: `'key'`,
+                },
+            },
         },
         disabled: {
-            description: 'Whether the list is disabled'
+            description: 'Whether the list is disabled',
         },
         addPadding: {
-            description: 'Whether list container has padding'
+            description: 'Whether list container has padding',
         },
         title: {
             description: 'Top bar title',
             table: {
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
         description: {
             description: 'List description',
             table: {
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
 
         inline: {
-            description: 'false → is when you want to use the Generic List as a page (Full view, Unique URL). true → if you want to use the Generic List as a part of a page'
+            description:
+                'false → is when you want to use the Generic List as a page (Full view, Unique URL). true → if you want to use the Generic List as a part of a page',
         },
         showSearch: {
-            description: 'Whether the search box is displayed'
+            description: 'Whether the search box is displayed',
         },
         selectionType: {
             description: 'Item selection type',
-            options: [
-                'multi',
-                'single',
-                'none'
-            ],
+            options: ['multi', 'single', 'none'],
             control: { type: 'radio' },
             table: {
                 type: {
                     summary: `'multi' | 'single' | 'none'`,
                 },
                 defaultValue: { summary: 'multi' },
-            }
+            },
         },
         noDataFoundMsg: {
             description: 'No data found text message',
             table: {
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
         emptyState: {
             description: 'No data found page',
             defaultValue: null,
             table: {
                 type: {
-                    summary: 'IPepGenericListEmptyState'
+                    summary: 'IPepGenericListEmptyState',
                 },
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
         supportSorting: {
-            description: 'Whether column sorting is enabled'
+            description: 'Whether column sorting is enabled',
+        },
+        supportSortingArray: {
+            control: 'array',
+            defaultValue:[],
+            description: 'A field API name string array which enables sorting on specific columns/fields, optional (no need to use if you implement sorting on all columns)'
         },
         showTopBar: {
-            description: 'Whether the top bar is displayed'
+            description: 'Whether the top bar is displayed',
         },
         pager: {
             description: 'Table paging type',
             defaultValue: {
-                type: 'scroll'
+                type: 'scroll',
             },
             table: {
                 type: {
-                    summary: 'IPepGenericListPager'
+                    summary: 'IPepGenericListPager',
                 },
                 defaultValue: {
-                    summary: `type: 'scroll'`
-                }
-            }
+                    summary: `type: 'scroll'`,
+                },
+            },
         },
         tableViewType: {
-            description: 'List line height type. Relevant to data view of type \'Grid\' only',
-            options: [
-                'compact',
-                'regular'
-            ],
+            description:
+                "List line height type. Relevant to data view of type 'Grid' only",
+            options: ['compact', 'regular'],
             control: { type: 'radio' },
             table: {
                 type: {
                     summary: `'compact' | 'regular'`,
                 },
                 defaultValue: { summary: "'regular'" },
-            }
+            },
         },
         zebraStripes: {
-            description: 'Whether zebra stripes are displayed. Relevant to data view of type \'Grid\' only'
+            description:
+                "Whether zebra stripes are displayed. Relevant to data view of type 'Grid' only",
         },
         smartFilter: {
-            description: 'Smart Filter\'s data and data view',
-            defaultValue: null
-            ,
+            description: "Smart Filter's data and data view",
+            defaultValue: null,
             control: 'object',
             table: {
                 type: {
-                    summary: 'IPepGenericListSmartFilter'
+                    summary: 'IPepGenericListSmartFilter',
                 },
                 defaultValue: {
-                    summary: null
-                }
-            }
+                    summary: null,
+                },
+            },
         },
         getItemById: {
-            description: 'Retrieve item\'s data by Id, uuidMapping\'s value is used as search key. if uuidMapping was not provided, default value is used',
+            description:
+                "Retrieve item's data by Id, uuidMapping's value is used as search key. if uuidMapping was not provided, default value is used",
             control: false,
             table: {
                 type: {
-                    summary: `(id: string) => ObjectsDataRow | null`
-                }
-            }
+                    summary: `(id: string) => ObjectsDataRow | null`,
+                },
+            },
         },
         getSelectedItems: {
             description: 'Retrieve selected items',
             control: false,
             table: {
                 type: {
-                    summary: `() => PepSelectionData | null`
-                }
-            }
+                    summary: `() => PepSelectionData | null`,
+                },
+            },
         },
         valueChange: {
             action: 'valueChange',
@@ -323,9 +329,9 @@ export default {
             control: false,
             table: {
                 type: {
-                    summary: 'EventEmitter<IPepFormFieldValueChangeEvent>'
-                }
-            }
+                    summary: 'EventEmitter<IPepFormFieldValueChangeEvent>',
+                },
+            },
         },
         fieldClick: {
             action: 'fieldClick',
@@ -333,21 +339,21 @@ export default {
             control: false,
             table: {
                 type: {
-                    summary: 'EventEmitter<IPepFormFieldClickEvent>'
-                }
-            }
-
+                    summary: 'EventEmitter<IPepFormFieldClickEvent>',
+                },
+            },
         },
         breadCrumbItemClick: {
             action: 'breadCrumbItemClick',
-            description: 'Emits a click event whenever a breadcrumb item is clicked',
+            description:
+                'Emits a click event whenever a breadcrumb item is clicked',
             control: false,
             table: {
                 type: {
-                    summary: 'EventEmitter<IPepBreadCrumbItemClickEvent>'
-                }
-            }
-        }
+                    summary: 'EventEmitter<IPepBreadCrumbItemClickEvent>',
+                },
+            },
+        },
     },
     parameters: {
         controls: {
@@ -359,12 +365,13 @@ export default {
                 'disabled',
                 'addPadding',
                 'title',
-                "description",
+                'description',
                 'inline',
                 'showSearch',
                 'selectionType',
                 'noDataFoundMsg',
                 'supportSorting',
+                'supportSortingArray',
                 'showTopBar',
                 'pager',
                 'tableViewType',
@@ -374,17 +381,16 @@ export default {
                 'getSelectedItems',
                 'valueChange',
                 'fieldClick',
-                'breadCrumbItemClick'
+                'breadCrumbItemClick',
             ],
         },
         docs: {
             description: {
-              component: 'The Generic List is made out of 3 main components: 1) Topbar, 2) Smart filters and 3) List. You can use them all or just the List, or any other combination - its up to you, the developer, to decide. **Inline** - `false` → is when you want to use the Generic List as a page (Full view, Unique URL) - `true` → if you want to use the Generic List as a part of a page'
-            }
-          }
-    }
-
-
+                component:
+                    'The Generic List is made out of 3 main components: 1) Topbar, 2) Smart filters and 3) List. You can use them all or just the List, or any other combination - its up to you, the developer, to decide. **Inline** - `false` → is when you want to use the Generic List as a page (Full view, Unique URL) - `true` → if you want to use the Generic List as a part of a page',
+            },
+        },
+    },
 } as Meta;
 
 const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
@@ -392,7 +398,7 @@ const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
         ...args,
         fieldClick: action('fieldClick'),
         valueChange: action('valueChange'),
-        breadCrumbItemClick: action('breadCrumbItemClick')
+        breadCrumbItemClick: action('breadCrumbItemClick'),
     },
     template: `
         <div style="height: 40vh">
@@ -403,14 +409,14 @@ const Template: Story<GenericListComponent> = (args: GenericListComponent) => ({
                 (breadCrumbItemClick)="breadCrumbItemClick">
             </pep-generic-list>
         </div>
-    `
+    `,
 });
 
 export const Base = Template.bind({});
 Base.storyName = 'Basic';
 Base.args = {
-    showTopBar: true
-}
+    showTopBar: true,
+};
 
 export const NoDataFoundMsg = Template.bind({});
 NoDataFoundMsg.storyName = 'No Data Found Message';
@@ -422,7 +428,7 @@ NoDataFoundMsg.args = {
                     Context: {
                         Name: '',
                         Profile: { InternalID: 0 },
-                        ScreenSize: 'Landscape'
+                        ScreenSize: 'Landscape',
                     },
                     Type: 'Grid',
                     Title: '',
@@ -432,54 +438,53 @@ NoDataFoundMsg.args = {
                             Type: 'TextBox',
                             Title: 'UUID',
                             Mandatory: false,
-                            ReadOnly: true
+                            ReadOnly: true,
                         },
                         {
                             FieldID: 'Description',
                             Type: 'TextBox',
                             Title: 'Description',
                             Mandatory: false,
-                            ReadOnly: false
+                            ReadOnly: false,
                         },
                         {
                             FieldID: 'Version',
                             Type: 'TextBox',
                             Title: 'Version',
                             Mandatory: false,
-                            ReadOnly: true
+                            ReadOnly: true,
                         },
                         {
                             FieldID: 'Type',
                             Type: 'TextBox',
                             Title: 'Type',
                             Mandatory: false,
-                            ReadOnly: true
+                            ReadOnly: true,
                         },
                         {
                             FieldID: 'CreationDate',
                             Type: 'TextBox',
                             Title: 'Creation Date',
                             Mandatory: false,
-                            ReadOnly: true
-                        }
+                            ReadOnly: true,
+                        },
                     ],
                     Columns: [
                         { Width: 15 },
                         { Width: 30 },
                         { Width: 15 },
                         { Width: 20 },
-                        { Width: 20 }
+                        { Width: 20 },
                     ],
                     FrozenColumnsCount: 0,
-                    MinimumColumnWidth: 0
+                    MinimumColumnWidth: 0,
                 },
                 totalCount: 0,
-                items: [
-                ]
-            }
-        }
-    }
-}
+                items: [],
+            };
+        },
+    },
+};
 
 export const breadCrumbsItems = Template.bind({});
 breadCrumbsItems.storyName = 'Bread Crumbs Items';
@@ -488,15 +493,15 @@ breadCrumbsItems.args = {
         {
             key: '1',
             text: 'Item1',
-            title: 'Item 1'
+            title: 'Item 1',
         },
         {
             key: '2',
             text: 'Item2',
-            title: 'Item 2'
-        }
-    ]
-}
+            title: 'Item 2',
+        },
+    ],
+};
 
 export const SmartFilter = Template.bind({});
 SmartFilter.storyName = 'Smart filter';
@@ -506,7 +511,7 @@ SmartFilter.args = {
             Context: {
                 Name: '',
                 Profile: { InternalID: 0 },
-                ScreenSize: 'Landscape'
+                ScreenSize: 'Landscape',
             },
             Type: 'Menu',
             Title: '',
@@ -515,23 +520,184 @@ SmartFilter.args = {
                     FieldID: 'BillToName',
                     Type: 'MultipleStringValues',
                     Title: 'Bill To Name',
-                    OptionalValues: [{ Key: "AD", Value: "Andorra" }, { Key: "IL", Value: "Israel" }]
+                    OptionalValues: [
+                        { Key: 'AD', Value: 'Andorra' },
+                        { Key: 'IL', Value: 'Israel' },
+                    ],
                 },
                 {
                     FieldID: 'AllowDecimal',
                     Type: 'Bool',
-                    Title: 'Allow Decimal'
+                    Title: 'Allow Decimal',
                 },
                 {
                     FieldID: 'CaseQuantity',
                     Type: 'Integer',
-                    Title: 'Case Quantity'
-                }
-            ] as any
-        }
-    }
-}
+                    Title: 'Case Quantity',
+                },
+            ] as any,
+        },
+    },
+};
 
+export const CompactMode = Template.bind({});
+CompactMode.storyName = 'Compact Mode';
+CompactMode.args = {
+    tableViewType: 'compact',
+};
 
+export const ZebraStripes = Template.bind({});
+ZebraStripes.storyName = 'Zebra Stripes';
+ZebraStripes.args = {
+    zebraStripes: true,
+};
 
-
+export const Pager = Template.bind({});
+Pager.storyName = 'Pager';
+Pager.args = {
+    pager: {
+        type: 'pages',
+        size: 5,
+        index: 0,
+    },
+    dataSource: {
+        init: async (params: any) => {
+            return {
+                dataView: {
+                    Context: {
+                        Name: '',
+                        Profile: { InternalID: 0 },
+                        ScreenSize: 'Landscape',
+                    },
+                    Type: 'Grid',
+                    Title: '',
+                    Fields: [
+                        {
+                            FieldID: 'UUID',
+                            Type: 'TextBox',
+                            Title: 'UUID',
+                            Mandatory: false,
+                            ReadOnly: true,
+                        },
+                        {
+                            FieldID: 'Description',
+                            Type: 'TextBox',
+                            Title: 'Description',
+                            Mandatory: false,
+                            ReadOnly: false,
+                        },
+                        {
+                            FieldID: 'Version',
+                            Type: 'TextBox',
+                            Title: 'Version',
+                            Mandatory: false,
+                            ReadOnly: true,
+                        },
+                        {
+                            FieldID: 'Type',
+                            Type: 'TextBox',
+                            Title: 'Type',
+                            Mandatory: false,
+                            ReadOnly: true,
+                        },
+                        {
+                            FieldID: 'CreationDate',
+                            Type: 'TextBox',
+                            Title: 'Creation Date',
+                            Mandatory: false,
+                            ReadOnly: true,
+                        },
+                    ],
+                    Columns: [
+                        { Width: 15 },
+                        { Width: 30 },
+                        { Width: 15 },
+                        { Width: 20 },
+                        { Width: 20 },
+                    ],
+                    FrozenColumnsCount: 0,
+                    MinimumColumnWidth: 0,
+                },
+                totalCount: 10,
+                items: [
+                    {
+                        UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
+                        Description: 'Manage your add-ons',
+                        Version: 'v1.0',
+                        Type: 1,
+                        CreationDate: '2020-04-22T11:56:09.863Z',
+                    },
+                    {
+                        UUID: 'bd629d5f-a7b4-4d03-9e7c-67865a6d82a9',
+                        Description:
+                            'Manage the addons (install, uninstall, upgrade)',
+                        Version: '0.3.3',
+                        Type: 1,
+                        CreationDate: '2020-06-08T09:39:08.703Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description: 'Run, Schedule and Audit your jobs',
+                        Version: '1.0.53',
+                        Type: 1,
+                        CreationDate: '2020-06-09T07:44:49.883Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description:
+                            'Manages the embeded Node.js app in the CPI',
+                        Version: '0.0.3',
+                        Type: 2,
+                        CreationDate: '2020-05-25T08:31:44.01Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description:
+                            'Periodical monitor for setup, data and usage',
+                        Version: '0.6',
+                        Type: 2,
+                        CreationDate: '2023-05-25T08:31:44.01Z',
+                    },
+                    {
+                        UUID: 'e738c47c-ed34-49a9-9c02-f8fb5209d151',
+                        Description: 'WebApp API Framework',
+                        Version: 'v17.30',
+                        Type: 1,
+                        CreationDate: '2019-04-22T11:56:09.863Z',
+                    },
+                    {
+                        UUID: 'bd629d5f-a7b4-4d03-9e7c-67865a6d82a9',
+                        Description:
+                            'Audit Log',
+                        Version: '0.9',
+                        Type: 1,
+                        CreationDate: '2020-06-08T09:39:08.703Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description: 'Tracking Object Flow',
+                        Version: '1.2.76',
+                        Type: 1,
+                        CreationDate: '2026-06-09T07:44:49.883Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description:
+                            'Editor for Object Types (account, activity, transaction)',
+                        Version: '0.5',
+                        Type: 2,
+                        CreationDate: '2023-11-22T08:31:44.01Z',
+                    },
+                    {
+                        UUID: 'fcb7ced2-4c81-4705-9f2b-89310d45e6c7',
+                        Description:
+                            'Customize your theme',
+                        Version: '1.0',
+                        Type: 2,
+                        CreationDate: '2021-05-20T12:51:44.01Z',
+                    },
+                ],
+            };
+        },
+    },
+};

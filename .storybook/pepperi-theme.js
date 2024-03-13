@@ -60,7 +60,7 @@ export default create({
     inputTextColor: "black",
     inputBorderRadius: 4,
 
-    brandTitle: "Pepperi storybook for ngx-lib ",
+    brandTitle: "Pepperi storybook for ngx-composite-lib ",
     brandUrl: "http://www.pepperi.com",
     brandImage: "https://yonatankof.com/misc/pepp/PepperiLogoGreenBlack.svg",
     brandTarget: "_self",

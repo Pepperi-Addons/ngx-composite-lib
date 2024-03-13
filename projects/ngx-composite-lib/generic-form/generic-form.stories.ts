@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, Story, moduleMetadata,componentWrapperDecorator } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 //import { CommonModule } from '@angular/common';
 import { PepGenericFormModule } from './generic-form.module';
@@ -20,7 +20,10 @@ export default {
                 PepGenericFormModule,
                 SBNgxCompositeHelperModule
             ]
-        })
+        }),
+        componentWrapperDecorator(
+            (story) => `<div style="width: 30rem">${story}</div>`
+        ),
     ],
     title: 'Components/generic-form',
     component: GenericFormComponent,
@@ -242,6 +245,7 @@ export default {
         } 
     },
     parameters: {
+        layout:'centered',
         controls: {
             include: [
                 'dataView',
@@ -270,6 +274,102 @@ const Template: Story<GenericFormComponent> = (args: GenericFormComponent) => ({
     }
 });
 
-export const Base = Template.bind({});
-Base.args = {}
+export const Base: any = Template.bind({});
+Base.storyName = 'Basic';
+Base.args = {};
+
+export const Story1: any = Template.bind({});
+Story1.storyName = 'Single column fields'
+Story1.args = {
+dataView: {
+    Type: 'Form',
+    Hidden: false,
+    Columns: [],
+    Context: {
+        Object: {
+            Resource: 'transactions',
+            InternalID: 0,
+            Name: 'Object Name'
+        },
+        Name: 'Context Name',
+        ScreenSize: 'Tablet',
+        Profile: {
+            InternalID: 0,
+            Name: 'Profile Name'
+        }
+    },
+    Fields: [
+        {
+            FieldID: 'GeneralInformation',
+            Type: 'Separator',
+            Title: 'General Information',
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+                Origin: {
+                    X: 0,
+                    Y: 0
+                },
+                Size: {
+                    Width: 2,
+                    Height: 0
+                }
+            },
+            Style: {
+                Alignment: {
+                    Horizontal: 'Stretch',
+                    Vertical: 'Stretch'
+                }
+            }
+        },
+       
+        {
+            FieldID: 'DeliveryDate',
+            Type: 'DateAndTime',
+            Title: 'Delivery Date',
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+                Origin: {
+                    X: 0,
+                    Y: 1
+                },
+                Size: {
+                    Width: 1,
+                    Height: 0
+                }
+            },
+            Style: {
+                Alignment: {
+                    Horizontal: 'Stretch',
+                    Vertical: 'Stretch'
+                }
+            }
+        },
+        {
+            FieldID: 'TSA Remark',
+            Type: 'TextBox',
+            Title: 'Remark',
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+                Origin: {
+                    X: 1,
+                    Y: 2
+                },
+                Size: {
+                    Width: 1,
+                    Height: 0
+                }
+            },
+            Style: {
+                Alignment: {
+                    Horizontal: 'Stretch',
+                    Vertical: 'Stretch'
+                }
+            }
+        }
+    ],
+    Rows: []
+}};
 

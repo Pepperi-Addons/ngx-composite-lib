@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, Story, moduleMetadata,componentWrapperDecorator } from '@storybook/angular';
 import { ShadowSettingsComponent } from './shadow-settings.component';
 import { PepShadowSettingsModule } from './shadow-settings.module';
 import { SBNgxCompositeHelperModule } from '../../../.storybook/ngx-helper-module';
@@ -14,8 +14,11 @@ export default {
         moduleMetadata({
             imports: [PepShadowSettingsModule, SBNgxCompositeHelperModule],
         }),
+        componentWrapperDecorator(
+            (story) => `<div style="width: 30vw">${story}</div>`
+        ),
     ],
-    title: 'Components/shadow-settings',
+    title: 'Pages-Components/shadow-settings',
     component: ShadowSettingsComponent,
     argTypes: {
         shadow: {
@@ -27,6 +30,7 @@ export default {
         },
     },
     parameters: {
+        layout:'centered',
         controls: {
             include: ['shadow', 'shadowChange'],
         },

@@ -14,7 +14,7 @@ export default {
             imports: [PepShowIfBadgeModule, SBNgxCompositeHelperModule],
         }),
     ],
-    title: 'Components/show-if-badge',
+    title: 'Pages-Components/show-if-badge',
     component: ShowIfBadgeComponent,
     argTypes: {
         showIf: {
@@ -32,7 +32,7 @@ export default {
     },
     parameters: {
         controls: {
-            include: ['showIf', 'iconName', 'backgroundColor'],
+            include: ["showIf","backgroundColor"],
         },
         layout: 'centered',
     },
