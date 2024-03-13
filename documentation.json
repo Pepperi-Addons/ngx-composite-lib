@@ -5342,7 +5342,7 @@
         },
         {
             "name": "FlowPickerButtonComponent",
-            "id": "component-FlowPickerButtonComponent-9373a8316dfb960a0bd5b59b19416ca2cc81b64ce1333791d1f4ca97e7829a5b51d66fbe5c73b7073d79c1d4fd5529ef506fa97133299b476a3f6cbc83ed5826",
+            "id": "component-FlowPickerButtonComponent-f3111c434b5f5e2b5086ae5586328cbc3391fa9b8fb947a6e5aec6b9b06b3b451bf075b4662de296660e1004de710fd19f16cfaf12d44f877861a54461392238",
             "file": "projects/ngx-composite-lib/flow-picker-button/flow-picker-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5365,7 +5365,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
+                    "line": 29,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -5373,8 +5373,17 @@
                     "name": "flowHostObject",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "styleType",
+                    "defaultValue": "'weak'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "PepStyleType",
                     "decorators": []
                 }
             ],
@@ -5384,7 +5393,7 @@
                     "defaultValue": "new EventEmitter<any>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 33,
                     "type": "EventEmitter<any>"
                 }
             ],
@@ -5397,7 +5406,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 13,
                     "modifierKind": [
                         123
                     ]
@@ -5410,7 +5419,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 34,
+                    "line": 36,
                     "modifierKind": [
                         124
                     ]
@@ -5423,7 +5432,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 35,
                     "modifierKind": [
                         124
                     ]
@@ -5443,7 +5452,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -5467,7 +5476,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 62,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5477,7 +5486,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5494,7 +5503,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -5522,7 +5531,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';\r\nimport { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';\r\nimport { FlowPickerService } from './flow-picker-button.service';\r\n\r\n@Component({\r\n    selector: 'pep-flow-picker-button',\r\n    templateUrl: './flow-picker-button.component.html',\r\n    styleUrls: ['./flow-picker-button.component.scss']\r\n})\r\nexport class FlowPickerButtonComponent implements OnInit {\r\n\r\n    private _flowHostObject: any = undefined;\r\n    @Input()\r\n    set flowHostObject(value: any) {\r\n        this._flowHostObject = value;\r\n        \r\n        // If there is a flow key - search for the flow name.\r\n        if (value?.runFlowData?.FlowKey) {\r\n            this.setChoosenFlow(value.runFlowData.FlowKey);\r\n        } else {\r\n            this.initChoosenFlow('');\r\n        }\r\n    }\r\n    get flowHostObject(): any {\r\n        return this._flowHostObject;\r\n    }\r\n\r\n    @Input() disabled = false;\r\n\r\n    @Output()\r\n    flowChange: EventEmitter<any> = new EventEmitter<any>();\r\n    \r\n    protected choosenFlowName = '';\r\n    protected choosenFlowKey = '';\r\n\r\n    constructor(\r\n        private viewContainerRef: ViewContainerRef,\r\n        private addonBlockLoaderService: PepAddonBlockLoaderService, \r\n        private flowPickerService: FlowPickerService) { }\r\n\r\n    private initChoosenFlow(flowKey: string) {\r\n        this.choosenFlowKey = flowKey;\r\n        this.choosenFlowName = '';\r\n    }\r\n\r\n    private setChoosenFlow(flowKey: string) {\r\n        // If this is not the same flow key\r\n        if (this.choosenFlowKey !== flowKey) {\r\n            this.initChoosenFlow(flowKey);\r\n    \r\n            // Search for the flow name.\r\n            this.flowPickerService.searchFlows(flowKey).then(flows => {\r\n                if (flows?.Objects?.length > 0) {\r\n                    this.choosenFlowName = flows.Objects[0].Name || undefined;\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    ngOnInit() {\r\n        // Do nothing.\r\n    }\r\n\r\n    openFlowPickerDialog() {\r\n        const dialogRef = this.addonBlockLoaderService.loadAddonBlockInDialog({\r\n            container: this.viewContainerRef,\r\n            name: 'FlowPicker',\r\n            size: 'large',\r\n            hostObject: this.flowHostObject,\r\n            hostEventsCallback: async (event) => {\r\n                if (event.action === 'on-done') {\r\n                    // If flow key exist - search for the flow name.\r\n                    if (event.data?.FlowKey) {\r\n                        this.setChoosenFlow(event.data.FlowKey);\r\n                        this.flowChange.emit(event.data);\r\n                    } else {\r\n                        this.initChoosenFlow('');\r\n                        this.flowChange.emit(null);\r\n                    }\r\n\r\n                    dialogRef?.close();\r\n                } else if (event.action === 'on-cancel') {\r\n                    dialogRef?.close();\r\n                }\r\n            }\r\n        });\r\n    }\r\n}\r\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';\r\nimport { PepStyleType } from '@pepperi-addons/ngx-lib';\r\nimport { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';\r\nimport { FlowPickerService } from './flow-picker-button.service';\r\n\r\n@Component({\r\n    selector: 'pep-flow-picker-button',\r\n    templateUrl: './flow-picker-button.component.html',\r\n    styleUrls: ['./flow-picker-button.component.scss']\r\n})\r\nexport class FlowPickerButtonComponent implements OnInit {\r\n\r\n    private _flowHostObject: any = undefined;\r\n    @Input()\r\n    set flowHostObject(value: any) {\r\n        this._flowHostObject = value;\r\n        \r\n        // If there is a flow key - search for the flow name.\r\n        if (value?.runFlowData?.FlowKey) {\r\n            this.setChoosenFlow(value.runFlowData.FlowKey);\r\n        } else {\r\n            this.initChoosenFlow('');\r\n        }\r\n    }\r\n    get flowHostObject(): any {\r\n        return this._flowHostObject;\r\n    }\r\n\r\n    @Input() disabled = false;\r\n    @Input() styleType: PepStyleType = 'weak';\r\n    \r\n    @Output()\r\n    flowChange: EventEmitter<any> = new EventEmitter<any>();\r\n    \r\n    protected choosenFlowName = '';\r\n    protected choosenFlowKey = '';\r\n\r\n    constructor(\r\n        private viewContainerRef: ViewContainerRef,\r\n        private addonBlockLoaderService: PepAddonBlockLoaderService, \r\n        private flowPickerService: FlowPickerService) { }\r\n\r\n    private initChoosenFlow(flowKey: string) {\r\n        this.choosenFlowKey = flowKey;\r\n        this.choosenFlowName = '';\r\n    }\r\n\r\n    private setChoosenFlow(flowKey: string) {\r\n        // If this is not the same flow key\r\n        if (this.choosenFlowKey !== flowKey) {\r\n            this.initChoosenFlow(flowKey);\r\n    \r\n            // Search for the flow name.\r\n            this.flowPickerService.searchFlows(flowKey).then(flows => {\r\n                if (flows?.Objects?.length > 0) {\r\n                    this.choosenFlowName = flows.Objects[0].Name || undefined;\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    ngOnInit() {\r\n        // Do nothing.\r\n    }\r\n\r\n    openFlowPickerDialog() {\r\n        const dialogRef = this.addonBlockLoaderService.loadAddonBlockInDialog({\r\n            container: this.viewContainerRef,\r\n            name: 'FlowPicker',\r\n            size: 'large',\r\n            hostObject: this.flowHostObject,\r\n            hostEventsCallback: async (event) => {\r\n                if (event.action === 'on-done') {\r\n                    // If flow key exist - search for the flow name.\r\n                    if (event.data?.FlowKey) {\r\n                        this.setChoosenFlow(event.data.FlowKey);\r\n                        this.flowChange.emit(event.data);\r\n                    } else {\r\n                        this.initChoosenFlow('');\r\n                        this.flowChange.emit(null);\r\n                    }\r\n\r\n                    dialogRef?.close();\r\n                } else if (event.action === 'on-cancel') {\r\n                    dialogRef?.close();\r\n                }\r\n            }\r\n        });\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -5556,7 +5565,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 34,
+                "line": 36,
                 "jsdoctags": [
                     {
                         "name": "viewContainerRef",
@@ -5608,7 +5617,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 14,
+                        "line": 15,
                         "jsdoctags": [
                             {
                                 "name": "value",
@@ -5625,11 +5634,11 @@
                         "name": "flowHostObject",
                         "type": "any",
                         "returnType": "any",
-                        "line": 24
+                        "line": 25
                     }
                 }
             },
-            "templateData": "<pep-button class=\"flow-button\" \r\n    [value]=\"choosenFlowKey ? (choosenFlowName || choosenFlowKey) : ('FLOW_PICKER_BUTTON.CHOOSE_FLOW' | translate)\" \r\n    [disabled]=\"disabled\" (buttonClick)=\"openFlowPickerDialog()\">\r\n</pep-button>"
+            "templateData": "<pep-button class=\"flow-button\" [styleType]=\"styleType\"\r\n    [value]=\"choosenFlowKey ? (choosenFlowName || choosenFlowKey) : ('FLOW_PICKER_BUTTON.CHOOSE_FLOW' | translate)\" \r\n    [disabled]=\"disabled\" (buttonClick)=\"openFlowPickerDialog()\">\r\n</pep-button>"
         },
         {
             "name": "GenericFormComponent",
@@ -6447,7 +6456,7 @@
         },
         {
             "name": "GenericListComponent",
-            "id": "component-GenericListComponent-78b8dddbc03a8de0202dc75ac84c5c974aeca0e2e773cb31d02f99f9364484fc2ff5b86ccf6b2f798c86d33f0c1a4c54abf3c43c9e69d089bdff93ba37efc831",
+            "id": "component-GenericListComponent-03b55e65fb24d9fd625fc9367392015a3600db847729f6e94566463346274ff1242051902bd23e49e220e782d7bbf2a261a3f8e5261943046ea130cadef6caa2",
             "file": "projects/ngx-composite-lib/generic-list/generic-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6494,7 +6503,7 @@
                     "defaultValue": "new Array<PepBreadCrumbItem>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 175,
+                    "line": 178,
                     "type": "PepBreadCrumbItem[]",
                     "decorators": []
                 },
@@ -6503,7 +6512,7 @@
                     "defaultValue": "-1",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 148,
+                    "line": 151,
                     "type": "number",
                     "decorators": []
                 },
@@ -6546,7 +6555,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 151,
+                    "line": 154,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -6573,7 +6582,7 @@
                     "defaultValue": "{\r\n        type: 'scroll'\r\n    }",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 154,
+                    "line": 157,
                     "type": "IPepGenericListPager",
                     "decorators": []
                 },
@@ -6582,7 +6591,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 181,
+                    "line": 184,
                     "type": "number",
                     "decorators": []
                 },
@@ -6591,7 +6600,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 178,
+                    "line": 181,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -6618,7 +6627,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 172,
+                    "line": 175,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -6626,7 +6635,7 @@
                     "name": "smartFilter",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 165,
+                    "line": 168,
                     "type": "IPepGenericListSmartFilter",
                     "decorators": []
                 },
@@ -6634,7 +6643,7 @@
                     "name": "sorting",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 145,
+                    "line": 148,
                     "type": "IPepListSortingData | undefined",
                     "decorators": []
                 },
@@ -6648,11 +6657,20 @@
                     "decorators": []
                 },
                 {
+                    "name": "supportSortingArray",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 145,
+                    "type": "string[] | undefined",
+                    "decorators": []
+                },
+                {
                     "name": "tableViewType",
                     "defaultValue": "'regular'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 159,
+                    "line": 162,
                     "type": "PepListTableViewType",
                     "decorators": []
                 },
@@ -6679,7 +6697,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 162,
+                    "line": 165,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -6690,7 +6708,7 @@
                     "defaultValue": "new EventEmitter<IPepBreadCrumbItemClickEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 190,
+                    "line": 193,
                     "type": "EventEmitter"
                 },
                 {
@@ -6698,7 +6716,7 @@
                     "defaultValue": "new EventEmitter<IPepFormFieldClickEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 184,
+                    "line": 187,
                     "type": "EventEmitter"
                 },
                 {
@@ -6706,7 +6724,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 196,
+                    "line": 199,
                     "type": "EventEmitter<void>"
                 },
                 {
@@ -6714,7 +6732,7 @@
                     "defaultValue": "new EventEmitter<IPepListStartIndexChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 193,
+                    "line": 196,
                     "type": "EventEmitter"
                 },
                 {
@@ -6722,7 +6740,7 @@
                     "defaultValue": "new EventEmitter<IPepFormFieldValueChangeEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 187,
+                    "line": 190,
                     "type": "EventEmitter"
                 }
             ],
@@ -6735,7 +6753,7 @@
                     "type": "IPepSmartFilterData[]",
                     "optional": false,
                     "description": "",
-                    "line": 224,
+                    "line": 227,
                     "modifierKind": [
                         123
                     ]
@@ -6761,7 +6779,7 @@
                     "type": "DataView",
                     "optional": false,
                     "description": "",
-                    "line": 209,
+                    "line": 212,
                     "modifierKind": [
                         123
                     ]
@@ -6774,7 +6792,7 @@
                     "type": "Subscription",
                     "optional": false,
                     "description": "",
-                    "line": 207,
+                    "line": 210,
                     "modifierKind": [
                         123
                     ]
@@ -6786,7 +6804,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 212,
+                    "line": 215,
                     "modifierKind": [
                         123
                     ]
@@ -6811,7 +6829,7 @@
                     "type": "Subscription",
                     "optional": false,
                     "description": "",
-                    "line": 206,
+                    "line": 209,
                     "modifierKind": [
                         123
                     ]
@@ -6824,7 +6842,7 @@
                     "type": "IPepListSortingChangeEvent | undefined",
                     "optional": false,
                     "description": "",
-                    "line": 225,
+                    "line": 228,
                     "modifierKind": [
                         123
                     ]
@@ -6836,7 +6854,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 214
+                    "line": 217
                 },
                 {
                     "name": "menuActions",
@@ -6846,7 +6864,7 @@
                     "type": "Array<PepMenuItem>",
                     "optional": false,
                     "description": "",
-                    "line": 228
+                    "line": 231
                 },
                 {
                     "name": "menuHandlers",
@@ -6856,7 +6874,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "",
-                    "line": 227
+                    "line": 230
                 },
                 {
                     "name": "onLoad",
@@ -6866,7 +6884,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 213
+                    "line": 216
                 },
                 {
                     "name": "search",
@@ -6894,7 +6912,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 216
+                    "line": 219
                 },
                 {
                     "name": "showEmptyState",
@@ -6904,7 +6922,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 218
+                    "line": 221
                 },
                 {
                     "name": "showSmartFilter",
@@ -6914,7 +6932,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 217
+                    "line": 220
                 },
                 {
                     "name": "smartFilters",
@@ -6924,7 +6942,7 @@
                     "type": "IPepSmartFilters",
                     "optional": false,
                     "description": "",
-                    "line": 219
+                    "line": 222
                 },
                 {
                     "name": "smartFiltersComponent",
@@ -6952,7 +6970,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 215
+                    "line": 218
                 }
             ],
             "methodsClass": [
@@ -6969,7 +6987,7 @@
                     "optional": false,
                     "returnType": "ObjectsDataRow | null",
                     "typeParameters": [],
-                    "line": 543,
+                    "line": 549,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6990,7 +7008,7 @@
                     "optional": false,
                     "returnType": "Promise<PepMenuItem[]>",
                     "typeParameters": [],
-                    "line": 421,
+                    "line": 427,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7004,7 +7022,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 440,
+                    "line": 446,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7017,7 +7035,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 559,
+                    "line": 565,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7027,7 +7045,7 @@
                     "optional": false,
                     "returnType": "PepSelectionData | null",
                     "typeParameters": [],
-                    "line": 551,
+                    "line": 557,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7044,7 +7062,7 @@
                     "optional": false,
                     "returnType": "UIControl",
                     "typeParameters": [],
-                    "line": 402,
+                    "line": 408,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7068,7 +7086,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 250,
+                    "line": 253,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7082,7 +7100,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 454,
+                    "line": 460,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7095,7 +7113,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 459,
+                    "line": 465,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7121,7 +7139,7 @@
                     "optional": false,
                     "returnType": "Promise<PepRowData[]>",
                     "typeParameters": [],
-                    "line": 464,
+                    "line": 470,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7155,7 +7173,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 413,
+                    "line": 419,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7168,7 +7186,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 370,
+                    "line": 375,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nloads inputs in case they are provided and merge with selector inputs\n",
@@ -7179,8 +7197,8 @@
                     "jsdoctags": [
                         {
                             "tagName": {
-                                "pos": 13272,
-                                "end": 13279,
+                                "pos": 13473,
+                                "end": 13480,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -7197,7 +7215,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 608,
+                    "line": 614,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7207,7 +7225,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 246,
+                    "line": 249,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7224,7 +7242,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 563,
+                    "line": 569,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7252,7 +7270,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 586,
+                    "line": 592,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7280,7 +7298,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 582,
+                    "line": 588,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7308,7 +7326,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 599,
+                    "line": 605,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7329,7 +7347,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 604,
+                    "line": 610,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7346,7 +7364,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 518,
+                    "line": 524,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nloads virtual scroll items from api\n",
@@ -7380,7 +7398,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 531,
+                    "line": 537,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nloads paging bulk from api\n",
@@ -7414,7 +7432,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 570,
+                    "line": 576,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7442,7 +7460,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 575,
+                    "line": 581,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7470,7 +7488,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 594,
+                    "line": 600,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7498,7 +7516,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 590,
+                    "line": 596,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7519,7 +7537,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 396,
+                    "line": 402,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\ndetemines whether empty state is to be displayed\n",
@@ -7554,7 +7572,7 @@
                     "optional": false,
                     "returnType": "Promise<PepRowData[]>",
                     "typeParameters": [],
-                    "line": 492,
+                    "line": 498,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7602,7 +7620,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n    Component,\r\n    OnInit,\r\n    ViewChild,\r\n    Input,\r\n    Output,\r\n    EventEmitter,\r\n    ViewContainerRef\r\n} from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport {\r\n    PepDataConvertorService,\r\n    PepLayoutService,\r\n    ObjectsDataRow,\r\n    PepGuid,\r\n    UIControl,\r\n    PepLoaderService,\r\n    PepRowData,\r\n    PepSessionService\r\n} from '@pepperi-addons/ngx-lib';\r\nimport { Subscription } from 'rxjs';\r\nimport { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepListComponent,\r\n    PepSelectionData,\r\n    IPepListLoadPageEvent,\r\n    PepListSelectionType,\r\n    IPepListSortingChangeEvent,\r\n    DEFAULT_PAGE_SIZE,\r\n    IPepListLoadItemsEvent,\r\n    PepListTableViewType,\r\n    IPepListSortingData,\r\n    IPepListStartIndexChangeEvent\r\n} from '@pepperi-addons/ngx-lib/list';\r\nimport {\r\n    PepMenuItem,\r\n    IPepMenuItemClickEvent,\r\n} from '@pepperi-addons/ngx-lib/menu';\r\nimport { IPepFormFieldValueChangeEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepBreadCrumbItem,\r\n    IPepBreadCrumbItemClickEvent\r\n} from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { IPepSearchClickEvent, PepSearchComponent } from '@pepperi-addons/ngx-lib/search';\r\n\r\nimport {\r\n    DataView,\r\n    GridDataView\r\n} from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport {\r\n    IPepGenericListInitData,\r\n    IPepGenericListDataSource,\r\n    IPepGenericListPager,\r\n    IPepGenericListActions,\r\n    IPepGenericListSmartFilter,\r\n    IPepSmartFilters,\r\n    IPepGenericListEmptyState\r\n} from './generic-list.model';\r\nimport { PepGenericListService } from './generic-list.service';\r\nimport { DataViewConverter } from '@pepperi-addons/data-views';\r\nimport {\r\n    IPepSmartFilterData,\r\n    PepSmartFilterBaseField,\r\n    PepSmartFiltersComponent\r\n} from '@pepperi-addons/ngx-lib/smart-filters';\r\n\r\n\r\n@Component({\r\n    selector: 'pep-generic-list',\r\n    templateUrl: './generic-list.component.html',\r\n    styleUrls: ['./generic-list.component.scss', './generic-list.component.theme.scss'],\r\n    providers: [PepGenericListService]\r\n})\r\nexport class GenericListComponent implements OnInit {\r\n    @ViewChild('search') search: PepSearchComponent | undefined;\r\n    @ViewChild('smartFiltersComponent') smartFiltersComponent: PepSmartFiltersComponent | undefined;\r\n\r\n    private _pepListContainer: ViewContainerRef | undefined;\r\n    @ViewChild('pepListContainer', { read: ViewContainerRef })\r\n    set pepListContainer(val: ViewContainerRef) {\r\n        this._pepListContainer = val;\r\n    }\r\n\r\n    private _dataSource: IPepGenericListDataSource = {\r\n        init: async (params: any) => {\r\n            return {\r\n                dataView: {\r\n                    Type: 'Grid'\r\n                },\r\n                totalCount: -1,\r\n                items: []\r\n            }\r\n        }\r\n    }\r\n    @Input()\r\n    set dataSource(val: IPepGenericListDataSource) {\r\n        this._dataSource = val;\r\n        this._sorting = undefined;\r\n        this.initSearch();\r\n        this.initSmartSearch();\r\n        this.initList();\r\n    }\r\n\r\n    @Input()\r\n    actions: IPepGenericListActions = {\r\n        get: async (data: any) => {\r\n            return []\r\n        }\r\n    };\r\n\r\n    @Input()\r\n    uuidMapping = 'key';\r\n\r\n    @Input()\r\n    disabled = false;\r\n\r\n    @Input()\r\n    addPadding = false;\r\n\r\n    @Input()\r\n    title = '';\r\n\r\n    @Input()\r\n    description = '';\r\n\r\n    @Input()\r\n    inline = false;\r\n\r\n    @Input()\r\n    showSearch = false;\r\n\r\n    @Input()\r\n    noDataFoundMsg = '';\r\n\r\n    @Input()\r\n    emptyState: IPepGenericListEmptyState | undefined;\r\n\r\n    @Input()\r\n    selectionType: PepListSelectionType = 'multi';\r\n\r\n    @Input()\r\n    supportSorting = false;\r\n\r\n    @Input()\r\n    sorting: IPepListSortingData | undefined;\r\n\r\n    @Input()\r\n    cacheSize = -1;\r\n\r\n    @Input()\r\n    hideSelectAll = false;\r\n    \r\n    @Input()\r\n    pager: IPepGenericListPager = {\r\n        type: 'scroll'\r\n    }\r\n\r\n    @Input()\r\n    tableViewType: PepListTableViewType = 'regular';\r\n\r\n    @Input()\r\n    zebraStripes = false;\r\n\r\n    @Input()\r\n    set smartFilter(val: IPepGenericListSmartFilter) {\r\n        this.smartFilters = this._genericListService.convertToSmartFilter(val);\r\n        this._appliedFilters = this.smartFilters.data || [];\r\n        this.showSmartFilter = this.smartFilters.fields.length > 0; \r\n    }\r\n\r\n    @Input()\r\n    showTopBar = false;\r\n\r\n    @Input()\r\n    breadCrumbsItems: PepBreadCrumbItem[] = new Array<PepBreadCrumbItem>();\r\n\r\n    @Input()\r\n    selectAll = false\r\n\r\n    @Input()\r\n    scrollPosition = 0\r\n\r\n    @Output()\r\n    fieldClick = new EventEmitter<IPepFormFieldClickEvent>();\r\n\r\n    @Output()\r\n    valueChange = new EventEmitter<IPepFormFieldValueChangeEvent>();\r\n\r\n    @Output()\r\n    breadCrumbItemClick = new EventEmitter<IPepBreadCrumbItemClickEvent>();\r\n\r\n    @Output()\r\n    startIndexChange = new EventEmitter<IPepListStartIndexChangeEvent>()\r\n\r\n    @Output()\r\n    listLoad: EventEmitter<void> = new EventEmitter<void>();\r\n\r\n    set pepList(val: PepListComponent) {\r\n        this._pepList = val;\r\n    }\r\n\r\n    get pepList() {\r\n        return this._pepList;\r\n    }\r\n\r\n    private _resize$: Subscription = new Subscription();\r\n    private _loader$: Subscription = new Subscription();\r\n\r\n    private _dataView: DataView = {\r\n        Type: 'Grid'\r\n    };\r\n    private _pepList: any;\r\n    onLoad = true;\r\n    listInputs: any;\r\n    totalRowCount = -1;\r\n    searchString = '';\r\n    showSmartFilter = false;\r\n    showEmptyState = false;\r\n    smartFilters: IPepSmartFilters = {\r\n        fields: [],\r\n        data: [],\r\n        title: 'Filters'\r\n    };\r\n    private _appliedFilters: IPepSmartFilterData[] = [];\r\n    private _sorting: IPepListSortingChangeEvent | undefined = undefined;\r\n\r\n    menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};\r\n    menuActions: Array<PepMenuItem> = [];\r\n\r\n    constructor(\r\n        private _dataConvertorService: PepDataConvertorService,\r\n        private _layoutService: PepLayoutService,\r\n        private _loaderService: PepLoaderService,\r\n        private _translate: TranslateService,\r\n        private _genericListService: PepGenericListService,\r\n        private _sessionService: PepSessionService\r\n    ) {\r\n        this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {            \r\n            //            \r\n        });\r\n        this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {\r\n            //\r\n        });\r\n    }\r\n\r\n    ngOnInit() {\r\n        //\r\n    }\r\n\r\n    private async initList() {\r\n        this.onLoad = true;\r\n        setTimeout(async () => { //making sure all input data is available\r\n            if (this._dataSource) {\r\n                //merge selector inputs with callback inputs\r\n                this.loadTableInputs();\r\n\r\n                let fromIndex = 0;\r\n                let toIndex = 0;\r\n\r\n                if (this.listInputs.pager.type === 'pages') {\r\n                    fromIndex = this.listInputs.pager.size * this.listInputs.pager.index;\r\n                    toIndex = fromIndex + (this.listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;\r\n                } else {\r\n                    toIndex = 100;//TO DO - get value from - this.customList.getTopItems()\r\n                }\r\n\r\n                const data = await this.loadData(fromIndex, toIndex);\r\n                \r\n                if (this.listInputs?.emptyState?.show === true) {\r\n                    this.setEmptyState();\r\n                }\r\n                this.onLoad = false;\r\n                //show empty state\r\n                if (this.showEmptyState) {\r\n                    if (!this.listInputs.emptyState.title) {                        \r\n                        this._translate.get('GENERIC_LIST.EMPTY_STATE.TITLE').subscribe(text => {                            \r\n                            this.listInputs.emptyState.title = text;\r\n                        });\r\n                    }\r\n                    if (!this.listInputs.emptyState.description) {                        \r\n                        this._translate.get('GENERIC_LIST.EMPTY_STATE.DESCRIPTION').subscribe(text => {                            \r\n                            this.listInputs.emptyState.description = text;\r\n                        });\r\n                    }\r\n                    return;\r\n                }\r\n                setTimeout(async () => {\r\n                    if (this._pepListContainer) {\r\n                        if (this._pepListContainer.length > 0) {\r\n                            this._pepListContainer.remove();\r\n                        }\r\n                        const { PepListComponent } = await import('@pepperi-addons/ngx-lib/list');\r\n                        const componentRef = this._pepListContainer.createComponent(PepListComponent);\r\n\r\n                        this.pepList = componentRef.instance;\r\n                        \r\n                        componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);\r\n                        componentRef.instance.tableViewType = this.listInputs.tableViewType;\r\n                        componentRef.instance.zebraStripes = this.listInputs.zebraStripes;\r\n                        if (this.disabled) {\r\n                            componentRef.instance.disabled = true;\r\n                            componentRef.instance.lockItemInnerEvents = true;\r\n                        }\r\n                        componentRef.instance.supportSorting = this.listInputs.supportSorting;\r\n                        componentRef.instance.sorting = this.listInputs.sorting;\r\n                        componentRef.instance.cacheSize = this.listInputs.cacheSize;\r\n\r\n                        componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;\r\n                        componentRef.instance.hideAllSelectionInMulti = this.listInputs.hideSelectAll;\r\n\r\n                        componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';\r\n                        componentRef.instance.pagerType = this.listInputs.pager.type;\r\n                        if (this.listInputs.pager.type === 'pages') {\r\n                            componentRef.instance.pageSize = this.listInputs.pager?.size || DEFAULT_PAGE_SIZE;\r\n                            componentRef.instance.pageIndex = this.listInputs.pager?.index || 0;\r\n                        }\r\n                        if(this.selectionType == \"multi\" && this.selectAll){\r\n                            this._sessionService.setObject('AllSelected', true)\r\n                        }\r\n                        componentRef.instance.noDataFoundMsg = this.listInputs.noDataFoundMsg;\r\n                        componentRef.instance.startIndexChange.subscribe($event => {\r\n                            this.startIndexChange.emit($event)\r\n                        })\r\n                        componentRef.instance.fieldClick.subscribe(($event) => {\r\n                            this.onCustomizeFieldClick($event);\r\n                        });\r\n                        componentRef.instance.selectedItemsChange.subscribe(($event) => {\r\n                            this.onSelectedItemsChanged($event);\r\n                        });\r\n                        componentRef.instance.loadItems.subscribe(($event) => {\r\n                            this.onLoadItems($event);\r\n                        });\r\n                        componentRef.instance.loadPage.subscribe(($event) => {\r\n                            this.onLoadPage($event);\r\n                        });\r\n                        componentRef.instance.valueChange.subscribe(($event) => {\r\n                            this.onValueChanged($event);\r\n                        });\r\n                        componentRef.instance.sortingChange.subscribe(($event) => {\r\n                            this.onSortingChange($event);\r\n                        });\r\n                        componentRef.instance.listLoad.subscribe(($event) => {\r\n                            this.onSelectedItemsChanged(this._pepList.selectedItems.length);\r\n                            this.onListLoad();\r\n                        });\r\n                        let convertedList: ObjectsDataRow[] = [];\r\n                        if (data) {\r\n                            if (data?.length) {\r\n                                convertedList = this._dataConvertorService.convertListData(data);\r\n                            }\r\n                            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(this._dataView));\r\n                            const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n                            if (selectedItems?.length) {\r\n                                componentRef.instance.setSelectedIds(selectedItems);\r\n                            }                           \r\n                            \r\n                            componentRef.instance.initListData(uiControl, this.totalRowCount, convertedList);\r\n                        }\r\n                        componentRef.instance.scrollToIndex(this.scrollPosition)\r\n                    }\r\n                }, 0);\r\n            }\r\n        }, 0);\r\n    }\r\n\r\n    /**\r\n     * loads inputs in case they are provided and merge with selector inputs\r\n     * @returns merged pep-list inputs\r\n     */\r\n    private loadTableInputs() {\r\n        this.listInputs = {\r\n            supportSorting: this.supportSorting,\r\n            sorting: this.sorting,\r\n            cacheSize: this.cacheSize,\r\n            hideSelectAll: this.hideSelectAll,\r\n            selectionType: this.selectionType,\r\n            pager: this.pager,\r\n            noDataFoundMsg: this.noDataFoundMsg,\r\n            tableViewType: this.tableViewType,\r\n            zebraStripes: this.zebraStripes,\r\n            emptyState: this.emptyState,\r\n            selectAll: this.selectAll\r\n        };\r\n        if (this._dataSource.inputs) {\r\n            Object.entries(this._dataSource.inputs).forEach((item: any) => {\r\n                if (this._genericListService.hasProperty(this.listInputs, item[0])) {\r\n                    this.listInputs[item[0]] = item[1];\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    /**\r\n     * detemines whether empty state is to be displayed\r\n     */\r\n    private setEmptyState() {\r\n        this.showEmptyState = this.totalRowCount === 0 &&\r\n            this.searchString === '' &&\r\n            this._appliedFilters.length === 0;\r\n    }\r\n\r\n    private getUiControl(data: any): UIControl {\r\n        const uiControl = new UIControl();\r\n        uiControl.ControlFields = [];\r\n\r\n        if (data?.ControlFields) {\r\n            uiControl.ControlFields = data.ControlFields.map((field: any) => this._genericListService.convertToUiControlField(field));\r\n        }\r\n\r\n        return uiControl;\r\n    }\r\n\r\n    private loadMenuItems(): void { //TODO\r\n        if (this.listInputs.selectionType !== 'none') {\r\n            this.getMenuActions().then(\r\n                x => this.menuActions = x\r\n            );\r\n        }\r\n    }\r\n\r\n    private async getMenuActions(): Promise<PepMenuItem[]> {\r\n        const res: PepMenuItem[] = [];\r\n        const result = this.getMenuObjects();\r\n        if (result.success) {\r\n            const actions = await this.actions.get(result.data);\r\n            this.menuHandlers = {};\r\n            actions?.forEach(item => {\r\n                const uuid = PepGuid.newGuid();\r\n                this.menuHandlers[uuid] = item.handler;\r\n                res.push({\r\n                    key: uuid,\r\n                    text: item.title\r\n                })\r\n            })\r\n        }\r\n\r\n        return res;\r\n    }\r\n\r\n    private getMenuObjects() {\r\n        const menuObjects: any = {\r\n            success: false,\r\n            data: new PepSelectionData()\r\n        };\r\n\r\n        if (this.pepList) {\r\n            menuObjects.success = true;\r\n            menuObjects.data = this.pepList.getSelectedItemsData();\r\n        }\r\n\r\n        return menuObjects;\r\n    }\r\n\r\n    private initSearch() {\r\n        this.searchString = '';\r\n        this.search?.initSearch();\r\n    }\r\n\r\n    private initSmartSearch() {\r\n        this._appliedFilters = [];\r\n        this.smartFiltersComponent?.clearFilters();\r\n    }\r\n\r\n    private async loadData(fromIndex: number, toIndex: number): Promise<PepRowData[]> {\r\n        this._loaderService.show();\r\n        let converedData: PepRowData[] = [];\r\n        const data: IPepGenericListInitData = await this._dataSource.init({\r\n            searchString: this.searchString || undefined,\r\n            filters: this._appliedFilters.length ? this._appliedFilters : undefined,\r\n            sorting: this._sorting || undefined,\r\n            fromIndex: fromIndex,\r\n            toIndex: toIndex\r\n        });        \r\n        this._loaderService.hide();\r\n\r\n        // Set the total count\r\n        this.totalRowCount = data?.totalCount || 0;\r\n        this.setEmptyState();\r\n\r\n        if (data) {\r\n            this._dataView = data.dataView;\r\n\r\n            if (data.items?.length > 0 && !data.isPepRowData) {                \r\n                converedData = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));\r\n            }\r\n        }\r\n\r\n        return converedData;\r\n    }\r\n\r\n\r\n    private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined): Promise<PepRowData[]> {\r\n        if (this._dataSource.update) {\r\n            this._loaderService.show();\r\n            let converedData: PepRowData[] = [];\r\n            const dataList = await this._dataSource.update({\r\n                searchString: this.searchString || undefined,\r\n                filters: this._appliedFilters.length ? this._appliedFilters : undefined,\r\n                sorting: this._sorting || undefined,\r\n                fromIndex: fromIndex,\r\n                toIndex: toIndex,\r\n                pageIndex: pageIndex\r\n            });\r\n            this._loaderService.hide();\r\n\r\n            if (dataList?.length > 0) {\r\n                converedData = dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));\r\n            } \r\n            return converedData;\r\n        } else {\r\n            return [];\r\n        }\r\n    }\r\n\r\n    /**\r\n     * loads virtual scroll items from api\r\n     */\r\n    private async onLoadItems(event: IPepListLoadItemsEvent) {\r\n        const list = await this.updateDataList(event.fromIndex, event.toIndex);\r\n        const convertedList = this._dataConvertorService.convertListData(list);\r\n        const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n        if (selectedItems?.length) {\r\n            this.pepList.setSelectedIds(selectedItems);\r\n        }\r\n        this.pepList.updateItems(convertedList, event);\r\n    }\r\n\r\n    /**\r\n     * loads paging bulk from api\r\n     */\r\n    private async onLoadPage(event: IPepListLoadPageEvent) {\r\n        const fromIndex = event.pageIndex * event.pageSize;\r\n        const toIndex = Math.min(fromIndex + event.pageSize - 1, this.totalRowCount - 1);\r\n        const list = await this.updateDataList(fromIndex, toIndex, event.pageIndex);\r\n        const convertedList = this._dataConvertorService.convertListData(list);\r\n        const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n        if (selectedItems?.length) {\r\n            this.pepList.setSelectedIds(selectedItems);\r\n        }\r\n        this.pepList.updatePage(convertedList, event);\r\n    }\r\n\r\n    getItemById(id: string): ObjectsDataRow | null {\r\n        if (this.pepList) {\r\n            return this._pepList.getItemDataByID(id);\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    getSelectedItems(): PepSelectionData | null {\r\n        if (this.pepList) {\r\n            return this._pepList.getSelectedItemsData();\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    getPageIndex() {\r\n        return this.pepList.pageIndex;\r\n    }\r\n\r\n    onActionItemClicked(action: IPepMenuItemClickEvent): void {\r\n        const result = this.getMenuObjects();\r\n        if (result.success) {\r\n            this.menuHandlers[action.source.key](result.data);\r\n        }\r\n    }\r\n\r\n    onSearchChanged(event: IPepSearchClickEvent) {\r\n        this.searchString = event.value;\r\n        this.initList();\r\n    }\r\n\r\n    onSelectedItemsChanged(selectedRowsCount: number) {\r\n        //loading menu items after pep-list selected items are updated\r\n        setTimeout(() => {\r\n            this.loadMenuItems();\r\n        }, 0);\r\n    }\r\n\r\n    onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {\r\n        this.fieldClick.emit(fieldClickEvent);\r\n    }\r\n\r\n    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {\r\n        this.breadCrumbItemClick.emit(event);\r\n    }\r\n\r\n    onValueChanged(event: IPepFormFieldValueChangeEvent) {\r\n        this.valueChange.emit(event);\r\n    }\r\n\r\n    onSortingChange(event: IPepListSortingChangeEvent) {\r\n        this._sorting = event;\r\n        this.initList();\r\n    }\r\n\r\n    onFiltersChange(filters: IPepSmartFilterData[]) {\r\n        this._appliedFilters = filters;\r\n        this.initList();\r\n    }\r\n\r\n    onListLoad(): void {\r\n        this.listLoad.emit();\r\n    }\r\n\r\n    ngOnDestroy() {\r\n        if (this._resize$) {\r\n            this._resize$.unsubscribe();\r\n        }\r\n        if (this._loader$) {\r\n            this._loader$.unsubscribe();\r\n        }\r\n    }\r\n\r\n}\r\n",
+            "sourceCode": "import {\r\n    Component,\r\n    OnInit,\r\n    ViewChild,\r\n    Input,\r\n    Output,\r\n    EventEmitter,\r\n    ViewContainerRef\r\n} from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\nimport {\r\n    PepDataConvertorService,\r\n    PepLayoutService,\r\n    ObjectsDataRow,\r\n    PepGuid,\r\n    UIControl,\r\n    PepLoaderService,\r\n    PepRowData,\r\n    PepSessionService\r\n} from '@pepperi-addons/ngx-lib';\r\nimport { Subscription } from 'rxjs';\r\nimport { IPepFormFieldClickEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepListComponent,\r\n    PepSelectionData,\r\n    IPepListLoadPageEvent,\r\n    PepListSelectionType,\r\n    IPepListSortingChangeEvent,\r\n    DEFAULT_PAGE_SIZE,\r\n    IPepListLoadItemsEvent,\r\n    PepListTableViewType,\r\n    IPepListSortingData,\r\n    IPepListStartIndexChangeEvent\r\n} from '@pepperi-addons/ngx-lib/list';\r\nimport {\r\n    PepMenuItem,\r\n    IPepMenuItemClickEvent,\r\n} from '@pepperi-addons/ngx-lib/menu';\r\nimport { IPepFormFieldValueChangeEvent } from '@pepperi-addons/ngx-lib/form';\r\nimport {\r\n    PepBreadCrumbItem,\r\n    IPepBreadCrumbItemClickEvent\r\n} from '@pepperi-addons/ngx-lib/bread-crumbs';\r\nimport { IPepSearchClickEvent, PepSearchComponent } from '@pepperi-addons/ngx-lib/search';\r\n\r\nimport {\r\n    DataView,\r\n    GridDataView\r\n} from '@pepperi-addons/papi-sdk/dist/entities/data-view';\r\nimport {\r\n    IPepGenericListInitData,\r\n    IPepGenericListDataSource,\r\n    IPepGenericListPager,\r\n    IPepGenericListActions,\r\n    IPepGenericListSmartFilter,\r\n    IPepSmartFilters,\r\n    IPepGenericListEmptyState\r\n} from './generic-list.model';\r\nimport { PepGenericListService } from './generic-list.service';\r\nimport { DataViewConverter } from '@pepperi-addons/data-views';\r\nimport {\r\n    IPepSmartFilterData,\r\n    PepSmartFilterBaseField,\r\n    PepSmartFiltersComponent\r\n} from '@pepperi-addons/ngx-lib/smart-filters';\r\n\r\n\r\n@Component({\r\n    selector: 'pep-generic-list',\r\n    templateUrl: './generic-list.component.html',\r\n    styleUrls: ['./generic-list.component.scss', './generic-list.component.theme.scss'],\r\n    providers: [PepGenericListService]\r\n})\r\nexport class GenericListComponent implements OnInit {\r\n    @ViewChild('search') search: PepSearchComponent | undefined;\r\n    @ViewChild('smartFiltersComponent') smartFiltersComponent: PepSmartFiltersComponent | undefined;\r\n\r\n    private _pepListContainer: ViewContainerRef | undefined;\r\n    @ViewChild('pepListContainer', { read: ViewContainerRef })\r\n    set pepListContainer(val: ViewContainerRef) {\r\n        this._pepListContainer = val;\r\n    }\r\n\r\n    private _dataSource: IPepGenericListDataSource = {\r\n        init: async (params: any) => {\r\n            return {\r\n                dataView: {\r\n                    Type: 'Grid'\r\n                },\r\n                totalCount: -1,\r\n                items: []\r\n            }\r\n        }\r\n    }\r\n    @Input()\r\n    set dataSource(val: IPepGenericListDataSource) {\r\n        this._dataSource = val;\r\n        this._sorting = undefined;\r\n        this.initSearch();\r\n        this.initSmartSearch();\r\n        this.initList();\r\n    }\r\n\r\n    @Input()\r\n    actions: IPepGenericListActions = {\r\n        get: async (data: any) => {\r\n            return []\r\n        }\r\n    };\r\n\r\n    @Input()\r\n    uuidMapping = 'key';\r\n\r\n    @Input()\r\n    disabled = false;\r\n\r\n    @Input()\r\n    addPadding = false;\r\n\r\n    @Input()\r\n    title = '';\r\n\r\n    @Input()\r\n    description = '';\r\n\r\n    @Input()\r\n    inline = false;\r\n\r\n    @Input()\r\n    showSearch = false;\r\n\r\n    @Input()\r\n    noDataFoundMsg = '';\r\n\r\n    @Input()\r\n    emptyState: IPepGenericListEmptyState | undefined;\r\n\r\n    @Input()\r\n    selectionType: PepListSelectionType = 'multi';\r\n\r\n    @Input()\r\n    supportSorting = false;\r\n\r\n    @Input()\r\n    supportSortingArray: string[] | undefined = undefined;\r\n\r\n    @Input()\r\n    sorting: IPepListSortingData | undefined;\r\n\r\n    @Input()\r\n    cacheSize = -1;\r\n\r\n    @Input()\r\n    hideSelectAll = false;\r\n    \r\n    @Input()\r\n    pager: IPepGenericListPager = {\r\n        type: 'scroll'\r\n    }\r\n\r\n    @Input()\r\n    tableViewType: PepListTableViewType = 'regular';\r\n\r\n    @Input()\r\n    zebraStripes = false;\r\n\r\n    @Input()\r\n    set smartFilter(val: IPepGenericListSmartFilter) {\r\n        this.smartFilters = this._genericListService.convertToSmartFilter(val);\r\n        this._appliedFilters = this.smartFilters.data || [];\r\n        this.showSmartFilter = this.smartFilters.fields.length > 0; \r\n    }\r\n\r\n    @Input()\r\n    showTopBar = false;\r\n\r\n    @Input()\r\n    breadCrumbsItems: PepBreadCrumbItem[] = new Array<PepBreadCrumbItem>();\r\n\r\n    @Input()\r\n    selectAll = false\r\n\r\n    @Input()\r\n    scrollPosition = 0\r\n\r\n    @Output()\r\n    fieldClick = new EventEmitter<IPepFormFieldClickEvent>();\r\n\r\n    @Output()\r\n    valueChange = new EventEmitter<IPepFormFieldValueChangeEvent>();\r\n\r\n    @Output()\r\n    breadCrumbItemClick = new EventEmitter<IPepBreadCrumbItemClickEvent>();\r\n\r\n    @Output()\r\n    startIndexChange = new EventEmitter<IPepListStartIndexChangeEvent>()\r\n\r\n    @Output()\r\n    listLoad: EventEmitter<void> = new EventEmitter<void>();\r\n\r\n    set pepList(val: PepListComponent) {\r\n        this._pepList = val;\r\n    }\r\n\r\n    get pepList() {\r\n        return this._pepList;\r\n    }\r\n\r\n    private _resize$: Subscription = new Subscription();\r\n    private _loader$: Subscription = new Subscription();\r\n\r\n    private _dataView: DataView = {\r\n        Type: 'Grid'\r\n    };\r\n    private _pepList: any;\r\n    onLoad = true;\r\n    listInputs: any;\r\n    totalRowCount = -1;\r\n    searchString = '';\r\n    showSmartFilter = false;\r\n    showEmptyState = false;\r\n    smartFilters: IPepSmartFilters = {\r\n        fields: [],\r\n        data: [],\r\n        title: 'Filters'\r\n    };\r\n    private _appliedFilters: IPepSmartFilterData[] = [];\r\n    private _sorting: IPepListSortingChangeEvent | undefined = undefined;\r\n\r\n    menuHandlers: { [key: string]: (obj: any) => Promise<void> } = {};\r\n    menuActions: Array<PepMenuItem> = [];\r\n\r\n    constructor(\r\n        private _dataConvertorService: PepDataConvertorService,\r\n        private _layoutService: PepLayoutService,\r\n        private _loaderService: PepLoaderService,\r\n        private _translate: TranslateService,\r\n        private _genericListService: PepGenericListService,\r\n        private _sessionService: PepSessionService\r\n    ) {\r\n        this._resize$ = this._layoutService.onResize$.pipe().subscribe((size) => {            \r\n            //            \r\n        });\r\n        this._loader$ = this._loaderService.onChanged$.subscribe((status: boolean) => {\r\n            //\r\n        });\r\n    }\r\n\r\n    ngOnInit() {\r\n        //\r\n    }\r\n\r\n    private async initList() {\r\n        debugger;\r\n        this.onLoad = true;\r\n        setTimeout(async () => { //making sure all input data is available\r\n            if (this._dataSource) {\r\n                //merge selector inputs with callback inputs\r\n                this.loadTableInputs();\r\n\r\n                let fromIndex = 0;\r\n                let toIndex = 0;\r\n\r\n                if (this.listInputs.pager.type === 'pages') {\r\n                    fromIndex = this.listInputs.pager.size * this.listInputs.pager.index;\r\n                    toIndex = fromIndex + (this.listInputs.pager.size || DEFAULT_PAGE_SIZE) - 1;\r\n                } else {\r\n                    toIndex = 100;//TO DO - get value from - this.customList.getTopItems()\r\n                }\r\n\r\n                const data = await this.loadData(fromIndex, toIndex);\r\n                \r\n                if (this.listInputs?.emptyState?.show === true) {\r\n                    this.setEmptyState();\r\n                }\r\n                this.onLoad = false;\r\n                //show empty state\r\n                if (this.showEmptyState) {\r\n                    if (!this.listInputs.emptyState.title) {                        \r\n                        this._translate.get('GENERIC_LIST.EMPTY_STATE.TITLE').subscribe(text => {                            \r\n                            this.listInputs.emptyState.title = text;\r\n                        });\r\n                    }\r\n                    if (!this.listInputs.emptyState.description) {                        \r\n                        this._translate.get('GENERIC_LIST.EMPTY_STATE.DESCRIPTION').subscribe(text => {                            \r\n                            this.listInputs.emptyState.description = text;\r\n                        });\r\n                    }\r\n                    return;\r\n                }\r\n                setTimeout(async () => {\r\n                    if (this._pepListContainer) {\r\n                        if (this._pepListContainer.length > 0) {\r\n                            this._pepListContainer.remove();\r\n                        }\r\n                        const { PepListComponent } = await import('@pepperi-addons/ngx-lib/list');\r\n                        const componentRef = this._pepListContainer.createComponent(PepListComponent);\r\n\r\n                        this.pepList = componentRef.instance;\r\n                        \r\n                        componentRef.instance.viewType = this._genericListService.getListViewType(this._dataView.Type);\r\n                        componentRef.instance.tableViewType = this.listInputs.tableViewType;\r\n                        componentRef.instance.zebraStripes = this.listInputs.zebraStripes;\r\n                        if (this.disabled) {\r\n                            componentRef.instance.disabled = true;\r\n                            componentRef.instance.lockItemInnerEvents = true;\r\n                        }\r\n                        componentRef.instance.supportSorting = this.listInputs.supportSorting;\r\n                        componentRef.instance.supportSortingArray = this.listInputs.supportSortingArray;\r\n                        componentRef.instance.sorting = this.listInputs.sorting;\r\n                        componentRef.instance.cacheSize = this.listInputs.cacheSize;\r\n\r\n                        componentRef.instance.selectionTypeForActions = this.listInputs.selectionType;\r\n                        componentRef.instance.hideAllSelectionInMulti = this.listInputs.hideSelectAll;\r\n\r\n                        componentRef.instance.showCardSelection = this.listInputs.selectionType !== 'none';\r\n                        componentRef.instance.pagerType = this.listInputs.pager.type;\r\n                        if (this.listInputs.pager.type === 'pages') {\r\n                            componentRef.instance.pageSize = this.listInputs.pager?.size || DEFAULT_PAGE_SIZE;\r\n                            componentRef.instance.pageIndex = this.listInputs.pager?.index || 0;\r\n                        }\r\n                        if(this.selectionType == \"multi\" && this.selectAll){\r\n                            this._sessionService.setObject('AllSelected', true)\r\n                        }\r\n                        componentRef.instance.noDataFoundMsg = this.listInputs.noDataFoundMsg;\r\n                        componentRef.instance.startIndexChange.subscribe($event => {\r\n                            this.startIndexChange.emit($event)\r\n                        })\r\n                        componentRef.instance.fieldClick.subscribe(($event) => {\r\n                            this.onCustomizeFieldClick($event);\r\n                        });\r\n                        componentRef.instance.selectedItemsChange.subscribe(($event) => {\r\n                            this.onSelectedItemsChanged($event);\r\n                        });\r\n                        componentRef.instance.loadItems.subscribe(($event) => {\r\n                            this.onLoadItems($event);\r\n                        });\r\n                        componentRef.instance.loadPage.subscribe(($event) => {\r\n                            this.onLoadPage($event);\r\n                        });\r\n                        componentRef.instance.valueChange.subscribe(($event) => {\r\n                            this.onValueChanged($event);\r\n                        });\r\n                        componentRef.instance.sortingChange.subscribe(($event) => {\r\n                            this.onSortingChange($event);\r\n                        });\r\n                        componentRef.instance.listLoad.subscribe(($event) => {\r\n                            this.onSelectedItemsChanged(this._pepList.selectedItems.length);\r\n                            this.onListLoad();\r\n                        });\r\n                        let convertedList: ObjectsDataRow[] = [];\r\n                        if (data) {\r\n                            if (data?.length) {\r\n                                convertedList = this._dataConvertorService.convertListData(data);\r\n                            }\r\n                            const uiControl = this.getUiControl(DataViewConverter.toUIControlData(this._dataView));\r\n                            const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n                            if (selectedItems?.length) {\r\n                                componentRef.instance.setSelectedIds(selectedItems);\r\n                            }                           \r\n                            \r\n                            componentRef.instance.initListData(uiControl, this.totalRowCount, convertedList);\r\n                        }\r\n                        componentRef.instance.scrollToIndex(this.scrollPosition)\r\n                    }\r\n                }, 0);\r\n            }\r\n        }, 0);\r\n    }\r\n\r\n    /**\r\n     * loads inputs in case they are provided and merge with selector inputs\r\n     * @returns merged pep-list inputs\r\n     */\r\n    private loadTableInputs() {\r\n        this.listInputs = {\r\n            supportSorting: this.supportSorting,\r\n            supportSortingArray: this.supportSortingArray,\r\n            sorting: this.sorting,\r\n            cacheSize: this.cacheSize,\r\n            hideSelectAll: this.hideSelectAll,\r\n            selectionType: this.selectionType,\r\n            pager: this.pager,\r\n            noDataFoundMsg: this.noDataFoundMsg,\r\n            tableViewType: this.tableViewType,\r\n            zebraStripes: this.zebraStripes,\r\n            emptyState: this.emptyState,\r\n            selectAll: this.selectAll\r\n        };\r\n        if (this._dataSource.inputs) {\r\n            Object.entries(this._dataSource.inputs).forEach((item: any) => {\r\n                if (this._genericListService.hasProperty(this.listInputs, item[0])) {\r\n                    this.listInputs[item[0]] = item[1];\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    /**\r\n     * detemines whether empty state is to be displayed\r\n     */\r\n    private setEmptyState() {\r\n        this.showEmptyState = this.totalRowCount === 0 &&\r\n            this.searchString === '' &&\r\n            this._appliedFilters.length === 0;\r\n    }\r\n\r\n    private getUiControl(data: any): UIControl {\r\n        const uiControl = new UIControl();\r\n        uiControl.ControlFields = [];\r\n\r\n        if (data?.ControlFields) {\r\n            uiControl.ControlFields = data.ControlFields.map((field: any) => this._genericListService.convertToUiControlField(field));\r\n        }\r\n\r\n        return uiControl;\r\n    }\r\n\r\n    private loadMenuItems(): void { //TODO\r\n        if (this.listInputs.selectionType !== 'none') {\r\n            this.getMenuActions().then(\r\n                x => this.menuActions = x\r\n            );\r\n        }\r\n    }\r\n\r\n    private async getMenuActions(): Promise<PepMenuItem[]> {\r\n        const res: PepMenuItem[] = [];\r\n        const result = this.getMenuObjects();\r\n        if (result.success) {\r\n            const actions = await this.actions.get(result.data);\r\n            this.menuHandlers = {};\r\n            actions?.forEach(item => {\r\n                const uuid = PepGuid.newGuid();\r\n                this.menuHandlers[uuid] = item.handler;\r\n                res.push({\r\n                    key: uuid,\r\n                    text: item.title\r\n                })\r\n            })\r\n        }\r\n\r\n        return res;\r\n    }\r\n\r\n    private getMenuObjects() {\r\n        const menuObjects: any = {\r\n            success: false,\r\n            data: new PepSelectionData()\r\n        };\r\n\r\n        if (this.pepList) {\r\n            menuObjects.success = true;\r\n            menuObjects.data = this.pepList.getSelectedItemsData();\r\n        }\r\n\r\n        return menuObjects;\r\n    }\r\n\r\n    private initSearch() {\r\n        this.searchString = '';\r\n        this.search?.initSearch();\r\n    }\r\n\r\n    private initSmartSearch() {\r\n        this._appliedFilters = [];\r\n        this.smartFiltersComponent?.clearFilters();\r\n    }\r\n\r\n    private async loadData(fromIndex: number, toIndex: number): Promise<PepRowData[]> {\r\n        this._loaderService.show();\r\n        let converedData: PepRowData[] = [];\r\n        const data: IPepGenericListInitData = await this._dataSource.init({\r\n            searchString: this.searchString || undefined,\r\n            filters: this._appliedFilters.length ? this._appliedFilters : undefined,\r\n            sorting: this._sorting || undefined,\r\n            fromIndex: fromIndex,\r\n            toIndex: toIndex\r\n        });        \r\n        this._loaderService.hide();\r\n\r\n        // Set the total count\r\n        this.totalRowCount = data?.totalCount || 0;\r\n        this.setEmptyState();\r\n\r\n        if (data) {\r\n            this._dataView = data.dataView;\r\n\r\n            if (data.items?.length > 0 && !data.isPepRowData) {                \r\n                converedData = data.items.map(item => this._genericListService.convertToPepRowData(item, data.dataView, this.uuidMapping));\r\n            }\r\n        }\r\n\r\n        return converedData;\r\n    }\r\n\r\n\r\n    private async updateDataList(fromIndex: number, toIndex: number, pageIndex: number | undefined = undefined): Promise<PepRowData[]> {\r\n        if (this._dataSource.update) {\r\n            this._loaderService.show();\r\n            let converedData: PepRowData[] = [];\r\n            const dataList = await this._dataSource.update({\r\n                searchString: this.searchString || undefined,\r\n                filters: this._appliedFilters.length ? this._appliedFilters : undefined,\r\n                sorting: this._sorting || undefined,\r\n                fromIndex: fromIndex,\r\n                toIndex: toIndex,\r\n                pageIndex: pageIndex\r\n            });\r\n            this._loaderService.hide();\r\n\r\n            if (dataList?.length > 0) {\r\n                converedData = dataList.map(item => this._genericListService.convertToPepRowData(item, this._dataView, this.uuidMapping));\r\n            } \r\n            return converedData;\r\n        } else {\r\n            return [];\r\n        }\r\n    }\r\n\r\n    /**\r\n     * loads virtual scroll items from api\r\n     */\r\n    private async onLoadItems(event: IPepListLoadItemsEvent) {\r\n        const list = await this.updateDataList(event.fromIndex, event.toIndex);\r\n        const convertedList = this._dataConvertorService.convertListData(list);\r\n        const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n        if (selectedItems?.length) {\r\n            this.pepList.setSelectedIds(selectedItems);\r\n        }\r\n        this.pepList.updateItems(convertedList, event);\r\n    }\r\n\r\n    /**\r\n     * loads paging bulk from api\r\n     */\r\n    private async onLoadPage(event: IPepListLoadPageEvent) {\r\n        const fromIndex = event.pageIndex * event.pageSize;\r\n        const toIndex = Math.min(fromIndex + event.pageSize - 1, this.totalRowCount - 1);\r\n        const list = await this.updateDataList(fromIndex, toIndex, event.pageIndex);\r\n        const convertedList = this._dataConvertorService.convertListData(list);\r\n        const selectedItems = this._genericListService.getSelectedItems(convertedList);\r\n        if (selectedItems?.length) {\r\n            this.pepList.setSelectedIds(selectedItems);\r\n        }\r\n        this.pepList.updatePage(convertedList, event);\r\n    }\r\n\r\n    getItemById(id: string): ObjectsDataRow | null {\r\n        if (this.pepList) {\r\n            return this._pepList.getItemDataByID(id);\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    getSelectedItems(): PepSelectionData | null {\r\n        if (this.pepList) {\r\n            return this._pepList.getSelectedItemsData();\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    getPageIndex() {\r\n        return this.pepList.pageIndex;\r\n    }\r\n\r\n    onActionItemClicked(action: IPepMenuItemClickEvent): void {\r\n        const result = this.getMenuObjects();\r\n        if (result.success) {\r\n            this.menuHandlers[action.source.key](result.data);\r\n        }\r\n    }\r\n\r\n    onSearchChanged(event: IPepSearchClickEvent) {\r\n        this.searchString = event.value;\r\n        this.initList();\r\n    }\r\n\r\n    onSelectedItemsChanged(selectedRowsCount: number) {\r\n        //loading menu items after pep-list selected items are updated\r\n        setTimeout(() => {\r\n            this.loadMenuItems();\r\n        }, 0);\r\n    }\r\n\r\n    onCustomizeFieldClick(fieldClickEvent: IPepFormFieldClickEvent) {\r\n        this.fieldClick.emit(fieldClickEvent);\r\n    }\r\n\r\n    onBreadCrumbItemClick(event: IPepBreadCrumbItemClickEvent) {\r\n        this.breadCrumbItemClick.emit(event);\r\n    }\r\n\r\n    onValueChanged(event: IPepFormFieldValueChangeEvent) {\r\n        this.valueChange.emit(event);\r\n    }\r\n\r\n    onSortingChange(event: IPepListSortingChangeEvent) {\r\n        this._sorting = event;\r\n        this.initList();\r\n    }\r\n\r\n    onFiltersChange(filters: IPepSmartFilterData[]) {\r\n        this._appliedFilters = filters;\r\n        this.initList();\r\n    }\r\n\r\n    onListLoad(): void {\r\n        this.listLoad.emit();\r\n    }\r\n\r\n    ngOnDestroy() {\r\n        if (this._resize$) {\r\n            this._resize$.unsubscribe();\r\n        }\r\n        if (this._loader$) {\r\n            this._loader$.unsubscribe();\r\n        }\r\n    }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7658,7 +7676,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 228,
+                "line": 231,
                 "jsdoctags": [
                     {
                         "name": "_dataConvertorService",
@@ -7797,7 +7815,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 165,
+                        "line": 168,
                         "jsdoctags": [
                             {
                                 "name": "val",
@@ -7827,7 +7845,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 198,
+                        "line": 201,
                         "jsdoctags": [
                             {
                                 "name": "val",
@@ -7844,7 +7862,7 @@
                         "name": "pepList",
                         "type": "",
                         "returnType": "",
-                        "line": 202
+                        "line": 205
                     }
                 }
             },
@@ -8528,7 +8546,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"example-wrapper\">\r\n\r\n    <pep-generic-list #glist1 [dataSource]=\"dataSource\"  [actions]=\"actions\" [smartFilter]=\"smartFilter\" [inline]=\"true\"\r\n        [showTopBar]=\"true\" [hideSelectAll]=\"false\" [tableViewType]=\"tableViewType\" [zebraStripes]=\"true\" [uuidMapping]=\"'UUID'\" [emptyState]=\"{show: true}\"\r\n        [breadCrumbsItems]=\"breadCrumbsItems\" [description]=\"description\" [disabled]=\"disableTable\" [pager]=\"pager\" [selectionType]=\"'single'\"\r\n        title=\"Generic list inline title\" [showSearch]=\"true\" (breadCrumbItemClick)=\"onBreadCrumbClick($event)\">\r\n        <ng-container right-buttons>\r\n            <pep-menu class=\"pep-spacing-element\" [items]=\"menuItems\" [sizeType]=\"'sm'\"\r\n                (menuItemClick)=\"onMenuItemClicked($event)\">\r\n            </pep-menu>\r\n            <pep-button class=\"pep-spacing-element\" [value]=\"'New'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\"\r\n                (click)=\"onBtnClicked()\">\r\n            </pep-button>\r\n        </ng-container>\r\n      \r\n    </pep-generic-list>\r\n\r\n\r\n\r\n    <!-- <pep-generic-list #glist2 [dataSource]=\"dataSourceLine\" [actions]=\"actions2\" [addPadding]=\"addPadding\" [inline]=\"true\" [showTopBar]=\"true\"\r\n        [uuidMapping]=\"'UUIS'\" [disabled]=\"disableTable\" [selectionType]=\"'multi'\" [pager]=\"pager\" [title]=\"title\"\r\n        [showSearch]=\"true\" (breadCrumbItemClick)=\"onBreadCrumbClick($event)\">\r\n        <ng-container right-buttons>\r\n            <pep-menu class=\"pep-spacing-element\" [items]=\"menuItems\" [sizeType]=\"'sm'\"\r\n                (menuItemClick)=\"onMenuItemClicked($event)\">\r\n            </pep-menu>\r\n            <pep-button class=\"pep-spacing-element\" [value]=\"'New'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\"\r\n                (click)=\"onBtn2Clicked()\">\r\n            </pep-button>\r\n        </ng-container>\r\n    </pep-generic-list> -->\r\n\r\n</div>\r\n<pep-button class=\"pep-spacing-element\" [value]=\"'Try me'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\" (click)=\"onClick()\">\r\n</pep-button>"
+            "templateData": "<div class=\"example-wrapper\">\r\n\r\n    <pep-generic-list #glist1 [dataSource]=\"dataSource\"  [actions]=\"actions\" [smartFilter]=\"smartFilter\" [inline]=\"true\" [supportSorting]=\"true\"\r\n        [showTopBar]=\"true\" [hideSelectAll]=\"false\" [tableViewType]=\"tableViewType\" [zebraStripes]=\"true\" [uuidMapping]=\"'UUID'\" [emptyState]=\"{show: true}\"\r\n        [breadCrumbsItems]=\"breadCrumbsItems\" [description]=\"description\" [disabled]=\"disableTable\" [pager]=\"pager\" [selectionType]=\"'single'\"\r\n        title=\"Generic list inline title\" [showSearch]=\"true\" (breadCrumbItemClick)=\"onBreadCrumbClick($event)\">\r\n        <ng-container right-buttons>\r\n            <pep-menu class=\"pep-spacing-element\" [items]=\"menuItems\" [sizeType]=\"'sm'\"\r\n                (menuItemClick)=\"onMenuItemClicked($event)\">\r\n            </pep-menu>\r\n            <pep-button class=\"pep-spacing-element\" [value]=\"'New'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\"\r\n                (click)=\"onBtnClicked()\">\r\n            </pep-button>\r\n        </ng-container>\r\n      \r\n    </pep-generic-list>\r\n\r\n\r\n\r\n    <!-- <pep-generic-list #glist2 [dataSource]=\"dataSourceLine\" [actions]=\"actions2\" [addPadding]=\"addPadding\" [inline]=\"true\" [showTopBar]=\"true\"\r\n        [uuidMapping]=\"'UUIS'\" [disabled]=\"disableTable\" [selectionType]=\"'multi'\" [pager]=\"pager\" [title]=\"title\"\r\n        [showSearch]=\"true\" (breadCrumbItemClick)=\"onBreadCrumbClick($event)\">\r\n        <ng-container right-buttons>\r\n            <pep-menu class=\"pep-spacing-element\" [items]=\"menuItems\" [sizeType]=\"'sm'\"\r\n                (menuItemClick)=\"onMenuItemClicked($event)\">\r\n            </pep-menu>\r\n            <pep-button class=\"pep-spacing-element\" [value]=\"'New'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\"\r\n                (click)=\"onBtn2Clicked()\">\r\n            </pep-button>\r\n        </ng-container>\r\n    </pep-generic-list> -->\r\n\r\n</div>\r\n<pep-button class=\"pep-spacing-element\" [value]=\"'Try me'\" [sizeType]=\"'sm'\" [styleType]=\"'strong'\" (click)=\"onClick()\">\r\n</pep-button>"
         },
         {
             "name": "GroupButtonsSettingsComponent",
@@ -12299,10 +12317,10 @@
                 "name": "Base",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "",
+                "type": "any",
                 "defaultValue": "Template.bind({})"
             },
             {
@@ -12310,6 +12328,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "any",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Base",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -12367,6 +12395,16 @@
             },
             {
                 "name": "breadCrumbsItems",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "CompactMode",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
@@ -12566,6 +12604,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Pager",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "pepIcons",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -12704,6 +12752,126 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "snackBarRef",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "MatSnackBarRef | null",
+                "defaultValue": "null"
+            },
+            {
+                "name": "snackBarService",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "PepSnackBarService | null",
+                "defaultValue": "null"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "any",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "any",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/manage-parameters/manage-parameters.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "any",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Story3",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -12741,7 +12909,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ColorSettingsComponent>",
-                "defaultValue": "(\r\n    args: ColorSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(\r\n    args: ColorSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        colorChange: action('colorChange'),\r\n    },\r\n})"
             },
             {
                 "name": "Template",
@@ -12751,17 +12919,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<DataViewBuilderComponent>",
-                "defaultValue": "(\r\n    args: DataViewBuilderComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(\r\n    args: DataViewBuilderComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        dataViewChange: action('dataViewChange'),\r\n    },\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<GenericListComponent>",
-                "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        ...args,\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick')\r\n    },\r\n    template: `\r\n        <div style=\"height: 40vh\">\r\n            <pep-generic-list [dataSource]=\"dataSource\" [actions]=\"actions\" [breadCrumbsItems]=\"breadCrumbsItems\" [uuidMapping]=\"uuidMapping\" [disabled]=\"disabled\" \r\n                [addPadding]=\"addPadding\" [title]=\"title\" [description]=\"description\" [inline]=\"inline\" [showSearch]=\"showSearch\" [selectionType]=\"selectionType\"\r\n                [noDataFoundMsg]=\"noDataFoundMsg\" [supportSorting]=\"supportSorting\" [supportSorting]=\"supportSorting\" [showTopBar]=\"showTopBar\" [pager]=\"pager\"\r\n                [tableViewType]=\"tableViewType\" [zebraStripes]=\"zebraStripes\" [smartFilter]=\"smartFilter\" (valueChange)=\"valueChange\" (fieldClick)=\"fieldClick\" \r\n                (breadCrumbItemClick)=\"breadCrumbItemClick\">\r\n            </pep-generic-list>\r\n        </div>\r\n    `\r\n})"
+                "type": "Story<FileStatusPanelComponent>",
+                "defaultValue": "(\r\n    args: FileStatusPanelComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        closeClick: action('closeClick'),\r\n        onButtonClick: (event: any) => openFilePanel(event, args),\r\n    },\r\n    template: `\r\n    <pep-button sizeType=\"md\" value=\"Click me\" (buttonClick)=\"onButtonClick($event)\"></pep-button>\r\n`,\r\n})"
             },
             {
                 "name": "Template",
@@ -12777,11 +12945,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<GenericListComponent>",
+                "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        ...args,\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick'),\r\n    },\r\n    template: `\r\n        <div style=\"height: 40vh\">\r\n            <pep-generic-list [dataSource]=\"dataSource\" [actions]=\"actions\" [breadCrumbsItems]=\"breadCrumbsItems\" [uuidMapping]=\"uuidMapping\" [disabled]=\"disabled\" \r\n                [addPadding]=\"addPadding\" [title]=\"title\" [description]=\"description\" [inline]=\"inline\" [showSearch]=\"showSearch\" [selectionType]=\"selectionType\"\r\n                [noDataFoundMsg]=\"noDataFoundMsg\" [supportSorting]=\"supportSorting\" [supportSorting]=\"supportSorting\" [showTopBar]=\"showTopBar\" [pager]=\"pager\"\r\n                [tableViewType]=\"tableViewType\" [zebraStripes]=\"zebraStripes\" [smartFilter]=\"smartFilter\" (valueChange)=\"valueChange\" (fieldClick)=\"fieldClick\" \r\n                (breadCrumbItemClick)=\"breadCrumbItemClick\">\r\n            </pep-generic-list>\r\n        </div>\r\n    `,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<GroupButtonsSettingsComponent>",
-                "defaultValue": "(\r\n    args: GroupButtonsSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(\r\n    args: GroupButtonsSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        btnkeyChange: action('btnkeyChange'), \r\n    },\r\n})"
             },
             {
                 "name": "Template",
@@ -12791,7 +12969,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ManageParametersComponent>",
-                "defaultValue": "(\r\n    args: ManageParametersComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(\r\n    args: ManageParametersComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        parametersChange: action('parametersChange'),\r\n    },\r\n})"
             },
             {
                 "name": "Template",
@@ -12801,7 +12979,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<RichTextComponent>",
-                "defaultValue": "(args: RichTextComponent) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(args: RichTextComponent) => ({\r\n    props: {\r\n        ...args,\r\n        valueChange: action('valueChange'),\r\n    },\r\n})"
             },
             {
                 "name": "Template",
@@ -12811,7 +12989,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ShadowSettingsComponent>",
-                "defaultValue": "(args: ShadowSettingsComponent) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                "defaultValue": "(\r\n    args: ShadowSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        shadowChange: action('shadowChange'),\r\n    },\r\n})"
             },
             {
                 "name": "Template",
@@ -12842,9 +13020,119 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[\r\n    PepResetConfigurationFieldDirective\r\n]"
+            },
+            {
+                "name": "ZebraStripes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             }
         ],
-        "functions": [],
+        "functions": [
+            {
+                "name": "getSnackBarData",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "args",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "args",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "initSnackBarService",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "sb",
+                        "type": "PepSnackBarService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "sb",
+                        "type": "PepSnackBarService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "openFilePanel",
+                "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "event",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "args",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "event",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "args",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
         "typealiases": [
             {
                 "name": "FileStatusType",
@@ -12916,6 +13204,26 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
+                    "name": "Story1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -12923,7 +13231,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<ColorSettingsComponent>",
-                    "defaultValue": "(\r\n    args: ColorSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(\r\n    args: ColorSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        colorChange: action('colorChange'),\r\n    },\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/data-view-builder/data-view-builder.stories.ts": [
@@ -12945,7 +13253,101 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<DataViewBuilderComponent>",
-                    "defaultValue": "(\r\n    args: DataViewBuilderComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(\r\n    args: DataViewBuilderComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        dataViewChange: action('dataViewChange'),\r\n    },\r\n})"
+                }
+            ],
+            "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts": [
+                {
+                    "name": "Base",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "snackBarRef",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatSnackBarRef | null",
+                    "defaultValue": "null"
+                },
+                {
+                    "name": "snackBarService",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "PepSnackBarService | null",
+                    "defaultValue": "null"
+                },
+                {
+                    "name": "Story1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<FileStatusPanelComponent>",
+                    "defaultValue": "(\r\n    args: FileStatusPanelComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        closeClick: action('closeClick'),\r\n        onButtonClick: (event: any) => openFilePanel(event, args),\r\n    },\r\n    template: `\r\n    <pep-button sizeType=\"md\" value=\"Click me\" (buttonClick)=\"onButtonClick($event)\"></pep-button>\r\n`,\r\n})"
+                }
+            ],
+            "projects/ngx-composite-lib/generic-form/generic-form.stories.ts": [
+                {
+                    "name": "Base",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<GenericFormComponent>",
+                    "defaultValue": "(args: GenericFormComponent) => ({\r\n    props: {\r\n        ...args,\r\n        valueChange: action('valueChange'),\r\n        fieldClick: action('fieldClick'),\r\n        formValidationChange: action('formValidationChange')\r\n    }\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/generic-list/generic-list.stories.ts": [
@@ -12970,7 +13372,27 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
+                    "name": "CompactMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
                     "name": "NoDataFoundMsg",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Pager",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
@@ -12997,34 +13419,32 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<GenericListComponent>",
-                    "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        ...args,\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick')\r\n    },\r\n    template: `\r\n        <div style=\"height: 40vh\">\r\n            <pep-generic-list [dataSource]=\"dataSource\" [actions]=\"actions\" [breadCrumbsItems]=\"breadCrumbsItems\" [uuidMapping]=\"uuidMapping\" [disabled]=\"disabled\" \r\n                [addPadding]=\"addPadding\" [title]=\"title\" [description]=\"description\" [inline]=\"inline\" [showSearch]=\"showSearch\" [selectionType]=\"selectionType\"\r\n                [noDataFoundMsg]=\"noDataFoundMsg\" [supportSorting]=\"supportSorting\" [supportSorting]=\"supportSorting\" [showTopBar]=\"showTopBar\" [pager]=\"pager\"\r\n                [tableViewType]=\"tableViewType\" [zebraStripes]=\"zebraStripes\" [smartFilter]=\"smartFilter\" (valueChange)=\"valueChange\" (fieldClick)=\"fieldClick\" \r\n                (breadCrumbItemClick)=\"breadCrumbItemClick\">\r\n            </pep-generic-list>\r\n        </div>\r\n    `\r\n})"
+                    "defaultValue": "(args: GenericListComponent) => ({\r\n    props: {\r\n        ...args,\r\n        fieldClick: action('fieldClick'),\r\n        valueChange: action('valueChange'),\r\n        breadCrumbItemClick: action('breadCrumbItemClick'),\r\n    },\r\n    template: `\r\n        <div style=\"height: 40vh\">\r\n            <pep-generic-list [dataSource]=\"dataSource\" [actions]=\"actions\" [breadCrumbsItems]=\"breadCrumbsItems\" [uuidMapping]=\"uuidMapping\" [disabled]=\"disabled\" \r\n                [addPadding]=\"addPadding\" [title]=\"title\" [description]=\"description\" [inline]=\"inline\" [showSearch]=\"showSearch\" [selectionType]=\"selectionType\"\r\n                [noDataFoundMsg]=\"noDataFoundMsg\" [supportSorting]=\"supportSorting\" [supportSorting]=\"supportSorting\" [showTopBar]=\"showTopBar\" [pager]=\"pager\"\r\n                [tableViewType]=\"tableViewType\" [zebraStripes]=\"zebraStripes\" [smartFilter]=\"smartFilter\" (valueChange)=\"valueChange\" (fieldClick)=\"fieldClick\" \r\n                (breadCrumbItemClick)=\"breadCrumbItemClick\">\r\n            </pep-generic-list>\r\n        </div>\r\n    `,\r\n})"
+                },
+                {
+                    "name": "ZebraStripes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
                 }
             ],
-            "projects/ngx-composite-lib/generic-form/generic-form.stories.ts": [
+            "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts": [
                 {
                     "name": "Base",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                    "file": "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "Template.bind({})"
                 },
                 {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<GenericFormComponent>",
-                    "defaultValue": "(args: GenericFormComponent) => ({\r\n    props: {\r\n        ...args,\r\n        valueChange: action('valueChange'),\r\n        fieldClick: action('fieldClick'),\r\n        formValidationChange: action('formValidationChange')\r\n    }\r\n})"
-                }
-            ],
-            "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts": [
-                {
-                    "name": "Base",
+                    "name": "Story1",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts",
@@ -13041,12 +13461,22 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<GroupButtonsSettingsComponent>",
-                    "defaultValue": "(\r\n    args: GroupButtonsSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(\r\n    args: GroupButtonsSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        btnkeyChange: action('btnkeyChange'), \r\n    },\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/manage-parameters/manage-parameters.stories.ts": [
                 {
                     "name": "Base",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/manage-parameters/manage-parameters.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story1",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/ngx-composite-lib/manage-parameters/manage-parameters.stories.ts",
@@ -13063,12 +13493,42 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<ManageParametersComponent>",
-                    "defaultValue": "(\r\n    args: ManageParametersComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(\r\n    args: ManageParametersComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        parametersChange: action('parametersChange'),\r\n    },\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/rich-text/rich-text.stories.ts": [
                 {
                     "name": "Base",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Story3",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
@@ -13085,7 +13545,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<RichTextComponent>",
-                    "defaultValue": "(args: RichTextComponent) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(args: RichTextComponent) => ({\r\n    props: {\r\n        ...args,\r\n        valueChange: action('valueChange'),\r\n    },\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/shadow-settings/shadow-settings.stories.ts": [
@@ -13107,7 +13567,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<ShadowSettingsComponent>",
-                    "defaultValue": "(args: ShadowSettingsComponent) => ({\r\n    props: {\r\n        ...args,\r\n    },\r\n})"
+                    "defaultValue": "(\r\n    args: ShadowSettingsComponent\r\n) => ({\r\n    props: {\r\n        ...args,\r\n        shadowChange: action('shadowChange'),\r\n    },\r\n})"
                 }
             ],
             "projects/ngx-composite-lib/show-if-badge/show-if-badge.stories.ts": [
@@ -13525,7 +13985,109 @@
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts": [
+                {
+                    "name": "getSnackBarData",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "args",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "args",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "initSnackBarService",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "sb",
+                            "type": "PepSnackBarService",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "sb",
+                            "type": "PepSnackBarService",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "openFilePanel",
+                    "file": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "args",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "args",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
             "projects/ngx-composite-lib/file-status-panel/file-status-panel.model.ts": [
@@ -13850,6 +14412,26 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Story1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/color-settings/color-settings.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -13941,12 +14523,102 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "getSnackBarData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "initSnackBarService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "openFilePanel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Base",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "snackBarRef",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "snackBarService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/file-status-panel/file-status-panel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/ngx-composite-lib/flow-picker-button/flow-picker-button.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "FlowPickerButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -14045,6 +14717,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Story1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/generic-form/generic-form.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -14056,7 +14738,7 @@
                 "linktype": "component",
                 "name": "GenericListComponent",
                 "coveragePercent": 5,
-                "coverageCount": "4/77",
+                "coverageCount": "4/78",
                 "status": "low"
             },
             {
@@ -14202,7 +14884,27 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "CompactMode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "NoDataFoundMsg",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Pager",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -14223,6 +14925,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/generic-list/generic-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ZebraStripes",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -14252,6 +14964,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Base",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/group-buttons-settings/group-buttons-settings.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story1",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -14353,6 +15075,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Story1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/manage-parameters/manage-parameters.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -14392,6 +15124,36 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Base",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-composite-lib/rich-text/rich-text.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Story3",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

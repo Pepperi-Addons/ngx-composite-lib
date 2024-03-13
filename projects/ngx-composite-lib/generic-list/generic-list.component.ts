@@ -142,6 +142,9 @@ export class GenericListComponent implements OnInit {
     supportSorting = false;
 
     @Input()
+    supportSortingArray: string[] | undefined = undefined;
+
+    @Input()
     sorting: IPepListSortingData | undefined;
 
     @Input()
@@ -302,6 +305,7 @@ export class GenericListComponent implements OnInit {
                             componentRef.instance.lockItemInnerEvents = true;
                         }
                         componentRef.instance.supportSorting = this.listInputs.supportSorting;
+                        componentRef.instance.supportSortingArray = this.listInputs.supportSortingArray;
                         componentRef.instance.sorting = this.listInputs.sorting;
                         componentRef.instance.cacheSize = this.listInputs.cacheSize;
 
@@ -370,6 +374,7 @@ export class GenericListComponent implements OnInit {
     private loadTableInputs() {
         this.listInputs = {
             supportSorting: this.supportSorting,
+            supportSortingArray: this.supportSortingArray,
             sorting: this.sorting,
             cacheSize: this.cacheSize,
             hideSelectAll: this.hideSelectAll,

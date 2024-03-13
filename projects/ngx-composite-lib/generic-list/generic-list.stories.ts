@@ -253,6 +253,11 @@ export default {
         supportSorting: {
             description: 'Whether column sorting is enabled',
         },
+        supportSortingArray: {
+            control: 'array',
+            defaultValue:[],
+            description: 'A field API name string array which enables sorting on specific columns/fields, optional (no need to use if you implement sorting on all columns)'
+        },
         showTopBar: {
             description: 'Whether the top bar is displayed',
         },
@@ -366,6 +371,7 @@ export default {
                 'selectionType',
                 'noDataFoundMsg',
                 'supportSorting',
+                'supportSortingArray',
                 'showTopBar',
                 'pager',
                 'tableViewType',
