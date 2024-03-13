@@ -253,7 +253,7 @@ export default {
         supportSorting: {
             description: 'Whether column sorting is enabled',
         },
-        supportSortingArray: {
+        supportSortingFields: {
             control: 'array',
             defaultValue:[],
             description: 'A field API name string array which enables sorting on specific columns/fields, optional (no need to use if you implement sorting on all columns)'
