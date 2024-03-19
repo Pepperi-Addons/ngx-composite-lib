@@ -145,6 +145,9 @@ export class GenericListComponent implements OnInit {
     supportSortingFields: string[] | undefined = undefined;
 
     @Input()
+    separator = ',';
+
+    @Input()
     sorting: IPepListSortingData | undefined;
 
     @Input()
@@ -306,6 +309,7 @@ export class GenericListComponent implements OnInit {
                         }
                         componentRef.instance.supportSorting = this.listInputs.supportSorting;
                         componentRef.instance.supportSortingFields = this.listInputs.supportSortingFields;
+                        componentRef.instance.SEPARATOR = this.listInputs.separator;
                         componentRef.instance.sorting = this.listInputs.sorting;
                         componentRef.instance.cacheSize = this.listInputs.cacheSize;
 
@@ -375,6 +379,7 @@ export class GenericListComponent implements OnInit {
         this.listInputs = {
             supportSorting: this.supportSorting,
             supportSortingFields: this.supportSortingFields,
+            SEPARATOR: this.separator,
             sorting: this.sorting,
             cacheSize: this.cacheSize,
             hideSelectAll: this.hideSelectAll,
